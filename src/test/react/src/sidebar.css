@@ -34,6 +34,7 @@
     border-bottom: 1px solid #cccccc;
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
+    /*background: linear-gradient(180deg, deeppink, blue);*/
 
     cursor: pointer;
     display: inline-block;

@@ -19,7 +19,8 @@ interface AppState {
     numPersonalState: number;
     settingsActive: boolean;
     gayMode: boolean;
-    color1: string;
+    rainbow: any;
+    gradientIndex: number, // Add this line
 }
 
 interface Track {
@@ -57,8 +58,9 @@ class App extends Component<{}, AppState> {
             numGenreState: 0,
             numPersonalState: 0,
             settingsActive: false,
-            color1: "red",
             gayMode: false,
+            rainbow: "idk",
+            gradientIndex: 0, // Add this line
         };
     }
 
@@ -71,73 +73,9 @@ class App extends Component<{}, AppState> {
     }
 
     rainbow = () => {
-        const rainbowColors = [
-            'hsl(1deg, 100%, 55%)', // red
-            'hsl(25deg, 100%, 50%)', // orange
-            'hsl(40deg, 100%, 50%)', // yellow
-            'hsl(130deg, 100%, 40%)', // green
-            'hsl(230deg, 100%, 45%)', // blue
-            'hsl(240deg, 100%, 45%)', // indigo
-            'hsl(260deg, 100%, 55%)', // violet
-        ];
-        const paletteSize = rainbowColors.length;
-// Number of milliseconds for each update
-        const intervalDelay = 1000;
-        const colorNames = [
-            '--magic-rainbow-color-0',
-            '--magic-rainbow-color-1',
-            '--magic-rainbow-color-2',
-        ];
-// Register properties
-//         colorNames.forEach((name, index) => {
-//             CSS.registerProperty({
-//                 name,
-//                 syntax: '<color>',
-//                 inherits: false,
-//                 initialValue: rainbowColors[index],
-//             });
-//         });
-        const buttonElem = document.getElementsByClassName("start-game")[0] as HTMLElement;
-        if (!buttonElem) {
-            console.log("no butt");
-        }
-        let cycleIndex = 0;
-        window.setInterval(() => {
-            // Shift every color up by one position.
-            //
-            // % paletteSize is a handy trick to ensure
-            // that values "wrap around"; if we've exceeded
-            // the number of items in the array, it loops
-            // back to 0.
-            const nextColors = [
-                rainbowColors[(cycleIndex + 1) % paletteSize],
-                rainbowColors[(cycleIndex + 2) % paletteSize],
-                rainbowColors[(cycleIndex + 3) % paletteSize],
-            ];
-            // Apply these new colors, update the DOM.
-            colorNames.forEach((name, index) => {
-                buttonElem.style.setProperty(name, nextColors[index]);
-            });
-            // increment the cycle count, so that we advance
-            // the colors in the next loop.
-            cycleIndex++;
-        }, intervalDelay);
+        const buttonElem = document.getElementsByClassName('App')[0] as HTMLElement;
+        buttonElem.style.background = `linear-gradient(170deg,${this.state.gayMode ? "white" : "red"}, navy 80%))`;
     }
-
-    calculateBackgroundColor = () => {
-        const rainbowColors = [
-            'hsl(1deg, 100%, 55%)', // red
-            'hsl(25deg, 100%, 50%)', // orange
-            'hsl(40deg, 100%, 50%)', // yellow
-            'hsl(130deg, 100%, 40%)', // green
-            'hsl(230deg, 100%, 45%)', // blue
-            'hsl(240deg, 100%, 45%)', // indigo
-            'hsl(260deg, 100%, 55%)', // violet
-        ];
-
-        return this.state.gayMode ? rainbowColors.join(",") : "red";
-    };
-
 
     handleStart = async () => {
         const client_id = '4cd6054588e84b1884b9e14998f34844'; // Your client id
@@ -421,9 +359,8 @@ class App extends Component<{}, AppState> {
                              const rSidebar = document.getElementsByClassName("settings-sidebar")[0] as HTMLElement;
                              if (rSidebar) {
                                  rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";
-                                 console.log("rSidebar exists")
                              }
-                             console.log("Settings are active: " + this.state.settingsActive);
+                             // console.log("Settings are active: " + this.state.settingsActive);
                          }}
 
                          style={{
@@ -449,11 +386,7 @@ class App extends Component<{}, AppState> {
                         fontSize: "150%",
                         // '--color-1': 'deepskyblue',
                         // '--color-2': 'navy',
-                        background: `linear-gradient(
-                            170deg,
-                        ${this.calculateBackgroundColor()},
-                        antiquewhite 80%
-                        )`
+                        background: `linear-gradient(170deg,${this.state.gayMode ? "white" : "red"}, navy 80%))`,
                     }}>Gay
                         <label className="switch"
                         style={{
@@ -461,8 +394,14 @@ class App extends Component<{}, AppState> {
                             marginTop: "-10%"
                         }}>
                             <input
-                                onClick={() => {
-                                    this.setState({ gayMode: !this.state.gayMode });}}
+                                onClick={() => {{
+                                    this.setState({ gayMode: !this.state.gayMode });
+                                    if (this.state.gayMode) {
+                                        this.rainbow();
+                                    }
+                                }}
+                            }
+
                                 type="checkbox" />
                             <span className="slider round"></span>
                         </label>
