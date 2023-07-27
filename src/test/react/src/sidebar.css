@@ -1,0 +1,62 @@
+.sidebar {
+    position: fixed;
+    color: aliceblue;
+    top: 15%;
+    width: 25%;
+    height: 90%;
+    background-color: #1d233d;
+    border-right:2px solid black;
+    font-family: Avenir;
+    /*font-weight: bold;*/
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    /*visibility: hidden;*/
+}
+/*button {*/
+/*    !*color: midnightblue;*!*/
+/*    align-content: center;*/
+/*}*/
+
+.tab-container {
+     /*display: flex;*/
+     /*width: 100px;*/
+     /*height: 40px;*/
+ }
+
+.tab {
+    padding: 10px;
+    font-size: 120%;
+    font-weight: bold;
+    width: calc(120% / 2);
+    align-content: stretch;
+    /*border: 1px solid #ccc;*/
+    border-bottom: 1px solid #cccccc;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+
+    cursor: pointer;
+    display: inline-block;
+    /*z-index: -10;*/
+}
+
+.tabs {
+    align-content: stretch;
+    cursor: pointer;
+    background-color: black;
+}
+
+.tab.active {
+    background-color: #1d233d;
+    border: 1px solid #cccccc;
+    border-bottom: none;
+}
+
+
+.tab:last-child {
+    /*border-right: 1px solid #cccccc;*/
+}
+
+.tab:hover {
+    background-color: rgba(25, 187, 173, 0.77);
+}

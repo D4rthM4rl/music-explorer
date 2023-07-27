@@ -1,0 +1,25 @@
+/*
+ * Copyright (C) 2020 Hal Perkins.  All rights reserved.  Permission is
+ * hereby granted to students registered for University of Washington
+ * CSE 331 for use solely during Winter Quarter 2021 for purposes of
+ * the course.  No other use, copying, distribution, or modification
+ * is permitted without prior written consent. Copyrights for
+ * third-party components of this work must be honored.  Instructors
+ * interested in reusing these course materials should contact the
+ * author.
+ */
+
+.App {
+    margin-top: 6%;
+    height: 100%;
+    width: 76%;
+    text-align: center;
+    margin-left: 24.5%;
+    /*background-color: red;*/
+}
+
+/*
+"p" means any <p> tags, anywhere in the app. This is just the one that contains
+the text returned by the response, and adds a margin so it isn't squished up against
+the button.
+ */
