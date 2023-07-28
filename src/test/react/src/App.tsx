@@ -19,8 +19,8 @@ interface AppState {
     numPersonalState: number;
     settingsActive: boolean;
     gayMode: boolean;
-    rainbow: any;
-    gradientIndex: number, // Add this line
+    theme: string;
+    mainFontColor: string
 }
 
 interface Track {
@@ -59,8 +59,8 @@ class App extends Component<{}, AppState> {
             numPersonalState: 0,
             settingsActive: false,
             gayMode: false,
-            rainbow: "idk",
-            gradientIndex: 0, // Add this line
+            theme: "default",
+            mainFontColor: "black",
         };
     }
 
@@ -72,7 +72,13 @@ class App extends Component<{}, AppState> {
         this.setState({playlists: [] });
     }
 
-    rainbow = () => {
+    handleThemeChange = (event: { target: { value: string; }; }) => {
+        // Update the theme based on the selected option value
+        // const selectedTheme = event.target.value;
+        this.setState({theme: event.target.value})
+        // Implement the theme change logic here based on the selectedTheme
+        // For example, you can change the background color or apply CSS classes
+        // to change the appearance of the app based on the selected theme.
         const buttonElem = document.getElementsByClassName('App')[0] as HTMLElement;
         buttonElem.style.background = `linear-gradient(170deg,${this.state.gayMode ? "white" : "red"}, navy 80%))`;
     }
@@ -325,7 +331,7 @@ class App extends Component<{}, AppState> {
     }
 
     render() {
-        const { activeTab, playlists, names, numPersonalState, numGenreState} = this.state;
+        const { activeTab, playlists, names, numPersonalState, numGenreState } = this.state;
         return (
             <div style={{zIndex: -10}}>
                 <div className="topbar">
@@ -378,11 +384,31 @@ class App extends Component<{}, AppState> {
                 </div>
 
                 <div className="settings-sidebar">
+                    <div>Theme
+                        <select
+                            value={this.state.theme}
+                            onChange={(event) => this.handleThemeChange(event)}
+                            style={{
+                                marginLeft: '10%',
+                                marginTop: '3%',
+                                color: 'black',
+                                fontSize: '150%',
+                                background: this.state.gayMode
+                                    ? 'linear-gradient(170deg, white, navy 80%)'
+                                    : 'linear-gradient(170deg, red, navy 80%)',
+                            }}
+                        >
+                            <option onClick={() => {this.setState({theme: "Default"})}}
+                                value="default">Default</option>
+                            <option value="gay">Gay</option>
+                            {/* Add more theme options here */}
+                        </select>
+                    </div>
                     <div style={{
                         // textAlign: "center",
                         marginLeft: "10%",
                         marginTop: "3%",
-                        color: "fuchsia",
+                        color: "black",
                         fontSize: "150%",
                         // '--color-1': 'deepskyblue',
                         // '--color-2': 'navy',
@@ -396,9 +422,6 @@ class App extends Component<{}, AppState> {
                             <input
                                 onClick={() => {{
                                     this.setState({ gayMode: !this.state.gayMode });
-                                    if (this.state.gayMode) {
-                                        this.rainbow();
-                                    }
                                 }}
                             }
 

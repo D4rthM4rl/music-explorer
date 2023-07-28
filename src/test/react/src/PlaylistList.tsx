@@ -50,7 +50,6 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
     handleClear = async () => {
         this.props.onChange(this.props.playlistArray);
         this.props.onClear(); // call the onClear prop
-        console.log("Cleared playlists in PlaylistList.tsx");
     }
 
     handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -64,8 +63,6 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
         const newPlaylist = [...this.props.playlistArray];
         newPlaylist.splice(index, 1);
         this.props.onChange(newPlaylist);
-        // let url = `http://localhost:4567/remove-playlist?index=${index}`;
-        // await fetch(url);
     }
 
     render() {
