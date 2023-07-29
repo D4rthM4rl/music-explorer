@@ -5,12 +5,26 @@
     right: -20%; /* Initially hidden to the right */
     width: 20%;
     height: 100%;
-    /*background-color: #7b00ff;*/
     transition: right 0.3s ease; /* Add smooth sliding transition */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     align-items: center;
     align-content: center;
+    color: aliceblue;
+    background: #1d233d;
+    font-family: Avenir;
+}
 
+.settings-sidebar.gay {
+    position: fixed;
+    top: 10%;
+    right: -20%; /* Initially hidden to the right */
+    width: 20%;
+    height: 100%;
+    transition: right 0.3s ease; /* Add smooth sliding transition */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    align-items: center;
+    align-content: center;
+    font-family: Avenir;
     background: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
     background-size: 800% 200%;
 

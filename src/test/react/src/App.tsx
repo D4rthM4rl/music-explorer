@@ -20,7 +20,6 @@ interface AppState {
     settingsActive: boolean;
     gayMode: boolean;
     theme: string;
-    mainFontColor: string
 }
 
 interface Track {
@@ -45,9 +44,6 @@ interface PlaylistResponse {
 class App extends Component<{}, AppState> {
     constructor(props: any) {
         super(props);
-        // You don't need to store the string result of a request in
-        // state, but we're using for this example so we can display
-        // the string on the page.
         this.state = {
             requestResult: "NO REQUEST RESULT",
             tracks: [],
@@ -60,7 +56,6 @@ class App extends Component<{}, AppState> {
             settingsActive: false,
             gayMode: false,
             theme: "default",
-            mainFontColor: "black",
         };
     }
 
@@ -75,10 +70,65 @@ class App extends Component<{}, AppState> {
     handleThemeChange = (event: { target: { value: string; }; }) => {
         // Update the theme based on the selected option value
         // const selectedTheme = event.target.value;
-        this.setState({theme: event.target.value})
+        this.setState({theme: event.target.value});
+        console.log(this.state.theme);
         // Implement the theme change logic here based on the selectedTheme
         // For example, you can change the background color or apply CSS classes
         // to change the appearance of the app based on the selected theme.
+        const rSidebar = document.getElementsByClassName("settings-sidebar")[0] as HTMLElement;
+        const themeSelect = document.getElementsByClassName("theme-select")[0] as HTMLElement;
+        const sidebar = document.getElementsByClassName("sidebar")[0] as HTMLElement;
+        const startButton = document.getElementsByClassName("start-game")[0] as HTMLElement;
+        switch (event.target.value) {
+            case 'default':
+                this.setState({gayMode: false});
+                console.log("Default mode activated");
+                rSidebar.style.color = "aliceblue";
+                rSidebar.style.background = "#1d233d";
+                // rSidebar.style.fontFamily = " ";
+                sidebar.style.color = "red";
+                sidebar.style.backgroundColor = "black";
+                break;
+            case 'dark mode':
+                this.setState({gayMode: false});
+                console.log("Dark mode activated");
+                break;
+            case 'gay':
+                this.setState({gayMode: true});
+                console.log("Gay mode activated");
+                rSidebar.style.color = "white";
+                startButton.style.background = "linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3)"
+                themeSelect.style.background = "black";
+                themeSelect.style.color = "red";
+                sidebar.style.color = "red";
+                sidebar.style.backgroundColor = "black";
+                // TODO: Switching to gay mode and then another and then back to gay only works with kevin mode
+                break;
+            case 'kevin':
+                this.setState({gayMode: false});
+                console.log("Kevin mode activated");
+                break;
+            case 'drac':
+                this.setState({gayMode: false});
+                console.log("Bleh bleh bleh");
+                rSidebar.style.color = "red";
+                rSidebar.style.background = "black";
+                themeSelect.style.background = "black";
+                themeSelect.style.color = "red";
+                sidebar.style.color = "red";
+                sidebar.style.backgroundColor = "black";
+                if (rSidebar) {
+
+                }
+                break;
+            case 'marley':
+                this.setState({gayMode: false});
+                console.log(this.state.theme);
+                console.log("Big man");
+                break;
+            default:
+                console.log(`Cant find that theme`);
+        }
         const buttonElem = document.getElementsByClassName('App')[0] as HTMLElement;
         buttonElem.style.background = `linear-gradient(170deg,${this.state.gayMode ? "white" : "red"}, navy 80%))`;
     }
@@ -366,7 +416,6 @@ class App extends Component<{}, AppState> {
                              if (rSidebar) {
                                  rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";
                              }
-                             // console.log("Settings are active: " + this.state.settingsActive);
                          }}
 
                          style={{
@@ -383,9 +432,9 @@ class App extends Component<{}, AppState> {
                     Settings</nav>
                 </div>
 
-                <div className="settings-sidebar">
+                <div className={`settings-sidebar ${this.state.gayMode ? "gay" : ""}`}>
                     <div>Theme
-                        <select
+                        <select className="theme-select"
                             value={this.state.theme}
                             onChange={(event) => this.handleThemeChange(event)}
                             style={{
@@ -393,14 +442,15 @@ class App extends Component<{}, AppState> {
                                 marginTop: '3%',
                                 color: 'black',
                                 fontSize: '150%',
-                                background: this.state.gayMode
-                                    ? 'linear-gradient(170deg, white, navy 80%)'
-                                    : 'linear-gradient(170deg, red, navy 80%)',
+                                background: "lightcyan",
                             }}
                         >
-                            <option onClick={() => {this.setState({theme: "Default"})}}
-                                value="default">Default</option>
+                            <option value="default">Default</option>
+                            <option value="dark mode">Dark Mode</option>
                             <option value="gay">Gay</option>
+                            <option value="kevin">Kevin</option>
+                            <option value="drac">Drac</option>
+                            <option value="marley">Marley</option>
                             {/* Add more theme options here */}
                         </select>
                     </div>
@@ -408,12 +458,9 @@ class App extends Component<{}, AppState> {
                         // textAlign: "center",
                         marginLeft: "10%",
                         marginTop: "3%",
-                        color: "black",
                         fontSize: "150%",
-                        // '--color-1': 'deepskyblue',
-                        // '--color-2': 'navy',
                         background: `linear-gradient(170deg,${this.state.gayMode ? "white" : "red"}, navy 80%))`,
-                    }}>Gay
+                    }}>Toggle
                         <label className="switch"
                         style={{
                             marginLeft: "20%",
@@ -421,7 +468,6 @@ class App extends Component<{}, AppState> {
                         }}>
                             <input
                                 onClick={() => {{
-                                    this.setState({ gayMode: !this.state.gayMode });
                                 }}
                             }
 
@@ -478,7 +524,6 @@ class App extends Component<{}, AppState> {
                             }}
                             onNumChange={(value: number) => {
                                 this.setState({numPersonalState: value});
-                                // this.handleSongNumChange(value, numGenreState);
                             }}
                         ></NamesList>
                     </div>}
@@ -513,8 +558,7 @@ class App extends Component<{}, AppState> {
                             marginRight: "10%",
                             marginTop: "-1%"
                         }}></div>
-                        <button
-                            className="start-game"
+                        <button className="start-game"
                             style={{
                                 fontSize: 50,
                                 border: "2px solid black",
