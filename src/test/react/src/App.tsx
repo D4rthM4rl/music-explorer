@@ -18,7 +18,6 @@ interface AppState {
     numGenreState: number;
     numPersonalState: number;
     settingsActive: boolean;
-    gayMode: boolean;
     theme: string;
 }
 
@@ -54,7 +53,6 @@ class App extends Component<{}, AppState> {
             numGenreState: 0,
             numPersonalState: 0,
             settingsActive: false,
-            gayMode: false,
             theme: "default",
         };
     }
@@ -69,15 +67,21 @@ class App extends Component<{}, AppState> {
 
     handleThemeChange = (event: { target: { value: string; }; }) => {
         // Update the theme based on the selected option value
-        console.log(this.state.theme);
         const themeableElements = ["settings-sidebar", "theme-select", "sidebar", "sidebar-h", "start-game",
                     "App", "topbar"];
+        const themeableGenericElements = ["slider round"];
 
         for (let i = 0; i < themeableElements.length; i++) {
             let id = themeableElements[i];
             const e = document.getElementById(id) as HTMLElement;
             // Themes are: default, dark, pastel, gay, kevin, drac, marley
             e.className = themeableElements[i] + " " + event.target.value;
+        }
+        for (let i = 0; i < themeableGenericElements.length; i++) {
+            let className = themeableGenericElements[i];
+            const e = document.getElementsByClassName(className)[0] as HTMLElement;
+            // Themes are: default, dark, pastel, gay, kevin, drac, marley
+            e.className = themeableGenericElements[i] + " " + event.target.value;
         }
     }
 
@@ -337,25 +341,24 @@ class App extends Component<{}, AppState> {
                     <nav id="topbar-links"
                     style={{
                         fontSize: 22,
-                        color: "lightcyan",
                         paddingLeft: "10%",
                         paddingRight: "5%",
                         textAlign: "center",
                     }}>
-                        <a href="/directions"
+                        <a href="/how-to-play"
                         style={{color: "#7387af"
                         }}>How to Play</a>
                     </nav>
                     <nav id="topbar-links"
                         style={{
                             fontSize: 22,
-                            color: "lightcyan",
                             paddingLeft: "10%",
                             paddingRight: "5%",
                             textAlign: "center",
                     }}>
                     <a href="https://everynoise.com/everynoise1d.cgi?scope=all"
-                    style={{color: "#7387af"}}>All Spotify Genres</a>
+                       id=""
+                        style={{color: "#7387af"}}>All Spotify Genres</a>
                     </nav>
                     <nav id="topbar-links"
                          onClick={() => {
@@ -375,12 +378,12 @@ class App extends Component<{}, AppState> {
                              blockSize: "0%",
                              color: "#7387af",
                              marginBottom: "2%",
-                             backgroundColor: "#90909090"
                          }}>
                     Settings</nav>
                 </div>
 
-                <div id={`settings-sidebar`}>
+                <div id={`settings-sidebar`}
+                    style={{fontSize: "170%"}}>
                     <div>Theme
                         <select id="theme-select"
                             value={this.state.theme}
@@ -390,8 +393,8 @@ class App extends Component<{}, AppState> {
                                 marginLeft: '10%',
                                 marginTop: '3%',
                                 color: 'black',
-                                fontSize: '150%',
                                 background: "lightcyan",
+                                fontSize: "90%"
                             }}
                         >
                             <option value="default">Default</option>
@@ -405,11 +408,8 @@ class App extends Component<{}, AppState> {
                         </select>
                     </div>
                     <div style={{
-                        // textAlign: "center",
                         marginLeft: "10%",
                         marginTop: "3%",
-                        fontSize: "150%",
-                        background: `linear-gradient(170deg,${this.state.gayMode ? "white" : "red"}, navy 80%))`,
                     }}>Toggle
                         <label className="switch"
                         style={{
@@ -514,8 +514,6 @@ class App extends Component<{}, AppState> {
                                 border: "2px solid black",
                                 padding: "1%",
                                 borderRadius: "5%",
-                                backgroundColor: "#0050ff",
-                                color: "black",
                                 cursor: "pointer"
                             }}
                             onClick={() => {
@@ -542,7 +540,7 @@ class App extends Component<{}, AppState> {
                                 marginLeft: "0%",
                             }}>
                                 {this.state.links.map((link, index) => (
-                                    <li key={index}><a href={link}>{link}</a></li>
+                                    <li key={index}><a href={link} target="_blank">{link}</a></li>
                                 ))}
                             </ul>
                         </div>

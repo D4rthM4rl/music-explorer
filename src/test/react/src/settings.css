@@ -8,56 +8,10 @@
     transition: right 0.3s ease; /* Add smooth sliding transition */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     align-items: center;
-    align-content: center;
+    text-align: center;
     color: aliceblue;
     background: #1d233d;
     font-family: Avenir;
-}
-
-#settings-sidebar.default {
-    color: aliceblue;
-    background: #1d233d;
-}
-
-#settings-sidebar.kevin {
-    color: aliceblue;
-    background: linear-gradient(180deg, #D60270, #0038A8);
-}
-
-#settings-sidebar.gay {
-    background: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-    background-size: 800% 200%;
-
-    -webkit-animation: rainbow 5s ease infinite;
-    -z-animation: rainbow 10s ease infinite;
-    -o-animation: rainbow 5s ease infinite;
-    animation: rainbow 5s ease infinite;
-}
-
-#settings-sidebar.drac {
-    color: red;
-    background: black;
-}
-
-@-webkit-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@-moz-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@-o-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
 }
 
 /* Style for the button */
@@ -74,12 +28,12 @@
     cursor: pointer;
 }
 
- .switch {
-     position: relative;
-     display: inline-block;
-     width: 60px;
-     height: 34px;
- }
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 60px;
+    height: 34px;
+}
 
 .switch input {
     opacity: 0;
@@ -111,13 +65,9 @@
     transition: .4s;
 }
 
-input:checked + .slider {
-    background-color: #2196F3;
-}
+input:checked + .slider {background-color: #2196F3;}
 
-input:focus + .slider {
-    box-shadow: 0 0 1px #2196F3;
-}
+input:focus + .slider {box-shadow: 0 0 1px #2196F3;}
 
 input:checked + .slider:before {
     -webkit-transform: translateX(26px);
@@ -125,12 +75,117 @@ input:checked + .slider:before {
     transform: translateX(26px);
 }
 
-/* Rounded sliders */
-.slider.round {
-    border-radius: 34px;
-}
+.slider.round {border-radius: 34px;}
 
-.slider.round:before {
-    border-radius: 50%;
-}
+.slider.round:before {border-radius: 50%;}
 
+/* Default Themes*/
+#settings-sidebar.default {
+    color: aliceblue;
+    background: #1d233d;
+}
+#settingsButton.default {
+    background-color: #7387af;
+    color: #fff;
+}
+.slider.default {background-color: #ccc;}
+.slider.default:before {background-color: white;}
+input:checked + .slider.default {background-color: #2196F3;}
+input:focus + .slider.default {box-shadow: 0 0 1px #2196F3;}
+
+
+/* Dark Themes*/
+#settings-sidebar.dark {
+    color: aliceblue;
+    background: #1d233d;
+}
+#settingsButton.dark {
+    background-color: #7387af;
+    color: #fff;
+}
+.slider.dark {background-color: #ccc;}
+.slider.dark:before {background-color: white;}
+input:checked + .slider.dark {background-color: #2196F3;}
+input:focus + .slider.dark {box-shadow: 0 0 1px #2196F3;}
+
+/* Pastel Themes*/
+#settings-sidebar.pastel {
+    color: aliceblue;
+    background: #1d233d;
+}
+#settingsButton.pastel {
+    background-color: #7387af;
+    color: #fff;
+}
+.slider.pastel {background-color: #ccc;}
+.slider.pastel:before {background-color: white;}
+input:checked + .slider.pastel {background-color: #2196F3;}
+input:focus + .slider.pastel {box-shadow: 0 0 1px #2196F3;}
+
+/* Gay Themes*/
+#settings-sidebar.gay {
+    background: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    background-size: 100% 300%;
+    -webkit-animation: rainbow 10s ease infinite;
+    /*-z-animation: rainbow 10s ease infinite;*/
+    -o-animation: rainbow 10s linear infinite;
+    animation: rainbow 10s ease infinite;
+}
+#settingsButton.gay {
+    background-color: #7387af;
+    color: #fff;
+}
+.slider.gay {background-color: #ccc;}
+.slider.gay:before {background-color: white;}
+input:checked + .slider.gay {background-color: #00ffea;}
+input:focus + .slider.gay {box-shadow: 0 0 1px #00ffea;}
+
+/* Kevin Themes*/
+#settings-sidebar.kevin {
+    color: aliceblue;
+    background: #1d233d;
+}
+#settingsButton.kevin {
+    background-color: #7387af;
+    color: #fff;
+}
+.slider.kevin {background-color: #ccc;}
+.slider.kevin:before {background-color: white;}
+input:checked + .slider.kevin {background-color: #0038A8;}
+input:focus + .slider.kevin {box-shadow: 0 0 1px #0038A8;}
+
+/* Drac Themes*/
+#settings-sidebar.drac {
+    color: aliceblue;
+    background: #1d233d;
+}
+#settingsButton.drac {
+    background-color: #7387af;
+    color: #fff;
+}
+.slider.drac {background-color: #ccc;}
+.slider.drac:before {background-color: white;}
+input:checked + .slider.drac {background-color: #2196F3;}
+input:focus + .slider.drac {box-shadow: 0 0 1px #2196F3;}
+
+
+@-webkit-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-moz-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@-o-keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}
+@keyframes rainbow {
+    0%{background-position:0% 82%}
+    50%{background-position:100% 19%}
+    100%{background-position:0% 82%}
+}

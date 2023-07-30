@@ -12,14 +12,26 @@
     color: black;
 }
 
+#App.dark {
+    color: #758bb4;
+    background-color: #131054;
+}
+
 #App.gay {
     background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-    background-size: 1800% 1800%;
-
+    background-size: 1800% 300%;
     -webkit-animation: rainbow 18s ease infinite;
     /*-z-animation: rainbow 10s ease infinite;*/
     -o-animation: rainbow 18s linear infinite;
     animation: rainbow 18s ease infinite;
+}
+
+#start-game.default {
+
+}
+
+#start-game.default {
+
 }
 
 @-webkit-keyframes rainbow {
@@ -42,11 +54,3 @@
     50%{background-position:100% 19%}
     100%{background-position:0% 82%}
 }
-
-/*.start*/
-
-/*
-"p" means any <p> tags, anywhere in the app. This is just the one that contains
-the text returned by the response, and adds a margin so it isn't squished up against
-the button.
- */
