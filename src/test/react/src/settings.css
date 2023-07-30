@@ -1,5 +1,5 @@
 /* Style for the sidebar */
-.settings-sidebar {
+#settings-sidebar {
     position: fixed;
     top: 10%;
     right: -20%; /* Initially hidden to the right */
@@ -14,17 +14,17 @@
     font-family: Avenir;
 }
 
-.settings-sidebar.gay {
-    position: fixed;
-    top: 10%;
-    right: -20%; /* Initially hidden to the right */
-    width: 20%;
-    height: 100%;
-    transition: right 0.3s ease; /* Add smooth sliding transition */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-    align-items: center;
-    align-content: center;
-    font-family: Avenir;
+#settings-sidebar.default {
+    color: aliceblue;
+    background: #1d233d;
+}
+
+#settings-sidebar.kevin {
+    color: aliceblue;
+    background: linear-gradient(180deg, #D60270, #0038A8);
+}
+
+#settings-sidebar.gay {
     background: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
     background-size: 800% 200%;
 
@@ -32,6 +32,11 @@
     -z-animation: rainbow 10s ease infinite;
     -o-animation: rainbow 5s ease infinite;
     animation: rainbow 5s ease infinite;
+}
+
+#settings-sidebar.drac {
+    color: red;
+    background: black;
 }
 
 @-webkit-keyframes rainbow {

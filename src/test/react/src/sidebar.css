@@ -1,4 +1,4 @@
-.sidebar {
+#sidebar {
     position: fixed;
     color: aliceblue;
     top: 15%;
@@ -13,16 +13,31 @@
     z-index: 10;
     /*visibility: hidden;*/
 }
-/*button {*/
-/*    !*color: midnightblue;*!*/
-/*    align-content: center;*/
-/*}*/
+#sidebar.kevin {
+    background: linear-gradient(180deg, #D60270, #0038A8);
+}
 
-.tab-container {
-     /*display: flex;*/
-     /*width: 100px;*/
-     /*height: 40px;*/
- }
+#sidebar-h {
+    position: fixed;
+    color: aliceblue;
+    top: 15%;
+    width: 25%;
+    height: 90%;
+    background-color: #1d233d;
+    border-right:2px solid black;
+    font-family: Avenir;
+    /*font-weight: bold;*/
+    align-items: center;
+    text-align: center;
+    z-index: 10;
+    /*visibility: hidden;*/
+}
+
+/*.tab-container {*/
+/*     !*display: flex;*!*/
+/*     !*width: 100px;*!*/
+/*     !*height: 40px;*!*/
+/* }*/
 
 .tab {
     padding: 10px;

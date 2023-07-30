@@ -1,20 +1,18 @@
-/*
- * Copyright (C) 2020 Hal Perkins.  All rights reserved.  Permission is
- * hereby granted to students registered for University of Washington
- * CSE 331 for use solely during Winter Quarter 2021 for purposes of
- * the course.  No other use, copying, distribution, or modification
- * is permitted without prior written consent. Copyrights for
- * third-party components of this work must be honored.  Instructors
- * interested in reusing these course materials should contact the
- * author.
- */
-
-.App {
-    margin-top: 6%;
-    height: 100%;
-    width: 76%;
+#App {
+    padding-top: 6%;
+    height: 100vh;
+    overflow: visible;
+    width: 80%;
     text-align: center;
-    margin-left: 24.5%;
+    padding-left: 24.5%;
+}
+
+#App.default {
+    background: antiquewhite;
+    color: black;
+}
+
+#App.gay {
     background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
     background-size: 1800% 1800%;
 
