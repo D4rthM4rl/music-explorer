@@ -69,7 +69,8 @@ class App extends Component<{}, AppState> {
         // Update the theme based on the selected option value
         const themeableElements = ["settings-sidebar", "theme-select", "sidebar", "sidebar-h", "start-game",
                     "App", "topbar"];
-        const themeableGenericElements = ["slider round"];
+        const themeableGenericElements = ["slider round", "tab", "name-tab active", "playlist-tab active", "tab active",
+        "name-tab", "playlist-tab"];
 
         for (let i = 0; i < themeableElements.length; i++) {
             let id = themeableElements[i];
@@ -81,7 +82,13 @@ class App extends Component<{}, AppState> {
             let className = themeableGenericElements[i];
             const e = document.getElementsByClassName(className)[0] as HTMLElement;
             // Themes are: default, dark, pastel, gay, kevin, drac, marley
-            e.className = themeableGenericElements[i] + " " + event.target.value;
+            if (e) {
+                console.log(themeableGenericElements[i]);
+                e.className = themeableGenericElements[i] + " " + event.target.value;
+            }
+            if (!e) {
+                console.log(themeableGenericElements[i] + " is not real");
+            }
         }
     }
 
@@ -416,12 +423,7 @@ class App extends Component<{}, AppState> {
                             marginLeft: "20%",
                             marginTop: "-10%"
                         }}>
-                            <input
-                                onClick={() => {{
-                                }}
-                            }
-
-                                type="checkbox" />
+                            <input type="checkbox" />
                             <span className="slider round"></span>
                         </label>
                     </div>

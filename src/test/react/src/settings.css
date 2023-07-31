@@ -13,7 +13,6 @@
     background: #1d233d;
     font-family: Avenir;
 }
-
 /* Style for the button */
 #settingsButton {
     position: fixed;
@@ -27,20 +26,17 @@
     border-radius: 4px;
     cursor: pointer;
 }
-
 .switch {
     position: relative;
     display: inline-block;
     width: 60px;
     height: 34px;
 }
-
 .switch input {
     opacity: 0;
     width: 0;
     height: 0;
 }
-
 .slider {
     position: absolute;
     cursor: pointer;
@@ -52,7 +48,6 @@
     -webkit-transition: .4s;
     transition: .4s;
 }
-
 .slider:before {
     position: absolute;
     content: "";
@@ -64,22 +59,17 @@
     -webkit-transition: .4s;
     transition: .4s;
 }
-
 input:checked + .slider {background-color: #2196F3;}
-
 input:focus + .slider {box-shadow: 0 0 1px #2196F3;}
-
 input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
     transform: translateX(26px);
 }
-
 .slider.round {border-radius: 34px;}
-
 .slider.round:before {border-radius: 50%;}
 
-/* Default Themes*/
+/* Default Themes */
 #settings-sidebar.default {
     color: aliceblue;
     background: #1d233d;
@@ -94,7 +84,7 @@ input:checked + .slider.default {background-color: #2196F3;}
 input:focus + .slider.default {box-shadow: 0 0 1px #2196F3;}
 
 
-/* Dark Themes*/
+/* Dark Themes */
 #settings-sidebar.dark {
     color: aliceblue;
     background: #1d233d;
@@ -108,7 +98,7 @@ input:focus + .slider.default {box-shadow: 0 0 1px #2196F3;}
 input:checked + .slider.dark {background-color: #2196F3;}
 input:focus + .slider.dark {box-shadow: 0 0 1px #2196F3;}
 
-/* Pastel Themes*/
+/* Pastel Themes */
 #settings-sidebar.pastel {
     color: aliceblue;
     background: #1d233d;
@@ -122,7 +112,7 @@ input:focus + .slider.dark {box-shadow: 0 0 1px #2196F3;}
 input:checked + .slider.pastel {background-color: #2196F3;}
 input:focus + .slider.pastel {box-shadow: 0 0 1px #2196F3;}
 
-/* Gay Themes*/
+/* Gay Themes */
 #settings-sidebar.gay {
     background: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
     background-size: 100% 300%;
@@ -140,7 +130,7 @@ input:focus + .slider.pastel {box-shadow: 0 0 1px #2196F3;}
 input:checked + .slider.gay {background-color: #00ffea;}
 input:focus + .slider.gay {box-shadow: 0 0 1px #00ffea;}
 
-/* Kevin Themes*/
+/* Kevin Themes */
 #settings-sidebar.kevin {
     color: aliceblue;
     background: #1d233d;
@@ -154,7 +144,7 @@ input:focus + .slider.gay {box-shadow: 0 0 1px #00ffea;}
 input:checked + .slider.kevin {background-color: #0038A8;}
 input:focus + .slider.kevin {box-shadow: 0 0 1px #0038A8;}
 
-/* Drac Themes*/
+/* Drac Themes */
 #settings-sidebar.drac {
     color: aliceblue;
     background: #1d233d;

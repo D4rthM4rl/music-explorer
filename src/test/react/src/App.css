@@ -5,10 +5,15 @@
     width: 80%;
     text-align: center;
     padding-left: 24.5%;
+    background: ghostwhite;
+    color: black;
+}
+#start-game {
+
 }
 
 #App.default {
-    background: antiquewhite;
+    background: ghostwhite;
     color: black;
 }
 

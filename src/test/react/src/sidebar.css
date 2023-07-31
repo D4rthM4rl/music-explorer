@@ -11,24 +11,7 @@
     align-items: center;
     text-align: center;
     z-index: 10;
-    /*visibility: hidden;*/
 }
-
-#sidebar.default {
-    color: aliceblue;
-    background-color: #1d233d;
-}
-
-#sidebar.dark {
-    color: #758bb4;
-    background-color: #1d233d;
-}
-
-#sidebar.kevin {
-    background: linear-gradient(180deg, #D60270, #0038A8);
-}
-
-
 #sidebar-h {
     position: fixed;
     color: aliceblue;
@@ -43,19 +26,6 @@
     text-align: center;
     z-index: 10;
 }
-
-#sidebar-h.default {
-    color: aliceblue;
-    background-color: #1d233d;
-    border-right:2px solid black;
-}
-
-#sidebar-h.dark {
-    color: aliceblue;
-    background-color: #1d233d;
-    border-right:2px solid black;
-}
-
 .tab {
     padding: 10px;
     font-size: 120%;
@@ -69,20 +39,144 @@
     z-index: 5;
     cursor: pointer;
     display: inline-block;
+    background: black;
 }
-
 .tabs {
+    background: black;
     align-content: stretch;
     cursor: pointer;
-    /*background-color: black;*/
 }
-
 .tab.active {
     background-color: #1d233d;
     border: 1px solid #cccccc;
     border-bottom: none;
 }
+.tab:hover {background-color: rgba(30, 155, 222, 0.77);}
 
-.tab:hover {
-    background-color: rgba(30, 155, 222, 0.77);
+/* Default Themes */
+#sidebar.default {
+    color: aliceblue;
+    background-color: #1d233d;
 }
+#sidebar-h.default {
+    color: aliceblue;
+    background-color: #1d233d;
+    border-right:2px solid black;
+}
+.tab.default {border-bottom: 1px solid #cccccc;}
+.tabs.default {background: black;}
+.tab.default.active {
+    background-color: #1d233d;
+    border: 1px solid #cccccc;
+}
+.tab.default:hover {background-color: rgba(30, 155, 222, 0.77);}
+
+/* Dark Themes */
+#sidebar.dark {
+    color: #758bb4;
+    background-color: #1d233d;
+}
+#sidebar-h.dark {
+    color: aliceblue;
+    background-color: #1d233d;
+    border-right:2px solid black;
+}
+.tab.dark {border-bottom: 1px solid #cccccc;}
+.tabs.dark {background: black;}
+.tab.dark.active {
+    background-color: #1d233d;
+    border: 1px solid #cccccc;
+}
+.tab.dark:hover {background-color: rgba(30, 155, 222, 0.77);}
+
+/* Pastel Themes */
+#sidebar.pastel {
+    color: #ffffff;
+    background-color: #89c0f3;
+}
+#sidebar-h.pastel {
+    color: aliceblue;
+    background-color: paleturquoise;
+    border-right:2px solid black;
+}
+.tab.pastel {border-bottom: 1px solid #cccccc;}
+.tabs.default {background: black;}
+.tab.pastel.active {
+    background-color: paleturquoise;
+    border: 1px solid #cccccc;
+}
+.tab.pastel:hover {background-color: rgba(30, 155, 222, 0.77);}
+
+/* Gay Themes */
+#sidebar.gay {
+    color: #758bb4;
+    background-color: #13ff0a;
+}
+#sidebar-h.gay {
+    color: aliceblue;
+    background-color: rgba(29, 35, 61, 0.16);
+    border-right:2px solid black;
+}
+.tab.gay {
+    border-bottom: 1px solid #cccccc;
+    background: black
+}
+.tabs.gay {background: #0af5b6;}
+.tab.active.gay {
+    background-color: rgba(29, 35, 61, 0);
+    border: 1px solid #cccccc;
+}
+.tab.gay:hover {background-color: rgba(255, 0, 0, 0.77);}
+
+/* Kevin Themes */
+#sidebar.kevin {
+    background: linear-gradient(180deg, #D60270, #0038A8);
+}
+#sidebar-h.kevin {
+    color: aliceblue;
+    background-color: #1d233d;
+    border-right:2px solid black;
+}
+.tab.kevin {border-bottom: 1px solid #cccccc;}
+.tabs.kevin {background: black;}
+.tab.active.kevin {
+    background-color: #1d233d;
+    border: 1px solid #cccccc;
+}
+.tab.kevin:hover {background-color: rgba(30, 155, 222, 0.77);}
+
+/* Drac Themes */
+#sidebar.drac {
+    color: #758bb4;
+    background-color: #1d233d;
+}
+#sidebar-h.drac {
+    color: aliceblue;
+    background-color: #1d233d;
+    border-right:2px solid black;
+}
+.tab.drac {border-bottom: 1px solid #cccccc;}
+.tabs.drac {background: black;}
+.tab.drac.active {
+    background-color: #1d233d;
+    border: 1px solid #cccccc;
+}
+.tab.drac:hover {background-color: rgba(30, 155, 222, 0.77);}
+
+/* Marley Themes */
+#sidebar.marley {
+    color: #758bb4;
+    background-color: #1d233d;
+}
+#sidebar-h.marley {
+    color: aliceblue;
+    background-color: #1d233d;
+    border-right:2px solid black;
+}
+.tab.marley {border-bottom: 1px solid #cccccc;}
+.tabs.marley {background: black;}
+.tab.marley.active {
+    background-color: #1d233d;
+    border: 1px solid #cccccc;
+}
+.tab.marley:hover {background-color: rgba(30, 155, 222, 0.77);}
