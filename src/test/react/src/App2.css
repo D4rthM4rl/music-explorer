@@ -105,6 +105,7 @@ body{
   flex:30%;
   background-color: #282b31;
   animation: slideFromLeft ease 1.5s;
+  text-align: center;
 }
 .tab{
   cursor: pointer;
