@@ -78,7 +78,7 @@ body{
   align-content: space-evenly;
   align-items: center;
   text-align: center;
-  display:flex
+  display:flex;
 }
 .start-button{
   font-size: 25px;
@@ -131,4 +131,11 @@ body{
   0% { background-position: 0 0; }
   50% { background-position: 400% 0; }
   100% { background-position: 0 0; }
+}
+.links{
+  position:absolute;
+  margin-bottom: 25%
+}
+.links-output{
+  color:black;
 }
