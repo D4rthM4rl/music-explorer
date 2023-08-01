@@ -334,8 +334,8 @@ class App2 extends Component<{}, AppState> {
                 </div>
                 <div className="game-options">
                   <div className="main-interface game-ui">
-                    <div className = "tabtemp tab1">Players</div>
-                    <div className = "tabtemp tab2 active">PlayLists/Genres</div>
+                    <div className = "tab tab1">Players</div>
+                    <div className = "tab tab2 active">PlayLists/Genres</div>
                   </div>
                   <div className="start-game game-ui"></div>
                 </div>

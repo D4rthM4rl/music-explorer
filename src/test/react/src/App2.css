@@ -40,7 +40,7 @@ html{
   font-size: 22px;
 }
 body{
-  background-color: whitesmoke;
+  background-color: #282b31;
   color:whitesmoke;
 }
 .welcome-container{
@@ -50,13 +50,12 @@ body{
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  color:#282b31
 }
 .clickable{
   cursor: pointer;
 }
 .topbar{
-  background-color:#282b31;
+  background-color:#131313;
   animation: fallDownAnimation ease 1s;
   display: grid;
   grid-template-columns: repeat(4,25%);
@@ -105,8 +104,9 @@ body{
 .main-interface{
   flex:30%;
   background-color: #282b31;
+  animation: slideFromLeft ease 1.5s;
 }
-.tabtemp{
+.tab{
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -118,13 +118,16 @@ body{
   background-color: #15161a;
   box-shadow: inset  1px -1px 20px 1px black;
 }
-.tabtemp.active{
+.tab.active{
   background-color: #282b31;
   box-shadow:none;
 }
-.tabtemp.active:hover{
+.tab.active:hover{
   background-color: #282b31;
 }
-.tabtemp:hover{
+.tab:hover{
   background-color: #4e545f;
+}
+.start-game{
+  background-color: antiquewhite;
 }
