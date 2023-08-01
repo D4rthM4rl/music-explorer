@@ -5,7 +5,6 @@ import axios from "axios";
 import { Buffer } from "buffer";
 import "./settings.css"
 import "./App.css";
-import "./sidebar.css";
 import "./topbar.css";
 import settingsIcon from "./settings-icon.png"
 import NamesList from "./NamesList";
@@ -336,7 +335,7 @@ class App2 extends Component<{}, AppState> {
                 <div className="game-options">
                   <div className="main-interface game-ui">
                     <div className = "tabtemp tab1">Players</div>
-                    <div className = "tabtemp tab2">PlayLists/Genres</div>
+                    <div className = "tabtemp tab2 active">PlayLists/Genres</div>
                   </div>
                   <div className="start-game game-ui"></div>
                 </div>
