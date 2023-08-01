@@ -441,9 +441,7 @@ class App extends Component<{}, AppState> {
                                 this.setState({ playlists: value });
                             }}
                             onClear={() => {this.clearPlaylists();}}
-                            onNumChange={(value: number) => {
-                                this.setState({numGenreState: value})
-                            }}
+                            onNumChange={(value: number) => {this.setState({numGenreState: value})}}
                         />
                     </div>}
                 </div>
