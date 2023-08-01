@@ -329,10 +329,53 @@ class App2 extends Component<{}, AppState> {
           {!this.state.welcomeVisible ? (
               <div className="main-page">
                 <div className="topbar">
-                  <div className="topbar-option" id= "title">Song Game By Marley</div>
-                  <div className="topbar-option" id="spotify-genres">All Spotify Genres</div>
-                  <div className="topbar-option" id="directions">How to Play</div>
-                  <div className="topbar-option" id="settings toggle">Settings</div>
+                  <div className="topbar-option clickable" id= "title">Song Game By Marley</div>
+                  <div className="topbar-option clickable" id="spotify-genres">All Spotify Genres</div>
+                  <div className="topbar-option clickable" id="directions">How to Play</div>
+                  <div className="topbar-option clickable" id="settings toggle"
+                       onClick={() => {const rSidebar = document.getElementById("settings-sidebar") as HTMLElement;
+                         if (rSidebar) {rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";}
+                         this.setState({settingsActive: !this.state.settingsActive})}}
+                  >Settings</div>
+                </div>
+                <div id={`settings-sidebar`}
+                     className="themed"
+                     style={{fontSize: "170%"}}>
+                  <div>Theme
+                    <select id="theme-select" className="themed"
+                            value={this.state.theme}
+                            onChange={(event) => {this.setState({theme: event.target.value})
+                              handleThemeChange(event.target.value)}}
+                            style={{
+                              marginLeft: '10%',
+                              marginTop: '3%',
+                              fontSize: "90%"
+                            }}
+                    >
+                      <option value="default">Default</option>
+                      <option value="dark">Dark Mode</option>
+                      <option value="pastel">Pastel</option>
+                      <option value="gay">Gay</option>
+                      <option value="kevin">Kevin</option>
+                      <option value="drac">Drac</option>
+                      <option value="marley">Marley</option>
+                      {/* Add more theme options here */}
+                    </select>
+                  </div>
+                  <div style={{
+                    marginLeft: "10%",
+                    marginTop: "3%",
+                  }}>Toggle
+                    <label className="switch themed"
+                           style={{
+                             marginLeft: "20%",
+                             // marginTop: "-10%"
+                           }}>
+                      <input type="checkbox" />
+                      <span className="slider round themed"></span>
+                    </label>
+                  </div>
+                  <div>AHH</div>
                 </div>
                 <div className="game-options">
                   <div className="sidebar game-ui">
