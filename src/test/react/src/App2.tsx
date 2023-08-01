@@ -49,7 +49,7 @@ class App2 extends Component<{}, AppState> {
       names: [],
       links: [],
       playlists: [],
-      activeTab: 'names',
+      activeTab: 'players',
       numGenreState: 0,
       numPersonalState: 0,
       settingsActive: false,
@@ -315,6 +315,7 @@ class App2 extends Component<{}, AppState> {
   handleWelcomeClick = () => {
     this.setState({welcomeVisible: false})
   };
+
   render() {
     return (
         <div>
@@ -334,8 +335,12 @@ class App2 extends Component<{}, AppState> {
                 </div>
                 <div className="game-options">
                   <div className="main-interface game-ui">
-                    <div className = "tab tab1">Players</div>
-                    <div className = "tab tab2 active">PlayLists/Genres</div>
+                    <div className={`tab ${this.state.activeTab === "players" ? "active" : ""} themed ${this.state.theme}`}
+                         onClick={() => {this.setState({ activeTab: "names" });}}
+                        >Players</div>
+                    <div className={`tab ${this.state.activeTab === "players" ? "active" : ""} themed ${this.state.theme}`}
+                         onClick={() => {this.setState({ activeTab: "playlist" });}}
+                        >PlayLists/Genres</div>
                   </div>
                   <div className="start-game game-ui"></div>
                 </div>
