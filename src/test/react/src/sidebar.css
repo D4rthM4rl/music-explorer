@@ -3,10 +3,13 @@
     background-color: #282b31;
     animation: slideFromLeft ease 1.5s;
     text-align: center;
-    font-size: 90%;
+    border-right:2px solid #15161a
+}
+.sidebar-headings{
+    font-size: 20px;
 }
 .tab {
-    font-size: 19px;
+    font-size: 16px;
     font-weight: bold;
     cursor: pointer;
     display: flex;

@@ -59,7 +59,7 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
     render() {
         return (
             <div>
-                <h1>Songs per Genre: {this.props.numGenreProp}</h1>
+                <h1 className="sidebar-headings">Songs per Genre: {this.props.numGenreProp}</h1>
                 <input className={`num-song-box themed ${this.props.theme}`}
                     type={"number"}
                        placeholder={"00"}
@@ -80,7 +80,7 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
                            border: '1px solid black'
                        }}
                 /> <br/>
-                <h1>Playlists/Genres go here</h1>
+                <h1 className="sidebar-headings">Playlists/Genres go here</h1>
                 <input className={`name-playlist-box themed ${this.props.theme}`}
                     list="playlist-list"
                     placeholder={"Type Genres and Playlists here"}

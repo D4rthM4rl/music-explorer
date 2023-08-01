@@ -56,7 +56,7 @@ class NamesList extends Component<NamesListProps, NamesListState> {
     render() {
         return (
             <div>
-                <h1>Songs per Person: {this.props.numPersonalProp}</h1>
+                <h1 className='sidebar-headings'>Songs per Person: {this.props.numPersonalProp}</h1>
                 <input className={`num-song-box themed ${this.props.theme}`}
                     type={"number"}
                     placeholder={"00"}
@@ -77,7 +77,7 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                         border: '1px solid black'
                     }}
                 /> <br/>
-                <h1>Names go here</h1>
+                <h1 className="sidebar-headings">Names go here</h1>
                 <input className={`name-playlist-box themed ${this.props.theme}`}
                     list="name-list"
                     placeholder={"Type Player Names Here"}

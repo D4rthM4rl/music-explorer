@@ -362,7 +362,9 @@ class App2 extends Component<{}, AppState> {
                         onNumChange={(value: number) => {this.setState({numGenreState: value})}}
                     />)}
                   </div>
-                  <div className="start-game game-ui"></div>
+                  <div className="start-game game-ui">
+                    <button className="start-button glow-on-hover">Start</button>
+                  </div>
                 </div>
               </div>
           ) : null}
