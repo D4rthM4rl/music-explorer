@@ -310,7 +310,6 @@ class App2 extends Component<{}, AppState> {
         }
       }
     } catch (error) {
-      console.error('Error:', error.message);
     }
   }
 
@@ -335,8 +334,11 @@ class App2 extends Component<{}, AppState> {
                   <div className="topbar-option" id="settings toggle">Settings</div>
                 </div>
                 <div className="game-options">
-                  <div className="main-interface game-ui"> placeholder</div>
-                  <div className="start-game game-ui"> placeholder</div>
+                  <div className="main-interface game-ui">
+                    <div className = "tabtemp tab1">Players</div>
+                    <div className = "tabtemp tab2">PlayLists/Genres</div>
+                  </div>
+                  <div className="start-game game-ui"></div>
                 </div>
               </div>
           ) : null}

@@ -311,7 +311,6 @@ class App extends Component<{}, AppState> {
                 }
             }
         } catch (error) {
-            console.error('Error:', error.message);
         }
     }
 
