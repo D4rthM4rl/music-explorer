@@ -328,10 +328,10 @@ class App2 extends Component<{}, AppState> {
           {!this.state.welcomeVisible ? (
               <div className="main-page">
                 <div className="topbar">
-                  <div className="topbar-option topbar-option1">Song Game By Marley</div>
-                  <div className="topbar-option topbar-option2">All Spotify Genres</div>
-                  <div className="topbar-option topbar-option3">How To Play</div>
-                  <div className="topbar-option topbar-option4">Settings</div>
+                  <div className="topbar-option" id= "title">Song Game By Marley</div>
+                  <div className="topbar-option" id="spotify-genres">All Spotify Genres</div>
+                  <div className="topbar-option" id="directions">How to Play</div>
+                  <div className="topbar-option" id="settings toggle">Settings</div>
                 </div>
                 <div className="game-options">
                   <div className="main-interface game-ui">
