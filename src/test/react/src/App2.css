@@ -14,24 +14,6 @@ body{
   cursor: pointer;
   animation: fadeInAnimation ease 2s;
 }
-.topbar{
-  background-color:#131313;
-  animation: fallDownAnimation ease 1s;
-  display: grid;
-  grid-template-columns: repeat(4,25%);
-  height: 100px;
-  justify-content: space-evenly;
-  justify-items: center;
-  align-content: space-evenly;
-  align-items: center;
-  text-align: center;
-  box-shadow:inset 1px -2px 11px 0px black;
-}
-.topbar-option {
-  cursor: pointer;
-  font-weight: bold;
-  font-size: 25px;
-}
 
 @keyframes Spin {
   from {transform: rotate(-1deg);}
@@ -96,7 +78,6 @@ body{
   z-index: 0;
   border-radius: 10px;
 }
-
 .glow-on-hover:before {
   content: '';
   background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);

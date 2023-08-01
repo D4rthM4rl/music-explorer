@@ -1,41 +1,52 @@
 #topbar {
-    position: absolute;
+    background-color:#131313;
+    animation: fallDownAnimation ease 1s;
     display: grid;
     grid-template-columns: repeat(4,25%);
+    height: 100px;
     justify-content: space-evenly;
     justify-items: center;
     align-content: space-evenly;
     align-items: center;
     text-align: center;
-    top: 0;
-    left: 0;
-    /*margin-top: -1%;*/
-    width: 100%;
-    height: 10%;
-    visibility: visible;
-    /*padding: 10px;*/
-    padding-bottom: 0;
-    font-size: 16px;
-    font-weight: bold;
-    /*color: #2c2fe2;*/
-    background-color: #000000;
-    font-family: Avenir;
+    box-shadow:inset 1px -2px 11px 0px black;
 }
-#title {
+.topbar-option {
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 25px;
     color: whitesmoke;
 }
-
-#topbar.default {
-    color: #2c2fe2;
-    background-color: #000000;
+#title {
+    color: mediumslateblue;
 }
 
-#topbar.dark {
-    color: #2c2fe2;
-    background-color: #000000;
-}
+/* Default Themes */
+#topbar.default {background-color: #000000;}
+.topbar-option.default {color: whitesmoke;}
+#title.default {color: mediumslateblue;}
 
-#settings-sidebar.kevin {
-    color: aliceblue;
-    background: linear-gradient(180deg, #D60270, #0038A8);
-}
+/* Dark Themes */
+#topbar.dark {background-color: #000000;}
+.topbar-option.dark {color: whitesmoke;}
+#title.dark {color: mediumslateblue;}
+
+/* Pastel Themes */
+#topbar.pastel {background-color: #57f5f5;}
+.topbar-option.pastel {color: whitesmoke;}
+#title.pastel {color: #ff80e2;}
+
+/* Gay Themes */
+#topbar.gay {background-color: #000000;}
+.topbar-option.gay {color: whitesmoke;}
+#title.gay {color: mediumslateblue;}
+
+/* Kevin Themes */
+#topbar.kevin {background-color: #000000;}
+.topbar-option.kevin {color: whitesmoke;}
+#title.kevin {color: mediumslateblue;}
+
+/* Drac Themes */
+#topbar.drac {background-color: #000000;}
+.topbar-option.drac {color: whitesmoke;}
+#title.drac {color: red;}

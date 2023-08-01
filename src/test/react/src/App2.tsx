@@ -328,11 +328,11 @@ class App2 extends Component<{}, AppState> {
           ) : null}
           {!this.state.welcomeVisible ? (
               <div className="main-page">
-                <div className="topbar">
-                  <div className="topbar-option clickable" id= "title">Song Game By Marley</div>
-                  <div className="topbar-option clickable" id="spotify-genres">All Spotify Genres</div>
-                  <div className="topbar-option clickable" id="directions">How to Play</div>
-                  <div className="topbar-option clickable" id="settings toggle"
+                <div className="themed" id="topbar">
+                  <div className="topbar-option themed" id= "title">Song Game By Marley</div>
+                  <div className="topbar-option themed" id="spotify-genres">All Spotify Genres</div>
+                  <div className="topbar-option themed" id="directions">How to Play</div>
+                  <div className="topbar-option themed" id="settings toggle"
                        onClick={() => {const rSidebar = document.getElementById("settings-sidebar") as HTMLElement;
                          if (rSidebar) {rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";}
                          this.setState({settingsActive: !this.state.settingsActive})}}
