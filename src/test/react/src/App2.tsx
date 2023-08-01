@@ -336,9 +336,9 @@ class App2 extends Component<{}, AppState> {
                 <div className="game-options">
                   <div className="main-interface game-ui">
                     <div className={`tab ${this.state.activeTab === "players" ? "active" : ""} themed ${this.state.theme}`}
-                         onClick={() => {this.setState({ activeTab: "names" });}}
+                         onClick={() => {this.setState({ activeTab: "players" });}}
                         >Players</div>
-                    <div className={`tab ${this.state.activeTab === "players" ? "active" : ""} themed ${this.state.theme}`}
+                    <div className={`tab ${this.state.activeTab === "playlist" ? "active" : ""} themed ${this.state.theme}`}
                          onClick={() => {this.setState({ activeTab: "playlist" });}}
                         >PlayLists/Genres</div>
                   </div>
