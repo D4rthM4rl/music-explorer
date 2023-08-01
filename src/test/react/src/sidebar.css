@@ -1,0 +1,27 @@
+.sidebar {
+    flex:25%;
+    background-color: #282b31;
+    animation: slideFromLeft ease 1.5s;
+    text-align: center;
+    font-size: 90%;
+}
+.tab {
+    font-size: 19px;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    float:left;
+    width: 50%;
+    height:6%;
+    animation: fadeInAnimation ease 1s;
+    background-color: #15161a;
+    box-shadow: inset  1px -1px 20px 1px black;
+}
+.tab.active {
+    background-color: #282b31;
+    box-shadow:none;
+}
+.tab.active:hover {background-color: #282b31;}
+.tab:hover {background-color: #4e545f;}

@@ -29,22 +29,19 @@
 }
 
 @keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  from {transform: rotate(-1deg);}
+  to {transform: rotate(1deg);}
 }
 html{
   font-size: 22px;
 }
 body{
+  /*animation: App-logo-spin infinite 1s linear;*/
   background-color: #282b31;
   color:whitesmoke;
 }
 .welcome-container{
-  animation: fadeInAnimation ease-in 4s;
+  animation: App-logo-spin infinite 3s forwards;
   position: absolute;
   text-align: center;
   top: 50%;
@@ -97,37 +94,9 @@ body{
   display:flex;
   height: 100vh;
 }
-.game-ui{
-  flex: 50%;
+.start-game{
+  flex: 80%;
   background-color: #282b31;
-}
-.main-interface{
-  flex:30%;
-  background-color: #282b31;
-  animation: slideFromLeft ease 1.5s;
-  text-align: center;
-}
-.tab{
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  float:left;
-  width: 50%;
-  height:10%;
-  animation: fadeInAnimation ease 1s;
-  background-color: #15161a;
-  box-shadow: inset  1px -1px 20px 1px black;
-}
-.tab.active{
-  background-color: #282b31;
-  box-shadow:none;
-}
-.tab.active:hover{
-  background-color: #282b31;
-}
-.tab:hover{
-  background-color: #4e545f;
 }
 .start-game{
   background-color: antiquewhite;

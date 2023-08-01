@@ -4,6 +4,7 @@ import React, {Component} from 'react';
 import axios from "axios";
 import { Buffer } from "buffer";
 import "./settings.css"
+import "./sidebar.css"
 import "./App.css";
 import "./topbar.css";
 import settingsIcon from "./settings-icon.png"
@@ -334,7 +335,7 @@ class App2 extends Component<{}, AppState> {
                   <div className="topbar-option" id="settings toggle">Settings</div>
                 </div>
                 <div className="game-options">
-                  <div className="main-interface game-ui">
+                  <div className="sidebar game-ui">
                     <div className={`tab ${this.state.activeTab ? "active" : ""} themed ${this.state.theme}`}
                          onClick={() => {this.setState({ activeTab: true });}}
                         >Players</div>
