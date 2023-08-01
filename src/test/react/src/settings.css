@@ -1,4 +1,4 @@
-/* Style for the sidebar */
+/* Style for the settings sidebar */
 #settings-sidebar {
     position: fixed;
     top: 10%;
@@ -13,7 +13,6 @@
     background: #1d233d;
     font-family: Avenir;
 }
-/* Style for the button */
 #settingsButton {
     position: fixed;
     text-align: center;
@@ -26,6 +25,7 @@
     border-radius: 4px;
     cursor: pointer;
 }
+#theme-select {background: lightcyan}
 .switch {
     position: relative;
     display: inline-block;
@@ -69,7 +69,7 @@ input:checked + .slider:before {
 .slider.round {border-radius: 34px;}
 .slider.round:before {border-radius: 50%;}
 
-/* Default Themes */
+/* Default Themes (Pretty much done) */
 #settings-sidebar.default {
     color: aliceblue;
     background: #1d233d;
@@ -78,13 +78,14 @@ input:checked + .slider:before {
     background-color: #7387af;
     color: #fff;
 }
+#theme-select.default {background: lightcyan}
 .slider.default {background-color: #ccc;}
 .slider.default:before {background-color: white;}
 input:checked + .slider.default {background-color: #2196F3;}
 input:focus + .slider.default {box-shadow: 0 0 1px #2196F3;}
 
 
-/* Dark Themes */
+/* Dark Themes (Pretty much done) */
 #settings-sidebar.dark {
     color: aliceblue;
     background: #1d233d;
@@ -93,10 +94,11 @@ input:focus + .slider.default {box-shadow: 0 0 1px #2196F3;}
     background-color: #7387af;
     color: #fff;
 }
-.slider.dark {background-color: #ccc;}
-.slider.dark:before {background-color: white;}
-input:checked + .slider.dark {background-color: #2196F3;}
-input:focus + .slider.dark {box-shadow: 0 0 1px #2196F3;}
+#theme-select.dark {background: #758bb4; color: black}
+.slider.dark {background-color: #8d8d8d;}
+.slider.dark:before {background-color: #eaeaea;}
+input:checked + .slider.dark {background: blue;}
+input:focus + .slider.dark {box-shadow: 0 0 1px blue;}
 
 /* Pastel Themes */
 #settings-sidebar.pastel {
@@ -107,6 +109,7 @@ input:focus + .slider.dark {box-shadow: 0 0 1px #2196F3;}
     background-color: #7387af;
     color: #fff;
 }
+#theme-select.pastel {background: #85ffff; color: black}
 .slider.pastel {background-color: #ccc;}
 .slider.pastel:before {background-color: white;}
 input:checked + .slider.pastel {background-color: #2196F3;}
@@ -125,6 +128,7 @@ input:focus + .slider.pastel {box-shadow: 0 0 1px #2196F3;}
     background-color: #7387af;
     color: #fff;
 }
+#theme-select.gay {background: mediumvioletred; color: black}
 .slider.gay {background-color: #ccc;}
 .slider.gay:before {background-color: white;}
 input:checked + .slider.gay {background-color: #00ffea;}
@@ -139,6 +143,7 @@ input:focus + .slider.gay {box-shadow: 0 0 1px #00ffea;}
     background-color: #7387af;
     color: #fff;
 }
+#theme-select.kevin {background: #0038A8; color: white}
 .slider.kevin {background-color: #ccc;}
 .slider.kevin:before {background-color: white;}
 input:checked + .slider.kevin {background-color: #0038A8;}
@@ -146,17 +151,33 @@ input:focus + .slider.kevin {box-shadow: 0 0 1px #0038A8;}
 
 /* Drac Themes */
 #settings-sidebar.drac {
-    color: aliceblue;
-    background: #1d233d;
+    color: red;
+    background: #262c2d;
 }
 #settingsButton.drac {
     background-color: #7387af;
     color: #fff;
 }
-.slider.drac {background-color: #ccc;}
+#theme-select.drac {background: linear-gradient(45deg, #ff0000, #000000);color: black}
+.slider.drac {background-color: #5b5b5b;}
 .slider.drac:before {background-color: white;}
-input:checked + .slider.drac {background-color: #2196F3;}
-input:focus + .slider.drac {box-shadow: 0 0 1px #2196F3;}
+input:checked + .slider.drac {background-color: red;}
+input:focus + .slider.drac {box-shadow: 0 0 1px red;}
+
+/* Marley Themes */
+#settings-sidebar.marley {
+    color: white;
+    background: #262c2d;
+}
+#settingsButton.marley {
+    background-color: #7387af;
+    color: #fff;
+}
+#theme-select.marley {background: mediumpurple; color: blue}
+.slider.marley {background-color: #ccc;}
+.slider.marley:before {background-color: white;}
+input:checked + .slider.marley {background-color: midnightblue;}
+input:focus + .slider.marley {box-shadow: 0 0 1px midnightblue;}
 
 
 @-webkit-keyframes rainbow {

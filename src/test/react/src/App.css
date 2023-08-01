@@ -2,42 +2,99 @@
     padding-top: 6%;
     height: 100vh;
     overflow: visible;
-    width: 80%;
+    width: 76%;
     text-align: center;
     padding-left: 24.5%;
     background: ghostwhite;
     color: black;
 }
 #start-game {
-
+    background: #003cff;
+    color: black;
 }
+#links {color: blue;}
 
+/* Default Theme*/
 #App.default {
     background: ghostwhite;
     color: black;
 }
+#start-game.default {
+    background: #003cff;
+    color: black;
+}
+#links.default {color: blue;}
 
+/* Dark Theme*/
 #App.dark {
     color: #758bb4;
     background-color: #131054;
 }
+#start-game.dark {
+    background: #003cff;
+    color: black;
+}
+#links.dark {color: blue;}
 
+/* Pastel Theme*/
+#App.pastel {
+    background: #a7f18c;
+
+}
+#start-game.pastel {
+    background: mediumvioletred;
+    color: white;
+}
+#links.pastel {color: #a0a0da;}
+
+/* Gay Theme*/
 #App.gay {
     background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
     background-size: 1800% 300%;
     -webkit-animation: rainbow 18s ease infinite;
-    /*-z-animation: rainbow 10s ease infinite;*/
     -o-animation: rainbow 18s linear infinite;
     animation: rainbow 18s ease infinite;
 }
-
-#start-game.default {
-
+#start-game.gay {
+    background: mediumvioletred;
+    color: white;
 }
+#links.gay {color: white;}
 
-#start-game.default {
-
+/* Kevin Theme*/
+#App.kevin {
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
 }
+#start-game.kevin {
+    background: #ff7300;
+    color: white;
+}
+#links.kevin {color: floralwhite;}
+
+/* Drac Theme*/
+#App.drac {
+    background: linear-gradient(180deg, #ff2400,  dimgray);
+}
+#start-game.drac {
+    background: black;
+    color: red;
+}
+#links.drac {color: #9a0000; }
+
+/* Marley Theme*/
+#App.marley {
+    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    background-size: 1800% 300%;
+    -webkit-animation: rainbow 18s ease infinite;
+    -o-animation: rainbow 18s linear infinite;
+    animation: rainbow 18s ease infinite;
+}
+#start-game.marley {
+    background: mediumvioletred;
+    color: white;
+}
+#links.marley {color: blue;}
+
 
 @-webkit-keyframes rainbow {
     0%{background-position:0% 82%}

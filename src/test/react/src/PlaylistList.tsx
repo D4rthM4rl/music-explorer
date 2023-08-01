@@ -1,15 +1,6 @@
-/*
- * Copyright (C) 2022 Kevin Zatloukal and James Wilcox.  All rights reserved.  Permission is
- * hereby granted to students registered for University of Washington
- * CSE 331 for use solely during Autumn Quarter 2022 for purposes of
- * the course.  No other use, copying, distribution, or modification
- * is permitted without prior written consent. Copyrights for
- * third-party components of this work must be honored.  Instructors
- * interested in reusing these course materials should contact the
- * author.
- */
-
 import React, {Component} from 'react';
+import "./sidebar.css"
+import {handleThemeChange} from "./handleThemeChange";
 
 interface PlaylistListProps {
     onChange(playlists: string[]): void;  // called when a new playlist list is ready
@@ -17,6 +8,7 @@ interface PlaylistListProps {
     onClear(): void; // called when the clear button is clicked in the sidebar
     playlistArray: string[];
     numGenreProp: number;
+    theme?: string;
 }
 
 interface PlaylistListState {
@@ -69,7 +61,8 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
         return (
             <div>
                 <h1>Songs per Genre: {this.props.numGenreProp}</h1>
-                <input type={"number"}
+                <input className={`num-song-box themed ${this.props.theme}`}
+                    type={"number"}
                        placeholder={"00"}
                        onChange={(event) => {
                            const value = parseInt(event.target.value);
@@ -83,15 +76,13 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
                            width: "29%",
                            left: "30%",
                            fontSize: '20px',
-                           color: 'blue',
-                           backgroundColor: 'lightcyan',
                            borderRadius: '5px',
                            padding: '1%',
                            border: '1px solid black'
                        }}
                 /> <br/>
                 <h1>Playlists/Genres go here</h1>
-                <input
+                <input className={`name-playlist-box themed ${this.props.theme}`}
                     list="playlist-list"
                     placeholder={"Type Genres and Playlists here"}
                     onChange={(event) => {
@@ -103,8 +94,6 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
                         fontFamily: 'Comic Sans MS',
                         width: "75%",
                         fontSize: '115%',
-                        color: 'blue',
-                        backgroundColor: 'lightcyan',
                         borderRadius: '5px',
                         padding: '2%',
                         border: '1px solid black'
@@ -132,18 +121,14 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
                     <option value="Metal" />
                 </datalist>
                 <br/>
-                <button
+                <button className={`add-button themed ${this.props.theme}`}
                     onClick={this.handleAdd}
                     style={{fontSize: 20}}
                 >Add
                 </button>
-                <button
-                    onClick={() => {
-                        this.handleClear();
-                    }}
-                    style={{
-                        fontSize: 20,
-                    }}
+                <button className={`clear-button themed ${this.props.theme}`}
+                    onClick={this.handleClear}
+                    style={{fontSize: 20}}
                 >Clear
                 </button>
                 <ul style={{

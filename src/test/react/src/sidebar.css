@@ -26,6 +26,29 @@
     text-align: center;
     z-index: 10;
 }
+.num-song-box {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box {
+    color: blue;
+    background: lightcyan;
+}
+.add-button {
+    color: black;
+    background: #00ff18;
+    border-radius: 25%;
+    border: black;
+    cursor: pointer;
+    margin-right: 5%;
+}
+.clear-button {
+    color: black;
+    background: #fa0b0b;
+    border-radius: 25%;
+    border: black;
+    cursor: pointer;
+}
 .tab {
     padding: 10px;
     font-size: 120%;
@@ -63,11 +86,28 @@
     background-color: #1d233d;
     border-right:2px solid black;
 }
+.num-song-box.default {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box.default {
+    color: blue;
+    background: lightcyan;
+}
+.add-button.default {
+    color: black;
+    background: #30ff00;
+}
+.clear-button.default {
+    color: black;
+    background: #ff0000;
+}
 .tab.default {border-bottom: 1px solid #cccccc;}
 .tabs.default {background: black;}
 .tab.default.active {
     background-color: #1d233d;
     border: 1px solid #cccccc;
+    border-bottom: none;
 }
 .tab.default:hover {background-color: rgba(30, 155, 222, 0.77);}
 
@@ -77,15 +117,32 @@
     background-color: #1d233d;
 }
 #sidebar-h.dark {
-    color: aliceblue;
-    background-color: #1d233d;
+    color: #afb5bb;
+    background: #1d233d;
     border-right:2px solid black;
+}
+.num-song-box.dark {
+    color: #aaaac5;
+    background: #464f5b;
+}
+.name-playlist-box.dark {
+    color: #aaaac5;
+    background: #464f5b;
+}
+.add-button.dark {
+    color: black;
+    background: #179b2c;
+}
+.clear-button.dark {
+    color: black;
+    background: #e10202;
 }
 .tab.dark {border-bottom: 1px solid #cccccc;}
 .tabs.dark {background: black;}
 .tab.dark.active {
     background-color: #1d233d;
     border: 1px solid #cccccc;
+    border-bottom: none;
 }
 .tab.dark:hover {background-color: rgba(30, 155, 222, 0.77);}
 
@@ -96,16 +153,34 @@
 }
 #sidebar-h.pastel {
     color: aliceblue;
-    background-color: paleturquoise;
+    background: #89c0f3;
     border-right:2px solid black;
+}
+.num-song-box.pastel {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box.pastel {
+    color: blue;
+    background: lightcyan;
+}
+.add-button.pastel {
+    color: black;
+    background: lightcyan;
+}
+.clear-button.pastel {
+    color: black;
+    background: lightcyan;
 }
 .tab.pastel {border-bottom: 1px solid #cccccc;}
 .tabs.default {background: black;}
 .tab.pastel.active {
-    background-color: paleturquoise;
+    background-color: #89c0f3;
     border: 1px solid #cccccc;
+    border-bottom: none;
 }
-.tab.pastel:hover {background-color: rgba(30, 155, 222, 0.77);}
+.tab.pastel:hover {background: #b5d5f6;}
+.tab.pastel.active:hover {background: #89c0f3}
 
 /* Gay Themes */
 #sidebar.gay {
@@ -117,14 +192,31 @@
     background-color: rgba(29, 35, 61, 0.16);
     border-right:2px solid black;
 }
+.num-song-box.gay {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box.gay {
+    color: blue;
+    background: lightcyan;
+}
+.add-button.gay {
+    color: black;
+    background: lightcyan;
+}
+.clear-button.gay {
+    color: black;
+    background: lightcyan;
+}
 .tab.gay {
     border-bottom: 1px solid #cccccc;
     background: black
 }
 .tabs.gay {background: #0af5b6;}
 .tab.active.gay {
-    background-color: rgba(29, 35, 61, 0);
+    background-color: rgb(9, 224, 6);
     border: 1px solid #cccccc;
+    border-bottom: none;
 }
 .tab.gay:hover {background-color: rgba(255, 0, 0, 0.77);}
 
@@ -134,34 +226,68 @@
 }
 #sidebar-h.kevin {
     color: aliceblue;
-    background-color: #1d233d;
+    background-color: #D60270;
     border-right:2px solid black;
+}
+.num-song-box.kevin {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box.kevin {
+    color: blue;
+    background: lightcyan;
+}
+.add-button.kevin {
+    color: black;
+    background: lightcyan;
+}
+.clear-button.kevin {
+    color: black;
+    background: lightcyan;
 }
 .tab.kevin {border-bottom: 1px solid #cccccc;}
 .tabs.kevin {background: black;}
 .tab.active.kevin {
-    background-color: #1d233d;
+    background-color: #D60270;
     border: 1px solid #cccccc;
+    border-bottom: none;
 }
-.tab.kevin:hover {background-color: rgba(30, 155, 222, 0.77);}
+.tab.kevin:hover {background: rgba(252, 75, 166, 0.91);}
 
 /* Drac Themes */
 #sidebar.drac {
-    color: #758bb4;
-    background-color: #1d233d;
+    color: red;
+    background-color: #262c2d;
 }
 #sidebar-h.drac {
-    color: aliceblue;
-    background-color: #1d233d;
+    color: red;
+    background-color: #262c2d;
     border-right:2px solid black;
+}
+.num-song-box.drac {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box.drac {
+    color: blue;
+    background: lightcyan;
+}
+.add-button.drac {
+    color: black;
+    background: lightcyan;
+}
+.clear-button.drac {
+    color: black;
+    background: lightcyan;
 }
 .tab.drac {border-bottom: 1px solid #cccccc;}
 .tabs.drac {background: black;}
 .tab.drac.active {
-    background-color: #1d233d;
+    background-color: #262c2d;
     border: 1px solid #cccccc;
+    border-bottom: none;
 }
-.tab.drac:hover {background-color: rgba(30, 155, 222, 0.77);}
+.tab.drac:hover {background-color: rgba(71, 77, 77, 0.81);}
 
 /* Marley Themes */
 #sidebar.marley {
@@ -173,10 +299,27 @@
     background-color: #1d233d;
     border-right:2px solid black;
 }
+.num-song-box.marley {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box.marley {
+    color: blue;
+    background: lightcyan;
+}
+.add-button.marley {
+    color: black;
+    background: lightcyan;
+}
+.clear-button.marley {
+    color: black;
+    background: lightcyan;
+}
 .tab.marley {border-bottom: 1px solid #cccccc;}
 .tabs.marley {background: black;}
 .tab.marley.active {
     background-color: #1d233d;
     border: 1px solid #cccccc;
+    border-bottom: none;
 }
 .tab.marley:hover {background-color: rgba(30, 155, 222, 0.77);}

@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import "./sidebar.css"
+import {handleThemeChange} from "./handleThemeChange";
 
 interface NamesListProps {
     onChange(names: string[]): void;  // called when a new name list is ready
@@ -6,11 +8,13 @@ interface NamesListProps {
     onClear(): void; // called when the clear button is clicked in the sidebar
     nameArray: string[];
     numPersonalProp: number;
+    theme?: string;
 }
 
 interface NamesListState {
     value: string;
     numValue: number;
+    // themeState: string
 }
 
 class NamesList extends Component<NamesListProps, NamesListState> {
@@ -19,6 +23,7 @@ class NamesList extends Component<NamesListProps, NamesListState> {
         this.state = {
             value: "",
             numValue: 0,
+            // themeState: "default"
         }
     }
 
@@ -28,16 +33,12 @@ class NamesList extends Component<NamesListProps, NamesListState> {
             const newNames = [...this.props.nameArray, newName];
             this.props.onChange(newNames);
             this.setState({ value: "" });
-            // let url = `http://localhost:4567/add-person?name=${newName}`;
-            // await fetch(url);
         }
     }
 
     handleClear = async () => {
-        // let responsePromise = await fetch("http://localhost:4567/clear-people");
         this.props.onChange(this.props.nameArray);
         this.props.onClear(); // call the onClear prop
-        console.log("Cleared names in NamesList.tsx");
     }
 
     handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -51,16 +52,14 @@ class NamesList extends Component<NamesListProps, NamesListState> {
         const newNames = [...this.props.nameArray];
         newNames.splice(index, 1);
         this.props.onChange(newNames);
-        // let url = `http://localhost:4567/remove-person?index=${index}`;
-        // await fetch(url);
     }
 
     render() {
         return (
             <div>
-                <h1 style={{
-                }}>Songs per Person: {this.props.numPersonalProp}</h1>
-                <input type={"number"}
+                <h1>Songs per Person: {this.props.numPersonalProp}</h1>
+                <input className={`num-song-box themed ${this.props.theme}`}
+                    type={"number"}
                     placeholder={"00"}
                     // pass the playlists array as a prop
                     onChange={(event) => {
@@ -73,32 +72,23 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                     style={{
                         fontFamily: 'Comic Sans MS',
                         width: "29%",
-                        // left: "30%",
                         fontSize: '20px',
-                        color: 'blue',
-                        backgroundColor: 'lightcyan',
                         borderRadius: '5px',
                         padding: '1%',
                         border: '1px solid black'
                     }}
                 /> <br/>
                 <h1>Names go here</h1>
-                <input
+                <input className={`name-playlist-box themed ${this.props.theme}`}
                     list="name-list"
                     placeholder={"Type Player Names Here"}
-                    onChange={(event) => {
-                        this.setState({
-                            value: event.target.value
-                        })
-                    }}
+                    onChange={(event) => {this.setState({value: event.target.value})}}
                     onKeyDown={this.handleInputKeyDown}
                     value={this.state.value}
                     style={{
                         fontFamily: 'Comic Sans MS',
                         fontSize: '115%',
                         width: "75%",
-                        color: 'blue',
-                        backgroundColor: 'lightcyan',
                         borderRadius: '5px',
                         padding: '2%',
                         border: '1px solid black'
@@ -115,20 +105,14 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                     <option value="Memphis" />
                 </datalist>
                 <br/>
-                <button
+                <button className={`add-button themed ${this.props.theme}`}
                     onClick={this.handleAdd}
-                    style={{
-                        fontSize: 20,
-                    }}
+                    style={{fontSize: 20}}
                 >Add
                 </button>
-                <button
-                    onClick={() => {
-                        this.handleClear();
-                    }}
-                    style={{
-                        fontSize: 20,
-                    }}
+                <button className={`clear-button themed ${this.props.theme}`}
+                    onClick={this.handleClear}
+                    style={{fontSize: 20}}
                 >Clear
                 </button>
                 <ul style={{

@@ -5,8 +5,10 @@ import "./settings.css"
 import "./App.css";
 import "./sidebar.css";
 import "./topbar.css";
+import settingsIcon from "./settings-icon.png"
 import NamesList from "./NamesList";
 import PlaylistList from "./PlaylistList";
+import {handleThemeChange} from "./handleThemeChange";
 
 interface AppState {
     tracks: Track[];
@@ -65,32 +67,6 @@ class App extends Component<{}, AppState> {
         this.setState({playlists: [] });
     }
 
-    handleThemeChange = (event: { target: { value: string; }; }) => {
-        // Update the theme based on the selected option value
-        const themeableElements = ["settings-sidebar", "theme-select", "sidebar", "sidebar-h", "start-game",
-                    "App", "topbar"];
-        const themeableGenericElements = ["slider round", "tab", "name-tab active", "playlist-tab active", "tab active",
-        "name-tab", "playlist-tab"];
-
-        for (let i = 0; i < themeableElements.length; i++) {
-            let id = themeableElements[i];
-            const e = document.getElementById(id) as HTMLElement;
-            // Themes are: default, dark, pastel, gay, kevin, drac, marley
-            e.className = themeableElements[i] + " " + event.target.value;
-        }
-        for (let i = 0; i < themeableGenericElements.length; i++) {
-            let className = themeableGenericElements[i];
-            const e = document.getElementsByClassName(className)[0] as HTMLElement;
-            // Themes are: default, dark, pastel, gay, kevin, drac, marley
-            if (e) {
-                console.log(themeableGenericElements[i]);
-                e.className = themeableGenericElements[i] + " " + event.target.value;
-            }
-            if (!e) {
-                console.log(themeableGenericElements[i] + " is not real");
-            }
-        }
-    }
 
     handleStart = async () => {
         const client_id = '4cd6054588e84b1884b9e14998f34844'; // Your client id
@@ -340,67 +316,64 @@ class App extends Component<{}, AppState> {
     }
 
     render() {
-        const { activeTab, playlists, names, numPersonalState, numGenreState } = this.state;
+        const { activeTab, playlists, names, numPersonalState, numGenreState, theme } = this.state;
         return (
             <div style={{zIndex: -10}}>
                 <div id="topbar">
                     <h1>Song Game by Marley</h1>
-                    <nav id="topbar-links"
+                    <nav className="topbar-links"
                     style={{
                         fontSize: 22,
-                        paddingLeft: "10%",
-                        paddingRight: "5%",
-                        textAlign: "center",
+                        // paddingLeft: "10%",
+                        // paddingRight: "5%",
+                        // textAlign: "center",
                     }}>
-                        <a href="/how-to-play"
+                        <a
                         style={{color: "#7387af"
                         }}>How to Play</a>
                     </nav>
-                    <nav id="topbar-links"
+                    <nav className="topbar-links"
                         style={{
                             fontSize: 22,
-                            paddingLeft: "10%",
-                            paddingRight: "5%",
-                            textAlign: "center",
+                            // paddingLeft: "10%",
+                            // paddingRight: "5%",
+                            // textAlign: "center",
                     }}>
                     <a href="https://everynoise.com/everynoise1d.cgi?scope=all"
                        id=""
                         style={{color: "#7387af"}}>All Spotify Genres</a>
                     </nav>
-                    <nav id="topbar-links"
+                    <nav className="topbar-links"
                          onClick={() => {
                              this.setState({ settingsActive: !this.state.settingsActive });
                              const rSidebar = document.getElementById("settings-sidebar") as HTMLElement;
-                             if (rSidebar) {
-                                 rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";
-                             }
+                             if (rSidebar) {rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";}
                          }}
-
                          style={{
                              cursor: "pointer",
                              fontSize: 22,
-                             paddingLeft: "10%",
-                             paddingRight: "5%",
-                             textAlign: "center",
+                             // paddingLeft: "10%",
+                             // paddingRight: "5%",
+                             // textAlign: "center",
                              blockSize: "0%",
                              color: "#7387af",
-                             marginBottom: "2%",
-                         }}>
+                             // marginBottom: "2%",
+                         }}> <img src={settingsIcon}  alt="missing image"
+                                style={{width: "5%", verticalAlign: "middle"}}/>
                     Settings</nav>
                 </div>
 
                 <div id={`settings-sidebar`}
+                     className="themed"
                     style={{fontSize: "170%"}}>
                     <div>Theme
-                        <select id="theme-select"
+                        <select id="theme-select" className="themed"
                             value={this.state.theme}
                             onChange={(event) => {this.setState({theme: event.target.value})
-                                this.handleThemeChange(event)}}
+                                handleThemeChange(event.target.value)}}
                             style={{
                                 marginLeft: '10%',
                                 marginTop: '3%',
-                                color: 'black',
-                                background: "lightcyan",
                                 fontSize: "90%"
                             }}
                         >
@@ -418,56 +391,47 @@ class App extends Component<{}, AppState> {
                         marginLeft: "10%",
                         marginTop: "3%",
                     }}>Toggle
-                        <label className="switch"
+                        <label className="switch themed"
                         style={{
                             marginLeft: "20%",
                             marginTop: "-10%"
                         }}>
                             <input type="checkbox" />
-                            <span className="slider round"></span>
+                            <span className="slider round themed"></span>
                         </label>
                     </div>
                     <div>AHH</div>
                 </div>
-
-
-                <div id="sidebar-h" style={{ left: 0, top: "10%", height: "5.4%"}}>
-                    <div id="sidebar-header">
+                <div id="sidebar-h" className="themed" style={{ left: 0, top: "10%", height: "5.4%"}}>
+                    <div id="sidebar-header" className="themed">
                         <div
-                            className="tabs"
-                            style={{ paddingLeft: 0, display: "flex", width: "100%" }}
-                        >
-
+                            className="tabs themed"
+                            style={{ paddingLeft: 0, display: "flex", width: "100%" }}>
                             <div
-                                className={`tab ${activeTab === "names" ? "active" : ""}`}
-                                onClick={() => {
-                                    this.setState({ activeTab: "names" });
-                                }}
-                            >
-                                Names
-                            </div>
+                                className={`tab ${activeTab === "names" ? "active" : ""} themed ${this.state.theme}`}
+                                onClick={() => {this.setState({ activeTab: "names" });}}
+                            >Names</div>
                             <div
-                                className={`tab ${activeTab === "playlist" ? "active" : ""}`}
-                                onClick={() => {
-                                    this.setState({ activeTab: "playlist" })
-                                }}
-                            >
-                                Playlists/Genres
-                            </div>
+                                className = { `tab ${activeTab === "playlist" ? "active" : ""} themed ${this.state.theme}`}
+                                onClick={() => {this.setState({ activeTab: "playlist" });}}
+                            >Playlists/Genres</div>
                         </div>
                     </div>
                 </div>
-                <div id="sidebar" style={{
-                    left: 0,
-                    zIndex: 5,
-                }}>
+                <div id="sidebar"
+                     className="themed"
+                     style={{
+                        left: 0,
+                        zIndex: 5,
+                     }}>
                     {activeTab === "names" && <div
-                        className="name-tab active"
+                        className="name-tab themed"
                         style={{ left: 0 }}
                     >
                         <NamesList
-                            numPersonalProp={numPersonalState}
-                            nameArray={names} // pass the playlists array as a prop
+                            theme={theme} // pass the theme as a prop
+                            numPersonalProp={numPersonalState} // pass the personal number as a prop
+                            nameArray={names} // pass the names array as a prop
                             onChange={(value: []) => {
                                 this.setState({ names: value });
                             }}
@@ -480,15 +444,15 @@ class App extends Component<{}, AppState> {
                         ></NamesList>
                     </div>}
                     {activeTab === "playlist" && <div
-                        className="playlist-tab active"
+                        className="playlist-tab themed"
                         style={{ left: 0 }}
                     >
                         <PlaylistList
+                            theme={this.state.theme} // pass the theme as a prop
+                            numGenreProp={numGenreState} // pass the genre number as a prop
                             playlistArray={playlists} // pass the playlists array as a prop
-                            numGenreProp={numGenreState}
                             onChange={(value: string[]) => {
                                 this.setState({ playlists: value });
-                                console.log("PlaylistList onChange", value);
                             }}
                             onClear={() => {this.clearPlaylists();}}
                             onNumChange={(value: number) => {
@@ -497,8 +461,10 @@ class App extends Component<{}, AppState> {
                         />
                     </div>}
                 </div>
-                <div id="App">
-                    <div id="main-content" style={{
+                <div id="App"
+                className="themed">
+                    <div id="main-content" className="themed"
+                         style={{
                         fontSize: 80,
                         fontWeight: "bold"
                     }}>
@@ -510,7 +476,7 @@ class App extends Component<{}, AppState> {
                             marginRight: "10%",
                             marginTop: "-1%"
                         }}></div>
-                        <button id="start-game"
+                        <button id="start-game" className="themed"
                             style={{
                                 fontSize: 50,
                                 border: "2px solid black",
@@ -526,15 +492,13 @@ class App extends Component<{}, AppState> {
                             >Start Game
                         <br/></button>
                         <div>
-                            <h2
-                            style={{
+                            <h2 style={{
                                 fontSize: "100%",
                                 marginTop: "-2%",
                                 marginLeft: "4%",
                                 textAlign: "left"
                             }}>Links:</h2>
-                            <ul
-                            style={{
+                            <ul style={{
                                 fontSize: 30,
                                 listStyleType: "none",
                                 textAlign: "left",
@@ -542,7 +506,8 @@ class App extends Component<{}, AppState> {
                                 marginLeft: "0%",
                             }}>
                                 {this.state.links.map((link, index) => (
-                                    <li key={index}><a href={link} target="_blank">{link}</a></li>
+                                    <li key={index}><a id="links" className="themed"
+                                        href={link} target="_blank">{link}</a></li>
                                 ))}
                             </ul>
                         </div>
