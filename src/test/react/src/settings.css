@@ -4,7 +4,7 @@
     top: 10%;
     right: -20%; /* Initially hidden to the right */
     width: 20%;
-    height: 100%;
+    height: 90%;
     transition: right 0.3s ease; /* Add smooth sliding transition */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     align-items: center;

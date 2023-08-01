@@ -320,24 +320,16 @@ class App extends Component<{}, AppState> {
         return (
             <div style={{zIndex: -10}}>
                 <div id="topbar">
-                    <h1>Song Game by Marley</h1>
+                    <h1 id="title" className="themed">Song Game by Marley</h1>
                     <nav className="topbar-links"
-                    style={{
-                        fontSize: 22,
-                        // paddingLeft: "10%",
-                        // paddingRight: "5%",
-                        // textAlign: "center",
-                    }}>
-                        <a
+                    style={{fontSize: 22,}}>
+                        <div
                         style={{color: "#7387af"
-                        }}>How to Play</a>
+                        }}>How to Play</div>
                     </nav>
                     <nav className="topbar-links"
                         style={{
                             fontSize: 22,
-                            // paddingLeft: "10%",
-                            // paddingRight: "5%",
-                            // textAlign: "center",
                     }}>
                     <a href="https://everynoise.com/everynoise1d.cgi?scope=all"
                        id=""
@@ -352,14 +344,9 @@ class App extends Component<{}, AppState> {
                          style={{
                              cursor: "pointer",
                              fontSize: 22,
-                             // paddingLeft: "10%",
-                             // paddingRight: "5%",
-                             // textAlign: "center",
-                             blockSize: "0%",
                              color: "#7387af",
-                             // marginBottom: "2%",
                          }}> <img src={settingsIcon}  alt="missing image"
-                                style={{width: "5%", verticalAlign: "middle"}}/>
+                                style={{width: "7%", background: "white", verticalAlign: "middle"}}/>
                     Settings</nav>
                 </div>
 
@@ -394,7 +381,7 @@ class App extends Component<{}, AppState> {
                         <label className="switch themed"
                         style={{
                             marginLeft: "20%",
-                            marginTop: "-10%"
+                            // marginTop: "-10%"
                         }}>
                             <input type="checkbox" />
                             <span className="slider round themed"></span>

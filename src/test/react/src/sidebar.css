@@ -1,9 +1,9 @@
 #sidebar {
-    position: fixed;
+    position: absolute;
     color: aliceblue;
     top: 15%;
     width: 25%;
-    height: 90%;
+    height: 85vh;
     background-color: #1d233d;
     border-right:2px solid black;
     font-family: Avenir;
@@ -13,11 +13,11 @@
     z-index: 10;
 }
 #sidebar-h {
-    position: fixed;
+    position: absolute;
     color: aliceblue;
     top: 15%;
     width: 25%;
-    height: 90%;
+    height: 100vh;
     background-color: #1d233d;
     border-right:2px solid black;
     font-family: Avenir;
