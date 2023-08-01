@@ -338,45 +338,6 @@ class App2 extends Component<{}, AppState> {
                          this.setState({settingsActive: !this.state.settingsActive})}}
                   >Settings</div>
                 </div>
-                <div id={`settings-sidebar`}
-                     className="themed"
-                     style={{fontSize: "170%"}}>
-                  <div>Theme
-                    <select id="theme-select" className="themed"
-                            value={this.state.theme}
-                            onChange={(event) => {this.setState({theme: event.target.value})
-                              handleThemeChange(event.target.value)}}
-                            style={{
-                              marginLeft: '10%',
-                              marginTop: '3%',
-                              fontSize: "90%"
-                            }}
-                    >
-                      <option value="default">Default</option>
-                      <option value="dark">Dark Mode</option>
-                      <option value="pastel">Pastel</option>
-                      <option value="gay">Gay</option>
-                      <option value="kevin">Kevin</option>
-                      <option value="drac">Drac</option>
-                      <option value="marley">Marley</option>
-                      {/* Add more theme options here */}
-                    </select>
-                  </div>
-                  <div style={{
-                    marginLeft: "10%",
-                    marginTop: "3%",
-                  }}>Toggle
-                    <label className="switch themed"
-                           style={{
-                             marginLeft: "20%",
-                             // marginTop: "-10%"
-                           }}>
-                      <input type="checkbox" />
-                      <span className="slider round themed"></span>
-                    </label>
-                  </div>
-                  <div>AHH</div>
-                </div>
                 <div className="game-options">
                   <div className="sidebar game-ui">
                     <div className={`tab ${this.state.activeTab ? "active" : ""} themed ${this.state.theme}`}
@@ -407,6 +368,45 @@ class App2 extends Component<{}, AppState> {
                   </div>
                   <div className="start-game game-ui">
                     <button className="start-button glow-on-hover">Start</button>
+                      <div id={`settings-sidebar`}
+                      className="themed"
+                      style={{fontSize: "170%"}}>
+                    <div>Theme
+                      <select id="theme-select" className="themed"
+                              value={this.state.theme}
+                              onChange={(event) => {this.setState({theme: event.target.value})
+                                handleThemeChange(event.target.value)}}
+                              style={{
+                                marginLeft: '10%',
+                                marginTop: '3%',
+                                fontSize: "90%"
+                              }}
+                      >
+                        <option value="default">Default</option>
+                        <option value="dark">Dark Mode</option>
+                        <option value="pastel">Pastel</option>
+                        <option value="gay">Gay</option>
+                        <option value="kevin">Kevin</option>
+                        <option value="drac">Drac</option>
+                        <option value="marley">Marley</option>
+                        {/* Add more theme options here */}
+                      </select>
+                    </div>
+                    <div style={{
+                      marginLeft: "10%",
+                      marginTop: "3%",
+                    }}>Toggle
+                      <label className="switch themed"
+                            style={{
+                              marginLeft: "20%",
+                              // marginTop: "-10%"
+                            }}>
+                        <input type="checkbox" />
+                        <span className="slider round themed"></span>
+                      </label>
+                    </div>
+                    <div>AHH</div>
+                  </div>
                   </div>
                 </div>
               </div>

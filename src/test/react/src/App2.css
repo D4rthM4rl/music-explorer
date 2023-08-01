@@ -3,6 +3,7 @@ body{
   /*animation: Spin infinite 1s linear;*/
   background-color: #282b31;
   color:whitesmoke;
+  overflow: hidden;
 }
 .welcome-container{
   position: absolute;
@@ -11,6 +12,7 @@ body{
   left: 50%;
   transform: translate(-50%, -50%);
   cursor: pointer;
+  animation: fadeInAnimation ease 2s;
 }
 .topbar{
   background-color:#131313;
@@ -76,9 +78,9 @@ body{
   align-content: space-evenly;
   align-items: center;
   text-align: center;
+  display:flex
 }
 .start-button{
-  top: 50%;
   font-size: 25px;
   cursor: pointer;
 }
