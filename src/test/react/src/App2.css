@@ -55,8 +55,8 @@ body{
   cursor: pointer;
 }
 .topbar{
-  background-color:#282c34;
-  animation: fallDownAnimation ease 1.5s;
+  background-color:#282b31;
+  animation: fallDownAnimation ease 1s;
   display: grid;
   grid-template-columns: repeat(4,25%);
   height: 100px;
@@ -65,7 +65,6 @@ body{
   align-content: space-evenly;
   align-items: center;
   text-align: center;
-  border-left: 2px solid #1f2227;
 }
 
 @keyframes fadeInAnimation{
@@ -84,10 +83,37 @@ body{
     transform:translateY(0%)
   }
 }
+@keyframes slideFromLeft {
+  from{
+    transform: translateX(-100%)
+  }
+  to{
+    transform:translateX(0%)
+  }
+  
+}
 .game-options{
   display:flex;
   height: 100vh;
 }
 .game-ui{
   flex: 50%;
+  background-color: #ffffff;
+}
+.main-interface{
+  flex:30%;
+  background-color: #282b31;
+}
+.tabtemp{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  float:left;
+  width: 50%;
+  height:10%;
+  background-color: #282b31;
+  animation: fadeInAnimation ease 1s;
+  border-top-right-radius: 5%;
+  border-top-left-radius: 5%;
+  box-shadow: inset -1px 2px 0px 0px #cccc;
 }

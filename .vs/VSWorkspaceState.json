@@ -1,0 +1,15 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\.idea",
+    "\\.mvn",
+    "\\.mvn\\wrapper",
+    "\\src",
+    "\\src\\test",
+    "\\src\\test\\react",
+    "\\src\\test\\react\\public",
+    "\\src\\test\\react\\src"
+  ],
+  "SelectedNode": "\\src\\test\\react\\src\\black-settings-icon.png",
+  "PreviewInSolutionExplorer": false
+}

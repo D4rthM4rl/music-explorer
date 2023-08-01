@@ -310,7 +310,6 @@ class App2 extends Component<{}, AppState> {
         }
       }
     } catch (error) {
-      console.error('Error:', error.message);
     }
   }
 
@@ -331,12 +330,15 @@ class App2 extends Component<{}, AppState> {
                 <div className="topbar">
                   <div className="topbar-option topbar-option1">Song Game By Marley</div>
                   <div className="topbar-option topbar-option2">All Spotify Genres</div>
-                  <div className="topbar-option topbar-option3">Settings</div>
-                  <div className="topbar-option topbar-option4">How It Works</div>
+                  <div className="topbar-option topbar-option3">How To Play</div>
+                  <div className="topbar-option topbar-option4">Settings</div>
                 </div>
                 <div className="game-options">
-                  <div className="main-interface game-ui"> placeholder</div>
-                  <div className="start-game game-ui"> placeholder</div>
+                  <div className="main-interface game-ui">
+                    <div className = "tabtemp tab1">Players</div>
+                    <div className = "tabtemp tab2">PlayLists/Genres</div>
+                  </div>
+                  <div className="start-game game-ui"></div>
                 </div>
               </div>
           ) : null}
