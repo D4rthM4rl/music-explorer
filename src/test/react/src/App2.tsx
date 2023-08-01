@@ -367,7 +367,10 @@ class App2 extends Component<{}, AppState> {
                     />)}
                   </div>
                   <div className="start-game game-ui">
-                    <button className="start-button glow-on-hover">Start</button>
+                  <ul className="links">
+                     {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"href={link} target="_blank">{link}</a></li>))}
+                  </ul>
+                    <button className="start-button glow-on-hover" onClick={() => {this.handleStart();}}>Start</button>
                       <div id={`settings-sidebar`}
                       className="themed"
                       style={{fontSize: "170%"}}>
