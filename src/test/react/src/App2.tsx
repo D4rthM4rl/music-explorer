@@ -17,7 +17,7 @@ interface AppState {
   names: string[];
   playlists: string[];
   links: string[];
-  activeTab: string;
+  activeTab: boolean;
   numGenreState: number;
   numPersonalState: number;
   settingsActive: boolean;
@@ -49,7 +49,7 @@ class App2 extends Component<{}, AppState> {
       names: [],
       links: [],
       playlists: [],
-      activeTab: 'players',
+      activeTab: true,
       numGenreState: 0,
       numPersonalState: 0,
       settingsActive: false,
@@ -335,12 +335,31 @@ class App2 extends Component<{}, AppState> {
                 </div>
                 <div className="game-options">
                   <div className="main-interface game-ui">
-                    <div className={`tab ${this.state.activeTab === "players" ? "active" : ""} themed ${this.state.theme}`}
-                         onClick={() => {this.setState({ activeTab: "players" });}}
+                    <div className={`tab ${this.state.activeTab ? "active" : ""} themed ${this.state.theme}`}
+                         onClick={() => {this.setState({ activeTab: true });}}
                         >Players</div>
-                    <div className={`tab ${this.state.activeTab === "playlist" ? "active" : ""} themed ${this.state.theme}`}
-                         onClick={() => {this.setState({ activeTab: "playlist" });}}
+                    <div className={`tab ${this.state.activeTab ? "" : "active"} themed ${this.state.theme}`}
+                         onClick={() => {this.setState({ activeTab: false });}}
                         >PlayLists/Genres</div>
+                    {this.state.activeTab ?(
+                      <NamesList
+                          theme={this.state.theme} // pass the theme as a prop
+                          numPersonalProp={this.state.numPersonalState} // pass the personal number as a prop
+                          nameArray={this.state.names} // pass the names array as a prop
+                          onChange={(value: []) => {this.setState({ names: value });}}
+                          onClear={() => {this.clearNames();}}
+                          onNumChange={(value: number) => {this.setState({numPersonalState: value});}}
+                      ></NamesList>) : 
+                      ( <PlaylistList
+                        theme={this.state.theme} // pass the theme as a prop
+                        numGenreProp={this.state.numGenreState} // pass the genre number as a prop
+                        playlistArray={this.state.playlists} // pass the playlists array as a prop
+                        onChange={(value: string[]) => {
+                          this.setState({ playlists: value });
+                        }}
+                        onClear={() => {this.clearPlaylists();}}
+                        onNumChange={(value: number) => {this.setState({numGenreState: value})}}
+                    />)}
                   </div>
                   <div className="start-game game-ui"></div>
                 </div>

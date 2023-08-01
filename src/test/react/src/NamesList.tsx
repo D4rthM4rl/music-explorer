@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import "./sidebar.css"
 import {handleThemeChange} from "./handleThemeChange";
 
 interface NamesListProps {
