@@ -15,10 +15,6 @@ body {
   animation: fadeInAnimation ease 2s;
 }
 
-:root{
-  --color-theme: "pink"
-}
-
 @keyframes Spin {
   from {transform: rotate(-1deg);}
   to {transform: rotate(1deg);}

@@ -339,7 +339,7 @@ class App2 extends Component<{}, AppState> {
                   >Settings</div>
                 </div>
                 <div className="game-options">
-                  <div id="sidebar" className="sidebar game-ui themed">
+                  <div id="sidebar" className="game-ui themed">
                     <div className={`tab ${this.state.activeTab ? "active" : ""} themed ${this.state.theme}`}
                          onClick={() => {this.setState({ activeTab: true });}}
                         >Players</div>
@@ -371,7 +371,7 @@ class App2 extends Component<{}, AppState> {
                      {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"href={link} target="_blank">{link}</a></li>))}
                   </ul>
                     <button className="start-button glow-on-hover themed" onClick={() => {this.handleStart();}}>Start</button>
-                      <div id={`settings-sidebar`} className="themed"
+                      <div id="settings-sidebar" className={`themed ${this.state.theme}`}
                       style={{fontSize: "170%"}}>
                     <div>Theme
                       <select id="theme-select" className="themed"

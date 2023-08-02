@@ -1,18 +1,11 @@
-:root {
-
-}
-.default {
-
-}
-
 /* Style for the settings sidebar */
 #settings-sidebar {
     transition: right 0.5s ease; /* Add smooth sliding transition */
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 0 10px #000000;
     align-items: center;
     text-align: center;
-    color: aliceblue;
-    background: #282b31;
+    color: var(--sidebar-text-color);
+    background: var(--sidebar-bg);
     font-family: Avenir;
     height: 100vh;
     width:20%;
@@ -20,19 +13,10 @@
     margin-left:100%;
     position:absolute
 }
-#settingsButton {
-    position: fixed;
-    text-align: center;
-    top: 10px;
-    right: 10px;
-    background-color: #7387af;
-    color: #fff;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
+#theme-select {
+    background: var(--theme-select-bg);
+    color: var(--theme-select-color);
 }
-#theme-select {background: lightcyan}
 .switch {
     position: relative;
     display: inline-block;
@@ -51,7 +35,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: #ccc;
+    background: var(--toggle-inactive-bg);
     -webkit-transition: .4s;
     transition: .4s;
 }
@@ -62,12 +46,12 @@
     width: 26px;
     left: 4px;
     bottom: 4px;
-    background-color: white;
+    background: var(--toggle-color);
     -webkit-transition: .4s;
     transition: .4s;
 }
-input:checked + .slider {background-color: #2196F3;}
-input:focus + .slider {box-shadow: 0 0 1px #2196F3;}
+input:checked + .slider {background: var(--toggle-active-bg);}
+input:focus + .slider {box-shadow: 0 0 1px var(--toggle-active-bg);}
 input:checked + .slider:before {
     -webkit-transform: translateX(26px);
     -ms-transform: translateX(26px);
@@ -76,116 +60,77 @@ input:checked + .slider:before {
 .slider.round {border-radius: 34px;}
 .slider.round:before {border-radius: 50%;}
 
-/* Default Themes (Pretty much done) */
-#settings-sidebar.default {
-    color: aliceblue;
-    background: #282b31;
+/* Themes */
+.default {
+    --sidebar-bg: #282b31;
+    --sidebar-text-color: whitesmoke;
+    --theme-select-bg: lightcyan;
+    --theme-select-color: black;
+    --toggle-color: white;
+    --toggle-inactive-bg: #ccc;
+    --toggle-active-bg: #2196F3;
 }
-#settingsButton.default {
-    background-color: #7387af;
-    color: #fff;
+.dark {
+    --sidebar-bg: #1d233d;
+    --sidebar-text-color: whitesmoke;
+    --theme-select-bg: #758bb4;
+    --theme-select-color: black;
+    --toggle-color: #eaeaea;
+    --toggle-inactive-bg: #8d8d8d;
+    --toggle-active-bg: blue;
 }
-#theme-select.default {background: lightcyan}
-.slider.default {background-color: #ccc;}
-.slider.default:before {background-color: white;}
-input:checked + .slider.default {background-color: #2196F3;}
-input:focus + .slider.default {box-shadow: 0 0 1px #2196F3;}
-
-
-/* Dark Themes (Pretty much done) */
-#settings-sidebar.dark {
-    color: aliceblue;
-    background: #1d233d;
+.pastel {
+    --sidebar-bg: #7effab;
+    --sidebar-text-color: black;
+    --theme-select-bg: #85ffff;
+    --theme-select-color: black;
+    --toggle-color: white;
+    --toggle-inactive-bg: #ccc;
+    --toggle-active-bg: #ffee9b;
 }
-#settingsButton.dark {
-    background-color: #7387af;
-    color: #fff;
+.gay {
+    --sidebar-bg: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+    --sidebar-text-color: black;
+    --theme-select-bg: linear-gradient(90deg, #ff2400, #e8b71d, #1de840, #1d93e8,  #dd00f3);
+    --theme-select-color: black;
+    --toggle-color: white;
+    --toggle-inactive-bg: #ccc;
+    --toggle-active-bg: linear-gradient(90deg, #ff2400, #e8b71d, #1de840, #1d93e8,  #dd00f3);
 }
-#theme-select.dark {background: #758bb4; color: black}
-.slider.dark {background-color: #8d8d8d;}
-.slider.dark:before {background-color: #eaeaea;}
-input:checked + .slider.dark {background: blue;}
-input:focus + .slider.dark {box-shadow: 0 0 1px blue;}
-
-/* Pastel Themes */
-#settings-sidebar.pastel {
-    color: aliceblue;
-    background: #1d233d;
-}
-#settingsButton.pastel {
-    background-color: #7387af;
-    color: #fff;
-}
-#theme-select.pastel {background: #85ffff; color: black}
-.slider.pastel {background-color: #ccc;}
-.slider.pastel:before {background-color: white;}
-input:checked + .slider.pastel {background-color: #2196F3;}
-input:focus + .slider.pastel {box-shadow: 0 0 1px #2196F3;}
-
-/* Gay Themes */
 #settings-sidebar.gay {
-    background: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
     background-size: 100% 300%;
     overflow: hidden;
     -webkit-animation: rainbow 10s ease infinite;
-    /*-z-animation: rainbow 10s ease infinite;*/
     -o-animation: rainbow 10s linear infinite;
     animation: rainbow 10s ease infinite;
+} /* Necessary for animation stuff */
+.kevin {
+    --sidebar-bg: linear-gradient(180deg, #D60270, #0038A8);
+    --sidebar-text-color: white;
+    --theme-select-bg: #0041c5;
+    --theme-select-color: white;
+    --toggle-color: white;
+    --toggle-inactive-bg: #ccc;
+    --toggle-active-bg: #0038A8;
 }
-#settingsButton.gay {
-    background-color: #7387af;
-    color: #fff;
+.drac {
+    --sidebar-bg: #262c2d;
+    --sidebar-text-color: red;
+    --theme-select-bg: linear-gradient(45deg, red, black);
+    --theme-select-color: black;
+    --toggle-color: white;
+    --toggle-inactive-bg: #5b5b5b;
+    --toggle-active-bg: red;
 }
-#theme-select.gay {background: mediumvioletred; color: black}
-.slider.gay {background-color: #ccc;}
-.slider.gay:before {background-color: white;}
-input:checked + .slider.gay {background-color: #00ffea;}
-input:focus + .slider.gay {box-shadow: 0 0 1px #00ffea;}
-
-/* Kevin Themes */
-#settings-sidebar.kevin {
-    color: aliceblue;
-    background: #1d233d;
+.marley {
+    --sidebar-bg: #262c2d;
+    --sidebar-text-color: whitesmoke;
+    --theme-select-bg: mediumpurple;
+    --theme-select-color: blue;
+    --toggle-color: white;
+    --toggle-inactive-bg: #ccc;
+    --toggle-active-bg: midnightblue;
 }
-#settingsButton.kevin {
-    background-color: #7387af;
-    color: #fff;
-}
-#theme-select.kevin {background: #0038A8; color: white}
-.slider.kevin {background-color: #ccc;}
-.slider.kevin:before {background-color: white;}
-input:checked + .slider.kevin {background-color: #0038A8;}
-input:focus + .slider.kevin {box-shadow: 0 0 1px #0038A8;}
-
-/* Drac Themes */
-#settings-sidebar.drac {
-    color: red;
-    background: #262c2d;
-}
-#settingsButton.drac {
-    background-color: #7387af;
-    color: #fff;
-}
-#theme-select.drac {background: linear-gradient(45deg, #ff0000, #000000);color: black}
-.slider.drac {background-color: #5b5b5b;}
-.slider.drac:before {background-color: white;}
-input:checked + .slider.drac {background-color: red;}
-input:focus + .slider.drac {box-shadow: 0 0 1px red;}
-
-/* Marley Themes */
-#settings-sidebar.marley {
-    color: white;
-    background: #262c2d;
-}
-#settingsButton.marley {
-    background-color: #7387af;
-    color: #fff;
-}
-#theme-select.marley {background: mediumpurple; color: blue}
-.slider.marley {background-color: #ccc;}
-.slider.marley:before {background-color: white;}
-input:checked + .slider.marley {background-color: midnightblue;}
-input:focus + .slider.marley {box-shadow: 0 0 1px midnightblue;}
 
 
 @-webkit-keyframes rainbow {
