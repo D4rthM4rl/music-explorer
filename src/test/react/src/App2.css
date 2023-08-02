@@ -48,11 +48,11 @@ body {
   display:flex;
   height: 100vh;
 }
-#start-game{
+.start-game{
   flex: 80%;
   background-color: #282b31;
 }
-#start-game{
+.start-game{
   background-color: antiquewhite;
   justify-content: space-evenly;
   justify-items: center;

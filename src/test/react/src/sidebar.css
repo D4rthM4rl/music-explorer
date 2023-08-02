@@ -46,7 +46,7 @@
     width: 50%;
     height:6%;
     animation: fadeInAnimation ease 1s;
-    background: var(--inactive-tab-bg);
+    background: #15161a;
     box-shadow: inset  1px -1px 20px 1px var(--inactive-tab-bg);
 }
 .tab.active {
