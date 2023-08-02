@@ -1,6 +1,6 @@
 /* Style for the Sidebar */
 #sidebar {
-    flex:30%;
+    flex:33%;
     background: var(--main-bg);
     animation: slideFromLeft ease 1.5s;
     text-align: center;

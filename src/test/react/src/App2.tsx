@@ -345,7 +345,7 @@ class App2 extends Component<{}, AppState> {
                         >Players</div>
                     <div className={`tab ${this.state.activeTab ? "" : "active"} themed ${this.state.theme}`}
                          onClick={() => {this.setState({ activeTab: false });}}
-                        >PlayLists/Genres</div>
+                        >Playlists or Genres</div>
                     {this.state.activeTab ?(
                       <NamesList
                           theme={this.state.theme} // pass the theme as a prop
