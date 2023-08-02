@@ -88,7 +88,7 @@ body {
   filter: blur(50%);
   width: calc(100% + 6px);
   height: calc(100% + 6px);
-  animation: glowing 20s linear infinite;
+  animation: glowing 15s linear infinite;
   opacity: 0;
   transition: opacity .3s ease-in-out;
   border-radius: 10px;
@@ -112,8 +112,9 @@ body {
   50% { background-position: 200% 0; }
   100% { background-position: 400% 0; }
 }
-.links{
+#links{
   position:absolute;
-  margin-bottom: 25%
+  margin-bottom: 25%;
+  list-style: none;
 }
-.links-output{color:black;}
+#links-output{color:black;}
