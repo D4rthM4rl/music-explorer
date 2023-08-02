@@ -56,7 +56,8 @@ class NamesList extends Component<NamesListProps, NamesListState> {
     render() {
         return (
             <div>
-                <h1 className='sidebar-headings'>Songs per Person: {this.props.numPersonalProp}</h1>
+                <h1 style={{marginTop: "17%"}}
+                    className='sidebar-headings'>Songs per Person: {this.props.numPersonalProp}</h1>
                 <input className={`num-song-box themed ${this.props.theme}`}
                     type={"number"}
                     placeholder={"00"}

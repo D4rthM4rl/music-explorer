@@ -59,7 +59,7 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
     render() {
         return (
             <div>
-                <h1 className="sidebar-headings">Songs per Genre: {this.props.numGenreProp}</h1>
+                <h1 style={{marginTop: "17%"}} className="sidebar-headings">Songs per Genre: {this.props.numGenreProp}</h1>
                 <input className={`num-song-box themed ${this.props.theme}`}
                     type={"number"}
                        placeholder={"00"}

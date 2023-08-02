@@ -1,5 +1,5 @@
 #topbar {
-    background-color:#131313;
+    background-color:#252525;
     animation: fallDownAnimation ease 1s;
     display: grid;
     grid-template-columns: repeat(4,25%);
@@ -22,18 +22,18 @@
 }
 
 /* Default Themes */
-#topbar.default {background-color: #000000;}
+#topbar.default {background-color: #252525;}
 .topbar-option.default {color: whitesmoke;}
 #title.default {color: mediumslateblue;}
 
 /* Dark Themes */
-#topbar.dark {background-color: #000000;}
-.topbar-option.dark {color: whitesmoke;}
+#topbar.dark {background-color: #252525;}
+.topbar-option.dark {color: #dedede;}
 #title.dark {color: mediumslateblue;}
 
 /* Pastel Themes */
 #topbar.pastel {background-color: #57f5f5;}
-.topbar-option.pastel {color: whitesmoke;}
+.topbar-option.pastel {color: #fffd7c;}
 #title.pastel {color: #ff80e2;}
 
 /* Gay Themes */
@@ -42,7 +42,7 @@
 #title.gay {color: mediumslateblue;}
 
 /* Kevin Themes */
-#topbar.kevin {background-color: #000000;}
+#topbar.kevin {background-color: #2e4bbe;}
 .topbar-option.kevin {color: whitesmoke;}
 #title.kevin {color: mediumslateblue;}
 

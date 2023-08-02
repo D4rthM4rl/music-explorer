@@ -1,15 +1,39 @@
-.sidebar {
-    flex:25%;
+#sidebar {
+    flex:30%;
     background-color: #282b31;
     animation: slideFromLeft ease 1.5s;
     text-align: center;
     border-right:2px solid #15161a
 }
-.sidebar-headings{
-    font-size: 20px;
+#sidebar-headings{
+    font-size: 30px;
+    color: whitesmoke;
+}
+.num-song-box {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box {
+    color: blue;
+    background: lightcyan;
+}
+.add-button {
+    color: black;
+    background: #00ff18;
+    border-radius: 25%;
+    border: black;
+    cursor: pointer;
+    margin-right: 5%;
+}
+.clear-button {
+    color: black;
+    background: #fa0b0b;
+    border-radius: 25%;
+    border: black;
+    cursor: pointer;
 }
 .tab {
-    font-size: 16px;
+    font-size: 20px;
     font-weight: bold;
     cursor: pointer;
     display: flex;
@@ -28,3 +52,234 @@
 }
 .tab.active:hover {background-color: #282b31;}
 .tab:hover {background-color: #4e545f;}
+
+/* Default Themes */
+#sidebar.default {
+    background-color: #282b31;
+    border-right:2px solid #15161a
+}
+#sidebar-headings.default {color: whitesmoke;}
+.num-song-box.default {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box.default {
+    color: blue;
+    background: lightcyan;
+}
+.add-button.default {
+    color: black;
+    background: #30ff00;
+}
+.clear-button.default {
+    color: black;
+    background: #ff0000;
+}
+.tab.default {
+    background-color: #15161a;
+    box-shadow: inset  1px -1px 20px 1px black;
+}
+.tab.active.default {
+    background-color: #282b31;
+    box-shadow:none;
+}
+.tab.active.default:hover {background-color: #282b31;}
+.tab.default:hover {background-color: #4e545f;}
+
+/* Dark Themes */
+#sidebar.dark {
+    background-color: #282b31;
+    border-right:2px solid #15161a
+}
+#sidebar-headings.dark {color: whitesmoke;}
+.num-song-box.dark {
+    color: #aaaac5;
+    background: #464f5b;
+}
+.name-playlist-box.dark {
+    color: #aaaac5;
+    background: #464f5b;
+}
+.add-button.dark {
+    color: black;
+    background: #179b2c;
+}
+.clear-button.dark {
+    color: black;
+    background: #e10202;
+}
+.tab.dark {
+    background-color: #15161a;
+    box-shadow: inset  1px -1px 20px 1px black;
+}
+.tab.active.dark {
+    background-color: #282b31;
+    box-shadow:none;
+}
+.tab.active.dark:hover {background-color: #282b31;}
+.tab:hover.dark {background-color: #4e545f;}
+
+/* Pastel Themes */
+#sidebar.pastel {
+    background-color: #a1ff74;
+    border-right:2px solid #15161a
+}
+#sidebar-headings.pastel {color: whitesmoke;}
+.num-song-box.pastel {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box.pastel {
+    color: blue;
+    background: lightcyan;
+}
+.add-button.pastel {
+    color: black;
+    background: lightcyan;
+}
+.clear-button.pastel {
+    color: black;
+    background: lightcyan;
+}
+.tab.pastel {
+    background-color: #15161a;
+    box-shadow: inset  1px -1px 20px 1px black;
+}
+.tab.active.pastel {
+    background-color: #282b31;
+    box-shadow:none;
+}
+.tab.active.pastel:hover {background-color: #282b31;}
+.tab:hover.pastel {background-color: #4e545f;}
+
+/* Gay Themes */
+#sidebar.gay {
+    background-color: #282b31;
+    border-right:2px solid #15161a
+}
+#sidebar-headings.gay {color: whitesmoke;}
+.num-song-box.gay {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box.gay {
+    color: blue;
+    background: lightcyan;
+}
+.add-button.gay {
+    color: black;
+    background: lightcyan;
+}
+.clear-button.gay {
+    color: black;
+    background: lightcyan;
+}
+.tab.gay {
+    background-color: #15161a;
+    box-shadow: inset  1px -1px 20px 1px black;
+}
+.tab.active.gay {
+    background-color: #282b31;
+    box-shadow:none;
+}
+.tab.active.gay:hover {background-color: #282b31;}
+.tab:hover.gay {background-color: #4e545f;}
+
+/* Kevin Themes */
+#sidebar.kevin {
+    background-color: #282b31;
+    border-right:2px solid #15161a
+}
+#sidebar-headings.kevin {color: whitesmoke;}
+.num-song-box.kevin {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box.kevin {
+    color: blue;
+    background: lightcyan;
+}
+.add-button.kevin {
+    color: black;
+    background: lightcyan;
+}
+.clear-button.kevin {
+    color: black;
+    background: lightcyan;
+}
+.tab.kevin {
+    background-color: #15161a;
+    box-shadow: inset  1px -1px 20px 1px black;
+}
+.tab.active.kevin {
+    background-color: #282b31;
+    box-shadow:none;
+}
+.tab.active.kevin:hover {background-color: #282b31;}
+.tab:hover.kevin {background-color: #4e545f;}
+
+/* Drac Themes */
+#sidebar.drac {
+    background-color: #282b31;
+    border-right:2px solid #15161a
+}
+#sidebar-headings.drac {color: whitesmoke;}
+.num-song-box.drac {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box.drac {
+    color: blue;
+    background: lightcyan;
+}
+.add-button.drac {
+    color: black;
+    background: lightcyan;
+}
+.clear-button.drac {
+    color: black;
+    background: lightcyan;
+}
+.tab.drac {
+    background-color: #15161a;
+    box-shadow: inset  1px -1px 20px 1px black;
+}
+.tab.active.drac {
+    background-color: #282b31;
+    box-shadow:none;
+}
+.tab.active.drac:hover {background-color: #282b31;}
+.tab:hover.drac {background-color: #4e545f;}
+
+/* Marley Themes */
+#sidebar.marley {
+    background-color: #282b31;
+    border-right:2px solid #15161a
+}
+#sidebar-headings.marley {color: whitesmoke;}
+.num-song-box.marley {
+    color: blue;
+    background: lightcyan;
+}
+.name-playlist-box.marley {
+    color: blue;
+    background: lightcyan;
+}
+.add-button.marley {
+    color: black;
+    background: lightcyan;
+}
+.clear-button.marley {
+    color: black;
+    background: lightcyan;
+}
+.tab.marley {
+    background-color: #15161a;
+    box-shadow: inset  1px -1px 20px 1px black;
+}
+.tab.active.marley {
+    background-color: #282b31;
+    box-shadow:none;
+}
+.tab.active.marley:hover {background-color: #282b31;}
+.tab:hover.marley {background-color: #4e545f;}
