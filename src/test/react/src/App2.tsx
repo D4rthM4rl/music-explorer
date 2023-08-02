@@ -5,7 +5,7 @@ import axios from "axios";
 import { Buffer } from "buffer";
 import "./settings.css"
 import "./sidebar.css"
-import "./App.css";
+// import "./App.css";
 import "./topbar.css";
 import settingsIcon from "./settings-icon.png"
 import NamesList from "./NamesList";
@@ -328,7 +328,7 @@ class App2 extends Component<{}, AppState> {
           ) : null}
           {!this.state.welcomeVisible ? (
               <div className="main-page">
-                <div className="themed" id="topbar">
+                <div id="topbar" className="themed">
                   <div className="topbar-option themed" id= "title">Song Game By Marley</div>
                   <div className="topbar-option themed" id="spotify-genres">All Spotify Genres</div>
                   <div className="topbar-option themed" id="directions">How to Play</div>
@@ -366,48 +366,46 @@ class App2 extends Component<{}, AppState> {
                         onNumChange={(value: number) => {this.setState({numGenreState: value})}}
                     />)}
                   </div>
-                  <div className="start-game game-ui themed">
-                  <ul id="links" className="themed">
-                     {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"href={link} target="_blank">{link}</a></li>))}
-                  </ul>
+                  <div id="start-game" className="game-ui themed">
+                    <ul id="links" className="themed">
+                      {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"href={link} target="_blank">{link}</a></li>))}
+                    </ul>
                     <button className="start-button glow-on-hover themed" onClick={() => {this.handleStart();}}>Start</button>
-                      <div id="settings-sidebar" className={`themed ${this.state.theme}`}
-                      style={{fontSize: "170%"}}>
-                    <div>Theme
-                      <select id="theme-select" className="themed"
-                              value={this.state.theme}
-                              onChange={(event) => {this.setState({theme: event.target.value})
-                                handleThemeChange(event.target.value)}}
-                              style={{
-                                marginLeft: '10%',
-                                marginTop: '3%',
-                                fontSize: "90%"
-                              }}
-                      >
-                        <option value="default">Default</option>
-                        <option value="dark">Dark Mode</option>
-                        <option value="pastel">Pastel</option>
-                        <option value="gay">Gay</option>
-                        <option value="kevin">Kevin</option>
-                        <option value="drac">Drac</option>
-                        <option value="marley">Marley</option>
-                        {/* Add more theme options here */}
-                      </select>
+                    <div id="settings-sidebar" className={`themed ${this.state.theme}`}
+                         style={{fontSize: "170%"}}>
+                      <div>Theme
+                        <select id="theme-select" className="themed"
+                                value={this.state.theme}
+                                onChange={(event) => {this.setState({theme: event.target.value})
+                                  handleThemeChange(event.target.value)}}
+                                style={{
+                                  marginLeft: '10%',
+                                  marginTop: '3%',
+                                  fontSize: "90%"
+                                }}
+                        >
+                          <option value="default">Default</option>
+                          <option value="dark">Dark Mode</option>
+                          <option value="pastel">Pastel</option>
+                          <option value="gay">Gay</option>
+                          <option value="kevin">Kevin</option>
+                          <option value="drac">Drac</option>
+                          <option value="marley">Marley</option>
+                          {/* Add more theme options here */}
+                        </select>
+                      </div>
+                      <div style={{
+                        marginLeft: "10%",
+                        marginTop: "3%",
+                      }}>Toggle
+                        <label className="switch themed"
+                               style={{marginLeft: "20%"}}>
+                          <input type="checkbox" />
+                          <span className="slider round themed"></span>
+                        </label>
+                      </div>
+                      <div>AHH</div>
                     </div>
-                    <div style={{
-                      marginLeft: "10%",
-                      marginTop: "3%",
-                    }}>Toggle
-                      <label className="switch themed"
-                            style={{
-                              marginLeft: "20%",
-                            }}>
-                        <input type="checkbox" />
-                        <span className="slider round themed"></span>
-                      </label>
-                    </div>
-                    <div>AHH</div>
-                  </div>
                   </div>
                 </div>
               </div>
