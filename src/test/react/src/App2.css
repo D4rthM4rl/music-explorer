@@ -1,18 +1,22 @@
-.App {text-align: center;}
 body {
   /*animation: Spin infinite 1s linear;*/
-  background-color: #282b31;
-  color:whitesmoke;
+  background-color: #282B31FF; /* Can't set have this as a variable because it cant be set before active*/
   overflow: hidden;
 }
-.welcome-container {
+#welcome-screen {
+  background: #282B31FF; /* Can't set have this as a variable because it cant be set before active*/
   position: absolute;
-  text-align: center;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
   cursor: pointer;
+  text-align: center;
   animation: fadeInAnimation ease 2s;
+}
+#welcome-message {
+  font-size: 70px;
+  margin-top: 20%;
+  text-shadow: 0 0 5px white;
+  color: whitesmoke; /* Can't set have this as a variable because it cant be set before active*/
 }
 
 @keyframes Spin {
@@ -48,33 +52,31 @@ body {
   display:flex;
   height: 100vh;
 }
-.start-game{
+#game-area {
   flex: 80%;
-  background-color: #282b31;
-}
-.start-game{
-  background-color: antiquewhite;
+  background: var(--game-bg);
   justify-content: space-evenly;
   justify-items: center;
   align-content: space-evenly;
   align-items: center;
   text-align: center;
   display:flex;
+  /*animation: slideFromLeft ease 3s;*/
 }
 #spotify-player {
-  color: black;
+  color: var(--spotify-color);
 }
-.start-button{
+#start-button{
   font-size: 25px;
   cursor: pointer;
+  background: var(--start-button-bg);
+  color: var(--start-button-color);
 }
 .glow-on-hover {
   width: 220px;
   height: 50px;
   border: none;
   outline: none;
-  color: #fff;
-  background: #111;
   cursor: pointer;
   position: relative;
   z-index: 0;
@@ -82,7 +84,7 @@ body {
 }
 .glow-on-hover:before {
   content: '';
-  background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  background: var(--start-button-glow);
   position: absolute;
   top: -3px;
   left:-3px;
@@ -96,7 +98,7 @@ body {
   transition: opacity .3s ease-in-out;
   border-radius: 10px;
 }
-.glow-on-hover:active {color: #000}
+.glow-on-hover:active {color: var(--start-button-bg)}
 .glow-on-hover:active:after {background: transparent;}
 .glow-on-hover:hover:before {opacity: 1;}
 .glow-on-hover:after {
@@ -105,7 +107,7 @@ body {
   position: absolute;
   width: 100%;
   height: 100%;
-  background: #111;
+  background: var(--start-button-bg);
   left: 0;
   top: 0;
   border-radius: 10px;
@@ -120,4 +122,75 @@ body {
   margin-bottom: 25%;
   list-style: none;
 }
-#links-output{color:black;}
+#links-output{color:var(--link-color);}
+
+.default {
+  --overall-bg: #282b31;
+  --overall-font-color: whitesmoke;
+  --game-bg: #ccced0;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: black;
+}
+.dark {
+  --overall-bg: #282b31;
+  --overall-font-color: #3d476c;
+  --game-bg: #74879b;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: whitesmoke;
+}
+.pastel {
+  --overall-bg: #282b31;
+  --overall-font-color: #3d476c;
+  --game-bg: #f18cd4;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: #a0a0da;
+}
+.gay {
+  --overall-bg: #282b31;
+  --overall-font-color: #3d476c;
+  --game-bg: #74879b;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: whitesmoke;
+}
+.kevin {
+  --overall-bg: #282b31;
+  --overall-font-color: #3d476c;
+  --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: whitesmoke;
+}
+.drac {
+  --overall-bg: #282b31;
+  --overall-font-color: #3d476c;
+  --game-bg: linear-gradient(180deg, #ff2400,  dimgray);
+  --spotify-color: black;
+  --start-button-color: #7e7e7e;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #545454, #000000);
+  --link-color: whitesmoke;
+}
+.marley {
+  --overall-bg: #282b31;
+  --overall-font-color: #3d476c;
+  --game-bg: #74879b;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: whitesmoke;
+}

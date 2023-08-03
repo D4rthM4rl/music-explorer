@@ -1,6 +1,6 @@
 #topbar {
     background-color:#252525;
-    animation: fallDownAnimation ease 1s;
+    animation: fallDownAnimation ease 1.5s;
     display: grid;
     grid-template-columns: repeat(4,25%);
     height: 100px;

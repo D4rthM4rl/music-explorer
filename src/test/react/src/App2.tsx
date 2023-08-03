@@ -18,12 +18,13 @@ interface AppState {
   names: string[];
   playlists: string[];
   links: string[];
-  activeTab: boolean;
+  isNamesTab: boolean;
   numGenreState: number;
   numPersonalState: number;
   settingsActive: boolean;
   theme: string;
-  welcomeVisible: boolean
+  welcomeVisible: boolean;
+  useEmbed: boolean;
 }
 
 interface Track {
@@ -50,12 +51,13 @@ class App2 extends Component<{}, AppState> {
       names: [],
       links: [],
       playlists: [],
-      activeTab: true,
+      isNamesTab: true,
       numGenreState: 0,
       numPersonalState: 0,
       settingsActive: false,
       theme: "default",
       welcomeVisible: true,
+      useEmbed: false,
     };
   }
 
@@ -309,8 +311,7 @@ class App2 extends Component<{}, AppState> {
           }
         }
       }
-    } catch (error) {
-    }
+    } catch (error) {console.log("Uh oh there was an error with handle start");}
   }
 
   handleWelcomeClick = () => {
@@ -318,12 +319,13 @@ class App2 extends Component<{}, AppState> {
   };
 
   render() {
+    const { isNamesTab, playlists, names, numPersonalState, numGenreState, theme } = this.state;
     return (
         <div>
           <body>
           {this.state.welcomeVisible ? (
-              <div className="welcome-container clickable" id="welcome" onClick={this.handleWelcomeClick}>
-                <h1 className="welcome-message clickable"> Song Game </h1>
+              <div id="welcome-screen" className={`themed ${theme}`} onClick={this.handleWelcomeClick}>
+                <div id="welcome-message" className={`glow themed ${theme}`}> Song Game </div>
               </div>
           ) : null}
           {!this.state.welcomeVisible ? (
@@ -339,14 +341,14 @@ class App2 extends Component<{}, AppState> {
                   >Settings</div>
                 </div>
                 <div className="game-options">
-                  <div id="sidebar" className="game-ui themed">
-                    <div className={`tab ${this.state.activeTab ? "active" : ""} themed ${this.state.theme}`}
-                         onClick={() => {this.setState({ activeTab: true });}}
+                  <div id="sidebar" className={`game-ui themed ${this.state.theme}`}>
+                    <div className={`tab ${isNamesTab ? "active" : ""} themed ${theme}`}
+                         onClick={() => {this.setState({ isNamesTab: true });}}
                         >Players</div>
-                    <div className={`tab ${this.state.activeTab ? "" : "active"} themed ${this.state.theme}`}
-                         onClick={() => {this.setState({ activeTab: false });}}
+                    <div className={`tab ${isNamesTab ? "" : "active"} themed ${theme}`}
+                         onClick={() => {this.setState({ isNamesTab: false });}}
                         >Playlists or Genres</div>
-                    {this.state.activeTab ?(
+                    {isNamesTab ?(
                       <NamesList
                           theme={this.state.theme} // pass the theme as a prop
                           numPersonalProp={this.state.numPersonalState} // pass the personal number as a prop
@@ -354,7 +356,7 @@ class App2 extends Component<{}, AppState> {
                           onChange={(value: []) => {this.setState({ names: value });}}
                           onClear={() => {this.clearNames();}}
                           onNumChange={(value: number) => {this.setState({numPersonalState: value});}}
-                      ></NamesList>) : 
+                      ></NamesList>) :
                       ( <PlaylistList
                         theme={this.state.theme} // pass the theme as a prop
                         numGenreProp={this.state.numGenreState} // pass the genre number as a prop
@@ -366,15 +368,21 @@ class App2 extends Component<{}, AppState> {
                         onNumChange={(value: number) => {this.setState({numGenreState: value})}}
                     />)}
                   </div>
-                  <div className="start-game game-ui themed">
-                  <ul id="links" className="themed">
+                  <div id="game-area" className={`game-ui themed ${theme}`}>
+                    {this.state.useEmbed ? ( // If the toggle is on, use the embed
+                    <iframe style={{borderRadius: 12, border: "none"}}
+                            src="https://open.spotify.com/embed/playlist/3GVPsndFBvGFFfdRFZHUeK?utm_source=generator&theme=0"
+                            width="100%" height="352"
+                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                            loading="lazy"
+                    ></iframe>) : null}
+                    <ul id="links" className="themed">
                      {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"href={link} target="_blank">{link}</a></li>))}
                   </ul>
-                    <button className="start-button glow-on-hover themed" onClick={() => {this.handleStart();}}>Start</button>
-                      <div id="settings-sidebar" className={`themed ${this.state.theme}`}
-                      style={{fontSize: "170%"}}>
-                    <div>Theme
-                      <select id="theme-select" className="themed"
+                    <button id="start-button" className="glow-on-hover themed" onClick={() => {this.handleStart();}}>Start</button>
+                    <div id="settings-sidebar" className={`themed ${theme}`} style={{fontSize: "170%"}}>
+                      <div id="theme-header">Theme
+                        <select id="theme-select" className="themed"
                               value={this.state.theme}
                               onChange={(event) => {this.setState({theme: event.target.value})
                                 handleThemeChange(event.target.value)}}
@@ -383,7 +391,7 @@ class App2 extends Component<{}, AppState> {
                                 marginTop: '3%',
                                 fontSize: "90%"
                               }}
-                      >
+                        >
                         <option value="default">Default</option>
                         <option value="dark">Dark Mode</option>
                         <option value="pastel">Pastel</option>
@@ -392,22 +400,19 @@ class App2 extends Component<{}, AppState> {
                         <option value="drac">Drac</option>
                         <option value="marley">Marley</option>
                         {/* Add more theme options here */}
-                      </select>
-                    </div>
-                    <div style={{
-                      marginLeft: "10%",
-                      marginTop: "3%",
-                    }}>Toggle
-                      <label className="switch themed"
-                            style={{
-                              marginLeft: "20%",
-                            }}>
+                        </select>
+                      </div>
+                      <div id="embed-toggle" style={{
+                        marginLeft: "10%",
+                        marginTop: "3%",
+                      }}>Use Embed
+                      <label className="switch themed" style={{marginLeft: "10%"}}>
                         <input type="checkbox" />
-                        <span className="slider round themed"></span>
+                        <span className="slider round themed" onClick={() => this.setState({useEmbed: !this.state.useEmbed})}></span>
                       </label>
                     </div>
-                    <div>AHH</div>
-                  </div>
+                      <div>AHH</div>
+                    </div>
                   </div>
                 </div>
               </div>

@@ -1,23 +1,25 @@
 /* Style for the Sidebar */
 #sidebar {
+    z-index: 2;
     flex:33%;
-    background: var(--main-bg);
+    background: var(--sidebar-bg);
     animation: slideFromLeft ease 1.5s;
     text-align: center;
-    border-right:2px solid var(--border-color);
-    color: var(--text-main);
+    /*border-right:2px solid var(--sidebar-shadow-color);*/
+    box-shadow: 0px 0 10px #000000;
+    color: var(--sidebar-text);
 }
 #sidebar-headings{
     font-size: 30px;
-    color: var(--main-bg);
+    color: var(--sidebar-bg);
 }
 .num-song-box {
-    color: var(--text-box-color);
-    background: var(--text-box-bg);
+    color: var(--sidebar-textbox-color);
+    background: var(--sidebar-textbox-bg);
 }
 .name-playlist-box {
-    color: var(--text-box-color);
-    background: var(--text-box-bg);
+    color: var(--sidebar-textbox-color);
+    background: var(--sidebar-textbox-bg);
 }
 .add-button {
     color: var(--add-button-color);
@@ -51,7 +53,7 @@
 }
 .tab.active {
     background: var(--active-tab-bg);
-    color: var(--text-main);
+    color: var(--sidebar-text);
     box-shadow:none;
 }
 .tab.active:hover {background: var(--active-tab-bg);}
@@ -59,75 +61,75 @@
 
 /* Themes */
 .default {
-    --main-bg: #282b31;
-    --text-main: whitesmoke;
-    --text-box-color: #919191;
-    --text-box-bg: lightcyan;
-    --border-color: #15161a;
+    --sidebar-bg: #282b31;
+    --sidebar-text: whitesmoke;
+    --sidebar-textbox-color: #919191;
+    --sidebar-textbox-bg: lightcyan;
+    --sidebar-shadow-color: #15161a;
     --add-button-bg: #00ff00;
     --add-button-color: black;
     --clear-button-bg: red;
     --clear-button-color: black;
     --button-border: black;
-    --active-tab-bg: main-bg;
+    --active-tab-bg: sidebar-bg;
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
 }
 .dark {
-    --main-bg: #282b31;
-    --text-main: whitesmoke;
-    --text-box-color: #aaaac5;
-    --text-box-bg: #464f5b;
-    --border-color: #15161a;
+    --sidebar-bg: #282b31;
+    --sidebar-text: whitesmoke;
+    --sidebar-textbox-color: #aaaac5;
+    --sidebar-textbox-bg: #464f5b;
+    --sidebar-shadow-color: #15161a;
     --add-button-bg: #179b2c;
     --add-button-color: black;
     --clear-button-bg: #e10202;
     --clear-button-color: black;
     --button-border: black;
-    --active-tab-bg: main-bg;
+    --active-tab-bg: sidebar-bg;
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
 }
 .pastel {
-    --main-bg: #a1ff74;
-    --text-main: black;
-    --text-box-color: #aaaac5;
-    --text-box-bg: lightcyan;
-    --border-color: #15161a;
+    --sidebar-bg: #a1ff74;
+    --sidebar-text: black;
+    --sidebar-textbox-color: #aaaac5;
+    --sidebar-textbox-bg: lightcyan;
+    --sidebar-shadow-color: #15161a;
     --add-button-bg: #179b2c;
     --add-button-color: black;
     --clear-button-bg: #e10202;
     --clear-button-color: black;
     --button-border: black;
-    --active-tab-bg: main-bg;
+    --active-tab-bg: sidebar-bg;
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
 }
 .gay {
-    --main-bg: #282b31;
-    --text-main: whitesmoke;
-    --text-box-color: #919191;
-    --text-box-bg: lightcyan;
-    --border-color: #15161a;
+    --sidebar-bg: #282b31;
+    --sidebar-text: whitesmoke;
+    --sidebar-textbox-color: #919191;
+    --sidebar-textbox-bg: lightcyan;
+    --sidebar-shadow-color: #15161a;
     --add-button-bg: #00ff00;
     --add-button-color: black;
     --clear-button-bg: red;
     --clear-button-color: black;
     --button-border: black;
-    --active-tab-bg: main-bg;
+    --active-tab-bg: sidebar-bg;
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
 }
 .kevin {
-    --main-bg: linear-gradient(180deg, #D60270, #0038A8);
-    --text-main: black;
-    --text-box-color: #aaaac5;
-    --text-box-bg: lightcyan;
-    --border-color: #15161a;
+    --sidebar-bg: linear-gradient(180deg, #D60270, #0038A8);
+    --sidebar-text: black;
+    --sidebar-textbox-color: #aaaac5;
+    --sidebar-textbox-bg: lightcyan;
+    --sidebar-shadow-color: #15161a;
     --add-button-bg: #179b2c;
     --add-button-color: black;
     --clear-button-bg: red;
@@ -139,33 +141,33 @@
     --tab-highlight-color: #4E545FFF;
 }
 .drac {
-    --main-bg: #282b31;
-    --text-main: whitesmoke;
-    --text-box-color: #919191;
-    --text-box-bg: lightcyan;
-    --border-color: #15161a;
+    --sidebar-bg: #282b31;
+    --sidebar-text: whitesmoke;
+    --sidebar-textbox-color: #919191;
+    --sidebar-textbox-bg: lightcyan;
+    --sidebar-shadow-color: #15161a;
     --add-button-bg: #00ff00;
     --add-button-color: black;
     --clear-button-bg: red;
     --clear-button-color: black;
     --button-border: black;
-    --active-tab-bg: main-bg;
+    --active-tab-bg: sidebar-bg;
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
 }
 .marley {
-    --main-bg: #282b31;
-    --text-main: whitesmoke;
-    --text-box-color: #919191;
-    --text-box-bg: lightcyan;
-    --border-color: #15161a;
+    --sidebar-bg: #282b31;
+    --sidebar-text: whitesmoke;
+    --sidebar-textbox-color: #919191;
+    --sidebar-textbox-bg: lightcyan;
+    --sidebar-shadow-color: #15161a;
     --add-button-bg: #00ff00;
     --add-button-color: black;
     --clear-button-bg: red;
     --clear-button-color: black;
     --button-border: black;
-    --active-tab-bg: main-bg;
+    --active-tab-bg: sidebar-bg;
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
