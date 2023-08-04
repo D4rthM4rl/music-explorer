@@ -394,10 +394,12 @@ class App2 extends Component<{}, AppState> {
                         >
                         <option value="default">Default</option>
                         <option value="dark">Dark Mode</option>
+                        <option value="neon">Neon</option>
                         <option value="pastel">Pastel</option>
                         <option value="gay">Gay</option>
                         <option value="kevin">Kevin</option>
                         <option value="drac">Drac</option>
+                        <option value="barbie">Barbie</option>
                         <option value="marley">Marley</option>
                         {/* Add more theme options here */}
                         </select>

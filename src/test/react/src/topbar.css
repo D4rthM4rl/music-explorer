@@ -34,6 +34,11 @@
     --title-color: mediumslateblue;
     --topbar-color: #dedede;
 }
+.neon {
+    --topbar-bg: #252525;
+    --title-color: mediumslateblue;
+    --topbar-color: #dedede;
+}
 .pastel {
     --topbar-bg: #57f5f5;
     --title-color: #ff80e2;
@@ -53,6 +58,11 @@
     --topbar-bg: #252525;
     --title-color: red;
     --topbar-color: orangered;
+}
+.barbie {
+    --topbar-bg: #57f5f5;
+    --title-color: #ff80e2;
+    --topbar-color: #f5f557;
 }
 .marley {
     --topbar-bg: #252525;

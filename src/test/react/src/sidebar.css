@@ -92,6 +92,22 @@
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
 }
+.neon {
+    --sidebar-bg: #282b31;
+    --sidebar-color: #dedede;
+    --sidebar-textbox-color: #aaaac5;
+    --sidebar-textbox-bg: #464f5b;
+    --sidebar-shadow-color: #15161a;
+    --add-button-bg: #179b2c;
+    --add-button-color: black;
+    --clear-button-bg: #e10202;
+    --clear-button-color: black;
+    --button-border: black;
+    --active-tab-bg: sidebar-bg;
+    --inactive-tab-bg: black;
+    --inactive-tab-color: whitesmoke;
+    --tab-highlight-color: #4E545FFF;
+}
 .pastel {
     --sidebar-bg: #7effab;
     --sidebar-color: #7e92ff;

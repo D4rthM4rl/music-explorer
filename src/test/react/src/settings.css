@@ -80,6 +80,15 @@ input:checked + .slider:before {
     --embed-toggle-inactive-bg: #8d8d8d;
     --embed-toggle-active-bg: blue;
 }
+.neon {
+    --settings-bg: #282b31;
+    --settings-text-color: #dedede;
+    --theme-select-bg: #758bb4;
+    --theme-select-color: black;
+    --embed-toggle-color: #eaeaea;
+    --embed-toggle-inactive-bg: #8d8d8d;
+    --embed-toggle-active-bg: blue;
+}
 .pastel {
     --settings-bg: #7effab;
     --settings-text-color: #7e92ff;
@@ -122,6 +131,15 @@ input:checked + .slider:before {
     --embed-toggle-color: white;
     --embed-toggle-inactive-bg: #5b5b5b;
     --embed-toggle-active-bg: red;
+}
+.barbie {
+    --settings-bg: #7effab;
+    --settings-text-color: #7e92ff;
+    --theme-select-bg: #85ffff;
+    --theme-select-color: black;
+    --embed-toggle-color: white;
+    --embed-toggle-inactive-bg: #ccc;
+    --embed-toggle-active-bg: #ffee9b;
 }
 .marley {
     --settings-bg: #262c2d;
