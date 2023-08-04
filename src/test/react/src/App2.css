@@ -1,16 +1,17 @@
 body {
   /*animation: Spin infinite 1s linear;*/
-  background-color: #282B31FF; /* Can't set have this as a variable because it cant be set before active*/
+  background-color: #282B31FF; /* Can't set have this as a variable because it cant be set before active */
   overflow: hidden;
 }
 #welcome-screen {
-  background: #282B31FF; /* Can't set have this as a variable because it cant be set before active*/
+  background: var(--overall-bg); /* Will always be default */
   position: absolute;
   width: 100%;
   height: 100%;
   cursor: pointer;
   text-align: center;
   animation: fadeInAnimation ease 2s;
+  font-family: var(--overall-font-family); /* Will always be default */
 }
 #welcome-message {
   font-size: 70px;
@@ -122,9 +123,10 @@ body {
   margin-bottom: 25%;
   list-style: none;
 }
-#links-output{color:var(--link-color);}
+#links-output{color:var(--link-color); mix-blend-mode: var(--link-blend)}
 
 .default {
+  --overall-font-family: Arial;
   --overall-bg: #282b31;
   --overall-font-color: whitesmoke;
   --game-bg: #ccced0;
@@ -133,37 +135,47 @@ body {
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
   --link-color: black;
+  --link-blend: normal;
 }
 .dark {
   --overall-bg: #282b31;
-  --overall-font-color: #3d476c;
+  --overall-font-color: #dedede;
   --game-bg: #74879b;
   --spotify-color: black;
   --start-button-color: #fff;
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
   --link-color: whitesmoke;
+  --link-blend: normal;
 }
 .pastel {
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
-  --game-bg: #f18cd4;
+  --game-bg: #e2c1ff;
   --spotify-color: black;
   --start-button-color: #fff;
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-  --link-color: #a0a0da;
+  --link-color: #c1fdff;
+  --link-blend: normal;
 }
 .gay {
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
-  --game-bg: #74879b;
+  --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
   --spotify-color: black;
   --start-button-color: #fff;
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-  --link-color: whitesmoke;
+  --link-color: white;
+  --link-blend: difference;
 }
+#game-area.gay {
+  background-size: 1400% 300%;
+  -webkit-animation: rainbow 20s ease infinite;
+  -o-animation: rainbow 20s linear infinite;
+  animation: rainbow 20s ease infinite;
+} /* Necessary for animation stuff */
 .kevin {
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
@@ -173,6 +185,7 @@ body {
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
   --link-color: whitesmoke;
+  --link-blend: difference;
 }
 .drac {
   --overall-bg: #282b31;
@@ -183,6 +196,7 @@ body {
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #545454, #000000);
   --link-color: whitesmoke;
+  --link-blend: normal;
 }
 .marley {
   --overall-bg: #282b31;
@@ -193,4 +207,5 @@ body {
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
   --link-color: whitesmoke;
+  --link-blend: normal;
 }

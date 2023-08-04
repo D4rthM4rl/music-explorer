@@ -325,16 +325,16 @@ class App2 extends Component<{}, AppState> {
           <body>
           {this.state.welcomeVisible ? (
               <div id="welcome-screen" className={`themed ${theme}`} onClick={this.handleWelcomeClick}>
-                <div id="welcome-message" className={`glow themed ${theme}`}> Song Game </div>
+                <h1 id="welcome-message" className={`glow themed ${theme}`}> Song Game </h1>
               </div>
           ) : null}
           {!this.state.welcomeVisible ? (
               <div className="main-page">
                 <div className="themed" id="topbar">
-                  <div className="topbar-option themed" id= "title">Song Game By Marley</div>
-                  <div className="topbar-option themed" id="spotify-genres">All Spotify Genres</div>
-                  <div className="topbar-option themed" id="directions">How to Play</div>
-                  <div className="topbar-option themed" id="settings toggle"
+                  <div className={`topbar-option themed ${theme}`} id= "title">Song Game By Marley</div>
+                  <div className={`topbar-option themed ${theme}`} id="spotify-genres">All Spotify Genres</div>
+                  <div className={`topbar-option themed ${theme}`} id="directions">How to Play</div>
+                  <div className={`topbar-option themed ${theme}`} id="settings toggle"
                        onClick={() => {const rSidebar = document.getElementById("settings-sidebar") as HTMLElement;
                          if (rSidebar) {rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";}
                          this.setState({settingsActive: !this.state.settingsActive})}}
@@ -379,7 +379,7 @@ class App2 extends Component<{}, AppState> {
                     <ul id="links" className="themed">
                      {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"href={link} target="_blank">{link}</a></li>))}
                   </ul>
-                    <button id="start-button" className="glow-on-hover themed" onClick={() => {this.handleStart();}}>Start</button>
+                    <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Start</button>
                     <div id="settings-sidebar" className={`themed ${theme}`} style={{fontSize: "170%"}}>
                       <div id="theme-header">Theme
                         <select id="theme-select" className="themed"

@@ -1,5 +1,5 @@
 #topbar {
-    background-color:#252525;
+    background-color: var(--topbar-bg);
     animation: fallDownAnimation ease 1.5s;
     display: grid;
     grid-template-columns: repeat(4,25%);
@@ -13,41 +13,49 @@
 }
 .topbar-option {
     cursor: pointer;
+    font-family: var(--overall-font-family);
     font-weight: bold;
     font-size: 25px;
-    color: whitesmoke;
+    color: var(--topbar-color);
 }
 #title {
-    color: mediumslateblue;
+    color: var(--title-color);
     font-size: 30px;
 }
 
-/* Default Themes */
-#topbar.default {background-color: #252525;}
-.topbar-option.default {color: whitesmoke;}
-#title.default {color: mediumslateblue;}
-
-/* Dark Themes */
-#topbar.dark {background-color: #252525;}
-.topbar-option.dark {color: #dedede;}
-#title.dark {color: mediumslateblue;}
-
-/* Pastel Themes */
-#topbar.pastel {background-color: #57f5f5;}
-.topbar-option.pastel {color: #fffd7c;}
-#title.pastel {color: #ff80e2;}
-
-/* Gay Themes */
-#topbar.gay {background-color: #000000;}
-.topbar-option.gay {color: whitesmoke;}
-#title.gay {color: mediumslateblue;}
-
-/* Kevin Themes */
-#topbar.kevin {background-color: #2e4bbe;}
-.topbar-option.kevin {color: whitesmoke;}
-#title.kevin {color: mediumslateblue;}
-
-/* Drac Themes */
-#topbar.drac {background-color: #000000;}
-.topbar-option.drac {color: whitesmoke;}
-#title.drac {color: red;}
+/* Themes */
+.default {
+    --topbar-bg: #252525;
+    --title-color: mediumslateblue;
+    --topbar-color: whitesmoke;
+}
+.dark {
+    --topbar-bg: #252525;
+    --title-color: mediumslateblue;
+    --topbar-color: #dedede;
+}
+.pastel {
+    --topbar-bg: #57f5f5;
+    --title-color: #ff80e2;
+    --topbar-color: #f5f557;
+}
+.gay {
+    --topbar-bg: #000000;
+    --title-color: mediumslateblue;
+    --topbar-color: whitesmoke;
+}
+.kevin {
+    --topbar-bg: #2e4bbe;
+    --title-color: mediumslateblue;
+    --topbar-color: whitesmoke;
+}
+.drac {
+    --topbar-bg: #252525;
+    --title-color: red;
+    --topbar-color: orangered;
+}
+.marley {
+    --topbar-bg: #252525;
+    --title-color: mediumslateblue;
+    --topbar-color: whitesmoke;
+}

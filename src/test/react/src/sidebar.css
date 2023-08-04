@@ -5,9 +5,9 @@
     background: var(--sidebar-bg);
     animation: slideFromLeft ease 1.5s;
     text-align: center;
-    /*border-right:2px solid var(--sidebar-shadow-color);*/
-    box-shadow: 0px 0 10px #000000;
-    color: var(--sidebar-text);
+    box-shadow: 0 0 10px #000000;
+    color: var(--sidebar-color);
+    font-family: var(--overall-font-family);
 }
 #sidebar-headings{
     font-size: 30px;
@@ -53,7 +53,7 @@
 }
 .tab.active {
     background: var(--active-tab-bg);
-    color: var(--sidebar-text);
+    color: var(--sidebar-color);
     box-shadow:none;
 }
 .tab.active:hover {background: var(--active-tab-bg);}
@@ -62,7 +62,7 @@
 /* Themes */
 .default {
     --sidebar-bg: #282b31;
-    --sidebar-text: whitesmoke;
+    --sidebar-color: whitesmoke;
     --sidebar-textbox-color: #919191;
     --sidebar-textbox-bg: lightcyan;
     --sidebar-shadow-color: #15161a;
@@ -78,7 +78,7 @@
 }
 .dark {
     --sidebar-bg: #282b31;
-    --sidebar-text: whitesmoke;
+    --sidebar-color: #dedede;
     --sidebar-textbox-color: #aaaac5;
     --sidebar-textbox-bg: #464f5b;
     --sidebar-shadow-color: #15161a;
@@ -93,14 +93,14 @@
     --tab-highlight-color: #4E545FFF;
 }
 .pastel {
-    --sidebar-bg: #a1ff74;
-    --sidebar-text: black;
-    --sidebar-textbox-color: #aaaac5;
+    --sidebar-bg: #7effab;
+    --sidebar-color: #7e92ff;
+    --sidebar-textbox-color: #7e92ff;
     --sidebar-textbox-bg: lightcyan;
     --sidebar-shadow-color: #15161a;
-    --add-button-bg: #179b2c;
+    --add-button-bg: #02ff25;
     --add-button-color: black;
-    --clear-button-bg: #e10202;
+    --clear-button-bg: #ff4141;
     --clear-button-color: black;
     --button-border: black;
     --active-tab-bg: sidebar-bg;
@@ -109,9 +109,9 @@
     --tab-highlight-color: #4E545FFF;
 }
 .gay {
-    --sidebar-bg: #282b31;
-    --sidebar-text: whitesmoke;
-    --sidebar-textbox-color: #919191;
+    --sidebar-bg: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
+    --sidebar-color: white;
+    --sidebar-textbox-color: #df5cff;
     --sidebar-textbox-bg: lightcyan;
     --sidebar-shadow-color: #15161a;
     --add-button-bg: #00ff00;
@@ -121,14 +121,21 @@
     --button-border: black;
     --active-tab-bg: sidebar-bg;
     --inactive-tab-bg: black;
-    --inactive-tab-color: whitesmoke;
-    --tab-highlight-color: #4E545FFF;
+    --inactive-tab-color: white;
+    --tab-highlight-color: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;;
 }
+#sidebar.gay {
+    background-size: 100% 300%;
+    overflow: hidden;
+    -webkit-animation: rainbow 10s ease infinite;
+    -o-animation: rainbow 10s linear infinite;
+    animation: rainbow 10s ease infinite;
+} /* Necessary for animation stuff */
 .kevin {
     --sidebar-bg: linear-gradient(180deg, #D60270, #0038A8);
-    --sidebar-text: black;
-    --sidebar-textbox-color: #aaaac5;
-    --sidebar-textbox-bg: lightcyan;
+    --sidebar-color: white;
+    --sidebar-textbox-color: #a73df1;
+    --sidebar-textbox-bg: #bed5ff;
     --sidebar-shadow-color: #15161a;
     --add-button-bg: #179b2c;
     --add-button-color: black;
@@ -142,9 +149,9 @@
 }
 .drac {
     --sidebar-bg: #282b31;
-    --sidebar-text: whitesmoke;
-    --sidebar-textbox-color: #919191;
-    --sidebar-textbox-bg: lightcyan;
+    --sidebar-color: red;
+    --sidebar-textbox-color: black;
+    --sidebar-textbox-bg: #ffa0a0;
     --sidebar-shadow-color: #15161a;
     --add-button-bg: #00ff00;
     --add-button-color: black;
@@ -154,11 +161,11 @@
     --active-tab-bg: sidebar-bg;
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
-    --tab-highlight-color: #4E545FFF;
+    --tab-highlight-color: #ff0000;
 }
 .marley {
     --sidebar-bg: #282b31;
-    --sidebar-text: whitesmoke;
+    --sidebar-color: whitesmoke;
     --sidebar-textbox-color: #919191;
     --sidebar-textbox-bg: lightcyan;
     --sidebar-shadow-color: #15161a;
