@@ -138,7 +138,7 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
                     fontWeight: "bold",
                 }}>
                     {this.props.playlistArray.map((playlist, index) => (
-                        <li key={index} onClick={() => this.handleRemove(index)}>
+                        <li key={index} style={{cursor: "pointer"}} onClick={() => this.handleRemove(index)}>
                             {playlist}
                         </li>
                     ))}

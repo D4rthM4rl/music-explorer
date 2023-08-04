@@ -221,10 +221,10 @@ body {
   --overall-font-family: Arial;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
-  --game-bg: #e2c1ff;
+  --game-bg: linear-gradient(180deg, #2eedff, #ffffff);
   --spotify-color: black;
   --start-button-color: #fff;
-  --start-button-bg: #000000;
+  --start-button-bg: #ff3ec7;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
   --link-color: #c1fdff;
   --link-blend: normal;

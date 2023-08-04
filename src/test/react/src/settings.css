@@ -142,14 +142,14 @@ input:checked + .slider:before {
     --embed-toggle-active-bg: red;
 }
 .barbie {
-    --settings-bg: #7effab;
-    --settings-text-color: #7e92ff;
+    --settings-bg: #ff3ec7;
+    --settings-text-color: white;
     --settings-shadow: #000000;
-    --theme-select-bg: #85ffff;
+    --theme-select-bg: #ffc9ee;
     --theme-select-color: black;
     --embed-toggle-color: white;
     --embed-toggle-inactive-bg: #ccc;
-    --embed-toggle-active-bg: #ffee9b;
+    --embed-toggle-active-bg: #25e7ff;
 }
 .marley {
     --settings-bg: #262c2d;

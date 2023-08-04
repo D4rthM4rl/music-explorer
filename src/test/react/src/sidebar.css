@@ -193,10 +193,10 @@
     --tab-highlight-color: #ff0000;
 }
 .barbie {
-    --sidebar-bg: #7effab;
-    --sidebar-color: #7e92ff;
-    --sidebar-textbox-color: #7e92ff;
-    --sidebar-textbox-bg: lightcyan;
+    --sidebar-bg: #ff3ec7;
+    --sidebar-color: #ffc9ee;
+    --sidebar-textbox-color: #fff;
+    --sidebar-textbox-bg: #25e7ff;
     --sidebar-shadow: 0 0 10px #000000;
     --add-button-bg: #02ff25;
     --add-button-color: black;
@@ -206,7 +206,7 @@
     --active-tab-bg: sidebar-bg;
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
-    --tab-highlight-color: #4E545FFF;
+    --tab-highlight-color: #fab9e3;
 }
 .marley {
     --sidebar-bg: #282b31;

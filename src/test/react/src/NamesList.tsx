@@ -123,7 +123,7 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                     fontWeight: "bold",
                 }}>
                     {this.props.nameArray.map((name, index) => (
-                        <li key={index} onClick={() => this.handleRemove(index)}>
+                        <li key={index} style={{cursor: "pointer"}} onClick={() => this.handleRemove(index)}>
                             {name}
                         </li>
                     ))}
