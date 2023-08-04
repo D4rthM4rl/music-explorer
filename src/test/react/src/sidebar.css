@@ -5,21 +5,24 @@
     background: var(--sidebar-bg);
     animation: slideFromLeft ease 1.5s;
     text-align: center;
-    box-shadow: 0 0 10px #000000;
+    box-shadow: var(--sidebar-shadow);
     color: var(--sidebar-color);
+    text-shadow: var(--sidebar-glow);
     font-family: var(--overall-font-family);
 }
 #sidebar-headings{
     font-size: 30px;
-    color: var(--sidebar-bg);
+    color: var(--sidebar-bg); /* Idk if this does anything */
 }
 .num-song-box {
     color: var(--sidebar-textbox-color);
     background: var(--sidebar-textbox-bg);
+    box-shadow: var(--sidebar-textbox-glow);
 }
 .name-playlist-box {
     color: var(--sidebar-textbox-color);
     background: var(--sidebar-textbox-bg);
+    box-shadow: var(--sidebar-textbox-glow);
 }
 .add-button {
     color: var(--add-button-color);
@@ -38,6 +41,7 @@
 }
 .tab {
     font-size: 20px;
+    text-shadow: var(--inactive-tab-glow);
     color: var(--inactive-tab-color);
     font-weight: bold;
     cursor: pointer;
@@ -49,12 +53,14 @@
     height:6%;
     animation: fadeInAnimation ease 1s;
     background: #15161a;
-    box-shadow: inset  1px -1px 20px 1px var(--inactive-tab-bg);
+    box-shadow: var(--inactive-tab-border);
 }
 .tab.active {
     background: var(--active-tab-bg);
     color: var(--sidebar-color);
-    box-shadow:none;
+    text-shadow: var(--active-tab-glow);
+    box-shadow: var(--active-tab-border);
+    z-index: 10;
 }
 .tab.active:hover {background: var(--active-tab-bg);}
 .tab:hover {background: var(--tab-highlight-color);}
@@ -62,26 +68,28 @@
 /* Themes */
 .default {
     --sidebar-bg: #282b31;
+    --sidebar-glow: none;
     --sidebar-color: whitesmoke;
     --sidebar-textbox-color: #919191;
     --sidebar-textbox-bg: lightcyan;
-    --sidebar-shadow-color: #15161a;
+    --sidebar-shadow: 0 0 10px #000000;
     --add-button-bg: #00ff00;
     --add-button-color: black;
     --clear-button-bg: red;
     --clear-button-color: black;
     --button-border: black;
     --active-tab-bg: sidebar-bg;
-    --inactive-tab-bg: black;
+    --inactive-tab-border: inset  1px -1px 20px 1px var(--inactive-tab-bg);
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
 }
 .dark {
     --sidebar-bg: #282b31;
     --sidebar-color: #dedede;
+    --sidebar-glow: none;
     --sidebar-textbox-color: #aaaac5;
     --sidebar-textbox-bg: #464f5b;
-    --sidebar-shadow-color: #15161a;
+    --sidebar-shadow: 0 0 10px #000000;
     --add-button-bg: #179b2c;
     --add-button-color: black;
     --clear-button-bg: #e10202;
@@ -93,19 +101,24 @@
     --tab-highlight-color: #4E545FFF;
 }
 .neon {
-    --sidebar-bg: #282b31;
-    --sidebar-color: #dedede;
+    --sidebar-bg: #000000;
+    --sidebar-color: var(--sidebar-bg);
+    --sidebar-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #ffffff, 0 0 15px #00ff77;
     --sidebar-textbox-color: #aaaac5;
-    --sidebar-textbox-bg: #464f5b;
-    --sidebar-shadow-color: #15161a;
+    --sidebar-textbox-bg: #000000;
+    --sidebar-shadow: 0 40px 20px red;
+    --sidebar-textbox-glow: 0 0 7px #fff, 0 0 10px #ffffff, 0 0 15px #ffed66;
     --add-button-bg: #179b2c;
     --add-button-color: black;
     --clear-button-bg: #e10202;
     --clear-button-color: black;
     --button-border: black;
     --active-tab-bg: sidebar-bg;
-    --inactive-tab-bg: black;
-    --inactive-tab-color: whitesmoke;
+    --active-tab-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #00fff7, 0 0 15px #00fff7;
+    --active-tab-border: 0 -5px 10px red;
+    --inactive-tab-border: -5px 5px 10px red;
+    --inactive-tab-color: var(--inactive-tab-bg);
+    --inactive-tab-glow:  0 0 1px #adadad, 0 0 1px #adadad, 0 0 1px #adadad, 0 0 1px #adadad, 0 0 1px #adadad, 0 0 1px #adadad, 0 0 7px #adadad;
     --tab-highlight-color: #4E545FFF;
 }
 .pastel {
@@ -113,7 +126,7 @@
     --sidebar-color: #7e92ff;
     --sidebar-textbox-color: #7e92ff;
     --sidebar-textbox-bg: lightcyan;
-    --sidebar-shadow-color: #15161a;
+    --sidebar-shadow: 0 0 10px #000000;
     --add-button-bg: #02ff25;
     --add-button-color: black;
     --clear-button-bg: #ff4141;
@@ -129,7 +142,7 @@
     --sidebar-color: white;
     --sidebar-textbox-color: #df5cff;
     --sidebar-textbox-bg: lightcyan;
-    --sidebar-shadow-color: #15161a;
+    --sidebar-shadow: 0 0 10px #000000;
     --add-button-bg: #00ff00;
     --add-button-color: black;
     --clear-button-bg: red;
@@ -152,7 +165,7 @@
     --sidebar-color: white;
     --sidebar-textbox-color: #a73df1;
     --sidebar-textbox-bg: #bed5ff;
-    --sidebar-shadow-color: #15161a;
+    --sidebar-shadow: 0 0 10px #000000;
     --add-button-bg: #179b2c;
     --add-button-color: black;
     --clear-button-bg: red;
@@ -168,7 +181,7 @@
     --sidebar-color: red;
     --sidebar-textbox-color: black;
     --sidebar-textbox-bg: #ffa0a0;
-    --sidebar-shadow-color: #15161a;
+    --sidebar-shadow: 0 0 10px #000000;
     --add-button-bg: #00ff00;
     --add-button-color: black;
     --clear-button-bg: red;
@@ -179,12 +192,28 @@
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #ff0000;
 }
+.barbie {
+    --sidebar-bg: #7effab;
+    --sidebar-color: #7e92ff;
+    --sidebar-textbox-color: #7e92ff;
+    --sidebar-textbox-bg: lightcyan;
+    --sidebar-shadow: 0 0 10px #000000;
+    --add-button-bg: #02ff25;
+    --add-button-color: black;
+    --clear-button-bg: #ff4141;
+    --clear-button-color: black;
+    --button-border: black;
+    --active-tab-bg: sidebar-bg;
+    --inactive-tab-bg: black;
+    --inactive-tab-color: whitesmoke;
+    --tab-highlight-color: #4E545FFF;
+}
 .marley {
     --sidebar-bg: #282b31;
     --sidebar-color: whitesmoke;
     --sidebar-textbox-color: #919191;
     --sidebar-textbox-bg: lightcyan;
-    --sidebar-shadow-color: #15161a;
+    --sidebar-shadow: 0 0 10px #000000;
     --add-button-bg: #00ff00;
     --add-button-color: black;
     --clear-button-bg: red;

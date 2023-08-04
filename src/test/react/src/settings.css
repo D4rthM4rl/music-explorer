@@ -1,10 +1,11 @@
 /* Style for the settings sidebar */
 #settings-sidebar {
     transition: right 0.5s ease; /* Add smooth sliding transition */
-    box-shadow: 0 0 10px #000000;
+    box-shadow: 0 0 10px var(--settings-shadow);
     align-items: center;
     text-align: center;
     color: var(--settings-text-color);
+    text-shadow: var(--settings-glow);
     background: var(--settings-bg);
     font-family: var(--overall-font-family);
     height: 100vh;
@@ -65,6 +66,7 @@ input:checked + .slider:before {
 .default {
     --settings-bg: #282b31;
     --settings-text-color: whitesmoke;
+    --settings-shadow: #000000;
     --theme-select-bg: lightcyan;
     --theme-select-color: black;
     --embed-toggle-color: white;
@@ -74,6 +76,7 @@ input:checked + .slider:before {
 .dark {
     --settings-bg: #282b31;
     --settings-text-color: #dedede;
+    --settings-shadow: #000000;
     --theme-select-bg: #758bb4;
     --theme-select-color: black;
     --embed-toggle-color: #eaeaea;
@@ -81,17 +84,20 @@ input:checked + .slider:before {
     --embed-toggle-active-bg: blue;
 }
 .neon {
-    --settings-bg: #282b31;
-    --settings-text-color: #dedede;
-    --theme-select-bg: #758bb4;
-    --theme-select-color: black;
-    --embed-toggle-color: #eaeaea;
-    --embed-toggle-inactive-bg: #8d8d8d;
-    --embed-toggle-active-bg: blue;
+    --settings-bg: #000000;
+    --settings-text-color: var(--settings-bg);
+    --settings-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #ffffff, 0 0 15px #00ff77;
+    --settings-shadow: #00ffd0;
+    --theme-select-bg: #000000;
+    --theme-select-color: #00ffea;
+    --embed-toggle-color: #ffffff;
+    --embed-toggle-inactive-bg: #7c7c7c;
+    --embed-toggle-active-bg: #00f7ff;
 }
 .pastel {
     --settings-bg: #7effab;
     --settings-text-color: #7e92ff;
+    --settings-shadow: #000000;
     --theme-select-bg: #85ffff;
     --theme-select-color: black;
     --embed-toggle-color: white;
@@ -101,6 +107,7 @@ input:checked + .slider:before {
 .gay {
     --settings-bg: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
     --settings-text-color: black;
+    --settings-shadow: #000000;
     --theme-select-bg: linear-gradient(90deg, #ff2400, #e8b71d, #1de840, #1d93e8,  #dd00f3);
     --theme-select-color: black;
     --embed-toggle-color: white;
@@ -117,6 +124,7 @@ input:checked + .slider:before {
 .kevin {
     --settings-bg: linear-gradient(180deg, #D60270, #0038A8);
     --settings-text-color: white;
+    --settings-shadow: #000000;
     --theme-select-bg: #0041c5;
     --theme-select-color: white;
     --embed-toggle-color: white;
@@ -126,6 +134,7 @@ input:checked + .slider:before {
 .drac {
     --settings-bg: #262c2d;
     --settings-text-color: red;
+    --settings-shadow: #000000;
     --theme-select-bg: linear-gradient(45deg, red, black);
     --theme-select-color: black;
     --embed-toggle-color: white;
@@ -135,6 +144,7 @@ input:checked + .slider:before {
 .barbie {
     --settings-bg: #7effab;
     --settings-text-color: #7e92ff;
+    --settings-shadow: #000000;
     --theme-select-bg: #85ffff;
     --theme-select-color: black;
     --embed-toggle-color: white;
@@ -144,6 +154,7 @@ input:checked + .slider:before {
 .marley {
     --settings-bg: #262c2d;
     --settings-text-color: whitesmoke;
+    --settings-shadow: #000000;
     --theme-select-bg: mediumpurple;
     --theme-select-color: blue;
     --embed-toggle-color: white;

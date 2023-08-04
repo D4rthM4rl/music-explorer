@@ -17,9 +17,11 @@
     font-weight: bold;
     font-size: 25px;
     color: var(--topbar-color);
+    text-shadow: var(--topbar-glow);
 }
 #title {
     color: var(--title-color);
+    text-shadow: var(--title-glow);
     font-size: 30px;
 }
 
@@ -36,8 +38,10 @@
 }
 .neon {
     --topbar-bg: #252525;
-    --title-color: mediumslateblue;
-    --topbar-color: #dedede;
+    --title-color: var(--topbar-bg);
+    --title-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #6f00ff, 0 0 15px #6f00ff;
+    --topbar-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #0048ff, 0 0 15px #0048ff;
+    --topbar-color: var(--topbar-bg);
 }
 .pastel {
     --topbar-bg: #57f5f5;

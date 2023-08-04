@@ -62,6 +62,7 @@ body {
   align-items: center;
   text-align: center;
   display:flex;
+  box-shadow: var(--game-border);
   /*animation: slideFromLeft ease 3s;*/
 }
 #spotify-player {
@@ -138,6 +139,7 @@ body {
   --link-blend: normal;
 }
 .dark {
+  --overall-font-family: Arial;
   --overall-bg: #282b31;
   --overall-font-color: #dedede;
   --game-bg: #74879b;
@@ -149,9 +151,11 @@ body {
   --link-blend: normal;
 }
 .neon {
+  --overall-font-family: "Arial";
   --overall-bg: #282b31;
   --overall-font-color: #dedede;
-  --game-bg: #74879b;
+  --game-bg: #181818;
+  --game-border: 0 0 20px #ff00fc;
   --spotify-color: black;
   --start-button-color: #fff;
   --start-button-bg: #000000;
@@ -160,6 +164,7 @@ body {
   --link-blend: normal;
 }
 .pastel {
+  --overall-font-family: Arial;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: #e2c1ff;
@@ -171,6 +176,7 @@ body {
   --link-blend: normal;
 }
 .gay {
+  --overall-font-family: Arial;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
@@ -188,6 +194,7 @@ body {
   animation: rainbow 20s ease infinite;
 } /* Necessary for animation stuff */
 .kevin {
+  --overall-font-family: Arial;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
@@ -199,6 +206,7 @@ body {
   --link-blend: difference;
 }
 .drac {
+  --overall-font-family: Arial;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(180deg, #ff2400,  dimgray);
@@ -210,6 +218,7 @@ body {
   --link-blend: normal;
 }
 .barbie {
+  --overall-font-family: Arial;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: #e2c1ff;
@@ -221,6 +230,7 @@ body {
   --link-blend: normal;
 }
 .marley {
+  --overall-font-family: Arial;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: #74879b;
