@@ -1,0 +1,74 @@
+export function handleThemeChange (theme: string) {
+    // Update the theme based on the selected option value
+    const elements = document.querySelectorAll('.themed');
+    const classesToRemove = ['default', 'dark', 'neon', 'pastel', 'gay','kevin', 'drac', 'barbie', 'marley'];
+    elements.forEach((element) =>{
+        element.classList.remove(...classesToRemove);
+        element.classList.add(theme);
+    });
+    storeTheme(theme);
+}
+
+function storeTheme (theme: string) {
+    try {
+        localStorage.setItem('theme', theme);
+    } catch (err) {
+        console.error('Error storing theme:', err);
+    }
+}
+
+export function handleNewName (name: string, id: string) {
+    // https://open.spotify.com/user/swjy4clwrbijjzyonpha37rek?si=gkl2UWeLR_aLeI91q6pflw
+    if (id.includes("https://open.spotify.com/user/")) {
+        id = id.replace("https://open.spotify.com/user/", "");
+    } if (id.includes("?")) {
+        id = id.replace(id.substr(id.indexOf("?")), "");
+    }
+    console.log(`${name} has the id ${id}`)
+
+    const names = getAllNames();
+    if (names.includes(name)) {
+        console.log("name already exists");
+        return false;
+    } else {
+        storePair(name, id);
+        return true;
+    }
+}
+
+function storePair (newName: string, id: string) {
+    try {
+        const existingPairs = JSON.parse(localStorage.getItem('names') || '[]');
+        const newNamePair: string[] = [ newName, id ];
+        const updatedPairs: string[] = [...existingPairs, newNamePair];
+        // const names = JSON.parse(localStorage.getItem('names') || '[]');
+        if (updatedPairs.includes(newName)) {
+            console.log("Need different name, that one already exists")
+        } else {
+            // @ts-ignore
+            updatedPairs[newName] = id;
+            localStorage.setItem('names', JSON.stringify(updatedPairs));
+        }
+    } catch (err) {
+        console.error('Error storing names:', err);
+    }
+}
+
+export function getAllNames() {
+    try {return JSON.parse(localStorage.getItem('names') || '[]');
+    } catch (err) {
+        console.error('Error getting names:', err);
+        return [];
+    }
+}
+
+export function getTheme(): string {
+    try {
+        const theme = localStorage.getItem('theme') || 'default-theme';
+        return theme;
+    } catch (err) {
+        console.error('Error getting theme:', err);
+        return 'default-theme';
+    }
+}
+

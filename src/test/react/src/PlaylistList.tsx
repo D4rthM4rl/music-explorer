@@ -1,5 +1,7 @@
 import React, {Component} from 'react';
-import {handleThemeChange} from "./handleThemeChange";
+import names from '../public/names.json';
+import {getTheme} from "./handleLocalStorageChange";
+import {getAllNames} from "./handleLocalStorageChange";
 
 interface PlaylistListProps {
     onChange(playlists: string[]): void;  // called when a new playlist list is ready

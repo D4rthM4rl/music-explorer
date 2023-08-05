@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
-import {handleThemeChange} from "./handleThemeChange";
+import {getTheme} from "./handleLocalStorageChange";
+import {getAllNames} from "./handleLocalStorageChange";
 
 interface NamesListProps {
     onChange(names: string[]): void;  // called when a new name list is ready

@@ -1,5 +1,4 @@
 import './App2.css';
-import { useState } from 'react';
 import React, {Component} from 'react';
 import axios from "axios";
 import { Buffer } from "buffer";
@@ -10,7 +9,11 @@ import "./topbar.css";
 import settingsIcon from "./settings-icon.png"
 import NamesList from "./NamesList";
 import PlaylistList from "./PlaylistList";
-import {handleThemeChange} from "./handleThemeChange";
+import {handleThemeChange} from "./handleLocalStorageChange";
+import {handleNewName} from "./handleLocalStorageChange"
+import {getAllNames} from "./handleLocalStorageChange";
+import {getTheme} from "./handleLocalStorageChange";
+import path from "path";
 
 interface AppState {
   tracks: Track[];
@@ -25,6 +28,8 @@ interface AppState {
   theme: string;
   welcomeVisible: boolean;
   useEmbed: boolean;
+  newNameValue: string;
+  newProfileIdValue: string;
 }
 
 interface Track {
@@ -58,6 +63,8 @@ class App2 extends Component<{}, AppState> {
       theme: "default",
       welcomeVisible: true,
       useEmbed: false,
+      newNameValue: "",
+      newProfileIdValue: "",
     };
   }
 
@@ -315,11 +322,12 @@ class App2 extends Component<{}, AppState> {
   }
 
   handleWelcomeClick = () => {
-    this.setState({welcomeVisible: false})
+    this.setState({welcomeVisible: false});
+    this.setState({theme: getTheme()});
   };
 
   render() {
-    const { isNamesTab, playlists, names, numPersonalState, numGenreState, theme } = this.state;
+    const { isNamesTab, playlists, names, numPersonalState, numGenreState, theme, newNameValue, newProfileIdValue } = this.state;
     return (
         <div>
           <body>
@@ -341,7 +349,7 @@ class App2 extends Component<{}, AppState> {
                   >Settings</div>
                 </div>
                 <div className="game-options">
-                  <div id="sidebar" className={`game-ui themed ${this.state.theme}`}>
+                  <div id="sidebar" className={`game-ui themed ${theme}`}>
                     <div className={`tab ${isNamesTab ? "active" : ""} themed ${theme}`}
                          onClick={() => {this.setState({ isNamesTab: true });}}
                         >Players</div>
@@ -377,7 +385,8 @@ class App2 extends Component<{}, AppState> {
                             loading="lazy"
                     ></iframe>) : null}
                     <ul id="links" className="themed">
-                     {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"href={link} target="_blank">{link}</a></li>))}
+                     {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"
+                                                                                href={link} target="_blank" rel="noreferrer">{link}</a></li>))}
                   </ul>
                     <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Start</button>
                     <div id="settings-sidebar" className={`themed ${theme}`} style={{fontSize: "170%"}}>
@@ -401,18 +410,44 @@ class App2 extends Component<{}, AppState> {
                         <option value="drac">Drac</option>
                         <option value="barbie">Barbie</option>
                         <option value="marley">Marley</option>
-                        {/* Add more theme options here */}
                         </select>
                       </div>
-                      <div id="embed-toggle" style={{
-                        marginLeft: "10%",
-                        marginTop: "3%",
-                      }}>Use Embed
+                      <div id="embed-toggle" style={{marginTop: "5%"}}>Use Embed
                       <label className="switch themed" style={{marginLeft: "10%"}}>
                         <input type="checkbox" />
                         <span className="slider round themed" onClick={() => this.setState({useEmbed: !this.state.useEmbed})}></span>
                       </label>
                     </div>
+                      <div id="name-add-header"className={`themed ${theme}`}>Add Name to List</div>
+                      <input id="new-name-box" className={`themed ${theme}`}
+                           placeholder={"Player Name"}
+                           onChange={(event) => {this.setState({newNameValue: event.target.value})}}
+                           // onKeyDown={this.handleInputKeyDown}
+                           value={newNameValue}
+                      />
+                      <input id="new-profile-box" className={`themed ${theme}`}
+                           autoComplete="false"
+                           placeholder={"Profile Link"}
+                           onChange={(event) => {this.setState({newProfileIdValue: event.target.value})}}
+                          // onKeyDown={this.handleInputKeyDown}
+                          value={newProfileIdValue}
+                      /><br/>
+                      <button className={`add-button themed ${theme}`}
+                              onClick={ () => {handleNewName(newNameValue, newProfileIdValue)}}
+                              style={{fontSize: 20}}
+                      >Add pair
+                      </button>
+                      <button className={`clear-button themed ${theme}`}
+                              style={{fontSize: 20}}
+                      >Remove pair
+                      </button>
+                      <ul style={{
+                        position: "relative",
+                        fontSize: 20,
+                        textAlign: "left",
+                        alignContent: "flex-start",
+                        fontWeight: "bold",
+                      }}></ul>
                       <div>AHH</div>
                     </div>
                   </div>

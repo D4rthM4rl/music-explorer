@@ -8,7 +8,6 @@ import "./topbar.css";
 import settingsIcon from "./settings-icon.png"
 import NamesList from "./NamesList";
 import PlaylistList from "./PlaylistList";
-import {handleThemeChange} from "./handleThemeChange";
 
 interface AppState {
     tracks: Track[];
@@ -355,8 +354,7 @@ class App extends Component<{}, AppState> {
                     <div>Theme
                         <select id="theme-select" className="themed"
                             value={this.state.theme}
-                            onChange={(event) => {this.setState({theme: event.target.value})
-                                handleThemeChange(event.target.value)}}
+                            onChange={(event) => {this.setState({theme: event.target.value})}}
                             style={{
                                 marginLeft: '10%',
                                 marginTop: '3%',

@@ -4,6 +4,7 @@
     box-shadow: 0 0 10px var(--settings-shadow);
     align-items: center;
     text-align: center;
+    font-weight: bold;
     color: var(--settings-text-color);
     text-shadow: var(--settings-glow);
     background: var(--settings-bg);
@@ -24,6 +25,7 @@
     display: inline-block;
     width: 60px;
     height: 34px;
+    margin-top: 5%;
 }
 .switch input {
     opacity: 0;
@@ -61,6 +63,31 @@ input:checked + .slider:before {
 }
 .slider.round {border-radius: 34px;}
 .slider.round:before {border-radius: 50%;}
+#name-add-header {
+    margin-top: 5%;
+}
+#new-name-box {
+    font-family: Comic Sans MS;
+    font-size: 70%;
+    width: 80%;
+    border-radius: 5px;
+    padding: 2%;
+    border: 1px solid black;
+    color: var(--sidebar-textbox-color);
+    background: var(--settings-textbox-bg);
+    box-shadow: var(--settings-textbox-glow);
+}
+#new-profile-box {
+    font-family: Comic Sans MS;
+    font-size: 70%;
+    width: 80%;
+    border-radius: 5px;
+    padding: 2%;
+    border: 1px solid black;
+    color: var(--settings-textbox-color);
+    background: var(--settings-textbox-bg);
+    box-shadow: var(--settings-textbox-glow);
+}
 
 /* Themes */
 .default {
@@ -72,6 +99,8 @@ input:checked + .slider:before {
     --embed-toggle-color: white;
     --embed-toggle-inactive-bg: #ccc;
     --embed-toggle-active-bg: #2196F3;
+    --settings-textbox-bg: lightcyan;
+    --settings-textbox-color: #aaaac5;
 }
 .dark {
     --settings-bg: #282b31;
@@ -82,6 +111,8 @@ input:checked + .slider:before {
     --embed-toggle-color: #eaeaea;
     --embed-toggle-inactive-bg: #8d8d8d;
     --embed-toggle-active-bg: blue;
+    --settings-textbox-bg: #464f5b;
+    --settings-textbox-color: #aaaac5;
 }
 .neon {
     --settings-bg: #000000;
@@ -93,6 +124,9 @@ input:checked + .slider:before {
     --embed-toggle-color: #ffffff;
     --embed-toggle-inactive-bg: #7c7c7c;
     --embed-toggle-active-bg: #00f7ff;
+    --settings-textbox-bg: #000000;
+    --settings-textbox-color: #aaaac5;
+    --settings-textbox-glow: 0 0 7px #fff, 0 0 10px #ffffff, 0 0 15px #ffed66;
 }
 .pastel {
     --settings-bg: #7effab;
@@ -103,6 +137,8 @@ input:checked + .slider:before {
     --embed-toggle-color: white;
     --embed-toggle-inactive-bg: #ccc;
     --embed-toggle-active-bg: #ffee9b;
+    --settings-textbox-bg: lightcyan;
+    --settings-textbox-color: #7e92ff;
 }
 .gay {
     --settings-bg: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
@@ -113,6 +149,8 @@ input:checked + .slider:before {
     --embed-toggle-color: white;
     --embed-toggle-inactive-bg: #ccc;
     --embed-toggle-active-bg: linear-gradient(90deg, #ff2400, #e8b71d, #1de840, #1d93e8,  #dd00f3);
+    --settings-textbox-bg: lightcyan;
+    --settings-textbox-color: #7e92ff;
 }
 #settings-sidebar.gay {
     background-size: 100% 300%;
@@ -130,6 +168,8 @@ input:checked + .slider:before {
     --embed-toggle-color: white;
     --embed-toggle-inactive-bg: #ccc;
     --embed-toggle-active-bg: #0038A8;
+    --settings-textbox-bg: #bed5ff;
+    --settings-textbox-color: #a73df1;
 }
 .drac {
     --settings-bg: #262c2d;
@@ -140,6 +180,8 @@ input:checked + .slider:before {
     --embed-toggle-color: white;
     --embed-toggle-inactive-bg: #5b5b5b;
     --embed-toggle-active-bg: red;
+    --settings-textbox-bg: red;
+    --settings-textbox-color: black;
 }
 .barbie {
     --settings-bg: #ff3ec7;
@@ -150,6 +192,8 @@ input:checked + .slider:before {
     --embed-toggle-color: white;
     --embed-toggle-inactive-bg: #ccc;
     --embed-toggle-active-bg: #25e7ff;
+    --settings-textbox-bg: #25e7ff;
+    --settings-textbox-color: #fff;
 }
 .marley {
     --settings-bg: #262c2d;
@@ -160,6 +204,8 @@ input:checked + .slider:before {
     --embed-toggle-color: white;
     --embed-toggle-inactive-bg: #ccc;
     --embed-toggle-active-bg: midnightblue;
+    --settings-textbox-bg: lightcyan;
+    --settings-textbox-color: #7e92ff;
 }
 
 
