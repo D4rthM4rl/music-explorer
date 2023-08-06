@@ -17,6 +17,7 @@ function storeTheme (theme: string) {
     }
 }
 
+// Returns true if it added the name and false if not
 export function handleNewName (name: string, id: string) {
     // https://open.spotify.com/user/swjy4clwrbijjzyonpha37rek?si=gkl2UWeLR_aLeI91q6pflw
     if (id.includes("https://open.spotify.com/user/")) {
@@ -26,14 +27,21 @@ export function handleNewName (name: string, id: string) {
     }
     console.log(`${name} has the id ${id}`)
 
-    const names = getAllNames();
-    if (names.includes(name)) {
-        console.log("name already exists");
-        return false;
-    } else {
-        storePair(name, id);
-        return true;
+    const names: string[] = getAllNames();
+    console.log(names);
+
+    for (let i = 0; i < names.length; i++) {
+        if (names[i][0] === (name)) {
+            console.log("name already exists");
+            return false;
+        }
     }
+    storePair(name, id);
+    return true;
+}
+
+export function handleNameRemove(name: string) {
+
 }
 
 function storePair (newName: string, id: string) {

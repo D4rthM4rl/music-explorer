@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import names from '../public/names.json';
 import {getTheme} from "./handleLocalStorageChange";
 import {getAllNames} from "./handleLocalStorageChange";
 
@@ -29,6 +28,16 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
             num: 0,
         }
         console.log("INITIALIZING playlistARRAY");
+    }
+
+    populateDatalist = (names: string) => {
+        const datalist = document.getElementById('playlist-list');
+        for (let name of names) {
+            const option = document.createElement('option');
+            option.value = name;
+            // @ts-ignore
+            datalist.appendChild(option);
+        }
     }
 
     handleAdd = async () => {

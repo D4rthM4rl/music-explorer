@@ -27,6 +27,21 @@ class NamesList extends Component<NamesListProps, NamesListState> {
         }
     }
 
+    populateDatalist = (names: string) => {
+        console.log("started")
+        const datalist = document.getElementById('name-list');
+        if (datalist) {
+            datalist.innerHTML = '';
+            for (let name of names) {
+                const option = document.createElement('option');
+                option.value = name[0];
+                datalist.appendChild(option);
+            }
+        } else {
+            console.log("no namelist element")
+        }
+    }
+
     handleAdd = async () => {
         const newName = this.state.value.trim();
         if (newName && newName !== "") {
@@ -82,6 +97,7 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                 <h1 className="sidebar-headings">Names go here</h1>
                 <input className={`name-playlist-box themed ${this.props.theme}`}
                     list="name-list"
+                    onClick={() => this.populateDatalist(getAllNames())}
                     placeholder={"Type Player Names Here"}
                     onChange={(event) => {this.setState({value: event.target.value})}}
                     onKeyDown={this.handleInputKeyDown}
@@ -96,16 +112,19 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                     }}
                 /> <br/>
                 <datalist id="name-list">
-                    <option value="Marley" />
-                    <option value="Joe" />
-                    <option value="Candice" />
-                    <option value="Jake" />
-                    <option value="Justin" />
-                    <option value="Pedro" />
-                    <option value="Kevin" />
-                    <option value="Memphis" />
+                    {/*<option value="Marley" />*/}
+                    {/*<option value="Joe" />*/}
+                    {/*<option value="Candice" />*/}
+                    {/*<option value="Jake" />*/}
+                    {/*<option value="Justin" />*/}
+                    {/*<option value="Pedro" />*/}
+                    {/*<option value="Kevin" />*/}
+                    {/*<option value="Memphis" />*/}
                 </datalist>
                 <br/>
+                <script>
+
+                </script>
                 <button className={`add-button themed ${this.props.theme}`}
                     onClick={this.handleAdd}
                     style={{fontSize: 20}}

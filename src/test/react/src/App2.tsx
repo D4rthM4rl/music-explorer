@@ -10,10 +10,10 @@ import settingsIcon from "./settings-icon.png"
 import NamesList from "./NamesList";
 import PlaylistList from "./PlaylistList";
 import {handleThemeChange} from "./handleLocalStorageChange";
-import {handleNewName} from "./handleLocalStorageChange"
+import {handleNewName} from "./handleLocalStorageChange";
+import {handleNameRemove} from "./handleLocalStorageChange";
 import {getAllNames} from "./handleLocalStorageChange";
 import {getTheme} from "./handleLocalStorageChange";
-import path from "path";
 
 interface AppState {
   tracks: Track[];
@@ -28,6 +28,7 @@ interface AppState {
   theme: string;
   welcomeVisible: boolean;
   useEmbed: boolean;
+  grinchMode: boolean
   newNameValue: string;
   newProfileIdValue: string;
 }
@@ -63,6 +64,7 @@ class App2 extends Component<{}, AppState> {
       theme: "default",
       welcomeVisible: true,
       useEmbed: false,
+      grinchMode: false,
       newNameValue: "",
       newProfileIdValue: "",
     };
@@ -81,14 +83,14 @@ class App2 extends Component<{}, AppState> {
     const client_secret = '4edee765565a46a5833df1d0de910707'; // Your secret
     console.log(`Names are: ${this.state.names}, ${this.state.numPersonalState} from them`);
     console.log(`Playlists are: ${this.state.playlists}, ${this.state.numGenreState} from them`);
-    // your application requests authorization
+
+    const christmasWords = ["Christmas", "Snow", "Navidad", "Candy Cane", "Winter", "More Christ", "Santa", "Xmas"];
+
     try {
       const authOptions = {
         url: 'https://accounts.spotify.com/api/token',
         method: 'post',
-        headers: {
-          'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64'))
-        },
+        headers: {'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64'))},
         data: 'grant_type=client_credentials'
       };
       const authResponse = await axios(authOptions);
@@ -210,115 +212,112 @@ class App2 extends Component<{}, AppState> {
 
         // Adds a song from a randomly selected playlist from each players profile until it reaches selected value
         let profileID;
+        console.log('looking at profiles now')
         for (let i = 0; i < this.state.names.length; i++) {
           let failedAttempts = 0;
-          //TODO: Add name here if new person plays and has spotify playlist
-          switch (this.state.names[i].toUpperCase()) {
-            case 'MARLEY':
-              profileID = 'swjy4clwrbijjzyonpha37rek';
-              break;
-            case 'JOE':
-              profileID = '31qghybq3vtqtozyru4ypwwwljzq';
-              break;
-            case 'JAKE':
-              profileID = '31d3xf3k7a5tdxhkd2ewoconltvm';
-              break;
-            case 'JUSTIN':
-              profileID = '21bc36hykuaj73atw2nszt3cq';
-              break;
-            case 'PEDRO':
-              profileID = '22a5fvwowwkq6yfae4lvag5bq';
-              break;
-            case 'KEVIN':
-              profileID = '21a45dj3o3jqvlmrnoqey4j2q';
-              break;
-            case 'MEMPHIS':
-              profileID = '';
-              //ONLY HAS APPLE MUSIC
-              break;
-            case 'ROHUN':
-              profileID = '';
-              break;
-            case 'SEBASTIAN':
-              profileID = 'sossini';
-              break;
-            case 'EDDIE':
-              profileID = 'eddiehodde';
-              break;
-            case 'CONNOR':
-              profileID = '';
-              break;
-            case 'CARTER':
-              profileID = '';
-              break;
-            case 'MAGGIE':
-              profileID = 'dw0tyqgdf9ktox29ltvtpm7yz';
-              break;
-            default:
-              profileID = '';
-              throw new Error(`Cant find player for ${this.state.names[i]}`);
+          const availableNames: string[] = getAllNames();
+          for (let j = 0; j < availableNames.length; j++) {
+            if (this.state.names[i] === availableNames[j][0]) {
+              profileID = availableNames[j][1];
+            }
           }
           let options = {
             url: `https://api.spotify.com/v1/users/${profileID}/playlists`,
             method: 'get',
-            headers: {
-              'Authorization': 'Bearer ' + token
-            }
+            headers: {'Authorization': 'Bearer ' + token}
           }
           const profileResponse = await axios(options);
           if (profileResponse.status === 200) {
             const playlists = profileResponse.data.items;
-            // Iterates over each playlist and selects a song from a random one until reaches numPersonal
-            //TODO: Add it so that it's selectable whether it chooses randomly from one playlist or any or selectable
-            for (let j = 0; j < this.state.numPersonalState; j++) {
-              const playlistNum = Math.floor(Math.random() * playlists.length);
-              const playlist = playlists[playlistNum];
-              const playlistID = playlist.id;
-              console.log(`Chose ${playlist.name}`);
-
-              //TODO: Could make another method to add track to state because this is duplicated
-              let options = {
-                url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=00`,
-                method: 'get',
-                headers: {
-                  'Authorization': 'Bearer ' + token
+            if (playlists.length > 0) {
+              // Iterates over each playlist and selects a song from a random one until reaches numPersonal
+              //TODO: Add it so that it's selectable whether it chooses randomly from one playlist or any or selectable
+              for (let j = 0; j < this.state.numPersonalState; j++) {
+                let playlistNum = Math.floor(Math.random() * playlists.length);
+                if (this.state.grinchMode) {
+                  christmasWords.forEach(function (christmasWord:string) {
+                    console.log("Looking for bad words");
+                    let numGrinchTries = 0;
+                    while (playlists[playlistNum].name.includes(christmasWord)) {
+                      console.log(playlists[playlistNum].name + " includes " + christmasWord)
+                      playlistNum = Math.floor(Math.random() * playlists.length);
+                      numGrinchTries++;
+                      if (numGrinchTries > 10) {
+                        console.log("player doesn't have any non-Christmas/Winter playlists");
+                      }
+                    }
+                  });
                 }
-              };
+                const playlist = playlists[playlistNum];
+                const playlistID = playlist.id;
+                console.log(`Chose ${playlist.name}`);
 
-              const playlistResponse = await axios(options);
-              if (playlistResponse.status === 200) {
-                const tracks = playlistResponse.data.items;
-                const trackNum = Math.floor(Math.random() * tracks.length);
-                const track = tracks[trackNum].track;
-                const link = `http://open.spotify.com/track/${track.id}`;
-                const trackName = track.name;
-                const artists = track.artists;
-                const id = track.id;
-                const previewUrl = track.preview_url;
+                //TODO: Could make another method to add track to state because this is duplicated
+                let options = {
+                  url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=00`,
+                  method: 'get',
+                  headers: {'Authorization': 'Bearer ' + token}
+                };
 
-                if (this.state.tracks.includes(track)) {
-                  j--;
-                  failedAttempts++;
-                  console.log(trackName + "isn't playable or is already selected");
-                  console.log('---');
-                  if (failedAttempts > 5) {
-                    throw new Error("Failed too many times to get a song");
+                const playlistResponse = await axios(options);
+                if (playlistResponse.status === 200) {
+                  const tracks = playlistResponse.data.items;
+                  const trackNum = Math.floor(Math.random() * tracks.length);
+                  const track = tracks[trackNum].track;
+                  const link = `http://open.spotify.com/track/${track.id}`;
+                  const trackName = track.name;
+                  const artists = track.artists;
+                  // const id = track.id;
+                  // const previewUrl = track.preview_url;
+
+                  if (this.state.tracks.includes(track)) {
+                    j--;
+                    failedAttempts++;
+                    console.log(trackName + "isn't playable or is already selected");
+                    console.log('---');
+                    if (failedAttempts > 5) {
+                      throw new Error("Failed too many times to get a song");
+                    }
+                  } else if (this.state.grinchMode) {
+                    let hasChristmas = false
+                    christmasWords.forEach(function (christmasWord: string) {
+                      if (trackName.includes(christmasWord)) {
+                        hasChristmas = true;
+                        j--;
+                        failedAttempts++;
+                        console.log(trackName + " includes " + christmasWord)
+                        console.log('---');
+                        if (failedAttempts > 5) {
+                          throw new Error("Failed too many times to get a song");
+                        }
+                      }
+                    });
+                    if (!hasChristmas) {
+                      console.log('Track:', trackName);
+                      console.log('---');
+
+                      totalTracks.push(link);
+                      // Update the state with the new track
+                      this.setState({links: totalTracks});
+                    }
+                  } else { // if grinch mode is off and track isn't already selected
+                    console.log('Track:', trackName);
+                    // console.log('Preview:', previewUrl);
+                    console.log('---');
+
+                    totalTracks.push(link);
+                    // Update the state with the new track
+                    this.setState({links: totalTracks});
                   }
-                } else {
-                  console.log('Track:', trackName);
-                  console.log('Preview:', previewUrl);
-                  console.log('---');
-
-                  totalTracks.push(link);
-                  // Update the state with the new track
-                  this.setState({links: totalTracks});
                 }
               }
+            } else {
+              console.log(this.state.names[i] + " doesn't have any public playlists");
             }
           }
         }
       }
-    } catch (error) {console.log("Uh oh there was an error with handle start");}
+    } catch (error) {console.log("Uh oh there was an error with handle start" + error);}
   }
 
   handleWelcomeClick = () => {
@@ -417,7 +416,13 @@ class App2 extends Component<{}, AppState> {
                         <input type="checkbox" />
                         <span className="slider round themed" onClick={() => this.setState({useEmbed: !this.state.useEmbed})}></span>
                       </label>
-                    </div>
+                      </div>
+                      <div id="grinch-toggle" style={{marginTop: "5%"}}>Grinch Mode
+                        <label className="switch themed" style={{marginLeft: "10%"}}>
+                          <input type="checkbox" />
+                          <span className="slider round themed" onClick={() => this.setState({grinchMode: !this.state.grinchMode})}></span>
+                        </label>
+                      </div>
                       <div id="name-add-header"className={`themed ${theme}`}>Add Name to List</div>
                       <input id="new-name-box" className={`themed ${theme}`}
                            placeholder={"Player Name"}
@@ -433,13 +438,16 @@ class App2 extends Component<{}, AppState> {
                           value={newProfileIdValue}
                       /><br/>
                       <button className={`add-button themed ${theme}`}
-                              onClick={ () => {handleNewName(newNameValue, newProfileIdValue)}}
+                              onClick={ () => {handleNewName(newNameValue, newProfileIdValue)
+                                this.setState({newProfileIdValue: "", newNameValue: ""})}}
                               style={{fontSize: 20}}
                       >Add pair
                       </button>
                       <button className={`clear-button themed ${theme}`}
+                              onClick={() => {handleNameRemove(newNameValue)
+                                this.setState({newProfileIdValue: "", newNameValue: ""})}}
                               style={{fontSize: 20}}
-                      >Remove pair
+                      >Remove name
                       </button>
                       <ul style={{
                         position: "relative",
