@@ -5,9 +5,10 @@ import { Buffer } from "buffer";
 import "./settings.css"
 import "./sidebar.css"
 import "./topbar.css";
-import settingsIcon from "./settings-icon.png";
-import settingsIconWhite from "./white-settings-icon.png";
-import settingsIconWhiter from "./whiter-settings-icon.png"
+import settingsIconBlack from "./assets/black-settings-icon.png";
+import settingsIconWhite from "./assets/white-settings-icon.png";
+import settingsIconWhitesmoke from "./assets/whitesmoke-settings-icon.png"
+import settingsIconOrangered from "./assets/orangered-settings-icon.png"
 import NamesList from "./NamesList";
 import PlaylistList from "./PlaylistList";
 import {handleThemeChange} from "./handleLocalStorageChange";
@@ -32,7 +33,7 @@ interface AppState {
   grinchMode: boolean
   newNameValue: string;
   newProfileIdValue: string;
-  settingsIcon: typeof settingsIcon;
+  settingsIcon: typeof settingsIconWhite;
 }
 
 interface Track {
@@ -69,7 +70,7 @@ class App2 extends Component<{}, AppState> {
       grinchMode: false,
       newNameValue: "",
       newProfileIdValue: "",
-      settingsIcon: settingsIcon,
+      settingsIcon: settingsIconWhitesmoke,
     };
   }
 
@@ -83,23 +84,23 @@ class App2 extends Component<{}, AppState> {
 
   changeIcons = (theme: string) => {
     switch (theme) {
-      case "default": this.setState({settingsIcon: settingsIconWhite});
+      case "default": this.setState({settingsIcon: settingsIconWhitesmoke});
         break;
-      case "dark": this.setState({settingsIcon: settingsIconWhite});
+      case "dark": this.setState({settingsIcon: settingsIconWhitesmoke});
         break;
-      case "neon": this.setState({settingsIcon: settingsIconWhiter});
+      case "neon": this.setState({settingsIcon: settingsIconWhite});
         break;
-      case "pastel": this.setState({settingsIcon: settingsIconWhiter});
+      case "pastel": this.setState({settingsIcon: settingsIconWhite});
         break;
-      case "gay": this.setState({settingsIcon: settingsIconWhiter});
+      case "gay": this.setState({settingsIcon: settingsIconWhite});
         break;
       case "kevin": this.setState({settingsIcon: settingsIconWhite});
         break;
-      case "drac": this.setState({settingsIcon: settingsIcon});
+      case "drac": this.setState({settingsIcon: settingsIconOrangered});
         break;
-      case "barbie": this.setState({settingsIcon: settingsIcon});
+      case "barbie": this.setState({settingsIcon: settingsIconBlack});
         break;
-      case "marley": this.setState({settingsIcon: settingsIcon});
+      case "marley": this.setState({settingsIcon: settingsIconBlack});
         break;
     }
 
@@ -376,7 +377,7 @@ class App2 extends Component<{}, AppState> {
                          this.setState({settingsActive: !this.state.settingsActive})}}
                   >
                     <img src={this.state.settingsIcon}  alt="missing image"
-                         style={{width: "7%", verticalAlign: "middle"}}/>Settings</div>
+                         style={{width: "7%", verticalAlign: "middle", marginBottom: "1%", marginRight: "2%"}}/>Settings</div>
                 </div>
                 <div className="game-options">
                   <div id="sidebar" className={`game-ui themed ${theme}`}>
@@ -489,7 +490,6 @@ class App2 extends Component<{}, AppState> {
                         alignContent: "flex-start",
                         fontWeight: "bold",
                       }}></ul>
-                      <div>AHH</div>
                     </div>
                   </div>
                 </div>

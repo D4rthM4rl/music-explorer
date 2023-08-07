@@ -5,7 +5,7 @@ import "./settings.css"
 import "./App.css";
 import "./sidebar.css";
 import "./topbar.css";
-import settingsIcon from "./settings-icon.png"
+import settingsIcon from "./assets/settings-icon.png"
 import NamesList from "./NamesList";
 import PlaylistList from "./PlaylistList";
 

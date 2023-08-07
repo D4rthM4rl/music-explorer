@@ -1,4 +1,14 @@
 body {
-    font-family: "Arial";
+    /*font-family: "Barbie";*/
     margin: 0;
+}
+@font-face {
+    font-family: 'Barbie';
+    src: local('Barbie'), url(./assets/Bartex.ttf) format('truetype');
+    /* other formats include: 'woff2', 'truetype, 'opentype',
+                              'embedded-opentype', and 'svg' */
+}
+@font-face {
+    font-family: 'Genshin';
+    src: local('Genshin'), url(./assets/Genshin-Impact-Drip.ttf) format('truetype');
 }

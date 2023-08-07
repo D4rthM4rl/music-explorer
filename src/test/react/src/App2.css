@@ -70,6 +70,7 @@ body {
 }
 #start-button{
   font-size: 25px;
+  font-family: var(--overall-font-family);
   cursor: pointer;
   background: var(--start-button-bg);
   color: var(--start-button-color);
@@ -124,7 +125,7 @@ body {
   margin-bottom: 25%;
   list-style: none;
 }
-#links-output{color:var(--link-color); mix-blend-mode: var(--link-blend)}
+#links-output{color:var(--link-color); mix-blend-mode: var(--link-blend); font-family: var(--overall-font-family)}
 
 .default {
   --overall-font-family: Arial;
@@ -194,7 +195,7 @@ body {
   animation: rainbow 20s ease infinite;
 } /* Necessary for animation stuff */
 .kevin {
-  --overall-font-family: Arial;
+  --overall-font-family: Genshin;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
@@ -218,7 +219,7 @@ body {
   --link-blend: normal;
 }
 .barbie {
-  --overall-font-family: Arial;
+  --overall-font-family: Barbie;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(180deg, #2eedff, #ffffff);

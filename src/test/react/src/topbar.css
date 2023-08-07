@@ -15,14 +15,14 @@
     cursor: pointer;
     font-family: var(--overall-font-family);
     font-weight: bold;
-    font-size: 25px;
+    font-size: var(--topbar-font-size);
     color: var(--topbar-color);
     text-shadow: var(--topbar-glow);
 }
 #title {
     color: var(--title-color);
     text-shadow: var(--title-glow);
-    font-size: 30px;
+    font-size: var(--title-size);
 }
 
 /* Themes */
@@ -30,11 +30,15 @@
     --topbar-bg: #252525;
     --title-color: mediumslateblue;
     --topbar-color: whitesmoke;
+    --topbar-font-size: 25px;
+    --title-size: 30px;
 }
 .dark {
     --topbar-bg: #252525;
     --title-color: mediumslateblue;
     --topbar-color: #dedede;
+    --topbar-font-size: 25px;
+    --title-size: 30px;
 }
 .neon {
     --topbar-bg: #252525;
@@ -42,34 +46,48 @@
     --title-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #6f00ff, 0 0 15px #6f00ff;
     --topbar-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #0048ff, 0 0 15px #0048ff;
     --topbar-color: var(--topbar-bg);
+    --topbar-font-size: 25px;
+    --title-size: 30px;
 }
 .pastel {
     --topbar-bg: #57f5f5;
     --title-color: #ff80e2;
     --topbar-color: #f5f557;
+    --topbar-font-size: 25px;
+    --title-size: 30px;
 }
 .gay {
     --topbar-bg: #000000;
     --title-color: mediumslateblue;
     --topbar-color: whitesmoke;
+    --topbar-font-size: 25px;
+    --title-size: 30px;
 }
 .kevin {
     --topbar-bg: #2e4bbe;
-    --title-color: mediumslateblue;
+    --title-color: white;
     --topbar-color: whitesmoke;
+    --topbar-font-size: 25px;
+    --title-size: 30px;
 }
 .drac {
     --topbar-bg: #252525;
     --title-color: red;
     --topbar-color: orangered;
+    --topbar-font-size: 25px;
+    --title-size: 30px;
 }
 .barbie {
     --topbar-bg: #ff3ec7;
     --title-color: #ffc9ee;
     --topbar-color: white;
+    --topbar-font-size: 32px;
+    --title-size: 36px;
 }
 .marley {
     --topbar-bg: #252525;
     --title-color: mediumslateblue;
     --topbar-color: whitesmoke;
+    --topbar-font-size: 25px;
+    --title-size: 30px;
 }
