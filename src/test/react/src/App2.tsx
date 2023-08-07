@@ -4,9 +4,10 @@ import axios from "axios";
 import { Buffer } from "buffer";
 import "./settings.css"
 import "./sidebar.css"
-import "./App.css";
 import "./topbar.css";
-import settingsIcon from "./settings-icon.png"
+import settingsIcon from "./settings-icon.png";
+import settingsIconWhite from "./white-settings-icon.png";
+import settingsIconWhiter from "./whiter-settings-icon.png"
 import NamesList from "./NamesList";
 import PlaylistList from "./PlaylistList";
 import {handleThemeChange} from "./handleLocalStorageChange";
@@ -31,6 +32,7 @@ interface AppState {
   grinchMode: boolean
   newNameValue: string;
   newProfileIdValue: string;
+  settingsIcon: typeof settingsIcon;
 }
 
 interface Track {
@@ -67,6 +69,7 @@ class App2 extends Component<{}, AppState> {
       grinchMode: false,
       newNameValue: "",
       newProfileIdValue: "",
+      settingsIcon: settingsIcon,
     };
   }
 
@@ -76,6 +79,30 @@ class App2 extends Component<{}, AppState> {
 
   clearPlaylists = () => {
     this.setState({playlists: [] });
+  }
+
+  changeIcons = (theme: string) => {
+    switch (theme) {
+      case "default": this.setState({settingsIcon: settingsIconWhite});
+        break;
+      case "dark": this.setState({settingsIcon: settingsIconWhite});
+        break;
+      case "neon": this.setState({settingsIcon: settingsIconWhiter});
+        break;
+      case "pastel": this.setState({settingsIcon: settingsIconWhiter});
+        break;
+      case "gay": this.setState({settingsIcon: settingsIconWhiter});
+        break;
+      case "kevin": this.setState({settingsIcon: settingsIconWhite});
+        break;
+      case "drac": this.setState({settingsIcon: settingsIcon});
+        break;
+      case "barbie": this.setState({settingsIcon: settingsIcon});
+        break;
+      case "marley": this.setState({settingsIcon: settingsIcon});
+        break;
+    }
+
   }
 
   handleStart = async () => {
@@ -322,7 +349,9 @@ class App2 extends Component<{}, AppState> {
 
   handleWelcomeClick = () => {
     this.setState({welcomeVisible: false});
-    this.setState({theme: getTheme()});
+    const newTheme = getTheme();
+    this.setState({theme: newTheme});
+    this.changeIcons(newTheme);
   };
 
   render() {
@@ -337,7 +366,7 @@ class App2 extends Component<{}, AppState> {
           ) : null}
           {!this.state.welcomeVisible ? (
               <div className="main-page">
-                <div className="themed" id="topbar">
+                <div className={`themed ${theme}`} id="topbar">
                   <div className={`topbar-option themed ${theme}`} id= "title">Song Game By Marley</div>
                   <div className={`topbar-option themed ${theme}`} id="spotify-genres">All Spotify Genres</div>
                   <div className={`topbar-option themed ${theme}`} id="directions">How to Play</div>
@@ -345,7 +374,9 @@ class App2 extends Component<{}, AppState> {
                        onClick={() => {const rSidebar = document.getElementById("settings-sidebar") as HTMLElement;
                          if (rSidebar) {rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";}
                          this.setState({settingsActive: !this.state.settingsActive})}}
-                  >Settings</div>
+                  >
+                    <img src={this.state.settingsIcon}  alt="missing image"
+                         style={{width: "7%", verticalAlign: "middle"}}/>Settings</div>
                 </div>
                 <div className="game-options">
                   <div id="sidebar" className={`game-ui themed ${theme}`}>
@@ -393,7 +424,9 @@ class App2 extends Component<{}, AppState> {
                         <select id="theme-select" className="themed"
                               value={this.state.theme}
                               onChange={(event) => {this.setState({theme: event.target.value})
-                                handleThemeChange(event.target.value)}}
+                                this.changeIcons(event.target.value);
+                                handleThemeChange(event.target.value)}
+                        }
                               style={{
                                 marginLeft: '10%',
                                 marginTop: '3%',
