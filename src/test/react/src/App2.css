@@ -227,7 +227,7 @@ body {
   --start-button-color: #fff;
   --start-button-bg: #ff3ec7;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
-  --link-color: #c1fdff;
+  --link-color: #ffffff;
   --link-blend: normal;
 }
 .marley {

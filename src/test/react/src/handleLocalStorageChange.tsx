@@ -22,7 +22,8 @@ export function handleNewName (name: string, id: string) {
     // https://open.spotify.com/user/swjy4clwrbijjzyonpha37rek?si=gkl2UWeLR_aLeI91q6pflw
     if (id.includes("https://open.spotify.com/user/")) {
         id = id.replace("https://open.spotify.com/user/", "");
-    } if (id.includes("?")) {
+    }
+    if (id.includes("?")) {
         id = id.replace(id.substr(id.indexOf("?")), "");
     }
     console.log(`${name} has the id ${id}`)
@@ -41,7 +42,19 @@ export function handleNewName (name: string, id: string) {
 }
 
 export function handleNameRemove(name: string) {
-
+    try {
+        let existingPairs = JSON.parse(localStorage.getItem('names') || '[]');
+        for (let i = 0; i < existingPairs.length; i++) {
+            console.log(existingPairs[i][0]);
+            if (existingPairs[i][0] === name) {
+                console.log("found name")
+                existingPairs = existingPairs.slice(0,i).concat(existingPairs.slice(i+1));
+                localStorage.setItem('names', JSON.stringify(existingPairs))
+            }
+        }
+    } catch (err) {
+        console.error('Error removing name:', err);
+    }
 }
 
 function storePair (newName: string, id: string) {
@@ -49,7 +62,6 @@ function storePair (newName: string, id: string) {
         const existingPairs = JSON.parse(localStorage.getItem('names') || '[]');
         const newNamePair: string[] = [ newName, id ];
         const updatedPairs: string[] = [...existingPairs, newNamePair];
-        // const names = JSON.parse(localStorage.getItem('names') || '[]');
         if (updatedPairs.includes(newName)) {
             console.log("Need different name, that one already exists")
         } else {
