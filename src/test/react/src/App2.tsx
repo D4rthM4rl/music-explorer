@@ -13,7 +13,7 @@ import PlaylistList from "./PlaylistList";
 import {
   handleThemeChange, handleNewName,
   handleNameRemove, getAllNames,
-  getTheme, storeToken,
+  getTheme,
 } from "./handleLocalStorageChange";
 import {getToken} from "./spotifyLogin";
 
@@ -74,13 +74,9 @@ class App2 extends Component<{}, AppState> {
     };
   }
 
-  clearNames = () => {
-    this.setState({ names: [] });
-  }
+  clearNames = () => {this.setState({ names: [] });}
 
-  clearPlaylists = () => {
-    this.setState({playlists: [] });
-  }
+  clearPlaylists = () => {this.setState({playlists: [] });}
 
   changeIcons = (theme: string) => {
     switch (theme) {
@@ -108,26 +104,12 @@ class App2 extends Component<{}, AppState> {
 
   handleStart = async () => {
     const token = localStorage.getItem("access_token");
-
-    // const client_id = '4cd6054588e84b1884b9e14998f34844'; // Your client id
-    // const client_secret = '4edee765565a46a5833df1d0de910707'; // Your secret
     // console.log(`Names are: ${this.state.names}, ${this.state.numPersonalState} from them`);
     // console.log(`Playlists are: ${this.state.playlists}, ${this.state.numGenreState} from them`);
 
     const christmasWords = ["Christmas", "Snow", "Navidad", "Candy Cane", "Winter", "More Christ", "Santa", "Xmas"];
 
     try {
-      // const authOptions = {
-      //   url: 'https://accounts.spotify.com/api/token',
-      //   method: 'post',
-      //   headers: {'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64'))},
-      //   data: 'grant_type=client_credentials'
-      // };
-      // const authResponse = await axios(authOptions);
-      //
-      // if (authResponse.status === 200) {
-      //   console.log("Auth response good");
-      //   const token = authResponse.data.access_token;
         let totalTracks = [];
 
         // Gets songs from each playlist inputted
@@ -346,7 +328,6 @@ class App2 extends Component<{}, AppState> {
             }
           }
         }
-      // }
     } catch (error) {console.log("Uh oh there was an error with handle start" + error);}
   }
 
@@ -355,7 +336,6 @@ class App2 extends Component<{}, AppState> {
     const newTheme = getTheme();
     this.setState({theme: newTheme});
     this.changeIcons(newTheme);
-    // await storeToken(getToken());
     getToken()
   };
 

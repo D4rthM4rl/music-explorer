@@ -1,11 +1,11 @@
 // Replace redirect URIs with whatever the url is if it changes
+const redirectUri = "http://localhost:3000";
 
 export async function getToken() {
     const clientId = "4cd6054588e84b1884b9e14998f34844";
     const params = new URLSearchParams(window.location.search);
-    const code = params.get("code"); //TODO: make it refresh token
+    const code = params.get("code");
     let accessToken;
-    let n = 1;
     if (!code) {
         console.log("no code")
         await redirectToAuthCodeFlow(clientId);
@@ -26,7 +26,7 @@ export async function redirectToAuthCodeFlow(clientId: string) {
     const params = new URLSearchParams();
     params.append("client_id", clientId);
     params.append("response_type", "code");
-    params.append("redirect_uri", "http://localhost:3000");
+    params.append("redirect_uri", redirectUri);
     params.append("scope", "user-read-private user-read-email");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
@@ -56,11 +56,10 @@ async function generateCodeChallenge(codeVerifier: string) {
 
 export async function getAccessToken(clientId: string, code: string) {
     const verifier = localStorage.getItem("verifier");
-    console.log("Getting access token method, code is " + code + " and verifier is " +  verifier);
     let body = new URLSearchParams({
         grant_type: 'authorization_code',
         code: code,
-        redirect_uri: "http://localhost:3000",
+        redirect_uri: redirectUri,
         client_id: clientId,
         code_verifier: verifier!
     });
