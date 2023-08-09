@@ -3,9 +3,10 @@
 export async function getToken() {
     const clientId = "4cd6054588e84b1884b9e14998f34844";
     const params = new URLSearchParams(window.location.search);
-    const code = params.get("code");
-    let accessToken
-    if (!code || code === "undefined") {
+    const code = params.get("code"); //TODO: make it refresh token
+    let accessToken;
+    let n = 1;
+    if (!code) {
         console.log("no code")
         await redirectToAuthCodeFlow(clientId);
     } else {
@@ -29,8 +30,7 @@ export async function redirectToAuthCodeFlow(clientId: string) {
     params.append("scope", "user-read-private user-read-email");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
-
-    // @ts-ignore
+    // @ts-ignore   Not really any problem here, it's just picky
     document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
 
@@ -54,30 +54,73 @@ async function generateCodeChallenge(codeVerifier: string) {
         .replace(/=+$/, '');
 }
 
-export async function getAccessToken(clientId: string, code: string): Promise<string> {
+export async function getAccessToken(clientId: string, code: string) {
     const verifier = localStorage.getItem("verifier");
-
-    const params = new URLSearchParams();
-    params.append("client_id", clientId);
-    params.append("grant_type", "authorization_code");
-    params.append("code", code);
-    params.append("redirect_uri", "http://localhost:3000");
-    params.append("code_verifier", verifier!);
-
-    const result = await fetch("https://accounts.spotify.com/api/token", {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: params
+    console.log("Getting access token method, code is " + code + " and verifier is " +  verifier);
+    let body = new URLSearchParams({
+        grant_type: 'authorization_code',
+        code: code,
+        redirect_uri: "http://localhost:3000",
+        client_id: clientId,
+        code_verifier: verifier!
     });
 
-    const { access_token } = await result.json();
-    return access_token;
+    async function fetchAccessToken() {
+        try {
+            const response = await fetch('https://accounts.spotify.com/api/token', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: body
+            });
+
+            if (!response.ok) {
+                getRefreshToken(clientId);
+                // throw new Error('HTTP status ' + response.status);
+            }
+
+            const data = await response.json();
+            localStorage.setItem('access_token', data.access_token);
+            localStorage.setItem('refresh_token', data.refresh_token);
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    }
+
+    await fetchAccessToken();
+    const accessToken = localStorage.getItem('access_token');
+
+    if (!accessToken) {
+        await getRefreshToken(clientId);
+    }
 }
 
-async function fetchProfile(token: string): Promise<any> {
-    const result = await fetch("https://api.spotify.com/v1/me", {
-        method: "GET", headers: { Authorization: `Bearer ${token}` }
-    });
+export async function getRefreshToken(clientId: string) {
+    const refreshToken = localStorage.getItem("refresh_token")
 
-    return await result.json();
+    let bodyParams = new URLSearchParams();
+    bodyParams.append('grant_type', 'refresh_token');
+    bodyParams.append('refresh_token', refreshToken!);
+    bodyParams.append('client_id', clientId);
+
+    try {
+        const response = await fetch('https://accounts.spotify.com/api/token', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+            body: bodyParams
+        });
+
+        if (!response.ok) {
+            throw new Error('HTTP status ' + response.status);
+        }
+
+        const data = await response.json();
+        localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('refresh_token', data.refresh_token);
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }

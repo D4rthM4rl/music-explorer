@@ -11,12 +11,9 @@ import settingsIconOrangered from "./assets/orangered-settings-icon.png"
 import NamesList from "./NamesList";
 import PlaylistList from "./PlaylistList";
 import {
-  handleThemeChange,
-  handleNewName,
-  handleNameRemove,
-  getAllNames,
-  getTheme,
-  storeToken,
+  handleThemeChange, handleNewName,
+  handleNameRemove, getAllNames,
+  getTheme, storeToken,
 } from "./handleLocalStorageChange";
 import {getToken} from "./spotifyLogin";
 
@@ -110,7 +107,7 @@ class App2 extends Component<{}, AppState> {
   }
 
   handleStart = async () => {
-    const token = getToken()
+    const token = localStorage.getItem("access_token");
 
     // const client_id = '4cd6054588e84b1884b9e14998f34844'; // Your client id
     // const client_secret = '4edee765565a46a5833df1d0de910707'; // Your secret
@@ -358,14 +355,14 @@ class App2 extends Component<{}, AppState> {
     const newTheme = getTheme();
     this.setState({theme: newTheme});
     this.changeIcons(newTheme);
-    await storeToken(getToken());
+    // await storeToken(getToken());
+    getToken()
   };
 
   render() {
     const { isNamesTab, playlists, names, numPersonalState, numGenreState, theme, newNameValue, newProfileIdValue } = this.state;
     return (
         <div>
-          <body>
           {this.state.welcomeVisible ? (
               <div id="welcome-screen" className={`themed ${theme}`} onClick={this.handleWelcomeClick}>
                 <h1 id="welcome-message" className={`glow themed ${theme}`}> Song Game </h1>
@@ -501,7 +498,6 @@ class App2 extends Component<{}, AppState> {
                 </div>
               </div>
           ) : null}
-          </body>
         </div>
     );
   }

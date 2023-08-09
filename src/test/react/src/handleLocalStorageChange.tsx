@@ -22,7 +22,7 @@ export async function storeToken (token: Promise<string | undefined>) {
     try {
         localStorage.setItem('token', stringToken);
     } catch (err) {
-        console.error('Error storing theme:', err);
+        console.error('Error storing token:', err);
     }
 }
 
