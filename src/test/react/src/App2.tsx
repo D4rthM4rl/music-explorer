@@ -1,7 +1,6 @@
 import './App2.css';
 import React, {Component} from 'react';
 import axios from "axios";
-import { Buffer } from "buffer";
 import "./settings.css"
 import "./sidebar.css"
 import "./topbar.css";
@@ -11,11 +10,15 @@ import settingsIconWhitesmoke from "./assets/whitesmoke-settings-icon.png"
 import settingsIconOrangered from "./assets/orangered-settings-icon.png"
 import NamesList from "./NamesList";
 import PlaylistList from "./PlaylistList";
-import {handleThemeChange} from "./handleLocalStorageChange";
-import {handleNewName} from "./handleLocalStorageChange";
-import {handleNameRemove} from "./handleLocalStorageChange";
-import {getAllNames} from "./handleLocalStorageChange";
-import {getTheme} from "./handleLocalStorageChange";
+import {
+  handleThemeChange,
+  handleNewName,
+  handleNameRemove,
+  getAllNames,
+  getTheme,
+  storeToken,
+} from "./handleLocalStorageChange";
+import {getToken} from "./spotifyLogin";
 
 interface AppState {
   tracks: Track[];
@@ -107,25 +110,27 @@ class App2 extends Component<{}, AppState> {
   }
 
   handleStart = async () => {
-    const client_id = '4cd6054588e84b1884b9e14998f34844'; // Your client id
-    const client_secret = '4edee765565a46a5833df1d0de910707'; // Your secret
-    console.log(`Names are: ${this.state.names}, ${this.state.numPersonalState} from them`);
-    console.log(`Playlists are: ${this.state.playlists}, ${this.state.numGenreState} from them`);
+    const token = getToken()
+
+    // const client_id = '4cd6054588e84b1884b9e14998f34844'; // Your client id
+    // const client_secret = '4edee765565a46a5833df1d0de910707'; // Your secret
+    // console.log(`Names are: ${this.state.names}, ${this.state.numPersonalState} from them`);
+    // console.log(`Playlists are: ${this.state.playlists}, ${this.state.numGenreState} from them`);
 
     const christmasWords = ["Christmas", "Snow", "Navidad", "Candy Cane", "Winter", "More Christ", "Santa", "Xmas"];
 
     try {
-      const authOptions = {
-        url: 'https://accounts.spotify.com/api/token',
-        method: 'post',
-        headers: {'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64'))},
-        data: 'grant_type=client_credentials'
-      };
-      const authResponse = await axios(authOptions);
-
-      if (authResponse.status === 200) {
-        console.log("Auth response good");
-        const token = authResponse.data.access_token;
+      // const authOptions = {
+      //   url: 'https://accounts.spotify.com/api/token',
+      //   method: 'post',
+      //   headers: {'Authorization': 'Basic ' + (Buffer.from(client_id + ':' + client_secret).toString('base64'))},
+      //   data: 'grant_type=client_credentials'
+      // };
+      // const authResponse = await axios(authOptions);
+      //
+      // if (authResponse.status === 200) {
+      //   console.log("Auth response good");
+      //   const token = authResponse.data.access_token;
         let totalTracks = [];
 
         // Gets songs from each playlist inputted
@@ -344,15 +349,16 @@ class App2 extends Component<{}, AppState> {
             }
           }
         }
-      }
+      // }
     } catch (error) {console.log("Uh oh there was an error with handle start" + error);}
   }
 
-  handleWelcomeClick = () => {
+  handleWelcomeClick = async() => {
     this.setState({welcomeVisible: false});
     const newTheme = getTheme();
     this.setState({theme: newTheme});
     this.changeIcons(newTheme);
+    await storeToken(getToken());
   };
 
   render() {

@@ -17,6 +17,15 @@ function storeTheme (theme: string) {
     }
 }
 
+export async function storeToken (token: Promise<string | undefined>) {
+    let stringToken = await token + "";
+    try {
+        localStorage.setItem('token', stringToken);
+    } catch (err) {
+        console.error('Error storing theme:', err);
+    }
+}
+
 // Returns true if it added the name and false if not
 export function handleNewName (name: string, id: string) {
     // https://open.spotify.com/user/swjy4clwrbijjzyonpha37rek?si=gkl2UWeLR_aLeI91q6pflw
