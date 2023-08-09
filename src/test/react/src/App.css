@@ -1,118 +1,244 @@
-#App {
-    padding-top: 6%;
-    height: 90vh;
-    overflow: visible;
-    width: 76%;
-    text-align: center;
-    padding-left: 24.5%;
-    background: ghostwhite;
-    color: black;
+body {
+  /*animation: Spin infinite 1s linear;*/
+  background-color: #282B31FF; /* Can't set have this as a variable because it cant be set before active */
+  overflow: hidden;
 }
-#start-game {
-    background: #003cff;
-    color: black;
+#welcome-screen {
+  background: var(--overall-bg); /* Will always be default */
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  text-align: center;
+  animation: fadeInAnimation ease 2s;
+  font-family: var(--overall-font-family); /* Will always be default */
 }
-#links {color: blue;}
+#welcome-message {
+  font-size: 70px;
+  margin-top: 20%;
+  text-shadow: 0 0 5px white;
+  color: whitesmoke; /* Can't set have this as a variable because it cant be set before active*/
+}
 
-/* Default Theme*/
-#App.default {
-    background: ghostwhite;
-    color: black;
+@keyframes Spin {
+  from {transform: rotate(-1deg);}
+  to {transform: rotate(1deg);}
 }
-#start-game.default {
-    background: #003cff;
-    color: black;
+@keyframes fadeInAnimation{
+  0%{
+    opacity: 0%;
+  }
+  100%{
+    opacity: 100%;
+  }
 }
-#links.default {color: blue;}
+@keyframes fallDownAnimation{
+  from{
+    transform: translateY(-100%);
+  }
+  to{
+    transform:translateY(0%)
+  }
+}
+@keyframes slideFromLeft {
+  from{
+    transform: translateX(-100%)
+  }
+  to{
+    transform:translateX(0%)
+  }
+  
+}
+.game-options{
+  display:flex;
+  height: 100vh;
+}
+#game-area {
+  flex: 80%;
+  background: var(--game-bg);
+  justify-content: space-evenly;
+  justify-items: center;
+  align-content: space-evenly;
+  align-items: center;
+  text-align: center;
+  display:flex;
+  box-shadow: var(--game-border);
+  /*animation: slideFromLeft ease 3s;*/
+}
+#spotify-player {
+  color: var(--spotify-color);
+}
+#start-button{
+  font-size: 25px;
+  font-family: var(--overall-font-family);
+  cursor: pointer;
+  background: var(--start-button-bg);
+  color: var(--start-button-color);
+}
+.glow-on-hover {
+  width: 220px;
+  height: 50px;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  position: relative;
+  z-index: 0;
+  border-radius: 10px;
+}
+.glow-on-hover:before {
+  content: '';
+  background: var(--start-button-glow);
+  position: absolute;
+  top: -3px;
+  left:-3px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(50%);
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  animation: glowing 15s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+.glow-on-hover:active {color: var(--start-button-bg)}
+.glow-on-hover:active:after {background: transparent;}
+.glow-on-hover:hover:before {opacity: 1;}
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--start-button-bg);
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+@keyframes glowing {
+  0% { background-position: 0 0; }
+  50% { background-position: 200% 0; }
+  100% { background-position: 400% 0; }
+}
+#links{
+  position:absolute;
+  margin-bottom: 25%;
+  list-style: none;
+}
+#links-output{color:var(--link-color); mix-blend-mode: var(--link-blend); font-family: var(--overall-font-family)}
 
-/* Dark Theme*/
-#App.dark {
-    color: #758bb4;
-    background-color: #131054;
+.default {
+  --overall-font-family: Arial;
+  --overall-bg: #282b31;
+  --overall-font-color: whitesmoke;
+  --game-bg: #ccced0;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: black;
+  --link-blend: normal;
 }
-#start-game.dark {
-    background: #003cff;
-    color: black;
+.dark {
+  --overall-font-family: Arial;
+  --overall-bg: #282b31;
+  --overall-font-color: #dedede;
+  --game-bg: #74879b;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: whitesmoke;
+  --link-blend: normal;
 }
-#links.dark {color: blue;}
-
-/* Pastel Theme*/
-#App.pastel {
-    background: #a7f18c;
-
+.neon {
+  --overall-font-family: "Arial";
+  --overall-bg: #282b31;
+  --overall-font-color: #dedede;
+  --game-bg: #181818;
+  --game-border: 0 0 20px #ff00fc;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: whitesmoke;
+  --link-blend: normal;
 }
-#start-game.pastel {
-    background: mediumvioletred;
-    color: white;
+.pastel {
+  --overall-font-family: Arial;
+  --overall-bg: #282b31;
+  --overall-font-color: #3d476c;
+  --game-bg: #e2c1ff;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: #c1fdff;
+  --link-blend: normal;
 }
-#links.pastel {color: #a0a0da;}
-
-/* Gay Theme*/
-#App.gay {
-    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-    background-size: 1800% 300%;
-    -webkit-animation: rainbow 18s ease infinite;
-    -o-animation: rainbow 18s linear infinite;
-    animation: rainbow 18s ease infinite;
+.gay {
+  --overall-font-family: Arial;
+  --overall-bg: #282b31;
+  --overall-font-color: #3d476c;
+  --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: white;
+  --link-blend: difference;
 }
-#start-game.gay {
-    background: mediumvioletred;
-    color: white;
+#game-area.gay {
+  background-size: 1400% 300%;
+  -webkit-animation: rainbow 20s ease infinite;
+  -o-animation: rainbow 20s linear infinite;
+  animation: rainbow 20s ease infinite;
+} /* Necessary for animation stuff */
+.kevin {
+  --overall-font-family: Genshin;
+  --overall-bg: #282b31;
+  --overall-font-color: #3d476c;
+  --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: whitesmoke;
+  --link-blend: difference;
 }
-#links.gay {color: white;}
-
-/* Kevin Theme*/
-#App.kevin {
-    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+.drac {
+  --overall-font-family: Arial;
+  --overall-bg: #282b31;
+  --overall-font-color: #3d476c;
+  --game-bg: linear-gradient(180deg, #ff2400,  dimgray);
+  --spotify-color: black;
+  --start-button-color: #7e7e7e;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #545454, #000000);
+  --link-color: whitesmoke;
+  --link-blend: normal;
 }
-#start-game.kevin {
-    background: #ff7300;
-    color: white;
+.barbie {
+  --overall-font-family: Barbie;
+  --overall-bg: #282b31;
+  --overall-font-color: #3d476c;
+  --game-bg: linear-gradient(180deg, #2eedff, #ffffff);
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #ff3ec7;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: #ffffff;
+  --link-blend: normal;
 }
-#links.kevin {color: floralwhite;}
-
-/* Drac Theme*/
-#App.drac {
-    background: linear-gradient(180deg, #ff2400,  dimgray);
-}
-#start-game.drac {
-    background: black;
-    color: red;
-}
-#links.drac {color: #9a0000; }
-
-/* Marley Theme*/
-#App.marley {
-    background: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
-    background-size: 1800% 300%;
-    -webkit-animation: rainbow 18s ease infinite;
-    -o-animation: rainbow 18s linear infinite;
-    animation: rainbow 18s ease infinite;
-}
-#start-game.marley {
-    background: mediumvioletred;
-    color: white;
-}
-#links.marley {color: blue;}
-
-
-@-webkit-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@-moz-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@-o-keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
-}
-@keyframes rainbow {
-    0%{background-position:0% 82%}
-    50%{background-position:100% 19%}
-    100%{background-position:0% 82%}
+.marley {
+  --overall-font-family: Arial;
+  --overall-bg: #282b31;
+  --overall-font-color: #3d476c;
+  --game-bg: #74879b;
+  --spotify-color: black;
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --link-color: whitesmoke;
+  --link-blend: normal;
 }
