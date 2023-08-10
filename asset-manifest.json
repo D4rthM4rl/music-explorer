@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/song-game/static/css/main.1705ed1d.css",
-    "main.js": "/song-game/static/js/main.5485d01b.js",
+    "main.js": "/song-game/static/js/main.d8e73c8f.js",
     "static/media/whitesmoke-settings-icon.png": "/song-game/static/media/whitesmoke-settings-icon.50b636d53000d8c98312.png",
     "static/media/Bartex.ttf": "/song-game/static/media/Bartex.3348123b1c47d65e921a.ttf",
     "static/media/orangered-settings-icon.png": "/song-game/static/media/orangered-settings-icon.4ee99185fd0d9a747c36.png",
@@ -10,10 +10,10 @@
     "static/media/Genshin-Impact-Drip.ttf": "/song-game/static/media/Genshin-Impact-Drip.f386a0e4fc8a24d940a2.ttf",
     "index.html": "/song-game/index.html",
     "main.1705ed1d.css.map": "/song-game/static/css/main.1705ed1d.css.map",
-    "main.5485d01b.js.map": "/song-game/static/js/main.5485d01b.js.map"
+    "main.d8e73c8f.js.map": "/song-game/static/js/main.d8e73c8f.js.map"
   },
   "entrypoints": [
     "static/css/main.1705ed1d.css",
-    "static/js/main.5485d01b.js"
+    "static/js/main.d8e73c8f.js"
   ]
 }
