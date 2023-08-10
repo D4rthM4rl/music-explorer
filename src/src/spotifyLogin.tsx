@@ -1,5 +1,5 @@
 // Replace redirect URIs with whatever the url is if it changes
-const redirectUri = "http://localhost:3000";
+const redirectUri = "https://d4rthm4rl.github.io/song-game/";
 
 export async function getToken() {
     const clientId = "4cd6054588e84b1884b9e14998f34844";
