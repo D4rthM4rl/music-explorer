@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "autoprefixer": "10.4.5",
     "crypto-browserify": "^3.12.0",
     "fs": "^0.0.1-security",
     "stream-browserify": "^3.0.0"
