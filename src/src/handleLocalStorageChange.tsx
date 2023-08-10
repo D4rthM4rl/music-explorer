@@ -93,7 +93,7 @@ export function getAllNames() {
 
 export function getTheme(): string {
     try {
-        const theme = localStorage.getItem('theme') || 'default-theme';
+        const theme = localStorage.getItem('theme') || 'default';
         return theme;
     } catch (err) {
         console.error('Error getting theme:', err);
