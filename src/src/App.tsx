@@ -10,11 +10,7 @@ import settingsIconWhitesmoke from "./assets/whitesmoke-settings-icon.png"
 import settingsIconOrangered from "./assets/orangered-settings-icon.png"
 import NamesList from "./NamesList";
 import PlaylistList from "./PlaylistList";
-import {
-  handleThemeChange, handleNewName,
-  handleNameRemove, getAllNames,
-  getTheme,
-} from "./handleLocalStorageChange";
+import {handleThemeChange, handleNewName, handleNameRemove, getAllNames, getTheme} from "./handleLocalStorageChange";
 import {getToken} from "./spotifyLogin";
 
 interface AppState {
@@ -34,6 +30,7 @@ interface AppState {
   newNameValue: string;
   newProfileIdValue: string;
   settingsIcon: typeof settingsIconWhite;
+  directionsOn: boolean;
 }
 
 interface Track {
@@ -71,6 +68,7 @@ class App extends Component<{}, AppState> {
       newNameValue: "",
       newProfileIdValue: "",
       settingsIcon: settingsIconWhitesmoke,
+      directionsOn: false,
     };
   }
 
