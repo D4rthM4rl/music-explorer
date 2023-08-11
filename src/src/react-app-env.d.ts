@@ -1,1 +1,2 @@
 /// <reference types="react-scripts" />
+// DO NOT DELETE OR UNCOMMENT THIS BECAUSE IT RUINS IMPORTS WHICH ALSO CONFUSES ME

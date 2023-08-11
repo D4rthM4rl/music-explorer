@@ -391,7 +391,7 @@ class App extends Component<{}, AppState> {
                     />)}
                   </div>
                   <div id="game-area" className={`game-ui themed ${theme}`}>
-                    {directionsActive ? (
+                    {!directionsActive ? (
                         <div>
                           {this.state.useEmbed ? ( // If the toggle is on, use the embed
                           <iframe style={{borderRadius: 12, border: "none"}}
@@ -407,10 +407,9 @@ class App extends Component<{}, AppState> {
                           <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Start</button>
                         </div>) : (
                         <div>
-                          This is how to play the game g
+                          THis is hwo to use the NOT game
                         </div>
-                    )
-                    }
+                    )}
                     <div id="settings-sidebar" className={`themed ${theme}`} style={{fontSize: "170%"}}>
                       <div id="theme-header">Theme
                         <select id="theme-select" className="themed"
