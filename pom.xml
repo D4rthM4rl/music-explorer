@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.example</groupId>
-    <artifactId>Music-Explorer</artifactId>
+    <artifactId>Song-Guessing-Game</artifactId>
     <version>1.0-SNAPSHOT</version>
     <name>Song-Guessing-Game</name>
 
