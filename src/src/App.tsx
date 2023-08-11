@@ -30,7 +30,7 @@ interface AppState {
   newNameValue: string;
   newProfileIdValue: string;
   settingsIcon: typeof settingsIconWhite;
-  directionsOn: boolean;
+  directionsActive: boolean;
 }
 
 interface Track {
@@ -68,7 +68,7 @@ class App extends Component<{}, AppState> {
       newNameValue: "",
       newProfileIdValue: "",
       settingsIcon: settingsIconWhitesmoke,
-      directionsOn: false,
+      directionsActive: false,
     };
   }
 
@@ -338,7 +338,7 @@ class App extends Component<{}, AppState> {
   };
 
   render() {
-    const { isNamesTab, playlists, names, numPersonalState, numGenreState, theme, newNameValue, newProfileIdValue } = this.state;
+    const { isNamesTab, theme, newNameValue, newProfileIdValue, directionsActive } = this.state;
     return (
         <div>
           {this.state.welcomeVisible ? (
@@ -349,9 +349,11 @@ class App extends Component<{}, AppState> {
           {!this.state.welcomeVisible ? (
               <div className="main-page">
                 <div className={`themed ${theme}`} id="topbar">
-                  <div className={`topbar-option themed ${theme}`} id= "title">Music Explorer By Marley</div>
+                  <div className={`topbar-option themed ${theme}`} id="title" onClick={() => {
+                    this.setState({directionsActive: false})}}>Music Explorer By Marley</div>
                   <div className={`topbar-option themed ${theme}`} id="spotify-genres">All Spotify Genres</div>
-                  <div className={`topbar-option themed ${theme}`} id="directions">Directions</div>
+                  <div className={`topbar-option themed ${theme}`} id="directions" onClick={() => {
+                    this.setState({directionsActive: !directionsActive})}}>Directions</div>
                   <div className={`topbar-option themed ${theme}`} id="settings toggle"
                        onClick={() => {const rSidebar = document.getElementById("settings-sidebar") as HTMLElement;
                          if (rSidebar) {rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";}
@@ -389,32 +391,38 @@ class App extends Component<{}, AppState> {
                     />)}
                   </div>
                   <div id="game-area" className={`game-ui themed ${theme}`}>
-                    {this.state.useEmbed ? ( // If the toggle is on, use the embed
-                    <iframe style={{borderRadius: 12, border: "none"}}
-                            src="https://open.spotify.com/embed/playlist/3GVPsndFBvGFFfdRFZHUeK?utm_source=generator&theme=0"
-                            width="100%" height="352"
-                            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                            loading="lazy"
-                    ></iframe>) : null}
-                    <ul id="links" className="themed">
-                     {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"
-                                                                                href={link} target="_blank" rel="noreferrer">{link}</a></li>))}
-                  </ul>
-                    <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Start</button>
+                    {directionsActive ? (
+                        <div>
+                          {this.state.useEmbed ? ( // If the toggle is on, use the embed
+                          <iframe style={{borderRadius: 12, border: "none"}}
+                                  src="https://open.spotify.com/embed/playlist/3GVPsndFBvGFFfdRFZHUeK?utm_source=generator&theme=0"
+                                  width="100%" height="352"
+                                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                  loading="lazy"
+                          ></iframe>) : null}
+                          <ul id="links" className="themed">
+                           {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"
+                                                                                      href={link} target="_blank" rel="noreferrer">{link}</a></li>))}
+                          </ul>
+                          <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Start</button>
+                        </div>) : (
+                        <div>
+                          This is how to play the game
+                        </div>
+                    )
+                    }
                     <div id="settings-sidebar" className={`themed ${theme}`} style={{fontSize: "170%"}}>
                       <div id="theme-header">Theme
                         <select id="theme-select" className="themed"
                               value={this.state.theme}
                               onChange={(event) => {this.setState({theme: event.target.value})
                                 this.changeIcons(event.target.value);
-                                handleThemeChange(event.target.value)}
-                        }
+                                handleThemeChange(event.target.value)}}
                               style={{
                                 marginLeft: '10%',
                                 marginTop: '3%',
                                 fontSize: "90%"
-                              }}
-                        >
+                              }}>
                         <option value="default">Default</option>
                         <option value="dark">Dark Mode</option>
                         <option value="neon">Neon</option>
