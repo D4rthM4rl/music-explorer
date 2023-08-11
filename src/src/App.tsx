@@ -407,7 +407,7 @@ class App extends Component<{}, AppState> {
                           <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Start</button>
                         </div>) : (
                         <div>
-                          This is how to play the game
+                          This is how to play the game g
                         </div>
                     )
                     }
