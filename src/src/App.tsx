@@ -343,15 +343,15 @@ class App extends Component<{}, AppState> {
         <div>
           {this.state.welcomeVisible ? (
               <div id="welcome-screen" className={`themed ${theme}`} onClick={this.handleWelcomeClick}>
-                <h1 id="welcome-message" className={`glow themed ${theme}`}> Song Game </h1>
+                <h1 id="welcome-message" className={`glow themed ${theme}`}> Music Explorer </h1>
               </div>
           ) : null}
           {!this.state.welcomeVisible ? (
               <div className="main-page">
                 <div className={`themed ${theme}`} id="topbar">
-                  <div className={`topbar-option themed ${theme}`} id= "title">Song Game By Marley</div>
+                  <div className={`topbar-option themed ${theme}`} id= "title">Music Explorer By Marley</div>
                   <div className={`topbar-option themed ${theme}`} id="spotify-genres">All Spotify Genres</div>
-                  <div className={`topbar-option themed ${theme}`} id="directions">How to Play</div>
+                  <div className={`topbar-option themed ${theme}`} id="directions">Directions</div>
                   <div className={`topbar-option themed ${theme}`} id="settings toggle"
                        onClick={() => {const rSidebar = document.getElementById("settings-sidebar") as HTMLElement;
                          if (rSidebar) {rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";}
