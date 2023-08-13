@@ -44,8 +44,6 @@ interface Track {
   };
 }
 
-interface AuthResponse {access_token: string;}
-
 interface PlaylistResponse {items: Track[];}
 
 class App extends Component<{}, AppState> {
@@ -348,7 +346,7 @@ class App extends Component<{}, AppState> {
           ) : null}
           {!this.state.welcomeVisible ? (
               <div className="main-page">
-                <div className={`themed ${theme}`} id="topbar">
+                <div id="topbar" className={`themed ${theme}`}>
                   <div className={`topbar-option themed ${theme}`} id="title" onClick={() => {
                     this.setState({directionsActive: false})}}>Music Explorer By Marley</div>
                   <div className={`topbar-option themed ${theme}`} id="spotify-genres">All Spotify Genres</div>
@@ -357,13 +355,13 @@ class App extends Component<{}, AppState> {
                   <div className={`topbar-option themed ${theme}`} id="settings toggle"
                        onClick={() => {const rSidebar = document.getElementById("settings-sidebar") as HTMLElement;
                          if (rSidebar) {rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";}
-                         this.setState({settingsActive: !this.state.settingsActive})}}
-                  >
+                         this.setState({settingsActive: !this.state.settingsActive})}}>
                     <img src={this.state.settingsIcon}  alt="missing image"
-                         style={{width: "7%", verticalAlign: "middle", marginBottom: "1%", marginRight: "2%"}}/>Settings</div>
+                         style={{width: "7%", verticalAlign: "middle", marginBottom: "1%", marginRight: "2%"}}/>Settings
+                  </div>
                 </div>
                 <div className="game-options">
-                  <div id="sidebar" className={`game-ui themed ${theme}`}>
+                  <div id="sidebar" className={`themed ${theme}`}>
                     <div className={`tab ${isNamesTab ? "active" : ""} themed ${theme}`}
                          onClick={() => {this.setState({ isNamesTab: true });}}
                         >Players</div>
@@ -383,14 +381,12 @@ class App extends Component<{}, AppState> {
                         theme={this.state.theme} // pass the theme as a prop
                         numGenreProp={this.state.numGenreState} // pass the genre number as a prop
                         playlistArray={this.state.playlists} // pass the playlists array as a prop
-                        onChange={(value: string[]) => {
-                          this.setState({ playlists: value });
-                        }}
+                        onChange={(value: string[]) => {this.setState({ playlists: value });}}
                         onClear={() => {this.clearPlaylists();}}
                         onNumChange={(value: number) => {this.setState({numGenreState: value})}}
                     />)}
                   </div>
-                  <div id="game-area" className={`game-ui themed ${theme}`}>
+                  <div id="music-area" className={`themed ${theme}`}>
                     {!directionsActive ? (
                         <div>
                           {this.state.useEmbed ? ( // If the toggle is on, use the embed
@@ -406,13 +402,31 @@ class App extends Component<{}, AppState> {
                           </ul>
                           <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Start</button>
                         </div>) : (
-                        <div>
-                          THis is hwo to use the NOT game
-                        </div>
+                        <ol id="directions-list" className= {`themed ${theme}`}>
+                          <li>Add names and links to their respective Spotify profile in the Settings</li>
+                          <ol style={{listStyle: "none", fontSize: "80%"}}>
+                            <li style={{paddingBottom: 3, paddingTop: 5}}>These names will be added to the left sidebar and saved on the website</li>
+                          </ol>
+                          <li className="directions-item">Go to the left sidebar with names and playlists</li>
+                          <ol style={{fontSize: "80%"}}>
+                            <li className="directions-item">Select users whose public playlists you want songs randomly taken from (must click enter or add button)</li>
+                            <li className="directions-item">Switch to the "Playlists" Tab</li>
+                            <li className="directions-item">Select playlists which you want songs randomly taken from</li>
+                            <li className="directions-item">If you type in the box instead of selecting, make sure you typed it in right</li>
+                            <li className="directions-item">If there is something in the added list you want to remove, click it or click "clear" to clear the list</li>
+                            <li className="directions-item">In each tab, select the amount of songs you want to be generated per user or playlist</li>
+                          </ol>
+                          <li>Go to the main screen and click the start button</li>
+                          <ol style={{fontSize: "80%"}}>
+                            <li className="directions-item">By default, it generates and outputs links</li>
+                            <li className="directions-item">Enable the "Use Embed" toggle in Settings if you want it to create a playlist in your with the generated songs which it will then display</li>
+                          </ol>
+                        </ol>
                     )}
-                    <div id="settings-sidebar" className={`themed ${theme}`} style={{fontSize: "170%"}}>
-                      <div id="theme-header">Theme
-                        <select id="theme-select" className="themed"
+                  </div>
+                  <div id="settings-sidebar" className={`themed ${theme}`} style={{fontSize: "170%"}}>
+                    <div id="theme-header">Theme
+                      <select id="theme-select" className="themed"
                               value={this.state.theme}
                               onChange={(event) => {this.setState({theme: event.target.value})
                                 this.changeIcons(event.target.value);
@@ -431,54 +445,51 @@ class App extends Component<{}, AppState> {
                         <option value="drac">Drac</option>
                         <option value="barbie">Barbie</option>
                         <option value="marley">Marley</option>
-                        </select>
-                      </div>
-                      <div id="embed-toggle" style={{marginTop: "5%"}}>Use Embed
+                      </select>
+                    </div>
+                    <div id="embed-toggle" style={{marginTop: "5%"}}>Use Embed
                       <label className="switch themed" style={{marginLeft: "10%"}}>
                         <input type="checkbox" />
                         <span className="slider round themed" onClick={() => this.setState({useEmbed: !this.state.useEmbed})}></span>
                       </label>
-                      </div>
-                      <div id="grinch-toggle" style={{marginTop: "5%"}}>Grinch Mode
-                        <label className="switch themed" style={{marginLeft: "10%"}}>
-                          <input type="checkbox" />
-                          <span className="slider round themed" onClick={() => this.setState({grinchMode: !this.state.grinchMode})}></span>
-                        </label>
-                      </div>
-                      <div id="name-add-header"className={`themed ${theme}`}>Add Name to List</div>
-                      <input id="new-name-box" className={`themed ${theme}`}
+                    </div>
+                    <div id="grinch-toggle" style={{marginTop: "5%"}}>Grinch Mode
+                      <label className="switch themed" style={{marginLeft: "10%"}}>
+                        <input type="checkbox" />
+                        <span className="slider round themed" onClick={() => this.setState({grinchMode: !this.state.grinchMode})}></span>
+                      </label>
+                    </div>
+                    <div id="name-add-header"className={`themed ${theme}`}>Add Name to List</div>
+                    <input id="new-name-box" className={`themed ${theme}`}
                            placeholder={"Player Name"}
                            onChange={(event) => {this.setState({newNameValue: event.target.value})}}
-                           // onKeyDown={this.handleInputKeyDown}
+                        // onKeyDown={this.handleInputKeyDown}
                            value={newNameValue}
-                      />
-                      <input id="new-profile-box" className={`themed ${theme}`}
+                    />
+                    <input id="new-profile-box" className={`themed ${theme}`}
                            autoComplete="false"
                            placeholder={"Profile Link"}
                            onChange={(event) => {this.setState({newProfileIdValue: event.target.value})}}
-                          // onKeyDown={this.handleInputKeyDown}
-                          value={newProfileIdValue}
-                      /><br/>
-                      <button className={`add-button themed ${theme}`}
-                              onClick={ () => {handleNewName(newNameValue, newProfileIdValue)
-                                this.setState({newProfileIdValue: "", newNameValue: ""})}}
-                              style={{fontSize: 20}}
-                      >Add pair
-                      </button>
-                      <button className={`clear-button themed ${theme}`}
-                              onClick={() => {handleNameRemove(newNameValue)
-                                this.setState({newProfileIdValue: "", newNameValue: ""})}}
-                              style={{fontSize: 20}}
-                      >Remove name
-                      </button>
-                      <ul style={{
-                        position: "relative",
-                        fontSize: 20,
-                        textAlign: "left",
-                        alignContent: "flex-start",
-                        fontWeight: "bold",
-                      }}></ul>
-                    </div>
+                        // onKeyDown={this.handleInputKeyDown}
+                           value={newProfileIdValue}
+                    /><br/>
+                    <button className={`add-button themed ${theme}`}
+                            onClick={ () => {handleNewName(newNameValue, newProfileIdValue)
+                              this.setState({newProfileIdValue: "", newNameValue: ""})}}
+                            style={{fontSize: 20}}
+                    >Add pair</button>
+                    <button className={`clear-button themed ${theme}`}
+                            onClick={() => {handleNameRemove(newNameValue)
+                              this.setState({newProfileIdValue: "", newNameValue: ""})}}
+                            style={{fontSize: 20}}
+                    >Remove name</button>
+                    <ul style={{
+                      position: "relative",
+                      fontSize: 20,
+                      textAlign: "left",
+                      alignContent: "flex-start",
+                      fontWeight: "bold",
+                    }}></ul>
                   </div>
                 </div>
               </div>

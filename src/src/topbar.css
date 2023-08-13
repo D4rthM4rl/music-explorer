@@ -9,7 +9,7 @@
     align-content: space-evenly;
     align-items: center;
     text-align: center;
-    box-shadow:inset 1px -2px 11px 0px black;
+    box-shadow:inset 1px -2px 11px 0 black;
 }
 .topbar-option {
     cursor: pointer;

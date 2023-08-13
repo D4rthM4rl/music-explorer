@@ -85,14 +85,6 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                             this.props.onNumChange(value);
                         }
                     }}
-                    style={{
-                        fontFamily: 'Comic Sans MS',
-                        width: "29%",
-                        fontSize: '20px',
-                        borderRadius: '5px',
-                        padding: '1%',
-                        border: '1px solid black'
-                    }}
                 /> <br/>
                 <h1 className="sidebar-headings">Names go here</h1>
                 <input className={`name-playlist-box themed ${this.props.theme}`}
@@ -102,14 +94,6 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                     onChange={(event) => {this.setState({value: event.target.value})}}
                     onKeyDown={this.handleInputKeyDown}
                     value={this.state.value}
-                    style={{
-                        fontFamily: 'Comic Sans MS',
-                        fontSize: '115%',
-                        width: "75%",
-                        borderRadius: '5px',
-                        padding: '2%',
-                        border: '1px solid black'
-                    }}
                 /> <br/>
                 <datalist id="name-list">
                     {/*<option value="Marley" />*/}
@@ -122,19 +106,12 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                     {/*<option value="Memphis" />*/}
                 </datalist>
                 <br/>
-                <script>
-
-                </script>
                 <button className={`add-button themed ${this.props.theme}`}
                     onClick={this.handleAdd}
-                    style={{fontSize: 20}}
-                >Add
-                </button>
+                >Add</button>
                 <button className={`clear-button themed ${this.props.theme}`}
                     onClick={this.handleClear}
-                    style={{fontSize: 20}}
-                >Clear
-                </button>
+                >Clear</button>
                 <ul style={{
                     position: "relative",
                     fontSize: 20,

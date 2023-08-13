@@ -10,19 +10,38 @@
     text-shadow: var(--sidebar-glow);
     font-family: var(--overall-font-family);
 }
+@media (max-width: 768px) {
+    #sidebar {
+        /*width: 100%;*/
+        flex: 50%;
+        background: orange;
+    }
+}
 #sidebar-headings{
-    font-size: 30px;
+    font-size: 2vw;
     color: var(--sidebar-bg); /* Idk if this does anything */
 }
 .num-song-box {
     color: var(--sidebar-textbox-color);
     background: var(--sidebar-textbox-bg);
     box-shadow: var(--sidebar-textbox-glow);
+    font-family: 'Comic Sans MS';
+    width: 29%;
+    font-size: 115%;
+    border-radius: 5px;
+    padding: 1%;
+    border: 1px solid black;
 }
 .name-playlist-box {
     color: var(--sidebar-textbox-color);
     background: var(--sidebar-textbox-bg);
     box-shadow: var(--sidebar-textbox-glow);
+    font-family: Comic Sans MS;
+    width: 75%;
+    font-size: 115%;
+    border-radius: 5px;
+    padding: 2%;
+    border: 1px solid black;
 }
 .add-button {
     color: var(--add-button-color);
@@ -31,6 +50,7 @@
     border: var(--button-border);
     cursor: pointer;
     margin-right: 5%;
+    font-size: 20px;
 }
 .clear-button {
     color: var(--clear-button-color);
@@ -38,9 +58,10 @@
     border-radius: 25%;
     border: var(--button-border);
     cursor: pointer;
+    font-size: 20px;
 }
 .tab {
-    font-size: 20px;
+    font-size: 1.4vw;
     text-shadow: var(--inactive-tab-glow);
     color: var(--inactive-tab-color);
     font-weight: bold;

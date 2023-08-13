@@ -70,7 +70,7 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
     render() {
         return (
             <div>
-                <h1 style={{marginTop: "17%"}} className="sidebar-headings">Songs per Genre: {this.props.numGenreProp}</h1>
+                <h1 style={{marginTop: "17%"}} className="sidebar-headings">Songs per Playlist: {this.props.numGenreProp}</h1>
                 <input className={`num-song-box themed ${this.props.theme}`}
                     type={"number"}
                        placeholder={"00"}
@@ -81,33 +81,14 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
                                this.props.onNumChange(value)
                            }
                        }}
-                       style={{
-                           fontFamily: 'Comic Sans MS',
-                           width: "29%",
-                           left: "30%",
-                           fontSize: '20px',
-                           borderRadius: '5px',
-                           padding: '1%',
-                           border: '1px solid black'
-                       }}
                 /> <br/>
-                <h1 className="sidebar-headings">Playlists/Genres go here</h1>
+                <h1 className="sidebar-headings">Playlists go here</h1>
                 <input className={`name-playlist-box themed ${this.props.theme}`}
                     list="playlist-list"
-                    placeholder={"Type Genres and Playlists here"}
-                    onChange={(event) => {
-                        this.setState({value: event.target.value})
-                    }}
+                    placeholder={"Type Playlists here"}
+                    onChange={(event) => {this.setState({value: event.target.value})}}
                     onKeyDown={this.handleInputKeyDown}
                     value={this.state.value}
-                    style={{
-                        fontFamily: 'Comic Sans MS',
-                        width: "75%",
-                        fontSize: '115%',
-                        borderRadius: '5px',
-                        padding: '2%',
-                        border: '1px solid black'
-                    }}
                 /> <br/>
                 <datalist id="playlist-list">
                     <option value="Top Hits 2000-2023" />
