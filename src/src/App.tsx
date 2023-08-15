@@ -72,6 +72,32 @@ class App extends Component<{}, AppState> {
 
   clearNames = () => {this.setState({ names: [] });}
 
+  toggleSettings = () => {
+    const aspectRatio = window.innerWidth/window.innerHeight;
+    const rSidebar = document.getElementById("settings-sidebar") as HTMLElement;
+    if (rSidebar) {
+      if (aspectRatio < 1) {
+        rSidebar.style.right = rSidebar.style.right === "0px" ? "-80%" : "0px";
+      } else {
+        rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";
+      }
+    }
+    this.setState({settingsActive: !this.state.settingsActive})
+  }
+
+  toggleMainSidebar = () => {
+    const aspectRatio = window.innerWidth/window.innerHeight;
+    const sidebar = document.getElementById("sidebar") as HTMLElement;
+    if (sidebar) {
+      if (aspectRatio < 1) {
+        sidebar.style.right = sidebar.style.right === "0px" ? "-80%" : "0px";
+      } else {
+        sidebar.style.right = sidebar.style.right === "0px" ? "-20%" : "0px";
+      }
+    }
+    this.setState({settingsActive: !this.state.settingsActive})
+  }
+
   clearPlaylists = () => {this.setState({playlists: [] });}
 
   changeIcons = (theme: string) => {
@@ -337,6 +363,7 @@ class App extends Component<{}, AppState> {
 
   render() {
     const { isNamesTab, theme, newNameValue, newProfileIdValue, directionsActive } = this.state;
+    const aspectRatio = window.innerWidth/window.innerHeight;
     return (
         <div>
           {this.state.welcomeVisible ? (
@@ -353,22 +380,39 @@ class App extends Component<{}, AppState> {
                   <div className={`topbar-option themed ${theme}`} id="directions" onClick={() => {
                     this.setState({directionsActive: !directionsActive})}}>Directions</div>
                   <div className={`topbar-option themed ${theme}`} id="settings toggle"
-                       onClick={() => {const rSidebar = document.getElementById("settings-sidebar") as HTMLElement;
-                         if (rSidebar) {rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";}
-                         this.setState({settingsActive: !this.state.settingsActive})}}>
+                       onClick={() => {
+                         this.toggleSettings();
+                         const sidebar = document.getElementById("sidebar") as HTMLElement;
+                         if (sidebar && aspectRatio < 1) {
+                           sidebar.style.left = "-80%";
+                       }}}>
                     <img src={this.state.settingsIcon}  alt="missing image"
                          style={{width: "7%", verticalAlign: "middle", marginBottom: "1%", marginRight: "2%"}}/>Settings
                   </div>
                 </div>
                 <div className="game-options">
                   <div id="sidebar" className={`themed ${theme}`}>
+                    <button id="activate-sidebar-button" className={`themed ${theme}`}
+                            onClick={() => {
+                              const sidebar = document.getElementById("sidebar") as HTMLElement;
+                              if (sidebar) {
+                                if (aspectRatio < 1) {
+                                  sidebar.style.left = sidebar.style.left === "0px" ? "-80%" : "0px";
+                                  if (this.state.settingsActive) {
+                                    this.toggleSettings();
+                                  }
+                                } else {
+                                  sidebar.style.left = sidebar.style.left === "0px" ? "-30%" : "0px";
+                                }
+                              }}}
+                    >Sidebar</button>
                     <div className={`tab ${isNamesTab ? "active" : ""} themed ${theme}`}
                          onClick={() => {this.setState({ isNamesTab: true });}}
                         >Players</div>
                     <div className={`tab ${isNamesTab ? "" : "active"} themed ${theme}`}
                          onClick={() => {this.setState({ isNamesTab: false });}}
                         >Playlists or Genres</div>
-                    {isNamesTab ?(
+                    {isNamesTab ? (
                       <NamesList
                           theme={this.state.theme} // pass the theme as a prop
                           numPersonalProp={this.state.numPersonalState} // pass the personal number as a prop

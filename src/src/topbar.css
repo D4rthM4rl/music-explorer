@@ -3,13 +3,21 @@
     animation: fallDownAnimation ease 1.5s;
     display: grid;
     grid-template-columns: repeat(4,25%);
-    height: 100px;
+    height: var(--topbar-height);
     justify-content: space-evenly;
     justify-items: center;
     align-content: space-evenly;
     align-items: center;
     text-align: center;
     box-shadow:inset 1px -2px 11px 0 black;
+    position: fixed;
+    --topbar-height: 100px;
+}
+@media (max-aspect-ratio: 1/1) {
+    #topbar {
+        --topbar-phone-height: 20vh;
+        height: 20vh;
+    }
 }
 .topbar-option {
     cursor: pointer;

@@ -1,5 +1,6 @@
 /* Style for the settings sidebar */
 #settings-sidebar {
+    --topbar-height: 100px;
     transition: right 0.5s ease; /* Add smooth sliding transition */
     box-shadow: 0 0 10px var(--settings-shadow);
     align-items: center;
@@ -9,12 +10,20 @@
     text-shadow: var(--settings-glow);
     background: var(--settings-bg);
     font-family: var(--overall-font-family);
-    height: 100vh;
+    height: calc(100vh - var(--topbar-height));
+    margin-top: var(--topbar-height);
     width:20%;
     /*flex: 50%;*/
     overflow: hidden;
     right: -20%;
-    position:absolute;
+    position:fixed;
+}
+@media (max-aspect-ratio: 1/1) {
+    #settings-sidebar {
+        --topbar-height: 20vh;
+        width: 80%;
+        right: -80%;
+    }
 }
 #theme-select {
     background: var(--theme-select-bg);

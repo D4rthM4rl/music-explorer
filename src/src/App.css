@@ -55,6 +55,7 @@ body {
   #music-area {
     /*width: 100%;*/
     flex: 100%;
+    /*position: absolute;*/
     /*background: orange;*/
   }
   #directions-list {
@@ -81,6 +82,7 @@ body {
 
 .default {
   --overall-font-family: Arial;
+  --overall-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: whitesmoke;
   --game-bg: #ccced0;
@@ -93,6 +95,7 @@ body {
 }
 .dark {
   --overall-font-family: Arial;
+  --overall-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #dedede;
   --game-bg: #74879b;
@@ -105,6 +108,7 @@ body {
 }
 .neon {
   --overall-font-family: "Arial";
+  --overall-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #dedede;
   --game-bg: #181818;
@@ -118,6 +122,7 @@ body {
 }
 .pastel {
   --overall-font-family: Arial;
+  --overall-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: #e2c1ff;
@@ -130,6 +135,7 @@ body {
 }
 .gay {
   --overall-font-family: Arial;
+  --overall-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
@@ -148,6 +154,7 @@ body {
 } /* Necessary for animation stuff */
 .kevin {
   --overall-font-family: Genshin;
+  --overall-fontsize-adjustment: -40%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
@@ -160,6 +167,7 @@ body {
 }
 .drac {
   --overall-font-family: Arial;
+  --overall-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(180deg, #ff2400,  dimgray);
@@ -172,6 +180,7 @@ body {
 }
 .barbie {
   --overall-font-family: Barbie;
+  --overall-fontsize-adjustment: 35%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(180deg, #2eedff, #ffffff);
@@ -184,6 +193,7 @@ body {
 }
 .marley {
   --overall-font-family: Arial;
+  --overall-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: #74879b;
