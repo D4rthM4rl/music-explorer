@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/music-explorer/static/css/main.e90e4ebf.css",
+    "main.css": "/music-explorer/static/css/main.3bb83efa.css",
     "main.js": "/music-explorer/static/js/main.c005ced3.js",
     "static/media/Genshin.ttf": "/music-explorer/static/media/Genshin.54a8212866e6ec1b1003.ttf",
     "static/media/whitesmoke-settings-icon.png": "/music-explorer/static/media/whitesmoke-settings-icon.50b636d53000d8c98312.png",
@@ -10,11 +10,11 @@
     "static/media/black-settings-icon.png": "/music-explorer/static/media/black-settings-icon.e52db29a69d1453574a6.png",
     "static/media/Genshin-Impact-Drip.ttf": "/music-explorer/static/media/Genshin-Impact-Drip.f386a0e4fc8a24d940a2.ttf",
     "index.html": "/music-explorer/index.html",
-    "main.e90e4ebf.css.map": "/music-explorer/static/css/main.e90e4ebf.css.map",
+    "main.3bb83efa.css.map": "/music-explorer/static/css/main.3bb83efa.css.map",
     "main.c005ced3.js.map": "/music-explorer/static/js/main.c005ced3.js.map"
   },
   "entrypoints": [
-    "static/css/main.e90e4ebf.css",
+    "static/css/main.3bb83efa.css",
     "static/js/main.c005ced3.js"
   ]
 }
