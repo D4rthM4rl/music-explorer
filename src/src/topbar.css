@@ -13,12 +13,6 @@
     position: fixed;
     --topbar-height: 100px;
 }
-@media (max-aspect-ratio: 1/1) {
-    #topbar {
-        --topbar-phone-height: 20vh;
-        height: 20vh;
-    }
-}
 .topbar-option {
     cursor: pointer;
     font-family: var(--overall-font-family);
@@ -27,10 +21,23 @@
     color: var(--topbar-color);
     text-shadow: var(--topbar-glow);
 }
+
 #title {
     color: var(--title-color);
     text-shadow: var(--title-glow);
     font-size: var(--title-size);
+}
+
+@media (max-aspect-ratio: 1/1) {
+    #topbar {
+        height: 15vh;
+    }
+    .topbar-option {
+        font-size: calc(4vw + var(--overall-fontsize-adjustment));
+    }
+    #title {
+        font-size: calc(5vw + var(--overall-fontsize-adjustment));
+    }
 }
 
 /* Themes */
@@ -38,15 +45,15 @@
     --topbar-bg: #252525;
     --title-color: mediumslateblue;
     --topbar-color: whitesmoke;
-    --topbar-font-size: 25px;
-    --title-size: 30px;
+    --topbar-font-size: 30px;
+    --title-size: 38px;
 }
 .dark {
     --topbar-bg: #252525;
     --title-color: mediumslateblue;
     --topbar-color: #dedede;
-    --topbar-font-size: 25px;
-    --title-size: 30px;
+    --topbar-font-size: 30px;
+    --title-size: 38px;
 }
 .neon {
     --topbar-bg: #252525;
@@ -54,48 +61,48 @@
     --title-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #6f00ff, 0 0 15px #6f00ff;
     --topbar-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #0048ff, 0 0 15px #0048ff;
     --topbar-color: var(--topbar-bg);
-    --topbar-font-size: 25px;
-    --title-size: 30px;
+    --topbar-font-size: 30px;
+    --title-size: 38px;
 }
 .pastel {
     --topbar-bg: #57f5f5;
     --title-color: #ff80e2;
     --topbar-color: #f5f557;
-    --topbar-font-size: 25px;
-    --title-size: 30px;
+    --topbar-font-size: 30px;
+    --title-size: 38px;
 }
 .gay {
     --topbar-bg: #000000;
     --title-color: mediumslateblue;
     --topbar-color: whitesmoke;
-    --topbar-font-size: 25px;
-    --title-size: 30px;
+    --topbar-font-size: 30px;
+    --title-size: 38px;
 }
 .kevin {
     --topbar-bg: #2e4bbe;
     --title-color: white;
     --topbar-color: whitesmoke;
-    --topbar-font-size: 25px;
-    --title-size: 30px;
+    --topbar-font-size: 27px;
+    --title-size: 33px;
 }
 .drac {
     --topbar-bg: #252525;
     --title-color: red;
     --topbar-color: orangered;
-    --topbar-font-size: 25px;
-    --title-size: 30px;
+    --topbar-font-size: 30px;
+    --title-size: 38px;
 }
 .barbie {
     --topbar-bg: #ff3ec7;
     --title-color: #ffc9ee;
     --topbar-color: white;
-    --topbar-font-size: 32px;
-    --title-size: 36px;
+    --topbar-font-size: 34px;
+    --title-size: 45px;
 }
 .marley {
     --topbar-bg: #252525;
     --title-color: mediumslateblue;
     --topbar-color: whitesmoke;
-    --topbar-font-size: 25px;
-    --title-size: 30px;
+    --topbar-font-size: 30px;
+    --title-size: 35px;
 }

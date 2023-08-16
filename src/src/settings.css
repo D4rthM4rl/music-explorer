@@ -1,6 +1,7 @@
 /* Style for the settings sidebar */
 #settings-sidebar {
     --topbar-height: 100px;
+    font-size: 170%;
     transition: right 0.5s ease; /* Add smooth sliding transition */
     box-shadow: 0 0 10px var(--settings-shadow);
     align-items: center;
@@ -17,13 +18,6 @@
     overflow: hidden;
     right: -20%;
     position:fixed;
-}
-@media (max-aspect-ratio: 1/1) {
-    #settings-sidebar {
-        --topbar-height: 20vh;
-        width: 80%;
-        right: -80%;
-    }
 }
 #theme-select {
     background: var(--theme-select-bg);
@@ -97,6 +91,20 @@ input:checked + .slider:before {
     color: var(--settings-textbox-color);
     background: var(--settings-textbox-bg);
     box-shadow: var(--settings-textbox-glow);
+}
+@media (max-aspect-ratio: 1/1) {
+    #settings-sidebar {
+        --topbar-height: 15vh;
+        font-size: 7vw;
+        width: 80%;
+        right: -80%;
+    }
+    #theme-select {
+        margin-bottom: 0;
+    }
+    .switch {
+        margin-top: 1%;
+    }
 }
 
 /* Themes */

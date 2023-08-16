@@ -15,18 +15,10 @@
     position: relative;
     transition: left .5s ease;
 }
-@media (max-aspect-ratio: 1/1) {
-    #sidebar {
-        --topbar-height: 20vh;
-        flex: none;
-        width: 80vw;
-        left: -80vw;
-        position: fixed;
-    }
-}
-#sidebar-headings{
-    font-size: 2vw;
-    color: var(--sidebar-bg); /* Idk if this does anything */
+.sidebar-headings {
+    font-size: 2.6vw;
+    margin-top: 17%;
+    color: var(--sidebar-color); /* Idk if this does anything */
 }
 .num-song-box {
     color: var(--sidebar-textbox-color);
@@ -67,8 +59,11 @@
     cursor: pointer;
     font-size: 20px;
 }
+.listed-items {
+    font-size: 20px;
+}
 .tab {
-    font-size: 1.4vw;
+    font-size: calc(1.4vw + var(--overall-fontsize-adjustment));
     text-shadow: var(--inactive-tab-glow);
     color: var(--inactive-tab-color);
     font-weight: bold;
@@ -76,6 +71,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    vertical-align: middle;
     float:left;
     width: 50%;
     height:6%;
@@ -96,7 +92,7 @@
     font-family: var(--overall-font-family);
     overflow: hidden;
     visibility: visible;
-    font-size: calc(30px + var(--overall-fontsize-adjustment));
+    font-size: calc(30px + var(--activate-sidebar-fontsize-adjustment));
     z-index: 1;
     transform: rotate(270deg);
     background: white;
@@ -109,8 +105,9 @@
     cursor: pointer;
     writing-mode: vertical-lr;
     padding: 12px 10px 8px;
-    right: -89.5px;
+    right: -88.5px;
 }
+
 #activate-sidebar-button.gay {
     background-size: 1000% 300%;
     -webkit-animation: rainbow 10s ease infinite;
@@ -135,6 +132,8 @@
     --inactive-tab-border: inset  1px -1px 20px 1px var(--inactive-tab-bg);
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
+    --activate-sidebar-fontsize-adjustment: 0%;
+    --activate-sidebar-right-adjustment: 0px;
 }
 .dark {
     --sidebar-bg: #282b31;
@@ -152,6 +151,8 @@
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
+    --activate-sidebar-fontsize-adjustment: 0%;
+    --activate-sidebar-right-adjustment: 0px;
 }
 .neon {
     --sidebar-bg: #000000;
@@ -173,6 +174,8 @@
     --inactive-tab-color: var(--inactive-tab-bg);
     --inactive-tab-glow:  0 0 1px #adadad, 0 0 1px #adadad, 0 0 1px #adadad, 0 0 1px #adadad, 0 0 1px #adadad, 0 0 1px #adadad, 0 0 7px #adadad;
     --tab-highlight-color: #4E545FFF;
+    --activate-sidebar-fontsize-adjustment: 0%;
+    --activate-sidebar-right-adjustment: 0px;
 }
 .pastel {
     --sidebar-bg: #7effab;
@@ -189,6 +192,8 @@
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
+    --activate-sidebar-fontsize-adjustment: 0%;
+    --activate-sidebar-right-adjustment: 0px;
 }
 .gay {
     --sidebar-bg: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
@@ -205,6 +210,8 @@
     --inactive-tab-bg: black;
     --inactive-tab-color: white;
     --tab-highlight-color: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;;
+    --activate-sidebar-fontsize-adjustment: 0%;
+    --activate-sidebar-right-adjustment: 0px;
 }
 #sidebar.gay {
     background-size: 100% 300%;
@@ -228,6 +235,8 @@
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
+    --activate-sidebar-fontsize-adjustment: -40%;
+    --activate-sidebar-right-adjustment: -1%;
 }
 .drac {
     --sidebar-bg: #282b31;
@@ -244,6 +253,8 @@
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #ff0000;
+    --activate-sidebar-fontsize-adjustment: 0%;
+    --activate-sidebar-right-adjustment: 0px;
 }
 .barbie {
     --sidebar-bg: #ff3ec7;
@@ -260,6 +271,8 @@
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #fab9e3;
+    --activate-sidebar-fontsize-adjustment: 35%;
+    --activate-sidebar-right-adjustment: 2.5px;
 }
 .marley {
     --sidebar-bg: #282b31;
@@ -276,4 +289,44 @@
     --inactive-tab-bg: black;
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
+    --activate-sidebar-fontsize-adjustment: 0%;
+    --activate-sidebar-right-adjustment: 0px;
+}
+@media (max-aspect-ratio: 1/1) {
+    #sidebar {
+        --topbar-height: 15vh;
+        flex: none;
+        width: 80vw;
+        left: -80vw;
+        position: fixed;
+    }
+    #activate-sidebar-button {
+        font-size: calc(35px + var(--activate-sidebar-fontsize-adjustment));
+        right: calc(-100px + var(--activate-sidebar-right-adjustment));
+    }
+    .sidebar-headings {
+        font-size: 250%;
+        margin-top: 5%;
+        margin-bottom: 3%;
+    }
+    .num-song-box {
+        font-size: 130%;
+    }
+    .name-playlist-box {
+        font-size: 140%;
+    }
+    .add-button {
+        font-size: 25px;
+    }
+    .clear-button {
+        font-size: 25px;
+    }
+    .listed-items {
+        font-size: 23px;
+    }
+    .tab {
+        font-size: 150%;
+        padding: 10px 0 10px;
+        height: auto;
+    }
 }

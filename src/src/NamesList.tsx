@@ -72,8 +72,7 @@ class NamesList extends Component<NamesListProps, NamesListState> {
     render() {
         return (
             <div>
-                <h1 style={{marginTop: "17%"}}
-                    className='sidebar-headings'>Songs per Person: {this.props.numPersonalProp}</h1>
+                <h1 className='sidebar-headings'>Songs per Person: {this.props.numPersonalProp}</h1>
                 <input className={`num-song-box themed ${this.props.theme}`}
                     type={"number"}
                     placeholder={"00"}
@@ -112,9 +111,8 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                 <button className={`clear-button themed ${this.props.theme}`}
                     onClick={this.handleClear}
                 >Clear</button>
-                <ul style={{
+                <ul className='listed-items' style={{
                     position: "relative",
-                    fontSize: 20,
                     textAlign: "left",
                     alignContent: "flex-start",
                     fontWeight: "bold",

@@ -8,6 +8,10 @@ body {
                               'embedded-opentype', and 'svg' */
 }
 @font-face {
+    font-family: 'Genshin Drip';
+    src: local('Genshin Drip'), url(./assets/Genshin-Impact-Drip.ttf) format('truetype');
+}
+@font-face {
     font-family: 'Genshin';
-    src: local('Genshin'), url(./assets/Genshin-Impact-Drip.ttf) format('truetype');
+    src: local('Genshin'), url(./assets/Genshin.ttf) format('truetype');
 }

@@ -37,11 +37,12 @@ body {
   /*animation: slideFromLeft ease 3s;*/
 }
 #directions-list {
-  margin-top: -7%;
-  font-size: 2.1vw;
-  padding-left: 7%;
+  margin-top: 15%;
+  font-size: calc(2.1vw + var(--directions-fontsize-adjustment));
+  padding-left: 10%;
+  padding-right: 3%;
   text-align: left;
-  font-family: var(--overall-font-family);
+  font-family: var(--directions-font-family);
 }
 .directions-item {
   padding-top: 5px;
@@ -59,7 +60,8 @@ body {
     /*background: orange;*/
   }
   #directions-list {
-    font-size: 2.7vh;
+    font-size: calc(2.7vh + var(--directions-fontsize-adjustment));
+    margin-left: 10%;
   }
 }
 
@@ -82,7 +84,9 @@ body {
 
 .default {
   --overall-font-family: Arial;
+  --directions-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
+  --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: whitesmoke;
   --game-bg: #ccced0;
@@ -95,7 +99,9 @@ body {
 }
 .dark {
   --overall-font-family: Arial;
+  --directions-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
+  --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #dedede;
   --game-bg: #74879b;
@@ -108,7 +114,9 @@ body {
 }
 .neon {
   --overall-font-family: "Arial";
+  --directions-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
+  --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #dedede;
   --game-bg: #181818;
@@ -122,7 +130,9 @@ body {
 }
 .pastel {
   --overall-font-family: Arial;
+  --directions-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
+  --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: #e2c1ff;
@@ -135,7 +145,9 @@ body {
 }
 .gay {
   --overall-font-family: Arial;
+  --directions-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
+  --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
@@ -153,8 +165,10 @@ body {
   animation: rainbow 20s ease infinite;
 } /* Necessary for animation stuff */
 .kevin {
-  --overall-font-family: Genshin;
+  --overall-font-family: Genshin Drip;
+  --directions-font-family: Genshin;
   --overall-fontsize-adjustment: -40%;
+  --directions-fontsize-adjustment: -20%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
@@ -167,7 +181,9 @@ body {
 }
 .drac {
   --overall-font-family: Arial;
+  --directions-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
+  --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(180deg, #ff2400,  dimgray);
@@ -180,7 +196,9 @@ body {
 }
 .barbie {
   --overall-font-family: Barbie;
-  --overall-fontsize-adjustment: 35%;
+  --directions-font-family: var(--overall-font-family);
+  --overall-fontsize-adjustment: 30%;
+  --directions-fontsize-adjustment: 20%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: linear-gradient(180deg, #2eedff, #ffffff);
@@ -193,7 +211,9 @@ body {
 }
 .marley {
   --overall-font-family: Arial;
+  --directions-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
+  --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
   --game-bg: #74879b;

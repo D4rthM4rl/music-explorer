@@ -375,8 +375,8 @@ class App extends Component<{}, AppState> {
               <div className="main-page">
                 <div id="topbar" className={`themed ${theme}`}>
                   <div className={`topbar-option themed ${theme}`} id="title" onClick={() => {
-                    this.setState({directionsActive: false})}}>Music Explorer By Marley</div>
-                  <div className={`topbar-option themed ${theme}`} id="spotify-genres">All Spotify Genres</div>
+                    this.setState({directionsActive: false})}}>Music Explorer</div>
+                  <div className={`topbar-option themed ${theme}`} id="spotify-genres">All Genres</div>
                   <div className={`topbar-option themed ${theme}`} id="directions" onClick={() => {
                     this.setState({directionsActive: !directionsActive})}}>Directions</div>
                   <div className={`topbar-option themed ${theme}`} id="settings toggle"
@@ -408,10 +408,10 @@ class App extends Component<{}, AppState> {
                     >Sidebar</button>
                     <div className={`tab ${isNamesTab ? "active" : ""} themed ${theme}`}
                          onClick={() => {this.setState({ isNamesTab: true });}}
-                        >Players</div>
+                        >Profiles</div>
                     <div className={`tab ${isNamesTab ? "" : "active"} themed ${theme}`}
                          onClick={() => {this.setState({ isNamesTab: false });}}
-                        >Playlists or Genres</div>
+                        >Playlists</div>
                     {isNamesTab ? (
                       <NamesList
                           theme={this.state.theme} // pass the theme as a prop
@@ -468,7 +468,7 @@ class App extends Component<{}, AppState> {
                         </ol>
                     )}
                   </div>
-                  <div id="settings-sidebar" className={`themed ${theme}`} style={{fontSize: "170%"}}>
+                  <div id="settings-sidebar" className={`themed ${theme}`}>
                     <div id="theme-header">Theme
                       <select id="theme-select" className="themed"
                               value={this.state.theme}
