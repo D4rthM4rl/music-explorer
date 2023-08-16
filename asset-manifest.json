@@ -1,7 +1,8 @@
 {
   "files": {
-    "main.css": "/music-explorer/static/css/main.569ce054.css",
-    "main.js": "/music-explorer/static/js/main.967f964e.js",
+    "main.css": "/music-explorer/static/css/main.5dc0d608.css",
+    "main.js": "/music-explorer/static/js/main.29ef0afe.js",
+    "static/media/Genshin.ttf": "/music-explorer/static/media/Genshin.54a8212866e6ec1b1003.ttf",
     "static/media/whitesmoke-settings-icon.png": "/music-explorer/static/media/whitesmoke-settings-icon.50b636d53000d8c98312.png",
     "static/media/Bartex.ttf": "/music-explorer/static/media/Bartex.3348123b1c47d65e921a.ttf",
     "static/media/orangered-settings-icon.png": "/music-explorer/static/media/orangered-settings-icon.4ee99185fd0d9a747c36.png",
@@ -9,11 +10,11 @@
     "static/media/black-settings-icon.png": "/music-explorer/static/media/black-settings-icon.e52db29a69d1453574a6.png",
     "static/media/Genshin-Impact-Drip.ttf": "/music-explorer/static/media/Genshin-Impact-Drip.f386a0e4fc8a24d940a2.ttf",
     "index.html": "/music-explorer/index.html",
-    "main.569ce054.css.map": "/music-explorer/static/css/main.569ce054.css.map",
-    "main.967f964e.js.map": "/music-explorer/static/js/main.967f964e.js.map"
+    "main.5dc0d608.css.map": "/music-explorer/static/css/main.5dc0d608.css.map",
+    "main.29ef0afe.js.map": "/music-explorer/static/js/main.29ef0afe.js.map"
   },
   "entrypoints": [
-    "static/css/main.569ce054.css",
-    "static/js/main.967f964e.js"
+    "static/css/main.5dc0d608.css",
+    "static/js/main.29ef0afe.js"
   ]
 }
