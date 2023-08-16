@@ -294,7 +294,6 @@ body {
     margin-left: 10%;
   }
   #music-area.gay {
-    position: fixed;
     --game-bg: linear-gradient(124deg, #6600ff, #ff0059, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #6600FF, #6600ff, #dd00f3);;
     background-size: 1500% 300%;
     -webkit-animation: rainbow 23s ease infinite;
