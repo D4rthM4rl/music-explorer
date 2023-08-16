@@ -70,9 +70,10 @@ class NamesList extends Component<NamesListProps, NamesListState> {
     }
 
     render() {
+        const aspectRatio = window.innerWidth/window.innerHeight;
         return (
             <div>
-                <h1 className='sidebar-headings'>Songs per Person: {this.props.numPersonalProp}</h1>
+                <h1 style={{marginTop: "14%"}} className='sidebar-headings'>Songs per Person: {this.props.numPersonalProp}</h1>
                 <input className={`num-song-box themed ${this.props.theme}`}
                     type={"number"}
                     placeholder={"00"}
@@ -118,8 +119,9 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                     fontWeight: "bold",
                 }}>
                     {this.props.nameArray.map((name, index) => (
-                        <li key={index} style={{cursor: "pointer"}} onClick={() => this.handleRemove(index)}>
-                            {name}
+                        <li key={index} style={{cursor: "pointer"}} onClick={() =>
+                        {if (aspectRatio < 1) {this.handleRemove(index)}
+                        }}>{name}
                         </li>
                     ))}
                 </ul>

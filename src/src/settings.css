@@ -27,8 +27,9 @@
 .switch {
     position: relative;
     display: inline-block;
-    width: 60px;
-    height: 34px;
+    --toggle-size: 1;
+    width: calc(60px * var(--toggle-size));
+    height: calc(34px * var(--toggle-size));
     margin-top: 5%;
 }
 .switch input {
@@ -50,10 +51,10 @@
 .slider:before {
     position: absolute;
     content: "";
-    height: 26px;
-    width: 26px;
-    left: 4px;
-    bottom: 4px;
+    height: calc(26px * var(--toggle-size));
+    width: calc(26px * var(--toggle-size));
+    left: calc(4px * var(--toggle-size));
+    bottom: calc(4px * var(--toggle-size));
     background: var(--embed-toggle-color);
     -webkit-transition: .4s;
     transition: .4s;
@@ -61,11 +62,11 @@
 input:checked + .slider {background: var(--embed-toggle-active-bg);}
 input:focus + .slider {box-shadow: 0 0 1px var(--embed-toggle-active-bg);}
 input:checked + .slider:before {
-    -webkit-transform: translateX(26px);
-    -ms-transform: translateX(26px);
-    transform: translateX(26px);
+    -webkit-transform: translateX(calc(26px * var(--toggle-size)));
+    -ms-transform: translateX(calc(26px * var(--toggle-size)));
+    transform: translateX(calc(26px * var(--toggle-size)));
 }
-.slider.round {border-radius: 34px;}
+.slider.round {border-radius: calc(34px * var(--toggle-size));}
 .slider.round:before {border-radius: 50%;}
 #name-add-header {
     margin-top: 5%;
@@ -94,7 +95,7 @@ input:checked + .slider:before {
 }
 @media (max-aspect-ratio: 1/1) {
     #settings-sidebar {
-        --topbar-height: 15vh;
+        --topbar-height: 12vh;
         font-size: 7vw;
         width: 80%;
         right: -80%;
@@ -104,6 +105,7 @@ input:checked + .slider:before {
     }
     .switch {
         margin-top: 1%;
+        --toggle-size: 2;
     }
 }
 

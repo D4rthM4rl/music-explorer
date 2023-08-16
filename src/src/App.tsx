@@ -358,7 +358,7 @@ class App extends Component<{}, AppState> {
     const newTheme = getTheme();
     this.setState({theme: newTheme});
     this.changeIcons(newTheme);
-    getToken()
+    getToken();
   };
 
   render() {
@@ -383,11 +383,9 @@ class App extends Component<{}, AppState> {
                        onClick={() => {
                          this.toggleSettings();
                          const sidebar = document.getElementById("sidebar") as HTMLElement;
-                         if (sidebar && aspectRatio < 1) {
-                           sidebar.style.left = "-80%";
-                       }}}>
-                    <img src={this.state.settingsIcon}  alt="missing image"
-                         style={{width: "7%", verticalAlign: "middle", marginBottom: "1%", marginRight: "2%"}}/>Settings
+                         if (sidebar && aspectRatio < 1) {sidebar.style.left = "-80%";}
+                       }}>
+                    <img src={this.state.settingsIcon} alt="missing image" id="settings-icon"/>
                   </div>
                 </div>
                 <div className="game-options">
@@ -520,20 +518,11 @@ class App extends Component<{}, AppState> {
                     <button className={`add-button themed ${theme}`}
                             onClick={ () => {handleNewName(newNameValue, newProfileIdValue)
                               this.setState({newProfileIdValue: "", newNameValue: ""})}}
-                            style={{fontSize: 20}}
                     >Add pair</button>
                     <button className={`clear-button themed ${theme}`}
                             onClick={() => {handleNameRemove(newNameValue)
                               this.setState({newProfileIdValue: "", newNameValue: ""})}}
-                            style={{fontSize: 20}}
                     >Remove name</button>
-                    <ul style={{
-                      position: "relative",
-                      fontSize: 20,
-                      textAlign: "left",
-                      alignContent: "flex-start",
-                      fontWeight: "bold",
-                    }}></ul>
                   </div>
                 </div>
               </div>

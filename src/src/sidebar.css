@@ -17,7 +17,7 @@
 }
 .sidebar-headings {
     font-size: 2.6vw;
-    margin-top: 17%;
+    margin-top: 5%;
     color: var(--sidebar-color); /* Idk if this does anything */
 }
 .num-song-box {
@@ -236,7 +236,7 @@
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #4E545FFF;
     --activate-sidebar-fontsize-adjustment: -40%;
-    --activate-sidebar-right-adjustment: -1%;
+    --activate-sidebar-right-adjustment: -3%;
 }
 .drac {
     --sidebar-bg: #282b31;
@@ -272,7 +272,7 @@
     --inactive-tab-color: whitesmoke;
     --tab-highlight-color: #fab9e3;
     --activate-sidebar-fontsize-adjustment: 35%;
-    --activate-sidebar-right-adjustment: 2.5px;
+    --activate-sidebar-right-adjustment: 1.9%;
 }
 .marley {
     --sidebar-bg: #282b31;
@@ -294,38 +294,39 @@
 }
 @media (max-aspect-ratio: 1/1) {
     #sidebar {
-        --topbar-height: 15vh;
+        --topbar-height: 12vh;
         flex: none;
         width: 80vw;
         left: -80vw;
         position: fixed;
     }
     #activate-sidebar-button {
-        font-size: calc(35px + var(--activate-sidebar-fontsize-adjustment));
-        right: calc(-100px + var(--activate-sidebar-right-adjustment));
+        font-size: calc(65px + var(--activate-sidebar-fontsize-adjustment));
+        right: calc(-170px + var(--activate-sidebar-right-adjustment));
     }
     .sidebar-headings {
-        font-size: 250%;
+        font-size: 7vw;
         margin-top: 5%;
         margin-bottom: 3%;
     }
     .num-song-box {
-        font-size: 130%;
+        font-size: 300%;
     }
     .name-playlist-box {
-        font-size: 140%;
+        font-size: 250%;
     }
     .add-button {
-        font-size: 25px;
+        font-size: 40px;
     }
     .clear-button {
-        font-size: 25px;
+        font-size: 40px;
     }
     .listed-items {
-        font-size: 23px;
+        font-size: 45px;
+        margin-left: 5%;
     }
     .tab {
-        font-size: 150%;
+        font-size: calc(400% + var(--activate-sidebar-fontsize-adjustment));
         padding: 10px 0 10px;
         height: auto;
     }

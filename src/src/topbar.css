@@ -2,7 +2,7 @@
     background-color: var(--topbar-bg);
     animation: fallDownAnimation ease 1.5s;
     display: grid;
-    grid-template-columns: repeat(4,25%);
+    grid-template-columns: 30% 30% 30% 10%;
     height: var(--topbar-height);
     justify-content: space-evenly;
     justify-items: center;
@@ -21,7 +21,13 @@
     color: var(--topbar-color);
     text-shadow: var(--topbar-glow);
 }
-
+#settings-icon {
+    width: 30%;
+    vertical-align: middle;
+    /*text-align: left;*/
+    margin-bottom: 1%;
+    margin-right: 2%;
+}
 #title {
     color: var(--title-color);
     text-shadow: var(--title-glow);
@@ -30,13 +36,16 @@
 
 @media (max-aspect-ratio: 1/1) {
     #topbar {
-        height: 15vh;
+        height: 12vh;
     }
     .topbar-option {
         font-size: calc(4vw + var(--overall-fontsize-adjustment));
     }
     #title {
         font-size: calc(5vw + var(--overall-fontsize-adjustment));
+    }
+    #settings-icon {
+        width: 50%;
     }
 }
 
@@ -45,15 +54,15 @@
     --topbar-bg: #252525;
     --title-color: mediumslateblue;
     --topbar-color: whitesmoke;
-    --topbar-font-size: 30px;
-    --title-size: 38px;
+    --topbar-font-size: 34px;
+    --title-size: 42px;
 }
 .dark {
     --topbar-bg: #252525;
     --title-color: mediumslateblue;
     --topbar-color: #dedede;
-    --topbar-font-size: 30px;
-    --title-size: 38px;
+    --topbar-font-size: 34px;
+    --title-size: 42px;
 }
 .neon {
     --topbar-bg: #252525;
@@ -61,36 +70,36 @@
     --title-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #6f00ff, 0 0 15px #6f00ff;
     --topbar-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #0048ff, 0 0 15px #0048ff;
     --topbar-color: var(--topbar-bg);
-    --topbar-font-size: 30px;
-    --title-size: 38px;
+    --topbar-font-size: 34px;
+    --title-size: 42px;
 }
 .pastel {
     --topbar-bg: #57f5f5;
     --title-color: #ff80e2;
     --topbar-color: #f5f557;
-    --topbar-font-size: 30px;
-    --title-size: 38px;
+    --topbar-font-size: 34px;
+    --title-size: 42px;
 }
 .gay {
     --topbar-bg: #000000;
     --title-color: mediumslateblue;
     --topbar-color: whitesmoke;
-    --topbar-font-size: 30px;
-    --title-size: 38px;
+    --topbar-font-size: 34px;
+    --title-size: 42px;
 }
 .kevin {
     --topbar-bg: #2e4bbe;
     --title-color: white;
     --topbar-color: whitesmoke;
-    --topbar-font-size: 27px;
-    --title-size: 33px;
+    --topbar-font-size: 30px;
+    --title-size: 38px;
 }
 .drac {
     --topbar-bg: #252525;
     --title-color: red;
     --topbar-color: orangered;
-    --topbar-font-size: 30px;
-    --title-size: 38px;
+    --topbar-font-size: 34px;
+    --title-size: 42px;
 }
 .barbie {
     --topbar-bg: #ff3ec7;
