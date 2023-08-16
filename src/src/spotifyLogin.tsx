@@ -1,6 +1,6 @@
 // Replace redirect URIs with whatever the url is if it changes, bleh
-// const redirectUri = "https://d4rthm4rl.github.io/music-explorer/";
-const redirectUri = "http://localhost:3000";
+const redirectUri = "https://d4rthm4rl.github.io/music-explorer/";
+// const redirectUri = "http://localhost:3000";
 
 export async function getToken() {
     const clientId = "4cd6054588e84b1884b9e14998f34844";
