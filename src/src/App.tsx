@@ -12,6 +12,8 @@ import NamesList from "./NamesList";
 import PlaylistList from "./PlaylistList";
 import {handleThemeChange, handleNewName, handleNameRemove, getAllNames, getTheme} from "./handleLocalStorageChange";
 import {getToken} from "./spotifyLogin";
+import {deviceID} from "./WebPlayback";
+import WebPlayback from "./WebPlayback";
 
 interface AppState {
   tracks: Track[];
@@ -124,232 +126,262 @@ class App extends Component<{}, AppState> {
 
   }
 
+
   handleStart = async () => {
     const token = localStorage.getItem("access_token");
-    // console.log(`Names are: ${this.state.names}, ${this.state.numPersonalState} from them`);
-    // console.log(`Playlists are: ${this.state.playlists}, ${this.state.numGenreState} from them`);
-
     const christmasWords = ["Christmas", "Snow", "Navidad", "Candy Cane", "Winter", "More Christ", "Santa", "Xmas"];
 
     try {
-        let totalTracks = [];
+      let totalTracks = [];
+      let uris = [];
+      console.log(`device id is: ${deviceID}`)
+      //TODO: do this at the end and connect to player here, needs to get device id
+      let options = {
+        url: `https://api.spotify.com/v1/me/player`,
+        method: 'put',
+        headers: {
+          'Authorization': 'Bearer ' + token
+        },
+        data: {
+          "device_ids": [
+            `${deviceID}`
+          ]
+        }
+      }
+      const playerResponse = await axios(options);
 
-        // Gets songs from each playlist inputted
-        let playlistID;
-        for (let i = 0; i < this.state.playlists.length; i++) {
-          console.log("Getting songs from playlists");
-          //TODO: Add playlist here if new playlist to add
-          switch (this.state.playlists[i].toUpperCase()) {
-            case 'TOP HITS 2000-2023':
-              playlistID = ('7E3uEa1emOcbZJuB8sFXeK');
-              break;
-            case 'TOP SPOTIFY':
-              playlistID = ('2YRe7HRKNRvXdJBp9nXFza');
-              break;
-            case 'TOP USA':
-              playlistID = ('37i9dQZEVXbLp5XoPON0wI');
-              break;
-            case 'PARTY HITS 2010S':
-              playlistID = ('37i9dQZF1DWWylYLMvjuRG');
-              break;
-            case 'MARLEY PARTY':
-              playlistID = ('2CksMSvKf7rc3G5YLIxSon');
-              break;
-            case 'DEN OF 10':
-              playlistID = ('3RHkHvFcAut8GQt3n31zuK');
-              break;
-            case 'SOFT POP HITS':
-              playlistID = ('37i9dQZF1DWTwnEm1IYyoj');
-              break;
-            case 'DANCE POP HITS':
-              playlistID = ('37i9dQZF1DWZQaaqNMbbXa');
-              break;
-            case 'THROWBACK JAMS':
-              playlistID = ('37i9dQZF1DX8ky12eWIvcW');
-              break;
-            case 'HIT REWIND':
-              playlistID = ('37i9dQZF1DX0s5kDXi1oC5');
-              break;
-            case 'POP':
-              playlistID = ('6gS3HhOiI17QNojjPuPzqc');
-              break;
-            case 'CHRISTMAS':
-              playlistID = ('6LUTEhw1sm9tTSiqHyBIg2');
-              break;
-            case 'DISNEY':
-              playlistID = ('37i9dQZF1DX8C9xQcOrE6T');
-              break;
-            case 'RAP HITS':
-              playlistID = ('4riovLwMCrY3q0Cd4e0Sqp');
-              break;
-            case 'RAP':
-              playlistID = ('6s5MoZzR70Qef7x4bVxDO1');
-              break;
-            case 'JAZZ':
-              playlistID = ('5EyFMotmvSfDAZ4hSdKrbx');
-              break;
-            case 'J-POP':
-              playlistID = ('3leFycE2a7uXZyuC6DQbdQ');
-              break;
-            case 'ROCK':
-              playlistID = ('7dowgSWOmvdpwNkGFMUs6e');
-              break;
-            case 'METAL':
-              playlistID = ('3pBfUFu8MkyiCYyZe849Ks');
-              break;
+      // Gets songs from each playlist inputted
+      let playlistID;
+      for (let i = 0; i < this.state.playlists.length; i++) {
+        console.log("Getting songs from playlists");
+        //TODO: Add playlist here if new playlist to add
+        switch (this.state.playlists[i].toUpperCase()) {
+          case 'TOP HITS 2000-2023':
+            playlistID = ('7E3uEa1emOcbZJuB8sFXeK');
+            break;
+          case 'TOP SPOTIFY':
+            playlistID = ('2YRe7HRKNRvXdJBp9nXFza');
+            break;
+          case 'TOP USA':
+            playlistID = ('37i9dQZEVXbLp5XoPON0wI');
+            break;
+          case 'PARTY HITS 2010S':
+            playlistID = ('37i9dQZF1DWWylYLMvjuRG');
+            break;
+          case 'MARLEY PARTY':
+            playlistID = ('2CksMSvKf7rc3G5YLIxSon');
+            break;
+          case 'DEN OF 10':
+            playlistID = ('3RHkHvFcAut8GQt3n31zuK');
+            break;
+          case 'SOFT POP HITS':
+            playlistID = ('37i9dQZF1DWTwnEm1IYyoj');
+            break;
+          case 'DANCE POP HITS':
+            playlistID = ('37i9dQZF1DWZQaaqNMbbXa');
+            break;
+          case 'THROWBACK JAMS':
+            playlistID = ('37i9dQZF1DX8ky12eWIvcW');
+            break;
+          case 'HIT REWIND':
+            playlistID = ('37i9dQZF1DX0s5kDXi1oC5');
+            break;
+          case 'POP':
+            playlistID = ('6gS3HhOiI17QNojjPuPzqc');
+            break;
+          case 'CHRISTMAS':
+            playlistID = ('6LUTEhw1sm9tTSiqHyBIg2');
+            break;
+          case 'DISNEY':
+            playlistID = ('37i9dQZF1DX8C9xQcOrE6T');
+            break;
+          case 'RAP HITS':
+            playlistID = ('4riovLwMCrY3q0Cd4e0Sqp');
+            break;
+          case 'RAP':
+            playlistID = ('6s5MoZzR70Qef7x4bVxDO1');
+            break;
+          case 'JAZZ':
+            playlistID = ('5EyFMotmvSfDAZ4hSdKrbx');
+            break;
+          case 'J-POP':
+            playlistID = ('3leFycE2a7uXZyuC6DQbdQ');
+            break;
+          case 'ROCK':
+            playlistID = ('7dowgSWOmvdpwNkGFMUs6e');
+            break;
+          case 'METAL':
+            playlistID = ('3pBfUFu8MkyiCYyZe849Ks');
+            break;
+        }
+        let options = {
+          url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=00`,
+          method: 'get',
+          headers: {
+            'Authorization': 'Bearer ' + token
           }
-          let options = {
-            url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=00`,
-            method: 'get',
-            headers: {
-              'Authorization': 'Bearer ' + token
-            }
-          };
-          console.log(`https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=00`);
+        };
+        console.log(`https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=00`);
 
-          const playlistResponse = await axios(options);
-          if (playlistResponse.status === 200) {
-            let failedAttempts = 0;
-            for (let i = 0; i < this.state.numGenreState; i++) {
-              const tracks = playlistResponse.data.items;
-              const trackNum = Math.floor(Math.random() * tracks.length);
-              console.log(`Track number is: ${trackNum}`)
-              const track = tracks[trackNum].track;
-              const link = `http://open.spotify.com/track/${track.id}`;
-              console.log(`Link: ${link}`)
-              const trackName = track.name;
-              const artists = track.artists;
-              const id = track.id;
-              const previewUrl = track.preview_url;
-              console.log(`Track: ${track.name} and is playable: ${track.is_playable}`)
-              if (this.state.tracks.includes(track)) {
-                i--;
-                failedAttempts++;
-                console.log(trackName + "isn't playable or is already selected");
-                console.log('---');
+        const playlistResponse = await axios(options);
+        if (playlistResponse.status === 200) {
+          let failedAttempts = 0;
+          for (let i = 0; i < this.state.numGenreState; i++) {
+            const tracks = playlistResponse.data.items;
+            const trackNum = Math.floor(Math.random() * tracks.length);
+            console.log(`Track number is: ${trackNum}`)
+            const track = tracks[trackNum].track;
+            const link = `http://open.spotify.com/track/${track.id}`;
+            console.log(`Link: ${link}`)
+            const trackName = track.name;
+            const artists = track.artists;
+            const id = track.id;
+            const previewUrl = track.preview_url;
+            console.log(`Track: ${track.name} and is playable: ${track.is_playable}`)
+            if (this.state.tracks.includes(track)) {
+              i--;
+              failedAttempts++;
+              console.log(trackName + "isn't playable or is already selected");
+              console.log('---');
 
-                if (failedAttempts > 5) {
-                  throw new Error("Failed too many times to get a song");
-                }
-              } else {
-                console.log('Track:', trackName);
-                console.log('Preview:', previewUrl);
-                console.log('---');
-
-                totalTracks.push(link);
-                // Update the state with the new track
-                this.setState({links: totalTracks});
+              if (failedAttempts > 5) {
+                throw new Error("Failed too many times to get a song");
               }
+            } else {
+              console.log('Track:', trackName);
+              console.log('Preview:', previewUrl);
+              console.log('---');
+
+              totalTracks.push(link);
+              uris.push(`spotify:track:${id}`);
+              // Update the state with the new track
+              this.setState({links: totalTracks});
             }
           }
         }
+      }
 
-        // Adds a song from a randomly selected playlist from each players profile until it reaches selected value
-        let profileID;
-        console.log('looking at profiles now')
-        for (let i = 0; i < this.state.names.length; i++) {
-          let failedAttempts = 0;
-          const availableNames: string[] = getAllNames();
-          for (let j = 0; j < availableNames.length; j++) {
-            if (this.state.names[i] === availableNames[j][0]) {
-              profileID = availableNames[j][1];
-            }
+      // Adds a song from a randomly selected playlist from each players profile until it reaches selected value
+      let profileID;
+      console.log('looking at profiles now')
+      for (let i = 0; i < this.state.names.length; i++) {
+        let failedAttempts = 0;
+        const availableNames: string[] = getAllNames();
+        for (let j = 0; j < availableNames.length; j++) {
+          if (this.state.names[i] === availableNames[j][0]) {
+            profileID = availableNames[j][1];
           }
-          let options = {
-            url: `https://api.spotify.com/v1/users/${profileID}/playlists`,
-            method: 'get',
-            headers: {'Authorization': 'Bearer ' + token}
-          }
-          const profileResponse = await axios(options);
-          if (profileResponse.status === 200) {
-            const playlists = profileResponse.data.items;
-            if (playlists.length > 0) {
-              // Iterates over each playlist and selects a song from a random one until reaches numPersonal
-              //TODO: Add it so that it's selectable whether it chooses randomly from one playlist or any or selectable
-              for (let j = 0; j < this.state.numPersonalState; j++) {
-                let playlistNum = Math.floor(Math.random() * playlists.length);
-                if (this.state.grinchMode) {
-                  christmasWords.forEach(function (christmasWord:string) {
-                    console.log("Looking for bad words");
-                    let numGrinchTries = 0;
-                    while (playlists[playlistNum].name.includes(christmasWord)) {
-                      console.log(playlists[playlistNum].name + " includes " + christmasWord)
-                      playlistNum = Math.floor(Math.random() * playlists.length);
-                      numGrinchTries++;
-                      if (numGrinchTries > 10) {
-                        console.log("player doesn't have any non-Christmas/Winter playlists");
+        }
+        let options = {
+          url: `https://api.spotify.com/v1/users/${profileID}/playlists`,
+          method: 'get',
+          headers: {'Authorization': 'Bearer ' + token}
+        }
+        const profileResponse = await axios(options);
+        if (profileResponse.status === 200) {
+          const playlists = profileResponse.data.items;
+          if (playlists.length > 0) {
+            // Iterates over each playlist and selects a song from a random one until reaches numPersonal
+            //TODO: Add it so that it's selectable whether it chooses randomly from one playlist or any or selectable
+            for (let j = 0; j < this.state.numPersonalState; j++) {
+              let playlistNum = Math.floor(Math.random() * playlists.length);
+              if (this.state.grinchMode) {
+                christmasWords.forEach(function (christmasWord:string) {
+                  console.log("Looking for bad words");
+                  let numGrinchTries = 0;
+                  while (playlists[playlistNum].name.includes(christmasWord)) {
+                    console.log(playlists[playlistNum].name + " includes " + christmasWord)
+                    playlistNum = Math.floor(Math.random() * playlists.length);
+                    numGrinchTries++;
+                    if (numGrinchTries > 10) {
+                      console.log("player doesn't have any non-Christmas/Winter playlists");
+                    }
+                  }
+                });
+              }
+              const playlist = playlists[playlistNum];
+              const playlistID = playlist.id;
+              console.log(`Chose ${playlist.name}`);
+
+              //TODO: Could make another method to add track to state because this is duplicated
+              let options = {
+                url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=00`,
+                method: 'get',
+                headers: {'Authorization': 'Bearer ' + token}
+              };
+
+              const playlistResponse = await axios(options);
+              if (playlistResponse.status === 200) {
+                const tracks = playlistResponse.data.items;
+                const trackNum = Math.floor(Math.random() * tracks.length);
+                const track = tracks[trackNum].track;
+                const link = `http://open.spotify.com/track/${track.id}`;
+                const trackName = track.name;
+                const artists = track.artists;
+                const id = track.id;
+
+                if (this.state.tracks.includes(track)) {
+                  j--;
+                  failedAttempts++;
+                  console.log(trackName + "isn't playable or is already selected");
+                  console.log('---');
+                  if (failedAttempts > 5) {
+                    throw new Error("Failed too many times to get a song");
+                  }
+                } else if (this.state.grinchMode) {
+                  let hasChristmas = false
+                  christmasWords.forEach(function (christmasWord: string) {
+                    if (trackName.includes(christmasWord)) {
+                      hasChristmas = true;
+                      j--;
+                      failedAttempts++;
+                      console.log(trackName + " includes " + christmasWord)
+                      console.log('---');
+                      if (failedAttempts > 5) {
+                        throw new Error("Failed too many times to get a song");
                       }
                     }
                   });
-                }
-                const playlist = playlists[playlistNum];
-                const playlistID = playlist.id;
-                console.log(`Chose ${playlist.name}`);
-
-                //TODO: Could make another method to add track to state because this is duplicated
-                let options = {
-                  url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=00`,
-                  method: 'get',
-                  headers: {'Authorization': 'Bearer ' + token}
-                };
-
-                const playlistResponse = await axios(options);
-                if (playlistResponse.status === 200) {
-                  const tracks = playlistResponse.data.items;
-                  const trackNum = Math.floor(Math.random() * tracks.length);
-                  const track = tracks[trackNum].track;
-                  const link = `http://open.spotify.com/track/${track.id}`;
-                  const trackName = track.name;
-                  const artists = track.artists;
-                  // const id = track.id;
-                  // const previewUrl = track.preview_url;
-
-                  if (this.state.tracks.includes(track)) {
-                    j--;
-                    failedAttempts++;
-                    console.log(trackName + "isn't playable or is already selected");
-                    console.log('---');
-                    if (failedAttempts > 5) {
-                      throw new Error("Failed too many times to get a song");
-                    }
-                  } else if (this.state.grinchMode) {
-                    let hasChristmas = false
-                    christmasWords.forEach(function (christmasWord: string) {
-                      if (trackName.includes(christmasWord)) {
-                        hasChristmas = true;
-                        j--;
-                        failedAttempts++;
-                        console.log(trackName + " includes " + christmasWord)
-                        console.log('---');
-                        if (failedAttempts > 5) {
-                          throw new Error("Failed too many times to get a song");
-                        }
-                      }
-                    });
-                    if (!hasChristmas) {
-                      console.log('Track:', trackName);
-                      console.log('---');
-
-                      totalTracks.push(link);
-                      // Update the state with the new track
-                      this.setState({links: totalTracks});
-                    }
-                  } else { // if grinch mode is off and track isn't already selected
+                  if (!hasChristmas) {
                     console.log('Track:', trackName);
-                    // console.log('Preview:', previewUrl);
                     console.log('---');
 
                     totalTracks.push(link);
+                    uris.push(`spotify:track:${id}`);
                     // Update the state with the new track
                     this.setState({links: totalTracks});
                   }
+                } else { // if grinch mode is off and track isn't already selected
+                  console.log('Track:', trackName);
+                  console.log('---');
+
+                  totalTracks.push(link);
+                  uris.push(`spotify:track:${id}`);
+                  // Update the state with the new track
+                  this.setState({links: totalTracks});
                 }
               }
-            } else {
-              console.log(this.state.names[i] + " doesn't have any public playlists");
             }
+          } else {
+            console.log(this.state.names[i] + " doesn't have any public playlists");
+            //TODO: Add something on the page that says this
           }
         }
+      }
+
+      // Puts the found tracks on the player
+      let playerOptions = {
+        url: `https://api.spotify.com/v1/me/player/play`,
+        method: 'put',
+        headers: {
+          'Authorization': 'Bearer ' + token
+        },
+        data: {
+          'uris': uris
+        }
+      };
+      const songStartResponse = await axios(playerOptions);
+
     } catch (error) {console.log("Uh oh there was an error with handle start" + error);}
   }
 
@@ -432,16 +464,14 @@ class App extends Component<{}, AppState> {
                     {!directionsActive ? (
                         <div>
                           {this.state.useEmbed ? ( // If the toggle is on, use the embed
-                          <iframe style={{borderRadius: 12, border: "none"}}
-                                  src="https://open.spotify.com/embed/playlist/3GVPsndFBvGFFfdRFZHUeK?utm_source=generator&theme=0"
-                                  width="100%" height="352"
-                                  allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                                  loading="lazy"
-                          ></iframe>) : null}
-                          <ul id="links" className="themed">
-                           {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"
+                              // Put the Spotify SDK player here
+                              <WebPlayback token={localStorage.getItem("access_token")}></WebPlayback>
+                          ) : (
+                          <ul id="links" className={`themed ${theme}`}>
+                            {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"
                                                                                       href={link} target="_blank" rel="noreferrer">{link}</a></li>))}
                           </ul>
+                          )}
                           <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Start</button>
                         </div>) : (
                         <ol id="directions-list" className= {`themed ${theme}`}>
