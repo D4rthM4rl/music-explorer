@@ -4,6 +4,7 @@ import {getTheme} from "./handleLocalStorageChange";
 import rewindIcon from "./assets/rewind-icon.png"
 import pauseIcon from "./assets/pause-icon.png"
 import fastforwardIcon from "./assets/fastforward-icon.png"
+import axios from "axios";
 
 const track = {
     name: "",
@@ -64,12 +65,26 @@ function WebPlayback(props) {
             }));
             player.connect();
         };
+        // console.log(`device id is: ${deviceID}`)
+        // let options = {
+        //     url: `https://api.spotify.com/v1/me/player`,
+        //     method: 'put',
+        //     headers: {
+        //         'Authorization': 'Bearer ' + localStorage.getItem("access_token")
+        //     },
+        //     data: {
+        //         "device_ids": [
+        //             `${deviceID}`
+        //         ]
+        //     }
+        // }
+        // axios(options);
     }, []);
 
     if (!is_active) {
         return (
             <div className="player-container">
-                <b> Instance not active. Press start to connect </b>
+                <b> Instance not active. Press "Generate" to connect </b>
             </div>)
     } else {
         return (

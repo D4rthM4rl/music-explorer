@@ -1,5 +1,8 @@
 // Replace redirect URIs with whatever the url is if it changes, bleh
 // const redirectUri = "https://d4rthm4rl.github.io/music-explorer/";
+import {deviceID} from "./WebPlayback";
+import axios from "axios";
+
 const redirectUri = "http://localhost:3000";
 
 export async function getToken() {
@@ -18,7 +21,7 @@ export async function getToken() {
     return accessToken;
 }
 
-export async function redirectToAuthCodeFlow(clientId: string) {
+async function redirectToAuthCodeFlow(clientId: string) {
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
 
@@ -77,7 +80,6 @@ export async function getAccessToken(clientId: string, code: string) {
 
             if (!response.ok) {
                 getRefreshToken(clientId);
-                // throw new Error('HTTP status ' + response.status);
             }
 
             const data = await response.json();
@@ -123,4 +125,20 @@ export async function getRefreshToken(clientId: string) {
     } catch (error) {
         console.error('Error:', error);
     }
+}
+
+export async function getUserPremium() {
+    let totalTracks = [];
+    let uris = [];
+    console.log(`device id is: ${deviceID}`)
+    let options = {
+        url: `https://api.spotify.com/v1/me`,
+        method: 'get',
+        headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+        }
+    }
+    const playerResponse = await axios(options);
+    // localStorage.setItem("user_premium",playerResponse.data.product === "premium");
+    return playerResponse.data.product === "premium";
 }

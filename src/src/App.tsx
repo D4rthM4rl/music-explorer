@@ -13,6 +13,7 @@ import PlaylistList from "./PlaylistList";
 import {handleThemeChange, handleNewName, handleNameRemove, getAllNames, getTheme} from "./handleLocalStorageChange";
 import {getToken} from "./spotifyLogin";
 import {deviceID} from "./WebPlayback";
+import {getUserPremium} from "./spotifyLogin";
 import WebPlayback from "./WebPlayback";
 
 interface AppState {
@@ -28,11 +29,13 @@ interface AppState {
   theme: string;
   welcomeVisible: boolean;
   usePlayer: boolean;
+  useEmbed: boolean;
   grinchMode: boolean
   newNameValue: string;
   newProfileIdValue: string;
   settingsIcon: typeof settingsIconWhite;
   directionsActive: boolean;
+  userPremium: boolean;
 }
 
 interface Track {
@@ -64,11 +67,13 @@ class App extends Component<{}, AppState> {
       theme: "default",
       welcomeVisible: true,
       usePlayer: true,
+      useEmbed: false,
       grinchMode: false,
       newNameValue: "",
       newProfileIdValue: "",
       settingsIcon: settingsIconWhitesmoke,
       directionsActive: false,
+      userPremium: false,
     };
   }
 
@@ -81,7 +86,7 @@ class App extends Component<{}, AppState> {
       if (aspectRatio < 1) {
         rSidebar.style.right = rSidebar.style.right === "0px" ? "-80%" : "0px";
       } else {
-        rSidebar.style.right = rSidebar.style.right === "0px" ? "-20%" : "0px";
+        rSidebar.style.right = rSidebar.style.right === "0px" ? "-25%" : "0px";
       }
     }
     this.setState({settingsActive: !this.state.settingsActive})
@@ -133,21 +138,22 @@ class App extends Component<{}, AppState> {
     try {
       let totalTracks = [];
       let uris = [];
-      console.log(`device id is: ${deviceID}`)
-      let options = {
-        url: `https://api.spotify.com/v1/me/player`,
-        method: 'put',
-        headers: {
-          'Authorization': 'Bearer ' + token
-        },
-        data: {
-          "device_ids": [
-            `${deviceID}`
-          ]
+      if (this.state.userPremium && this.state.usePlayer) {
+        console.log(`device id is: ${deviceID}`)
+        let options = {
+          url: `https://api.spotify.com/v1/me/player`,
+          method: 'put',
+          headers: {
+            'Authorization': 'Bearer ' + token
+          },
+          data: {
+            "device_ids": [
+              `${deviceID}`
+            ]
+          }
         }
+        await axios(options);
       }
-      const playerResponse = await axios(options);
-
       // Gets songs from each playlist inputted
       let playlistID;
       for (let i = 0; i < this.state.playlists.length; i++) {
@@ -212,6 +218,7 @@ class App extends Component<{}, AppState> {
             playlistID = ('3pBfUFu8MkyiCYyZe849Ks');
             break;
         }
+        //TODO: Make the offset variable to how many user wants and how many are in playlist
         let options = {
           url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=00`,
           method: 'get',
@@ -247,7 +254,6 @@ class App extends Component<{}, AppState> {
               }
             } else {
               console.log('Track:', trackName);
-              console.log('Preview:', previewUrl);
               console.log('---');
 
               totalTracks.push(link);
@@ -261,7 +267,6 @@ class App extends Component<{}, AppState> {
 
       // Adds a song from a randomly selected playlist from each players profile until it reaches selected value
       let profileID;
-      console.log('looking at profiles now')
       for (let i = 0; i < this.state.names.length; i++) {
         let failedAttempts = 0;
         const availableNames: string[] = getAllNames();
@@ -367,19 +372,20 @@ class App extends Component<{}, AppState> {
         }
       }
 
-      // Puts the found tracks on the player
-      let playerOptions = {
-        url: `https://api.spotify.com/v1/me/player/play`,
-        method: 'put',
-        headers: {
-          'Authorization': 'Bearer ' + token
-        },
-        data: {
-          'uris': uris
-        }
-      };
-      const songStartResponse = await axios(playerOptions);
-
+      if (this.state.userPremium && this.state.usePlayer) {
+        // Puts the found tracks on the player
+        let playerOptions = {
+          url: `https://api.spotify.com/v1/me/player/play`,
+          method: 'put',
+          headers: {
+            'Authorization': 'Bearer ' + token
+          },
+          data: {
+            'uris': uris
+          }
+        };
+        const songStartResponse = await axios(playerOptions);
+      }
     } catch (error) {console.log("Uh oh there was an error with handle start" + error);}
   }
 
@@ -389,11 +395,13 @@ class App extends Component<{}, AppState> {
     this.setState({theme: newTheme});
     this.changeIcons(newTheme);
     getToken();
+    this.setState({userPremium: await getUserPremium()})
   };
 
   render() {
-    const { isNamesTab, theme, newNameValue, newProfileIdValue, directionsActive } = this.state;
+    const { isNamesTab, theme, newNameValue, newProfileIdValue, directionsActive, userPremium } = this.state;
     const aspectRatio = window.innerWidth/window.innerHeight;
+
     return (
         <div>
           {this.state.welcomeVisible ? (
@@ -460,18 +468,30 @@ class App extends Component<{}, AppState> {
                   </div>
                   <div id="music-area" className={`themed ${theme}`}>
                     {!directionsActive ? (
-                        <div>
-                          {this.state.usePlayer ? ( // If the toggle is on, use the Spotify Web APK Player
-                              <WebPlayback token={localStorage.getItem("access_token")}></WebPlayback>
-                          ) : (
-                          <ul id="links" className={`themed ${theme}`}>
-                            {this.state.links.map((link, index) => (<li key={index}><a id="links-output" className="themed links-output"
-                                                                                      href={link} target="_blank" rel="noreferrer">{link}</a></li>))}
-                          </ul>
-                          )}
-                          <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Generate</button>
-                        </div>) : (
-                        <ol id="directions-list" className= {`themed ${theme}`}>
+                      <div>
+                        {this.state.usePlayer ? ( // If the toggle is on, use the Spotify Web APK Player
+                            <WebPlayback token={localStorage.getItem("access_token")}></WebPlayback>
+                        ) : (
+                          <div>
+                            {!this.state.useEmbed ? (
+                                <ul id="links" className={`themed ${theme}`}>
+                                  {this.state.links.map((link, index) => (
+                                    <li key={index}><a id="links-output" className="themed links-output" href={link} target="_blank" rel="noreferrer">{link}</a></li>))}
+                                </ul>
+                            ): (<iframe id="embed"
+                                // style={"border-radius:12px"}
+                                //TODO: Add embed functionality
+                                src="https://open.spotify.com/embed/playlist/3RHkHvFcAut8GQt3n31zuK?utm_source=generator"
+                                width="100%" height="352"
+                                allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                                loading="lazy">
+                            </iframe>)}
+                          </div>
+                        )}
+                        <br/>
+                        <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Generate</button>
+                      </div>) : (
+                      <ol id="directions-list" className= {`themed ${theme}`}>
                           <li>Add names and links to their respective Spotify profile in the Settings</li>
                           <ol style={{listStyle: "none", fontSize: "80%"}}>
                             <li style={{paddingBottom: 3, paddingTop: 5}}>These names will be added to the left sidebar and saved on the website</li>
@@ -487,8 +507,18 @@ class App extends Component<{}, AppState> {
                           </ol>
                           <li>Go to the main screen and click the start button</li>
                           <ol style={{fontSize: "80%"}}>
-                            <li className="directions-item">By default, it will play songs in the player but this won't work if you don't have Spotify Premium</li>
-                            <li className="directions-item">Disable the "Web Player" toggle in Settings if you want it to just output links or don't have Spotify Premium</li>
+                            {this.state.userPremium ? (
+                            <div>
+                              <li className="directions-item">Use the player to skip forward and backwards between songs</li>
+                              <li className="directions-item">Disable the "Web Player" toggle in Settings if you want it to just output links</li>
+                              <li className="directions-item">With "Web Player" disabled, click the links to go to each song or enable the "Use Embed" toggle in settings</li>
+                              <li className="directions-item">Enabling "Use Embed" will create a playlist in your library of the generated songs and put them on the screen with previews</li>
+                            </div>): (
+                                <div>
+                                  <li className="directions-item">Click the links to go to each song or enable the "Use Embed" toggle in settings</li>
+                                  <li className="directions-item">Enabling "Use Embed" will create a playlist in your library of the generated songs and put them on the screen with previews</li>
+                                </div>
+                            ) }
                           </ol>
                         </ol>
                     )}
@@ -516,12 +546,24 @@ class App extends Component<{}, AppState> {
                         <option value="marley">Marley</option>
                       </select>
                     </div>
+                    {userPremium ? (
                     <div id="player-toggle" style={{marginTop: "5%"}}>Web Player
                       <label className="switch themed" style={{marginLeft: "10%"}}>
                         <input type="checkbox" checked={this.state.usePlayer}/>
-                        <span className="slider round themed" onClick={() => this.setState({usePlayer: !this.state.usePlayer})}></span>
+                        <span className="slider round themed" onClick={() => {
+                          this.setState({usePlayer: !this.state.usePlayer});
+                          this.setState({useEmbed: false})}}/>
                       </label>
                     </div>
+                    ): null}
+                    {!this.state.usePlayer? (
+                    <div id="player-toggle" style={{marginTop: "5%"}}>Preview Embed
+                      <label className="switch themed" style={{marginLeft: "10%"}}>
+                        <input type="checkbox" checked={this.state.useEmbed}/>
+                        <span className="slider round themed" onClick={() => this.setState({useEmbed: !this.state.useEmbed})}/>
+                      </label>
+                    </div>
+                    ): null}
                     <div id="grinch-toggle" style={{marginTop: "5%"}}>Grinch Mode
                       <label className="switch themed" style={{marginLeft: "10%"}}>
                         <input type="checkbox" />

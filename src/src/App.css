@@ -38,7 +38,7 @@ body {
 }
 #directions-list {
   margin-top: 15%;
-  font-size: calc(2.1vw + var(--directions-fontsize-adjustment));
+  font-size: calc(2vw + var(--directions-fontsize-adjustment));
   padding-left: 10%;
   padding-right: 3%;
   text-align: left;
@@ -73,6 +73,10 @@ body {
   border-radius: 7px;
   cursor: pointer;
 }
+#embed {
+  border-radius:12px
+}
+
 #start-button{
   font-size: 25px;
   font-family: var(--overall-font-family);
@@ -81,8 +85,8 @@ body {
   color: var(--start-button-color);
 }
 #links{
-  position:absolute;
-  margin-bottom: 25%;
+  /*position:absolute;*/
+  /*margin-bottom: 25%;*/
   list-style: none;
 }
 #links-output{color:var(--link-color); mix-blend-mode: var(--link-blend); font-family: var(--overall-font-family)}
