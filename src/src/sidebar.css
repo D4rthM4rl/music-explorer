@@ -45,7 +45,7 @@
 .add-button {
     color: var(--add-button-color);
     background: var(--add-button-bg);
-    border-radius: 25%;
+    border-radius: 15%;
     border: var(--button-border);
     cursor: pointer;
     margin-right: 5%;
@@ -54,7 +54,7 @@
 .clear-button {
     color: var(--clear-button-color);
     background: var(--clear-button-bg);
-    border-radius: 25%;
+    border-radius: 15%;
     border: var(--button-border);
     cursor: pointer;
     font-size: 20px;

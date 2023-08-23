@@ -27,7 +27,7 @@ interface AppState {
   settingsActive: boolean;
   theme: string;
   welcomeVisible: boolean;
-  useEmbed: boolean;
+  usePlayer: boolean;
   grinchMode: boolean
   newNameValue: string;
   newProfileIdValue: string;
@@ -63,7 +63,7 @@ class App extends Component<{}, AppState> {
       settingsActive: false,
       theme: "default",
       welcomeVisible: true,
-      useEmbed: false,
+      usePlayer: true,
       grinchMode: false,
       newNameValue: "",
       newProfileIdValue: "",
@@ -126,7 +126,6 @@ class App extends Component<{}, AppState> {
 
   }
 
-
   handleStart = async () => {
     const token = localStorage.getItem("access_token");
     const christmasWords = ["Christmas", "Snow", "Navidad", "Candy Cane", "Winter", "More Christ", "Santa", "Xmas"];
@@ -135,7 +134,6 @@ class App extends Component<{}, AppState> {
       let totalTracks = [];
       let uris = [];
       console.log(`device id is: ${deviceID}`)
-      //TODO: do this at the end and connect to player here, needs to get device id
       let options = {
         url: `https://api.spotify.com/v1/me/player`,
         method: 'put',
@@ -463,8 +461,7 @@ class App extends Component<{}, AppState> {
                   <div id="music-area" className={`themed ${theme}`}>
                     {!directionsActive ? (
                         <div>
-                          {this.state.useEmbed ? ( // If the toggle is on, use the embed
-                              // Put the Spotify SDK player here
+                          {this.state.usePlayer ? ( // If the toggle is on, use the Spotify Web APK Player
                               <WebPlayback token={localStorage.getItem("access_token")}></WebPlayback>
                           ) : (
                           <ul id="links" className={`themed ${theme}`}>
@@ -472,7 +469,7 @@ class App extends Component<{}, AppState> {
                                                                                       href={link} target="_blank" rel="noreferrer">{link}</a></li>))}
                           </ul>
                           )}
-                          <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Start</button>
+                          <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Generate</button>
                         </div>) : (
                         <ol id="directions-list" className= {`themed ${theme}`}>
                           <li>Add names and links to their respective Spotify profile in the Settings</li>
@@ -490,8 +487,8 @@ class App extends Component<{}, AppState> {
                           </ol>
                           <li>Go to the main screen and click the start button</li>
                           <ol style={{fontSize: "80%"}}>
-                            <li className="directions-item">By default, it generates and outputs links</li>
-                            <li className="directions-item">Enable the "Use Embed" toggle in Settings if you want it to create a playlist in your with the generated songs which it will then display</li>
+                            <li className="directions-item">By default, it will play songs in the player but this won't work if you don't have Spotify Premium</li>
+                            <li className="directions-item">Disable the "Web Player" toggle in Settings if you want it to just output links or don't have Spotify Premium</li>
                           </ol>
                         </ol>
                     )}
@@ -519,10 +516,10 @@ class App extends Component<{}, AppState> {
                         <option value="marley">Marley</option>
                       </select>
                     </div>
-                    <div id="embed-toggle" style={{marginTop: "5%"}}>Use Embed
+                    <div id="player-toggle" style={{marginTop: "5%"}}>Web Player
                       <label className="switch themed" style={{marginLeft: "10%"}}>
-                        <input type="checkbox" />
-                        <span className="slider round themed" onClick={() => this.setState({useEmbed: !this.state.useEmbed})}></span>
+                        <input type="checkbox" checked={this.state.usePlayer}/>
+                        <span className="slider round themed" onClick={() => this.setState({usePlayer: !this.state.usePlayer})}></span>
                       </label>
                     </div>
                     <div id="grinch-toggle" style={{marginTop: "5%"}}>Grinch Mode

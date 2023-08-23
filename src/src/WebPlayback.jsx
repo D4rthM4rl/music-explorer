@@ -1,4 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import "./App.css"
+import {getTheme} from "./handleLocalStorageChange";
+import rewindIcon from "./assets/rewind-icon.png"
+import pauseIcon from "./assets/pause-icon.png"
+import fastforwardIcon from "./assets/fastforward-icon.png"
 
 const track = {
     name: "",
@@ -15,14 +20,13 @@ const track = {
 export let deviceID = "";
 
 function WebPlayback(props) {
-
+    let theme = getTheme()
     const [is_paused, setPaused] = useState(false);
     const [is_active, setActive] = useState(false);
     const [player, setPlayer] = useState(undefined);
     const [current_track, setTrack] = useState(track);
 
     useEffect(() => {
-
         const script = document.createElement("script");
         script.src = "https://sdk.scdn.co/spotify-player.js";
         script.async = true;
@@ -30,27 +34,20 @@ function WebPlayback(props) {
         document.body.appendChild(script);
 
         window.onSpotifyWebPlaybackSDKReady = () => {
-
             const player = new window.Spotify.Player({
-                name: 'Web Playback SDK',
+                name: 'Music Explorer Player',
                 getOAuthToken: cb => { cb(props.token); },
-                uri: "spotify:track:1301WleyT98MSxVHPZCA6M",
                 volume: 0.5
             });
-
             setPlayer(player);
-
-
             player.addListener('ready', ({ device_id }) => {
                 console.log('Ready with Device ID', device_id);
                 deviceID = device_id;
             });
-
             player.addListener('not_ready', ({ device_id }) => {
                 console.log('Device ID has gone offline', device_id);
                 deviceID = device_id;
             });
-
             player.addListener('player_state_changed', ( state => {
                 console.log("player state changed");
                 if (!state) {
@@ -65,48 +62,27 @@ function WebPlayback(props) {
                 });
 
             }));
-
             player.connect();
-
         };
     }, []);
 
     if (!is_active) {
         return (
-            <>
-                <div className="container">
-                    <div className="main-wrapper">
-                        <b> Instance not active. Transfer your playback using your Spotify app </b>
-                    </div>
-                </div>
-            </>)
+            <div className="player-container">
+                <b> Instance not active. Press start to connect </b>
+            </div>)
     } else {
         return (
-            <>
-                <div className="container">
-                    <div className="main-wrapper">
-
-                        <img src={current_track.album.images[0].url} className="now-playing__cover" alt="" />
-
-                        <div className="now-playing__side">
-                            <div className="now-playing__name">{current_track.name}</div>
-                            <div className="now-playing__artist">{current_track.artists[0].name}</div>
-
-                            <button className="btn-spotify" onClick={() => { player.previousTrack() }} >
-                                &lt;&lt;
-                            </button>
-
-                            <button className="btn-spotify" onClick={() => { player.togglePlay() }} >
-                                { is_paused ? "PLAY" : "PAUSE" }
-                            </button>
-
-                            <button className="btn-spotify" onClick={() => { player.nextTrack() }} >
-                                &gt;&gt;
-                            </button>
-                        </div>
-                    </div>
+            <div className="player-container">
+                <img src={current_track.album.images[0].url} id="now-playing__cover" alt=""/>
+                <div id="now-playing__title" className={`themed ${theme}`}>{current_track.name}</div>
+                <div id="now-playing__artist" className={`themed ${theme}`}>{current_track.artists[0].name}</div>
+                <div>
+                    <img src={rewindIcon} className="player-button" onClick={() => { player.previousTrack() }} alt="rewind"/>
+                    <img src={pauseIcon} id="pause-button" className="player-button" onClick={() => { player.togglePlay() }} alt="pause"/>
+                    <img src={fastforwardIcon} className="player-button" onClick={() => { player.nextTrack() }} alt="fast forward"/>
                 </div>
-            </>
+            </div>
         );
     }
 }

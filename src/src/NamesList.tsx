@@ -120,7 +120,7 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                 }}>
                     {this.props.nameArray.map((name, index) => (
                         <li key={index} style={{cursor: "pointer"}} onClick={() =>
-                        {if (aspectRatio < 1) {this.handleRemove(index)}
+                        {if (aspectRatio > 1 || true) {this.handleRemove(index)}
                         }}>{name}
                         </li>
                     ))}
