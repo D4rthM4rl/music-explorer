@@ -1,8 +1,8 @@
 // Replace redirect URIs with whatever the url is if it changes, bleh
-// const redirectUri = "https://d4rthm4rl.github.io/music-explorer/";
 import {deviceID} from "./WebPlayback";
 import axios from "axios";
 
+// const redirectUri = "https://d4rthm4rl.github.io/music-explorer/";
 const redirectUri = "http://localhost:3000";
 
 export async function getToken() {
