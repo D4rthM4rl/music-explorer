@@ -4,6 +4,7 @@ import {getTheme} from "./handleLocalStorageChange";
 import rewindIcon from "./assets/rewind-icon.png"
 import pauseIcon from "./assets/pause-icon.png"
 import fastforwardIcon from "./assets/fastforward-icon.png"
+import playIcon from "./assets/play-icon.png"
 import axios from "axios";
 
 const track = {
@@ -94,7 +95,9 @@ function WebPlayback(props) {
                 <div id="now-playing__artist" className={`themed ${theme}`}>{current_track.artists[0].name}</div>
                 <div>
                     <img src={rewindIcon} className="player-button" onClick={() => { player.previousTrack() }} alt="rewind"/>
-                    <img src={pauseIcon} id="pause-button" className="player-button" onClick={() => { player.togglePlay() }} alt="pause"/>
+                    {is_paused ? (<img src={playIcon} id="pause-button" className="player-button" onClick={() => { player.togglePlay() }} alt="pause"/>):
+                        (<img src={pauseIcon} id="pause-button" className="player-button" onClick={() => { player.togglePlay() }} alt="pause"/>)}
+                    {/*<img src={pauseIcon} id="pause-button" className="player-button" onClick={() => { player.togglePlay() }} alt="pause"/>*/}
                     <img src={fastforwardIcon} className="player-button" onClick={() => { player.nextTrack() }} alt="fast forward"/>
                 </div>
             </div>
