@@ -92,6 +92,7 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
                 /> <br/>
                 <datalist id="playlist-list">
                     <option value="Top Hits 2000-2023" />
+                    <option value="Carter" />
                     <option value="Top Spotify" />
                     <option value="Top USA" />
                     <option value="Party Hits 2010s" />

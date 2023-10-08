@@ -183,6 +183,9 @@ class App extends Component<{}, AppState> {
           case 'TOP HITS 2000-2023':
             playlistID = ('7E3uEa1emOcbZJuB8sFXeK');
             break;
+          case 'Carter':
+            playlistID = ('16Zy4RyltQwPm7slcsD1k6');
+            break;
           case 'TOP SPOTIFY':
             playlistID = ('2YRe7HRKNRvXdJBp9nXFza');
             break;
@@ -463,7 +466,7 @@ class App extends Component<{}, AppState> {
               <div className="main-page">
                 <div id="topbar" className={`themed ${theme}`}>
                   <div className={`topbar-option themed ${theme}`} id="title" onClick={() => {
-                    this.setState({directionsActive: false})}}>Music Explorer</div>
+                    this.setState({directionsActive: false})}}>Music Explorer v3.1</div>
                   <div className={`topbar-option themed ${theme}`} id="spotify-genres">All Genres</div>
                   <div className={`topbar-option themed ${theme}`} id="directions" onClick={() => {
                     this.setState({directionsActive: !directionsActive})}}>Directions</div>
