@@ -87,6 +87,17 @@ body {
   background: var(--start-button-bg);
   color: var(--start-button-color);
 }
+#songDupeError {
+  font-size: 130%;
+  font-family: var(--directions-font-family) ;
+  font-weight: bold;
+  padding-top: 2%;
+  padding-left: 5%;
+  visibility: hidden;
+  width: 90%;
+  color: red;
+  stroke: black;
+}
 #links{
   /*position:absolute;*/
   /*margin-bottom: 25%;*/

@@ -14,6 +14,7 @@ import {handleThemeChange, handleNewName, handleNameRemove, getAllNames, getThem
 import {getToken} from "./spotifyLogin";
 import {deviceID} from "./WebPlayback";
 import WebPlayback from "./WebPlayback";
+import assert from "assert";
 
 interface AppState {
   tracks: Track[];
@@ -183,9 +184,6 @@ class App extends Component<{}, AppState> {
           case 'TOP HITS 2000-2023':
             playlistID = ('7E3uEa1emOcbZJuB8sFXeK');
             break;
-          case 'Carter':
-            playlistID = ('16Zy4RyltQwPm7slcsD1k6');
-            break;
           case 'TOP SPOTIFY':
             playlistID = ('2YRe7HRKNRvXdJBp9nXFza');
             break;
@@ -329,9 +327,18 @@ class App extends Component<{}, AppState> {
               const playlistID = playlist.id;
               console.log(`Chose ${playlist.name}`);
 
+              // Chooses an offset for the 100 songs in the playlist to choose from being offset 0 to the offset end - 100
+              // Or if it isn't at least 100 songs long, then it just chooses 0
+              let offset: number;
+              if (playlist.tracks.total < 100) {
+                offset = 0;
+              } else {
+                offset = Math.min(Math.floor(Math.random() * (playlist.tracks.total - 100)));
+              }
+
               //TODO: Could make another method to add track to state because this is duplicated
               let options = {
-                url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=00`,
+                url: `https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=${offset}`,
                 method: 'get',
                 headers: {'Authorization': 'Bearer ' + token}
               };
@@ -352,7 +359,8 @@ class App extends Component<{}, AppState> {
                   console.log(trackName + "isn't playable or is already selected");
                   console.log('---');
                   if (failedAttempts > 5) {
-                    throw new Error("Failed too many times to get a song");
+                    console.log("Failed too many times to get a song");
+                    this.errorMessage("songDupeError", 5);
                   }
                 } else if (this.state.grinchMode) {
                   let hasChristmas = false
@@ -449,6 +457,26 @@ class App extends Component<{}, AppState> {
     this.getUserDetails();
   };
 
+  /**
+   * Displays an error message
+   * @param id class of error message to display
+   */
+  errorMessage = (id :string, secondsDuration: number) => {
+    const spot = document.getElementById(id);
+    assert(spot);
+    function displayMyMessage() {
+      // @ts-ignore
+      spot.style.visibility = "visible";
+    }
+    function hideMyMessage() {
+      // @ts-ignore
+      spot.style.visibility = "hidden";
+    }
+    displayMyMessage();
+    setTimeout(hideMyMessage, secondsDuration * 1000);
+
+  }
+
   render() {
     const { isNamesTab, theme, newNameValue, newProfileIdValue, directionsActive, userPremium } = this.state;
     const aspectRatio = window.innerWidth/window.innerHeight;
@@ -466,7 +494,7 @@ class App extends Component<{}, AppState> {
               <div className="main-page">
                 <div id="topbar" className={`themed ${theme}`}>
                   <div className={`topbar-option themed ${theme}`} id="title" onClick={() => {
-                    this.setState({directionsActive: false})}}>Music Explorer v3.1</div>
+                    this.setState({directionsActive: false})}}>Music Explorer v3.2</div>
                   <div className={`topbar-option themed ${theme}`} id="spotify-genres">All Genres</div>
                   <div className={`topbar-option themed ${theme}`} id="directions" onClick={() => {
                     this.setState({directionsActive: !directionsActive})}}>Directions</div>
@@ -542,6 +570,7 @@ class App extends Component<{}, AppState> {
                             </iframe>)}
                           </div>
                         )}
+                        <div id="songDupeError">Couldn't generate songs because there were likely too few playable songs</div>
                         <br/>
                         <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Generate</button>
                       </div>) : (
@@ -642,13 +671,18 @@ class App extends Component<{}, AppState> {
                     /><br/>
                     <button className={`add-button themed ${theme}`}
                             style={{marginTop: "5%"}}
-                            onClick={ () => {handleNewName(newNameValue, newProfileIdValue)
+                            onClick={ () => {
+                              if (!handleNewName(newNameValue, newProfileIdValue)) {
+                                this.errorMessage("newNameError", 3);
+
+                              }
                               this.setState({newProfileIdValue: "", newNameValue: ""})}}
                     >Add pair</button>
                     <button className={`clear-button themed ${theme}`}
                             onClick={() => {handleNameRemove(newNameValue)
                               this.setState({newProfileIdValue: "", newNameValue: ""})}}
-                    >Remove name</button>
+                    >Remove name</button><br/>
+                    <div id="newNameError" className="display-success">Couldn't add name because it probably already existed</div>
                   </div>
                 </div>
               </div>

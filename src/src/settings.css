@@ -94,6 +94,15 @@ input:checked + .slider:before {
     background: var(--settings-textbox-bg);
     box-shadow: var(--settings-textbox-glow);
 }
+#newNameError {
+    font-size: 70%;
+    padding-top: 2%;
+    padding-left: 10%;
+    visibility: hidden;
+    width: 80%;
+    color: red;
+    stroke: black;
+}
 @media (max-aspect-ratio: 1/1) {
     #settings-sidebar {
         --topbar-height: 12vh;

@@ -26,8 +26,10 @@ export async function storeToken (token: Promise<string | undefined>) {
     }
 }
 
-// Returns true if it added the name and false if not
-export function handleNewName (name: string, id: string) {
+/** Stores new name with corresponding id in localstorage if it is unique name
+ * @Returns true if it added the given name and id, and false otherwise.
+ */
+export function handleNewName (name: string, id: string): boolean {
     // https://open.spotify.com/user/swjy4clwrbijjzyonpha37rek?si=gkl2UWeLR_aLeI91q6pflw
     if (id.includes("https://open.spotify.com/user/")) {
         id = id.replace("https://open.spotify.com/user/", "");
@@ -46,11 +48,14 @@ export function handleNewName (name: string, id: string) {
             return false;
         }
     }
-    storePair(name, id);
-    return true;
+
+    return storePair(name, id);
 }
 
-export function handleNameRemove(name: string) {
+/** Removes given name from localstorage
+ * @Returns true if it removes the given name and corresponding id successfully, and false if name wasn't found.
+ */
+export function handleNameRemove(name: string): boolean {
     try {
         let existingPairs = JSON.parse(localStorage.getItem('names') || '[]');
         for (let i = 0; i < existingPairs.length; i++) {
@@ -59,30 +64,41 @@ export function handleNameRemove(name: string) {
                 console.log("found name")
                 existingPairs = existingPairs.slice(0,i).concat(existingPairs.slice(i+1));
                 localStorage.setItem('names', JSON.stringify(existingPairs))
+                return true;
             }
         }
+        return false;
     } catch (err) {
         console.error('Error removing name:', err);
+        return false;
     }
 }
 
-function storePair (newName: string, id: string) {
+/**
+ * Helper method that actually stores name and id in local storage
+ * @param newName given nonempty string
+ * @param id given spotify id of name's profile
+ * @throws Error if it has an error storing name in localstorage
+ * @returns false if there was an error storing name in localstorage
+ */
+function storePair (newName: string, id: string): boolean {
     try {
         const existingPairs = JSON.parse(localStorage.getItem('names') || '[]');
-        const newNamePair: string[] = [ newName, id ];
+        const newNamePair: string[] = [newName, id];
         const updatedPairs: string[] = [...existingPairs, newNamePair];
-        if (updatedPairs.includes(newName)) {
-            console.log("Need different name, that one already exists")
-        } else {
-            // @ts-ignore
-            updatedPairs[newName] = id;
-            localStorage.setItem('names', JSON.stringify(updatedPairs));
-        }
+        // @ts-ignore
+        updatedPairs[newName] = id;
+        localStorage.setItem('names', JSON.stringify(updatedPairs));
+        return true;
     } catch (err) {
-        console.error('Error storing names:', err);
+        console.error('Error storing name:', err);
+        return false;
     }
 }
 
+/**
+ * @Returns array of all the profile names in local storage.
+ */
 export function getAllNames() {
     try {return JSON.parse(localStorage.getItem('names') || '[]');
     } catch (err) {
