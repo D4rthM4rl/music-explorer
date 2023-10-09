@@ -5,7 +5,11 @@ import rewindIcon from "./assets/rewind-icon.png"
 import pauseIcon from "./assets/pause-icon.png"
 import fastforwardIcon from "./assets/fastforward-icon.png"
 import playIcon from "./assets/play-icon.png"
+import blackVisibleIcon from "./assets/black-visible-icon.png"
+import grayVisibleIcon from "./assets/gray-visible-icon.png"
+import whiteVisibleIcon from "./assets/white-visible-icon.png"
 import axios from "axios";
+import assert from "assert";
 
 const track = {
     name: "",
@@ -21,12 +25,28 @@ const track = {
 
 export let deviceID = "";
 
+async function toggleVisibilty(element) {
+    const spot = await document.getElementById(element);
+    if (spot) {
+        if (spot.style.visibility === "hidden") {
+            spot.style.visibility = "visible";
+        } else {
+            spot.style.visibility = "hidden";
+        }
+    }
+}
+
 function WebPlayback(props) {
     let theme = getTheme()
     const [is_paused, setPaused] = useState(false);
     const [is_active, setActive] = useState(false);
     const [player, setPlayer] = useState(undefined);
     const [current_track, setTrack] = useState(track);
+
+    const [coverVisible, coverSetVisible] = useState(true); // Initialize visibility state
+    const [titleVisible, titleSetVisible] = useState(true); // Initialize visibility state
+    const [artistVisible, artistSetVisible] = useState(true); // Initialize visibility state
+
 
     useEffect(() => {
         const script = document.createElement("script");
@@ -66,21 +86,11 @@ function WebPlayback(props) {
             }));
             player.connect();
         };
-        // console.log(`device id is: ${deviceID}`)
-        // let options = {
-        //     url: `https://api.spotify.com/v1/me/player`,
-        //     method: 'put',
-        //     headers: {
-        //         'Authorization': 'Bearer ' + localStorage.getItem("access_token")
-        //     },
-        //     data: {
-        //         "device_ids": [
-        //             `${deviceID}`
-        //         ]
-        //     }
-        // }
-        // axios(options);
     }, []);
+
+    const toggleCoverVisibility = () => {coverSetVisible(!coverVisible)}; // Toggle visibility state};
+    const toggleTitleVisibility = () => {titleSetVisible(!titleVisible)}; // Toggle visibility state};
+    const toggleArtistVisibility = () => {artistSetVisible(!artistVisible)}; // Toggle visibility state};
 
     if (!is_active) {
         return (
@@ -90,15 +100,42 @@ function WebPlayback(props) {
     } else {
         return (
             <div className="player-container">
-                <img src={current_track.album.images[0].url} id="now-playing__cover" alt=""/>
-                <div id="now-playing__title" className={`themed ${theme}`}>{current_track.name}</div>
-                <div id="now-playing__artist" className={`themed ${theme}`}>{current_track.artists[0].name}</div>
-                <div>
-                    <img src={rewindIcon} className="player-button" onClick={() => { player.previousTrack() }} alt="rewind"/>
-                    {is_paused ? (<img src={playIcon} id="pause-button" className="player-button" onClick={() => { player.togglePlay() }} alt="pause"/>):
-                        (<img src={pauseIcon} id="pause-button" className="player-button" onClick={() => { player.togglePlay() }} alt="pause"/>)}
-                    {/*<img src={pauseIcon} id="pause-button" className="player-button" onClick={() => { player.togglePlay() }} alt="pause"/>*/}
-                    <img src={fastforwardIcon} className="player-button" onClick={() => { player.nextTrack() }} alt="fast forward"/>
+                <div className="album-info">
+                    <div className="album-cover">
+                        <img src={current_track.album.images[0].url} alt="" ref={current_track.album.external_urls}
+                             style={{visibility: coverVisible? "visible": "hidden"}}/>
+                        <img src={grayVisibleIcon} id="cover-visibility" alt="" onClick={toggleCoverVisibility}/>
+                    </div>
+
+                </div>
+                <div className="controls">
+                    <div className="album-details">
+                        <div id="title">
+                        <div id="now-playing__title"  className={`themed ${theme}`}>{current_track.name}</div>
+                            <img src={grayVisibleIcon} id="title-visibility" alt="" onClick={toggleTitleVisibility}/>
+                        </div>
+
+                        <div id="now-playing__artist" className={`themed ${theme}`}>
+                            {current_track.artists[0].name}
+
+                        </div>
+                        <img src={grayVisibleIcon} id="artist-visibility" alt="" onClick={toggleArtistVisibility}/>
+                    </div>
+                    <img src={rewindIcon} className="player-button" onClick={() => {
+                        player.previousTrack()
+                    }} alt="rewind"/>
+                    {is_paused ? (
+                        <img src={playIcon} id="pause-button" className="player-button" onClick={() => {
+                            player.togglePlay()
+                        }} alt="pause"/>
+                    ) : (
+                        <img src={pauseIcon} id="pause-button" className="player-button" onClick={() => {
+                            player.togglePlay()
+                        }} alt="pause"/>
+                    )}
+                    <img src={fastforwardIcon} className="player-button" onClick={() => {
+                        player.nextTrack()
+                    }} alt="fast forward"/>
                 </div>
             </div>
         );
