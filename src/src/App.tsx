@@ -135,6 +135,18 @@ class App extends Component<{}, AppState> {
 
   }
 
+  /**
+   * Returns a random integer from 0 - max
+   * @param max highest value able to be randomly generated
+   * @requires max < 1000
+   */
+  getRandom = (max: number): number => {
+    const date = new Date();
+    const milli = date.getMilliseconds();
+    const randomer = (milli + Math.random() * 1000) % 1000;
+    return Math.floor((max + 1) * (milli / 1000.0));
+  }
+
   getUserDetails = async () => {
     let totalTracks = [];
     let uris = [];
@@ -153,6 +165,8 @@ class App extends Component<{}, AppState> {
   handleStart = async () => {
     // Memphis apple playlist: https://music.apple.com/us/playlist/anime-rap/pl.u-aZb0kKDTzP1pyE
     // Kevin apple playlist: https://music.apple.com/us/playlist/evolving-ride-playlist/pl.u-RRbVY6xtyPeVer
+
+    //TODO: Fix duplicate songs being added
     const token = localStorage.getItem("access_token");
     const christmasWords = ["Christmas", "Snow", "Navidad", "Candy Cane", "Winter", "More Christ", "Santa", "Xmas"];
 
@@ -254,7 +268,7 @@ class App extends Component<{}, AppState> {
           let failedAttempts = 0;
           for (let i = 0; i < this.state.numGenreState; i++) {
             const tracks = playlistResponse.data.items;
-            const trackNum = Math.floor(Math.random() * tracks.length);
+            const trackNum = this.getRandom(tracks.length - 1);
             console.log(`Track number is: ${trackNum}`)
             const track = tracks[trackNum].track;
             const link = `http://open.spotify.com/track/${track.id}`;
@@ -297,24 +311,25 @@ class App extends Component<{}, AppState> {
           }
         }
         let options = {
-          url: `https://api.spotify.com/v1/users/${profileID}/playlists`,
+          url: `https://api.spotify.com/v1/users/${profileID}/playlists?limit=50&offset=0`,
           method: 'get',
           headers: {'Authorization': 'Bearer ' + token}
         }
         const profileResponse = await axios(options);
         if (profileResponse.status === 200) {
           const playlists = profileResponse.data.items;
+          console.log("Person has " + playlists.length + " playlists");
           if (playlists.length > 0) {
             // Iterates over each playlist and selects a song from a random one until reaches numPersonal
             //TODO: Add it so that it's selectable whether it chooses randomly from one playlist or any or selectable
             for (let j = 0; j < this.state.numPersonalState; j++) {
-              let playlistNum = Math.floor(Math.random() * playlists.length);
+              let playlistNum = this.getRandom(playlists.length - 1);
               if (this.state.grinchMode) {
                 christmasWords.forEach(function (christmasWord:string) {
                   console.log("Looking for bad words");
                   let numGrinchTries = 0;
                   while (playlists[playlistNum].name.includes(christmasWord)) {
-                    console.log(playlists[playlistNum].name + " includes " + christmasWord)
+                    console.log(playlists[playlistNum].name + " includes " + christmasWord);
                     playlistNum = Math.floor(Math.random() * playlists.length);
                     numGrinchTries++;
                     if (numGrinchTries > 10) {
@@ -324,6 +339,7 @@ class App extends Component<{}, AppState> {
                 });
               }
               const playlist = playlists[playlistNum];
+              console.log("PlaylistNum " + playlistNum);
               const playlistID = playlist.id;
               console.log(`Chose ${playlist.name}`);
 
@@ -333,7 +349,7 @@ class App extends Component<{}, AppState> {
               if (playlist.tracks.total < 100) {
                 offset = 0;
               } else {
-                offset = Math.min(Math.floor(Math.random() * (playlist.tracks.total - 100)));
+                offset = this.getRandom(playlist.tracks.total - 100);
               }
 
               //TODO: Could make another method to add track to state because this is duplicated
@@ -346,7 +362,8 @@ class App extends Component<{}, AppState> {
               const playlistResponse = await axios(options);
               if (playlistResponse.status === 200) {
                 const tracks = playlistResponse.data.items;
-                const trackNum = Math.floor(Math.random() * tracks.length);
+                const trackNum = this.getRandom(tracks.length - 1);
+                console.log("Getting track #" + trackNum + "out of " + tracks.length);
                 const track = tracks[trackNum].track;
                 const link = `http://open.spotify.com/track/${track.id}`;
                 const trackName = track.name;
@@ -418,7 +435,7 @@ class App extends Component<{}, AppState> {
         await axios(playerOptions);
       } else if (this.state.useEmbed) {
         let playlistCreateOptions = {
-          url: "https://api.spotify.com/v1/users/" + this.state.userID + "/playlists",
+          url: "https://api.spotify.com/v1/users/" + this.state.userID + "/playlists?limit=50&offset=0",
           method: 'post',
           headers: {
             'Authorization': 'Bearer ' + token
