@@ -94,32 +94,33 @@ function WebPlayback(props) {
 
     if (!is_active) {
         return (
-            <div className="player-container">
-                <b> Instance not active. Press "Generate" to connect </b>
-            </div>)
+            <b id="player-placeholder"> Instance not active. Press "Generate" to connect </b>)
     } else {
         return (
             <div className="player-container">
                 <div className="album-info">
                     <div className="album-cover">
                         <img src={current_track.album.images[0].url} alt="" ref={current_track.album.external_urls}
-                             style={{visibility: coverVisible? "visible": "hidden"}}/>
+                             style={{visibility: coverVisible ? "visible": "hidden"}}/>
                         <img src={grayVisibleIcon} id="cover-visibility" alt="" onClick={toggleCoverVisibility}/>
                     </div>
 
                 </div>
                 <div className="controls">
                     <div className="album-details">
-                        <div id="title">
-                        <div id="now-playing__title"  className={`themed ${theme}`}>{current_track.name}</div>
+                        <div>
                             <img src={grayVisibleIcon} id="title-visibility" alt="" onClick={toggleTitleVisibility}/>
+                            <img src={grayVisibleIcon} id="artist-visibility" alt="" onClick={toggleArtistVisibility}/>
+                        <div id="now-playing__title" className={`themed ${theme}`}
+                             style={{visibility: titleVisible ? "visible": "hidden"}}>
+                            {current_track.name}
                         </div>
-
-                        <div id="now-playing__artist" className={`themed ${theme}`}>
+                        </div>
+                        <br/>
+                        <div id="now-playing__artist" className={`themed ${theme}`}
+                             style={{visibility: artistVisible ? "visible": "hidden"}}>
                             {current_track.artists[0].name}
-
                         </div>
-                        <img src={grayVisibleIcon} id="artist-visibility" alt="" onClick={toggleArtistVisibility}/>
                     </div>
                     <img src={rewindIcon} className="player-button" onClick={() => {
                         player.previousTrack()

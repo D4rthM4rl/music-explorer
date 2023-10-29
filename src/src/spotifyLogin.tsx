@@ -32,8 +32,8 @@ async function redirectToAuthCodeFlow(clientId: string) {
     params.append("response_type", "code");
     params.append("redirect_uri", redirectUri);
     params.append("scope", "user-read-private user-read-email streaming " +
-        "user-modify-playback-state playlist-modify-public playlist-modify-private" +
-        "playlist-read-collaborative playlist-read-private user-library-read");
+        "user-modify-playback-state playlist-modify-public playlist-modify-private " +
+        "playlist-read-collaborative playlist-read-private");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
     // @ts-ignore   Not really any problem here, it's just picky

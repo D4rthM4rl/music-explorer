@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {getTheme} from "./handleLocalStorageChange";
-import {getAllNames} from "./handleLocalStorageChange";
+import {getAllFromStorage} from "./handleLocalStorageChange";
 
 interface NamesListProps {
     onChange(names: string[]): void;  // called when a new name list is ready
@@ -27,8 +27,7 @@ class NamesList extends Component<NamesListProps, NamesListState> {
         }
     }
 
-    populateDatalist = (names: string) => {
-        console.log("started")
+    populateDatalist = (names: string[]) => {
         const datalist = document.getElementById('name-list');
         if (datalist) {
             datalist.innerHTML = '';
@@ -89,21 +88,13 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                 <h1 className="sidebar-headings">Names go here</h1>
                 <input className={`name-playlist-box themed ${this.props.theme}`}
                     list="name-list"
-                    onClick={() => this.populateDatalist(getAllNames())}
+                    onClick={() => this.populateDatalist(getAllFromStorage("names"))}
                     placeholder={"Type Player Names Here"}
                     onChange={(event) => {this.setState({value: event.target.value})}}
                     onKeyDown={this.handleInputKeyDown}
                     value={this.state.value}
                 /> <br/>
                 <datalist id="name-list">
-                    {/*<option value="Marley" />*/}
-                    {/*<option value="Joe" />*/}
-                    {/*<option value="Candice" />*/}
-                    {/*<option value="Jake" />*/}
-                    {/*<option value="Justin" />*/}
-                    {/*<option value="Pedro" />*/}
-                    {/*<option value="Kevin" />*/}
-                    {/*<option value="Memphis" />*/}
                 </datalist>
                 <br/>
                 <button className={`add-button themed ${this.props.theme}`}

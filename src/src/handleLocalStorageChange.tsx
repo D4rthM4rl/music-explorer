@@ -39,7 +39,7 @@ export function handleNewName (name: string, id: string): boolean {
     }
     console.log(`${name} has the id ${id}`)
 
-    const names: string[] = getAllNames();
+    const names: string[] = getAllFromStorage("names");
     console.log(names);
 
     for (let i = 0; i < names.length; i++) {
@@ -49,7 +49,7 @@ export function handleNewName (name: string, id: string): boolean {
         }
     }
 
-    return storePair(name, id);
+    return storePair(name, id, "names");
 }
 
 /** Removes given name from localstorage
@@ -74,35 +74,84 @@ export function handleNameRemove(name: string): boolean {
     }
 }
 
-/**
- * Helper method that actually stores name and id in local storage
- * @param newName given nonempty string
- * @param id given spotify id of name's profile
- * @throws Error if it has an error storing name in localstorage
- * @returns false if there was an error storing name in localstorage
+/** Stores new name with corresponding id in localstorage if it is unique name
+ * @Returns true if it added the given name and id, and false otherwise.
  */
-function storePair (newName: string, id: string): boolean {
+export function handleNewPlaylist (title: string, id: string): boolean {
+    // https://open.spotify.com/playlist/7GwrfXPSSfVbIgli0yX9jv?si=62ddc970e6164146
+    if (id.includes("https://open.spotify.com/playlist/")) {
+        id = id.replace("https://open.spotify.com/playlist/", "");
+    }
+    if (id.includes("?")) {
+        id = id.replace(id.substr(id.indexOf("?")), "");
+    }
+    console.log(`${title} has the id ${id}`)
+
+    const playlists: string[] = getAllFromStorage("playlists");
+
+    for (let i = 0; i < playlists.length; i++) {
+        if (playlists[i][0] === (title)) {
+            console.log("playlist already exists");
+            return false;
+        }
+    }
+
+    return storePair(title, id, "playlists");
+}
+
+/** Removes given playlist from localstorage
+ * @Returns true if it removes the given playlist and corresponding id successfully,
+ * and false if playlist wasn't found.
+ */
+export function handlePlaylistRemove(title: string): boolean {
     try {
-        const existingPairs = JSON.parse(localStorage.getItem('names') || '[]');
-        const newNamePair: string[] = [newName, id];
-        const updatedPairs: string[] = [...existingPairs, newNamePair];
-        // @ts-ignore
-        updatedPairs[newName] = id;
-        localStorage.setItem('names', JSON.stringify(updatedPairs));
-        return true;
+        let existingPairs = JSON.parse(localStorage.getItem('playlists') || '[]');
+        for (let i = 0; i < existingPairs.length; i++) {
+            console.log(existingPairs[i][0]);
+            if (existingPairs[i][0] === title) {
+                existingPairs = existingPairs.slice(0,i).concat(existingPairs.slice(i+1));
+                localStorage.setItem("playlists", JSON.stringify(existingPairs))
+                return true;
+            }
+        }
+        return false;
     } catch (err) {
-        console.error('Error storing name:', err);
+        console.error('Error removing playlist:', err);
         return false;
     }
 }
 
 /**
- * @Returns array of all the profile names in local storage.
+ * Helper method that actually stores name and id in local storage
+ * @param newThing given nonempty string name of person or playlist
+ * @param id given spotify id of name's profile
+ * @param localStorageKey category of thing in localStorage
+ * @throws Error if it has an error storing name in localstorage
+ * @returns false if there was an error storing thing in localstorage
  */
-export function getAllNames() {
-    try {return JSON.parse(localStorage.getItem('names') || '[]');
+function storePair (newThing: string, id: string, localStorageKey: string): boolean {
+    try {
+        const existingPairs = JSON.parse(localStorage.getItem(localStorageKey) || '[]');
+        const newPair: string[] = [newThing, id];
+        const updatedPairs: string[] = [...existingPairs, newPair];
+        // @ts-ignore
+        updatedPairs[newThing] = id;
+        localStorage.setItem(localStorageKey, JSON.stringify(updatedPairs));
+        return true;
     } catch (err) {
-        console.error('Error getting names:', err);
+        console.error(`Error storing ${localStorageKey}:`, err);
+        return false;
+    }
+}
+
+/**
+ * @param localStorageKey of thing to return from localstorage
+ * @Returns array of all the inputted type in local storage.
+ */
+export function getAllFromStorage(localStorageKey: string): string[] {
+    try {return JSON.parse(localStorage.getItem(localStorageKey.toLowerCase()) || '[]');
+    } catch (err) {
+        console.error(`Error getting ${localStorageKey}:`, err);
         return [];
     }
 }

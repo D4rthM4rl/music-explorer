@@ -36,6 +36,23 @@ body {
   box-shadow: var(--game-border);
   /*animation: slideFromLeft ease 3s;*/
 }
+#player-placeholder {
+  font-family: var(--overall-font-family);
+  font-size: calc(20px + var(--directions-fontsize-adjustment));
+  color: var(--player-color);
+  height: 50%;
+  margin-left: 7.5%;
+  margin-top: 10%;
+  width: 85%;
+  display: inline-block;
+  padding-left: 3%;
+  padding-top: 3%;
+  padding-bottom: 3%;
+  background: var(--player-bg);
+  margin-bottom: 3%;
+  box-shadow: black;
+  border-radius: 10px;
+}
 #directions-list {
   margin-top: 15%;
   font-size: calc(2vw + var(--directions-fontsize-adjustment));
@@ -78,7 +95,7 @@ body {
   cursor: pointer;
 }
 #now-playing__title {
-  font-size: 200%;
+  font-size: 40px;
   margin: 1%;
 }
 #title-visibility {
@@ -89,7 +106,7 @@ body {
   position: relative;
 }
 #now-playing__artist {
-   font-size: 200%;
+   font-size: 40px;
    margin: 1%;
  }
 #artist-visibility {
@@ -278,10 +295,10 @@ body {
   --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #3d476c;
-  --game-bg: #74879b;
+  --game-bg: linear-gradient(135deg, #1c2067, #000000, #30169f);
   --player-color: blueviolet;
   --player-bg: black;
-  --start-button-color: #fff;
+  --start-button-color: #3600ff;
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
   --link-color: whitesmoke;

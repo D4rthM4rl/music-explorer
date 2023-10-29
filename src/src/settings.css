@@ -83,7 +83,7 @@ input:checked + .slider:before {
     background: var(--settings-textbox-bg);
     box-shadow: var(--settings-textbox-glow);
 }
-#new-profile-box {
+#profile-id-box {
     font-family: Comic Sans MS;
     font-size: 70%;
     width: 80%;
@@ -94,7 +94,32 @@ input:checked + .slider:before {
     background: var(--settings-textbox-bg);
     box-shadow: var(--settings-textbox-glow);
 }
-#newNameError {
+#playlist-add-header {
+    margin-top: 5%;
+}
+#new-playlist-box {
+    font-family: Comic Sans MS;
+    font-size: 70%;
+    width: 80%;
+    border-radius: 5px;
+    padding: 2%;
+    border: 1px solid black;
+    color: var(--sidebar-textbox-color);
+    background: var(--settings-textbox-bg);
+    box-shadow: var(--settings-textbox-glow);
+}
+#playlist-id-box {
+    font-family: Comic Sans MS;
+    font-size: 70%;
+    width: 80%;
+    border-radius: 5px;
+    padding: 2%;
+    border: 1px solid black;
+    color: var(--settings-textbox-color);
+    background: var(--settings-textbox-bg);
+    box-shadow: var(--settings-textbox-glow);
+}
+.adding-error {
     font-size: 70%;
     padding-top: 2%;
     padding-left: 10%;
@@ -233,8 +258,8 @@ input:checked + .slider:before {
     --theme-select-color: blue;
     --embed-toggle-color: white;
     --embed-toggle-inactive-bg: #ccc;
-    --embed-toggle-active-bg: midnightblue;
-    --settings-textbox-bg: lightcyan;
+    --embed-toggle-active-bg: #1f169f;
+    --settings-textbox-bg: linear-gradient(135deg, #30169f, #000000);;
     --settings-textbox-color: #7e92ff;
 }
 

@@ -10,7 +10,14 @@ import settingsIconWhitesmoke from "./assets/whitesmoke-settings-icon.png"
 import settingsIconOrangered from "./assets/orangered-settings-icon.png"
 import NamesList from "./NamesList";
 import PlaylistList from "./PlaylistList";
-import {handleThemeChange, handleNewName, handleNameRemove, getAllNames, getTheme} from "./handleLocalStorageChange";
+import {
+  handleThemeChange,
+  handleNewName,
+  handleNameRemove,
+  getAllFromStorage,
+  getTheme,
+  handleNewPlaylist, handlePlaylistRemove
+} from "./handleLocalStorageChange";
 import {getToken} from "./spotifyLogin";
 import {deviceID} from "./WebPlayback";
 import WebPlayback from "./WebPlayback";
@@ -34,6 +41,8 @@ interface AppState {
   grinchMode: boolean
   newNameValue: string;
   newProfileIdValue: string;
+  newPlaylistValue: string;
+  newPlaylistIdValue: string;
   settingsIcon: typeof settingsIconWhite;
   directionsActive: boolean;
   userPremium: boolean;
@@ -74,6 +83,8 @@ class App extends Component<{}, AppState> {
       grinchMode: false,
       newNameValue: "",
       newProfileIdValue: "",
+      newPlaylistValue: "",
+      newPlaylistIdValue: "",
       settingsIcon: settingsIconWhitesmoke,
       directionsActive: false,
       userPremium: false,
@@ -252,6 +263,15 @@ class App extends Component<{}, AppState> {
           case 'METAL':
             playlistID = ('3pBfUFu8MkyiCYyZe849Ks');
             break;
+          default:
+            const availablePlaylists: string[] = getAllFromStorage("playlists");
+            for (let j = 0; j < availablePlaylists.length; j++) {
+              if (this.state.playlists[i] === availablePlaylists[j][0]) {
+                playlistID = availablePlaylists[j][1];
+              } else {
+                console.log("Oh no couldn't find playlist")
+              }
+            }
         }
         //TODO: Make the offset variable to how many user wants and how many are in playlist
         let options = {
@@ -304,7 +324,7 @@ class App extends Component<{}, AppState> {
       let profileID;
       for (let i = 0; i < this.state.names.length; i++) {
         let failedAttempts = 0;
-        const availableNames: string[] = getAllNames();
+        const availableNames: string[] = getAllFromStorage("names");
         for (let j = 0; j < availableNames.length; j++) {
           if (this.state.names[i] === availableNames[j][0]) {
             profileID = availableNames[j][1];
@@ -477,6 +497,7 @@ class App extends Component<{}, AppState> {
   /**
    * Displays an error message
    * @param id class of error message to display
+   * @param secondsDuration how long to display error
    */
   errorMessage = (id :string, secondsDuration: number) => {
     const spot = document.getElementById(id);
@@ -495,7 +516,8 @@ class App extends Component<{}, AppState> {
   }
 
   render() {
-    const { isNamesTab, theme, newNameValue, newProfileIdValue, directionsActive, userPremium } = this.state;
+    const { isNamesTab, theme, newNameValue, newProfileIdValue, newPlaylistValue, newPlaylistIdValue,
+      directionsActive, userPremium } = this.state;
     const aspectRatio = window.innerWidth/window.innerHeight;
     // If I get embed to work, remove this
     const EMBED_WORKS = false;
@@ -679,7 +701,7 @@ class App extends Component<{}, AppState> {
                         // onKeyDown={this.handleInputKeyDown}
                            value={newNameValue}
                     />
-                    <input id="new-profile-box" className={`themed ${theme}`}
+                    <input id="profile-id-box" className={`themed ${theme}`}
                            autoComplete="false"
                            placeholder={"Profile Link"}
                            onChange={(event) => {this.setState({newProfileIdValue: event.target.value})}}
@@ -699,7 +721,41 @@ class App extends Component<{}, AppState> {
                             onClick={() => {handleNameRemove(newNameValue)
                               this.setState({newProfileIdValue: "", newNameValue: ""})}}
                     >Remove name</button><br/>
-                    <div id="newNameError" className="display-success">Couldn't add name because it probably already existed</div>
+                    <div id="newNameError" className="adding-error display-success">
+                      Couldn't add name because it probably already existed
+                    </div>
+
+
+                    <div id="playlist-add-header"className={`themed ${theme}`}>Add Playlist to List</div>
+                    <input id="new-playlist-box" className={`themed ${theme}`}
+                           placeholder={"Playlist Title"}
+                           onChange={(event) => {this.setState({newPlaylistValue: event.target.value})}}
+                        // onKeyDown={this.handleInputKeyDown}
+                           value={newPlaylistValue}
+                    />
+                    <input id="playlist-id-box" className={`themed ${theme}`}
+                           autoComplete="false"
+                           placeholder={"Playlist Link"}
+                           onChange={(event) => {this.setState({newPlaylistIdValue: event.target.value})}}
+                        // onKeyDown={this.handleInputKeyDown}
+                           value={newPlaylistIdValue}
+                    /><br/>
+                    <button className={`add-button themed ${theme}`}
+                            style={{marginTop: "5%"}}
+                            onClick={ () => {
+                              if (!handleNewPlaylist(newPlaylistValue, newPlaylistIdValue)) {
+                                this.errorMessage("newPlaylistError", 3);
+
+                              }
+                              this.setState({newPlaylistIdValue: "", newPlaylistValue: ""})}}
+                    >Add pair</button>
+                    <button className={`clear-button themed ${theme}`}
+                            onClick={() => {handlePlaylistRemove(newPlaylistValue);
+                              this.setState({newPlaylistIdValue: "", newPlaylistValue: ""})}}
+                    >Remove playlist</button><br/>
+                    <div id="newPlaylistError" className="adding-error display-success">
+                      Couldn't add playlist because it probably already existed
+                    </div>
                   </div>
                 </div>
               </div>

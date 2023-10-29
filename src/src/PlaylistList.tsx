@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {getTheme} from "./handleLocalStorageChange";
-import {getAllNames} from "./handleLocalStorageChange";
+import {getAllFromStorage} from "./handleLocalStorageChange";
 
 interface PlaylistListProps {
     onChange(playlists: string[]): void;  // called when a new playlist list is ready
@@ -30,13 +30,26 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
         console.log("INITIALIZING playlistARRAY");
     }
 
-    populateDatalist = (names: string) => {
+    populateDatalist = (playlists: string[]) => {
         const datalist = document.getElementById('playlist-list');
-        for (let name of names) {
-            const option = document.createElement('option');
-            option.value = name;
-            // @ts-ignore
-            datalist.appendChild(option);
+        const stockPlaylists = ["Top Hits 2000-2023", "Top Spotify", "Top USA",
+            "Party Hits 2010s", "Soft Pop Hits", "Dance Pop Hits", "Throwback Jams",
+            "Hit Rewind", "Pop"]
+
+        if (datalist) {
+            datalist.innerHTML = '';
+            for (let playlist of stockPlaylists) {
+                const option = document.createElement('option');
+                option.value = playlist;
+                datalist.appendChild(option);
+            }
+            for (let playlist of playlists) {
+                const option = document.createElement('option');
+                option.value = playlist[0];
+                datalist.appendChild(option);
+            }
+        } else {
+            console.log("no playlist-list element")
         }
     }
 
@@ -84,24 +97,25 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
                 /> <br/>
                 <h1 className="sidebar-headings">Playlists go here</h1>
                 <input className={`name-playlist-box themed ${this.props.theme}`}
-                    list="playlist-list"
-                    placeholder={"Type Playlists here"}
-                    onChange={(event) => {this.setState({value: event.target.value})}}
-                    onKeyDown={this.handleInputKeyDown}
-                    value={this.state.value}
+                   list="playlist-list"
+                   onClick={() => this.populateDatalist(getAllFromStorage("playlists"))}
+                   placeholder={"Type Playlists here"}
+                   onChange={(event) => {this.setState({value: event.target.value})}}
+                   onKeyDown={this.handleInputKeyDown}
+                   value={this.state.value}
                 /> <br/>
                 <datalist id="playlist-list">
-                    <option value="Top Hits 2000-2023" />
-                    <option value="Top Spotify" />
-                    <option value="Top USA" />
-                    <option value="Party Hits 2010s" />
+                    <option value="" />
+                    <option value="" />
+                    <option value="" />
+                    <option value="" />
                     <option value="Marley Party" />
                     <option value="Den of 10" />
-                    <option value="Soft Pop Hits" />
-                    <option value="Dance Pop Hits" />
-                    <option value="Throwback Jams" />
-                    <option value="Hit Rewind" />
-                    <option value="Pop" />
+                    <option value="" />
+                    <option value="" />
+                    <option value="" />
+                    <option value="" />
+                    <option value="" />
                     <option value="Christmas" />
                     <option value="Disney" />
                     <option value="Rap Hits" />
