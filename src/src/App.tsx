@@ -154,8 +154,8 @@ class App extends Component<{}, AppState> {
   getRandom = (max: number): number => {
     const date = new Date();
     const milli = date.getMilliseconds();
-    const randomer = (milli + Math.random() * 1000) % 1000;
-    return Math.floor((max + 1) * (milli / 1000.0));
+    const r = (milli + Math.random() * 1000) % 1000; // Random number from 0 - 999
+    return Math.floor(((max + 1) * r) / 1000.0); // (Max + 1) * some decimal from 0 - .999 floored
   }
 
   getUserDetails = async () => {
@@ -177,13 +177,13 @@ class App extends Component<{}, AppState> {
     // Memphis apple playlist: https://music.apple.com/us/playlist/anime-rap/pl.u-aZb0kKDTzP1pyE
     // Kevin apple playlist: https://music.apple.com/us/playlist/evolving-ride-playlist/pl.u-RRbVY6xtyPeVer
 
-    //TODO: Fix duplicate songs being added
     const token = localStorage.getItem("access_token");
     const christmasWords = ["Christmas", "Snow", "Navidad", "Candy Cane", "Winter", "More Christ", "Santa", "Xmas"];
 
     try {
-      let totalTracks = [];
-      let uris = [];
+      let totalTracks: string[] = [];
+      let trackNamesChosen: string[] = [];
+      let uris: string[] = [];
       if (this.state.userPremium && this.state.usePlayer) {
         console.log(`device id is: ${deviceID}`)
         let options = {
@@ -297,8 +297,9 @@ class App extends Component<{}, AppState> {
             const artists = track.artists;
             const id = track.id;
             const previewUrl = track.preview_url;
+            let isSongNew = true;
             console.log(`Track: ${track.name} and is playable: ${track.is_playable}`)
-            if (this.state.tracks.includes(track)) {
+            if (trackNamesChosen.includes(trackName)) {
               i--;
               failedAttempts++;
               console.log(trackName + "isn't playable or is already selected");
@@ -312,6 +313,7 @@ class App extends Component<{}, AppState> {
               console.log('---');
 
               totalTracks.push(link);
+              trackNamesChosen.push(trackName);
               uris.push(`spotify:track:${id}`);
               // Update the state with the new track
               this.setState({links: totalTracks});
@@ -390,7 +392,7 @@ class App extends Component<{}, AppState> {
                 const artists = track.artists;
                 const id = track.id;
 
-                if (this.state.tracks.includes(track)) {
+                if (trackNamesChosen.includes(trackName)) {
                   j--;
                   failedAttempts++;
                   console.log(trackName + "isn't playable or is already selected");
@@ -400,19 +402,19 @@ class App extends Component<{}, AppState> {
                     this.errorMessage("songDupeError", 5);
                   }
                 } else if (this.state.grinchMode) {
-                  let hasChristmas = false
-                  christmasWords.forEach(function (christmasWord: string) {
-                    if (trackName.includes(christmasWord)) {
+                  let hasChristmas = false;
+                  for(let cw in christmasWords) {
+                    if (trackName.includes(cw)) {
                       hasChristmas = true;
                       j--;
                       failedAttempts++;
-                      console.log(trackName + " includes " + christmasWord)
+                      console.log(trackName + " includes " + cw)
                       console.log('---');
                       if (failedAttempts > 5) {
                         throw new Error("Failed too many times to get a song");
                       }
                     }
-                  });
+                  }
                   if (!hasChristmas) {
                     console.log('Track:', trackName);
                     console.log('---');
@@ -427,6 +429,7 @@ class App extends Component<{}, AppState> {
                   console.log('---');
 
                   totalTracks.push(link);
+                  trackNamesChosen.push(trackName);
                   uris.push(`spotify:track:${id}`);
                   // Update the state with the new track
                   this.setState({links: totalTracks});
