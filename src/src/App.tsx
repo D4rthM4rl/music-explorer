@@ -536,7 +536,7 @@ class App extends Component<{}, AppState> {
               <div className="main-page">
                 <div id="topbar" className={`themed ${theme}`}>
                   <div className={`topbar-option themed ${theme}`} id="title" onClick={() => {
-                    this.setState({directionsActive: false})}}>Music Explorer v3.2</div>
+                    this.setState({directionsActive: false})}}>Music Explorer v3.3</div>
                   <div className={`topbar-option themed ${theme}`} id="spotify-genres">All Genres</div>
                   <div className={`topbar-option themed ${theme}`} id="directions" onClick={() => {
                     this.setState({directionsActive: !directionsActive})}}>Directions</div>
