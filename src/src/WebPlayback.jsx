@@ -97,7 +97,7 @@ function WebPlayback(props) {
             <b id="player-placeholder"> Instance not active. Press "Generate" to connect </b>)
     } else {
         return (
-            <div className="player-container">
+            <div className="player-container glowing-container">
                 <div className="album-info">
                     <div className="album-cover">
                         <img src={current_track.album.images[0].url} alt="" ref={current_track.album.external_urls}
@@ -111,10 +111,10 @@ function WebPlayback(props) {
                         <div>
                             <img src={grayVisibleIcon} id="title-visibility" alt="" onClick={toggleTitleVisibility}/>
                             <img src={grayVisibleIcon} id="artist-visibility" alt="" onClick={toggleArtistVisibility}/>
-                        <div id="now-playing__title" className={`themed ${theme}`}
-                             style={{visibility: titleVisible ? "visible": "hidden"}}>
-                            {current_track.name}
-                        </div>
+                            <div id="now-playing__title" className={`themed ${theme}`}
+                                 style={{visibility: titleVisible ? "visible": "hidden"}}>
+                                {current_track.name}
+                            </div>
                         </div>
                         <br/>
                         <div id="now-playing__artist" className={`themed ${theme}`}

@@ -1,4 +1,4 @@
-// Replace redirect URIs with whatever the url is if it changes, bleh
+// Replace redirect URIs with whatever the url is if it changes
 import {deviceID} from "./WebPlayback";
 import axios from "axios";
 

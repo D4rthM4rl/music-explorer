@@ -56,6 +56,7 @@ body {
 #directions-list {
   margin-top: 15%;
   font-size: calc(2vw + var(--directions-fontsize-adjustment));
+  color: var(--overall-font-color);
   padding-left: 10%;
   padding-right: 3%;
   text-align: left;
@@ -79,6 +80,7 @@ body {
   background: var(--player-bg);
   margin-bottom: 3%;
   box-shadow: black;
+  text-shadow: red;
   border-radius: 10px;
 }
 .album-details {
@@ -159,7 +161,7 @@ body {
   --overall-fontsize-adjustment: 0%;
   --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
-  --overall-font-color: whitesmoke;
+  --overall-font-color: #1c2738;
   --game-bg: #ccced0;
   --player-color: whitesmoke;
   --player-bg: black;
@@ -168,6 +170,7 @@ body {
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
   --link-color: black;
   --link-blend: normal;
+  --player-glow: linear-gradient(45deg, #0015ff, #0015ff, #ff0000, #0015ff, #ff0000, #0015ff);
 }
 .dark {
   --overall-font-family: Arial;
@@ -175,13 +178,14 @@ body {
   --overall-fontsize-adjustment: 0%;
   --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
-  --overall-font-color: #dedede;
+  --overall-font-color: #231d1d;
   --game-bg: #74879b;
   --player-color: whitesmoke;
   --player-bg: black;
   --start-button-color: #fff;
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --player-glow: linear-gradient(45deg, #003cff, #556c9b, #ff0000);
   --link-color: whitesmoke;
   --link-blend: normal;
 }
@@ -191,7 +195,7 @@ body {
   --overall-fontsize-adjustment: 0%;
   --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
-  --overall-font-color: #dedede;
+  --overall-font-color: #e3ff80;
   --game-bg: #181818;
   --game-border: 0 0 20px #ff00fc;
   --player-color: whitesmoke;
@@ -199,6 +203,7 @@ body {
   --start-button-color: #fff;
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --player-glow: linear-gradient(45deg, #66ff00, #41ffd1, #00ff35, #66ff00, #ddff00);
   --link-color: whitesmoke;
   --link-blend: normal;
 }
@@ -215,6 +220,7 @@ body {
   --start-button-color: #fff;
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --player-glow: linear-gradient(45deg, #ffc3dd, #ffc285, #ffef85, #caff89, #99ff8a, #c3ffe6, #85ffe9, #89c0ff, #b8b0ff, #dfb0ff, #ffb0f8, #ffb0cc) ;
   --link-color: #c1fdff;
   --link-blend: normal;
 }
@@ -224,13 +230,14 @@ body {
   --overall-fontsize-adjustment: 0%;
   --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
-  --overall-font-color: #3d476c;
+  --overall-font-color: #ffffff;
   --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
   --player-color: white;
   --player-bg: black;
   --start-button-color: #fff;
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --player-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
   --link-color: white;
   --link-blend: difference;
 }
@@ -253,6 +260,7 @@ body {
   --start-button-color: #fff;
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --player-glow: linear-gradient(45deg, #ff7300, #D60270, #9B4F96, #0038A8, #9B4F96, #ff7300,  #D60270, #9B4F96, #0038A8, #9B4F96, #0038A8, #ff7300);
   --link-color: whitesmoke;
   --link-blend: difference;
 }
@@ -262,13 +270,14 @@ body {
   --overall-fontsize-adjustment: 0%;
   --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
-  --overall-font-color: #3d476c;
+  --overall-font-color: #313a57;
   --game-bg: linear-gradient(180deg, #ff2400,  dimgray);
   --player-color: #ff3916;
   --player-bg: black;
   --start-button-color: #7e7e7e;
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #545454, #000000);
+  --player-glow: linear-gradient(45deg, #ff2400, #ff0000, #545454, #000000, #545454, #000000, #ff0000, #ff2400);
   --link-color: whitesmoke;
   --link-blend: normal;
 }
@@ -282,9 +291,10 @@ body {
   --game-bg: linear-gradient(180deg, #2eedff, #ffffff);
   --player-color: white;
   --player-bg: #ff3ec7;
-  --start-button-color: #fff;
+  --start-button-color: #ffffff;
   --start-button-bg: #ff3ec7;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --player-glow: linear-gradient(45deg, #ff3ec7, #ffffff, #ff3ec7, #ffffff, #ff3ec7, #ffffff, #ff3ec7, #ffffff, #ff3ec7);
   --link-color: #ffffff;
   --link-blend: normal;
 }
@@ -294,13 +304,14 @@ body {
   --overall-fontsize-adjustment: 0%;
   --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
-  --overall-font-color: #3d476c;
+  --overall-font-color: #d0d6f8;
   --game-bg: linear-gradient(135deg, #1c2067, #000000, #30169f);
   --player-color: blueviolet;
   --player-bg: black;
   --start-button-color: #3600ff;
   --start-button-bg: #000000;
   --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --player-glow: linear-gradient(45deg, #003cff, #7300ff, #00e1ff, #7000cb, #7000cb, #00e1ff, #7a00ff, #7300ff, #003cff);
   --link-color: whitesmoke;
   --link-blend: normal;
 }
@@ -375,6 +386,47 @@ body {
   top: 0;
   border-radius: 10px;
 }
+
+.glowing-container {
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 0;
+  border-radius: 15px;
+  opacity: 1;
+}
+.glowing-container:before {
+  content: '';
+  background: var(--player-glow);
+  position: absolute;
+  top: -5px;
+  left:-5px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(50%);
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  animation: glowing 15s linear infinite;
+  opacity: 1;
+  transition: opacity .3s ease-in-out;
+  border-radius: 15px;
+}
+/*.glowing-container:active {color: var(--player-bg)}*/
+/*.glowing-container:active:after {background: transparent;}*/
+/*.glowing-container:hover:before {opacity: 1;}*/ /* uncomment if you want to do it on hover*/
+.glowing-container:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--player-bg);
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+
 @keyframes glowing {
   0% { background-position: 0 0; }
   50% { background-position: 200% 0; }

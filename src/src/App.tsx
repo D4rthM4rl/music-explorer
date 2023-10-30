@@ -159,8 +159,6 @@ class App extends Component<{}, AppState> {
   }
 
   getUserDetails = async () => {
-    let totalTracks = [];
-    let uris = [];
     let options = {
       url: `https://api.spotify.com/v1/me`,
       method: 'get',
@@ -204,7 +202,6 @@ class App extends Component<{}, AppState> {
       let playlistID;
       for (let i = 0; i < this.state.playlists.length; i++) {
         console.log("Getting songs from playlists");
-        //TODO: Add playlist here if new playlist to add
         switch (this.state.playlists[i].toUpperCase()) {
           case 'TOP HITS 2000-2023':
             playlistID = ('7E3uEa1emOcbZJuB8sFXeK');
@@ -298,11 +295,11 @@ class App extends Component<{}, AppState> {
             const id = track.id;
             const previewUrl = track.preview_url;
             let isSongNew = true;
-            console.log(`Track: ${track.name} and is playable: ${track.is_playable}`)
+            console.log(`Track: ${track.name}`)
             if (trackNamesChosen.includes(trackName)) {
               i--;
               failedAttempts++;
-              console.log(trackName + "isn't playable or is already selected");
+              console.log(trackName + "is already selected");
               console.log('---');
 
               if (failedAttempts > 5) {
@@ -536,8 +533,10 @@ class App extends Component<{}, AppState> {
               <div className="main-page">
                 <div id="topbar" className={`themed ${theme}`}>
                   <div className={`topbar-option themed ${theme}`} id="title" onClick={() => {
-                    this.setState({directionsActive: false})}}>Music Explorer v3.3</div>
-                  <div className={`topbar-option themed ${theme}`} id="spotify-genres">All Genres</div>
+                    this.setState({directionsActive: false})}}>Music Explorer v3.4</div>
+                  <div className={`topbar-option themed ${theme}`} id="spotify-genres">
+                    <a id="spotify-genres-link" className="topbar-option themed" href="https://everynoise.com/everynoise1d.cgi?scope=all" target="_blank">All Genres</a>
+                  </div>
                   <div className={`topbar-option themed ${theme}`} id="directions" onClick={() => {
                     this.setState({directionsActive: !directionsActive})}}>Directions</div>
                   <div className={`topbar-option themed ${theme}`} id="settings toggle"
@@ -593,7 +592,7 @@ class App extends Component<{}, AppState> {
                     {!directionsActive ? (
                       <div>
                         {this.state.usePlayer ? ( // If the toggle is on, use the Spotify Web APK Player
-                            <WebPlayback token={localStorage.getItem("access_token")}></WebPlayback>
+                            <WebPlayback className="glow-on-hover" token={localStorage.getItem("access_token")}></WebPlayback>
                         ) : (
                           <div>
                             {!this.state.useEmbed ? (
