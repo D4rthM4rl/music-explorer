@@ -8,6 +8,8 @@ import playIcon from "./assets/play-icon.png"
 import blackVisibleIcon from "./assets/black-visible-icon.png"
 import grayVisibleIcon from "./assets/gray-visible-icon.png"
 import whiteVisibleIcon from "./assets/white-visible-icon.png"
+import quesionMarkIcon from "./assets/question-mark-icon.png"
+import {trackLocation} from "./App";
 import axios from "axios";
 import assert from "assert";
 
@@ -25,30 +27,21 @@ const track = {
 
 export let deviceID = "";
 
-async function toggleVisibilty(element) {
-    const spot = await document.getElementById(element);
-    if (spot) {
-        if (spot.style.visibility === "hidden") {
-            spot.style.visibility = "visible";
-        } else {
-            spot.style.visibility = "hidden";
-        }
-    }
-}
-
 function WebPlayback(props) {
-    let theme = getTheme()
+    let theme = getTheme();
+    const locations = props.trackLocations;
     const [is_paused, setPaused] = useState(false);
     const [is_active, setActive] = useState(false);
     const [player, setPlayer] = useState(undefined);
     const [current_track, setTrack] = useState(track);
 
     const [coverVisible, coverSetVisible] = useState(true); // Initialize visibility state
-    const [titleVisible, titleSetVisible] = useState(true); // Initialize visibility state
-    const [artistVisible, artistSetVisible] = useState(true); // Initialize visibility state
-
+    const [titleVisible, titleSetVisible] = useState(true);
+    const [artistVisible, artistSetVisible] = useState(true);
+    const [songLocationVisible, songLocationSetVisible] = useState(true);
 
     useEffect(() => {
+        console.log(locations.size);
         const script = document.createElement("script");
         script.src = "https://sdk.scdn.co/spotify-player.js";
         script.async = true;
@@ -91,6 +84,7 @@ function WebPlayback(props) {
     const toggleCoverVisibility = () => {coverSetVisible(!coverVisible)}; // Toggle visibility state};
     const toggleTitleVisibility = () => {titleSetVisible(!titleVisible)}; // Toggle visibility state};
     const toggleArtistVisibility = () => {artistSetVisible(!artistVisible)}; // Toggle visibility state};
+    const toggleSongLocationVisibility = () => {songLocationSetVisible(!songLocationVisible)};
 
     if (!is_active) {
         return (
@@ -104,7 +98,6 @@ function WebPlayback(props) {
                              style={{visibility: coverVisible ? "visible": "hidden"}}/>
                         <img src={grayVisibleIcon} id="cover-visibility" alt="" onClick={toggleCoverVisibility}/>
                     </div>
-
                 </div>
                 <div className="controls">
                     <div className="album-details">
@@ -123,7 +116,7 @@ function WebPlayback(props) {
                         </div>
                     </div>
                     <img src={rewindIcon} className="player-button" onClick={() => {
-                        player.previousTrack()
+                        player.previousTrack();
                     }} alt="rewind"/>
                     {is_paused ? (
                         <img src={playIcon} id="pause-button" className="player-button" onClick={() => {
@@ -138,6 +131,29 @@ function WebPlayback(props) {
                         player.nextTrack()
                     }} alt="fast forward"/>
                 </div>
+                <img src={quesionMarkIcon} id="question-button" className="player-button" onClick={() => {
+                    toggleSongLocationVisibility();
+                }} alt="fast forward"/>
+                {songLocationVisible && (
+                    <div className="modal-overlay">
+                        <div className="modal">
+                            <span className="close-button" onClick={toggleSongLocationVisibility}>&times;</span>
+                            <body>
+                            {props.trackLocations.has(current_track.id) ? (
+                                props.trackLocations.get(current_track.id).person ? (
+                                    `This track is from ${locations.get(current_track.id).person}'s playlist ${
+                                        props.trackLocations.get(current_track.id).playlist}`
+                                ) : (
+                                    `This track is from the ${props.trackLocations.get(current_track.id).playlist} playlist`
+                                )
+                            ) : (
+                                'Loading...' // or any other placeholder while waiting for trackLocations to be populated
+                            )}
+                            </body>
+
+                        </div>
+                    </div>
+                )}
             </div>
         );
     }

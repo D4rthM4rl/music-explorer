@@ -16,7 +16,8 @@ import {
   handleNameRemove,
   getAllFromStorage,
   getTheme,
-  handleNewPlaylist, handlePlaylistRemove
+  handleNewPlaylist,
+  handlePlaylistRemove
 } from "./handleLocalStorageChange";
 import {getToken} from "./spotifyLogin";
 import {deviceID} from "./WebPlayback";
@@ -25,6 +26,7 @@ import assert from "assert";
 
 interface AppState {
   tracks: Track[];
+  trackLocations: Map<string, trackLocation>;
   requestResult: string;
   names: string[];
   playlists: string[];
@@ -62,12 +64,18 @@ interface Track {
 
 interface PlaylistResponse {items: Track[];}
 
+export type trackLocation = {
+  person: string | undefined;
+  playlist: string;
+};
+
 class App extends Component<{}, AppState> {
   constructor(props: any) {
     super(props);
     this.state = {
       requestResult: "NO REQUEST RESULT",
       tracks: [],
+      trackLocations: new Map<string, trackLocation>(),
       names: [],
       links: [],
       playlists: [],
@@ -181,6 +189,7 @@ class App extends Component<{}, AppState> {
     try {
       let totalTracks: string[] = [];
       let trackNamesChosen: string[] = [];
+      let trackLocations: Map<string, trackLocation> = new Map<string, trackLocation>();
       let uris: string[] = [];
       if (this.state.userPremium && this.state.usePlayer) {
         console.log(`device id is: ${deviceID}`)
@@ -214,6 +223,9 @@ class App extends Component<{}, AppState> {
             break;
           case 'PARTY HITS 2010S':
             playlistID = ('37i9dQZF1DWWylYLMvjuRG');
+            break;
+          case '"SINGABLE" SONGS':
+            playlistID = ('37i9dQZF1DWWMOmoXKqHTD');
             break;
           case 'MARLEY PARTY':
             playlistID = ('2CksMSvKf7rc3G5YLIxSon');
@@ -283,7 +295,7 @@ class App extends Component<{}, AppState> {
         const playlistResponse = await axios(options);
         if (playlistResponse.status === 200) {
           let failedAttempts = 0;
-          for (let i = 0; i < this.state.numGenreState; i++) {
+          for (let j = 0; j < this.state.numGenreState; j++) {
             const tracks = playlistResponse.data.items;
             const trackNum = this.getRandom(tracks.length - 1);
             console.log(`Track number is: ${trackNum}`)
@@ -291,13 +303,11 @@ class App extends Component<{}, AppState> {
             const link = `http://open.spotify.com/track/${track.id}`;
             console.log(`Link: ${link}`)
             const trackName = track.name;
-            const artists = track.artists;
             const id = track.id;
-            const previewUrl = track.preview_url;
-            let isSongNew = true;
+            const trackLocation: trackLocation = {person: undefined, playlist: this.state.playlists[i]};
             console.log(`Track: ${track.name}`)
             if (trackNamesChosen.includes(trackName)) {
-              i--;
+              j--;
               failedAttempts++;
               console.log(trackName + "is already selected");
               console.log('---');
@@ -314,6 +324,9 @@ class App extends Component<{}, AppState> {
               uris.push(`spotify:track:${id}`);
               // Update the state with the new track
               this.setState({links: totalTracks});
+              trackLocations.set(id, trackLocation);
+              this.setState({trackLocations: trackLocations});
+              console.log(`From ${trackLocation.playlist}`);
             }
           }
         }
@@ -360,7 +373,10 @@ class App extends Component<{}, AppState> {
               const playlist = playlists[playlistNum];
               console.log("PlaylistNum " + playlistNum);
               const playlistID = playlist.id;
-              console.log(`Chose ${playlist.name}`);
+              const playlistName = playlist.name;
+              console.log(`Chose ${playlistName}`);
+              const person: string = this.state.names[i];
+              const trackLocation: trackLocation = {person: person, playlist: playlistName};
 
               // Chooses an offset for the 100 songs in the playlist to choose from being offset 0 to the offset end - 100
               // Or if it isn't at least 100 songs long, then it just chooses 0
@@ -420,6 +436,9 @@ class App extends Component<{}, AppState> {
                     uris.push(`spotify:track:${id}`);
                     // Update the state with the new track
                     this.setState({links: totalTracks});
+                    trackLocations = trackLocations.set(id, trackLocation);
+                    this.setState({trackLocations: trackLocations});
+                    console.log(this.state.trackLocations.keys().next());
                   }
                 } else { // if grinch mode is off and track isn't already selected
                   console.log('Track:', trackName);
@@ -430,6 +449,9 @@ class App extends Component<{}, AppState> {
                   uris.push(`spotify:track:${id}`);
                   // Update the state with the new track
                   this.setState({links: totalTracks});
+                  trackLocations.set(id, trackLocation);
+                  this.setState({trackLocations: trackLocations});
+                  console.log(this.state.trackLocations.keys().next());
                 }
               }
             }
@@ -533,7 +555,7 @@ class App extends Component<{}, AppState> {
               <div className="main-page">
                 <div id="topbar" className={`themed ${theme}`}>
                   <div className={`topbar-option themed ${theme}`} id="title" onClick={() => {
-                    this.setState({directionsActive: false})}}>Music Explorer v3.4</div>
+                    this.setState({directionsActive: false})}}>Music Explorer v3.5</div>
                   <div className={`topbar-option themed ${theme}`} id="spotify-genres">
                     <a id="spotify-genres-link" className="topbar-option themed" href="https://everynoise.com/everynoise1d.cgi?scope=all" target="_blank">All Genres</a>
                   </div>
@@ -592,7 +614,7 @@ class App extends Component<{}, AppState> {
                     {!directionsActive ? (
                       <div>
                         {this.state.usePlayer ? ( // If the toggle is on, use the Spotify Web APK Player
-                            <WebPlayback className="glow-on-hover" token={localStorage.getItem("access_token")}></WebPlayback>
+                            <WebPlayback token={localStorage.getItem("access_token")} trackLocations={this.state.trackLocations}></WebPlayback>
                         ) : (
                           <div>
                             {!this.state.useEmbed ? (

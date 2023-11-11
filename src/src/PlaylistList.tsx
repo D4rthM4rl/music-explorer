@@ -33,7 +33,7 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
     populateDatalist = (playlists: string[]) => {
         const datalist = document.getElementById('playlist-list');
         const stockPlaylists = ["Top Hits 2000-2023", "Top Spotify", "Top USA",
-            "Party Hits 2010s", "Soft Pop Hits", "Dance Pop Hits", "Throwback Jams",
+            "Party Hits 2010s", '"Singable" Songs', "Soft Pop Hits", "Dance Pop Hits", "Throwback Jams",
             "Hit Rewind", "Pop"]
 
         if (datalist) {
