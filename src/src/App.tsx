@@ -324,7 +324,7 @@ class App extends Component<{}, AppState> {
               uris.push(`spotify:track:${id}`);
               // Update the state with the new track
               this.setState({links: totalTracks});
-              trackLocations.set(id, trackLocation);
+              trackLocations.set(trackName, trackLocation);
               this.setState({trackLocations: trackLocations});
               console.log(`From ${trackLocation.playlist}`);
             }
@@ -376,7 +376,7 @@ class App extends Component<{}, AppState> {
               const playlistName = playlist.name;
               console.log(`Chose ${playlistName}`);
               const person: string = this.state.names[i];
-              const trackLocation: trackLocation = {person: person, playlist: playlistName};
+
 
               // Chooses an offset for the 100 songs in the playlist to choose from being offset 0 to the offset end - 100
               // Or if it isn't at least 100 songs long, then it just chooses 0
@@ -429,18 +429,20 @@ class App extends Component<{}, AppState> {
                     }
                   }
                   if (!hasChristmas) {
+                    const trackLocation: trackLocation = {person: person, playlist: playlistName};
                     console.log('Track:', trackName);
                     console.log('---');
 
                     totalTracks.push(link);
+                    trackNamesChosen.push(trackName);
                     uris.push(`spotify:track:${id}`);
                     // Update the state with the new track
                     this.setState({links: totalTracks});
-                    trackLocations = trackLocations.set(id, trackLocation);
+                    trackLocations = trackLocations.set(trackName, trackLocation);
                     this.setState({trackLocations: trackLocations});
-                    console.log(this.state.trackLocations.keys().next());
                   }
                 } else { // if grinch mode is off and track isn't already selected
+                  const trackLocation: trackLocation = {person: person, playlist: playlistName};
                   console.log('Track:', trackName);
                   console.log('---');
 
@@ -449,9 +451,8 @@ class App extends Component<{}, AppState> {
                   uris.push(`spotify:track:${id}`);
                   // Update the state with the new track
                   this.setState({links: totalTracks});
-                  trackLocations.set(id, trackLocation);
+                  trackLocations.set(trackName, trackLocation);
                   this.setState({trackLocations: trackLocations});
-                  console.log(this.state.trackLocations.keys().next());
                 }
               }
             }

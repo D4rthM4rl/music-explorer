@@ -38,7 +38,7 @@ function WebPlayback(props) {
     const [coverVisible, coverSetVisible] = useState(true); // Initialize visibility state
     const [titleVisible, titleSetVisible] = useState(true);
     const [artistVisible, artistSetVisible] = useState(true);
-    const [songLocationVisible, songLocationSetVisible] = useState(true);
+    const [songLocationVisible, songLocationSetVisible] = useState(false);
 
     useEffect(() => {
         console.log(locations.size);
@@ -135,21 +135,21 @@ function WebPlayback(props) {
                     toggleSongLocationVisibility();
                 }} alt="fast forward"/>
                 {songLocationVisible && (
-                    <div className="modal-overlay">
+                    <div className="modal-overlay" onClick={toggleSongLocationVisibility}>
                         <div className="modal">
                             <span className="close-button" onClick={toggleSongLocationVisibility}>&times;</span>
-                            <body>
-                            {props.trackLocations.has(current_track.id) ? (
-                                props.trackLocations.get(current_track.id).person ? (
-                                    `This track is from ${locations.get(current_track.id).person}'s playlist ${
-                                        props.trackLocations.get(current_track.id).playlist}`
+                            <text>
+                            {props.trackLocations.has(current_track.name) ? (
+                                props.trackLocations.get(current_track.name).person ? (
+                                    `This track is from ${locations.get(current_track.name).person}'s playlist ${
+                                        props.trackLocations.get(current_track.name).playlist}`
                                 ) : (
-                                    `This track is from the ${props.trackLocations.get(current_track.id).playlist} playlist`
+                                    `This track is from the ${props.trackLocations.get(current_track.name).playlist} playlist`
                                 )
                             ) : (
-                                'Loading...' // or any other placeholder while waiting for trackLocations to be populated
+                                `Loading track ${current_track.name}...` // or any other placeholder while waiting for trackLocations to be populated
                             )}
-                            </body>
+                            </text>
 
                         </div>
                     </div>
