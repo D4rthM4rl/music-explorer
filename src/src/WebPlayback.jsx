@@ -27,6 +27,66 @@ const track = {
 
 export let deviceID = "";
 
+/**
+ * Returns key and mode of song in a string
+ * @param k key number
+ * @param m mode number
+ * @returns key and mode in the form of "C♯ major"
+ */
+function getKey(k, m){
+    let key;
+    let mode;
+    if (m ===  1) {
+        mode = "major";
+    } else {
+        mode = "minor";
+    }
+
+    switch (k) {
+        case 0:
+            key = 'C';
+            break;
+        case 1:
+            key = 'C♯/D♭';
+            break;
+        case 2:
+            key = 'D';
+            break;
+        case 3:
+            key = 'D♯/E♭';
+            break;
+        case 4:
+            key = 'E';
+            break;
+        case 5:
+            key = 'F';
+            break;
+        case 6:
+            key = 'F♯/G♭';
+            break;
+        case 7:
+            key = 'G';
+            break;
+        case 8:
+            key = 'G♯/A♭';
+            break;
+        case 9:
+            key = 'A';
+            break;
+        case 10:
+            key = 'A♯/B♭';
+            break;
+        case 11:
+            key = 'B';
+            break;
+        default:
+            key = 'unknown';
+            break;
+    }
+
+    return key + " " + mode;
+}
+
 function WebPlayback(props) {
     let theme = getTheme();
     const locations = props.trackLocations;
@@ -38,7 +98,7 @@ function WebPlayback(props) {
     const [coverVisible, coverSetVisible] = useState(true); // Initialize visibility state
     const [titleVisible, titleSetVisible] = useState(true);
     const [artistVisible, artistSetVisible] = useState(true);
-    const [songLocationVisible, songLocationSetVisible] = useState(false);
+    const [moreDetailsVisible, moreDetailsSetVisible] = useState(false);
 
     useEffect(() => {
         console.log(locations.size);
@@ -84,7 +144,7 @@ function WebPlayback(props) {
     const toggleCoverVisibility = () => {coverSetVisible(!coverVisible)}; // Toggle visibility state};
     const toggleTitleVisibility = () => {titleSetVisible(!titleVisible)}; // Toggle visibility state};
     const toggleArtistVisibility = () => {artistSetVisible(!artistVisible)}; // Toggle visibility state};
-    const toggleSongLocationVisibility = () => {songLocationSetVisible(!songLocationVisible)};
+    const toggleMoreDetailsVisibility = () => {moreDetailsSetVisible(!moreDetailsVisible)};
 
     if (!is_active) {
         return (
@@ -132,25 +192,32 @@ function WebPlayback(props) {
                     }} alt="fast forward"/>
                 </div>
                 <img src={quesionMarkIcon} id="question-button" className="player-button" onClick={() => {
-                    toggleSongLocationVisibility();
+                    toggleMoreDetailsVisibility();
                 }} alt="fast forward"/>
-                {songLocationVisible && (
-                    <div className="modal-overlay" onClick={toggleSongLocationVisibility}>
+                {moreDetailsVisible && (
+                    <div className="modal-overlay" onClick={toggleMoreDetailsVisibility}>
                         <div className="modal">
-                            <span className="close-button" onClick={toggleSongLocationVisibility}>&times;</span>
+                            <span className="close-button" onClick={toggleMoreDetailsVisibility}>&times;</span>
                             <text>
                             {props.trackLocations.has(current_track.name) ? (
                                 props.trackLocations.get(current_track.name).person ? (
-                                    `This track is from ${locations.get(current_track.name).person}'s playlist ${
-                                        props.trackLocations.get(current_track.name).playlist}`
+                                    `This track is from ${locations.get(current_track.name).person}'s playlist "${
+                                        props.trackLocations.get(current_track.name).playlist}"`
                                 ) : (
-                                    `This track is from the ${props.trackLocations.get(current_track.name).playlist} playlist`
+                                    `This track is from the "${props.trackLocations.get(current_track.name).playlist}" playlist`
                                 )
                             ) : (
                                 `Loading track ${current_track.name}...` // or any other placeholder while waiting for trackLocations to be populated
                             )}
+                            <br/>
                             </text>
-
+                            {props.audioMap.has(current_track.name) ? (
+                                `This track's key is ${getKey(props.audioMap.get(current_track.name).key,
+                                    props.audioMap.get(current_track.name).mode)} and the tempo is 
+                                    ${props.audioMap.get(current_track.name).tempo} bpm`
+                            ) : (
+                                `Loading audio details of ${current_track.name}` // or any other placeholder while waiting for audio to be populated
+                            )}
                         </div>
                     </div>
                 )}

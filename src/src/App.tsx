@@ -30,6 +30,7 @@ interface AppState {
   requestResult: string;
   names: string[];
   playlists: string[];
+  audioFeatures: Map<string, AudioFeatures>;
   links: string[];
   isNamesTab: boolean;
   numGenreState: number;
@@ -62,12 +63,37 @@ interface Track {
   };
 }
 
+interface AudioFeatures {
+  audioFeatures: {
+    acousticness: number; // Float
+    analysis_url: string;
+    danceability: number; // Float
+    duration_ms: number; // integer
+    energy: number; // float
+    id: string;
+    instrumentalness: number; // float
+    key: number; // integer (E.g. 0 = C, 1 = C♯/D♭, 2 = D, and so on. If no key was detected, the value is -1)
+    liveness: number; // float
+    loudness: number; // float
+    mode: number; //integer (Major is represented by 1 and minor is 0)
+    speechiness: number; // float
+    tempo: number; // float
+    time_signature: number; // integer
+    track_href: string;
+    type: string;
+    uri: string;
+    valence: number; // float
+  }
+}
+
 interface PlaylistResponse {items: Track[];}
 
 export type trackLocation = {
   person: string | undefined;
   playlist: string;
 };
+
+export type audioInfo = {};
 
 class App extends Component<{}, AppState> {
   constructor(props: any) {
@@ -76,6 +102,7 @@ class App extends Component<{}, AppState> {
       requestResult: "NO REQUEST RESULT",
       tracks: [],
       trackLocations: new Map<string, trackLocation>(),
+      audioFeatures: new Map<string, AudioFeatures>(),
       names: [],
       links: [],
       playlists: [],
@@ -191,6 +218,7 @@ class App extends Component<{}, AppState> {
       let trackNamesChosen: string[] = [];
       let trackLocations: Map<string, trackLocation> = new Map<string, trackLocation>();
       let uris: string[] = [];
+      const ids: string[] = [];
       if (this.state.userPremium && this.state.usePlayer) {
         console.log(`device id is: ${deviceID}`)
         let options = {
@@ -322,6 +350,7 @@ class App extends Component<{}, AppState> {
               totalTracks.push(link);
               trackNamesChosen.push(trackName);
               uris.push(`spotify:track:${id}`);
+              ids.push(id);
               // Update the state with the new track
               this.setState({links: totalTracks});
               trackLocations.set(trackName, trackLocation);
@@ -436,6 +465,7 @@ class App extends Component<{}, AppState> {
                     totalTracks.push(link);
                     trackNamesChosen.push(trackName);
                     uris.push(`spotify:track:${id}`);
+                    ids.push(id);
                     // Update the state with the new track
                     this.setState({links: totalTracks});
                     trackLocations = trackLocations.set(trackName, trackLocation);
@@ -449,6 +479,7 @@ class App extends Component<{}, AppState> {
                   totalTracks.push(link);
                   trackNamesChosen.push(trackName);
                   uris.push(`spotify:track:${id}`);
+                  ids.push(id);
                   // Update the state with the new track
                   this.setState({links: totalTracks});
                   trackLocations.set(trackName, trackLocation);
@@ -464,8 +495,29 @@ class App extends Component<{}, AppState> {
       }
 
       if (this.state.userPremium && this.state.usePlayer) {
+        // Gets audio details of tracks
+        const audioOptions = {
+          url: `https://api.spotify.com/v1/audio-features?ids=${ids.toString()}`,
+          method: 'get',
+          headers: {
+            'Authorization': 'Bearer ' + token
+          },
+        };
+        const audioResponse = await axios(audioOptions);
+        if (audioResponse.status === 200) {
+          const audioFeatures = audioResponse.data.audio_features;
+          const audioMap: Map<string, AudioFeatures> = new Map<string, AudioFeatures>();
+          console.log(trackNamesChosen.toString());
+          for (let i = 0; i < trackNamesChosen.length; i++) {
+            const n: string = trackNamesChosen[i];
+            console.log(n, " goes with ", audioFeatures[i]);
+            audioMap.set(n, audioFeatures[i]);
+          }
+          this.setState({audioFeatures: audioMap});
+        }
+
         // Puts the found tracks on the player
-        let playerOptions = {
+        const playerOptions = {
           url: `https://api.spotify.com/v1/me/player/play`,
           method: 'put',
           headers: {
@@ -615,7 +667,11 @@ class App extends Component<{}, AppState> {
                     {!directionsActive ? (
                       <div>
                         {this.state.usePlayer ? ( // If the toggle is on, use the Spotify Web APK Player
-                            <WebPlayback token={localStorage.getItem("access_token")} trackLocations={this.state.trackLocations}></WebPlayback>
+                            <WebPlayback
+                                token={localStorage.getItem("access_token")}
+                                trackLocations={this.state.trackLocations}
+                                audioMap={this.state.audioFeatures}
+                            ></WebPlayback>
                         ) : (
                           <div>
                             {!this.state.useEmbed ? (
