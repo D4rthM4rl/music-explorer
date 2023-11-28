@@ -17,6 +17,9 @@ interface NamesListState {
     // themeState: string
 }
 
+/**
+ * An area of the sidebar where user enters names for app to use each name's profile
+ */
 class NamesList extends Component<NamesListProps, NamesListState> {
     constructor(props: NamesListProps) {
         super(props);
@@ -27,6 +30,10 @@ class NamesList extends Component<NamesListProps, NamesListState> {
         }
     }
 
+    /**
+     * Puts all the names into the name selector
+     * @param names list of names to put into the selector
+     */
     populateDatalist = (names: string[]) => {
         const datalist = document.getElementById('name-list');
         if (datalist) {
@@ -41,6 +48,9 @@ class NamesList extends Component<NamesListProps, NamesListState> {
         }
     }
 
+    /**
+     * Adds name to the list of names chosen
+     */
     handleAdd = async () => {
         const newName = this.state.value.trim();
         if (newName && newName !== "") {
@@ -50,11 +60,18 @@ class NamesList extends Component<NamesListProps, NamesListState> {
         }
     }
 
+    /**
+     * Clears the list of chosen names
+     */
     handleClear = async () => {
         this.props.onChange(this.props.nameArray);
         this.props.onClear(); // call the onClear prop
     }
 
+    /**
+     * Adds name if key pressed was ENTER
+     * @param event key pressed event to check
+     */
     handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.keyCode === 13) {
             // Enter key was pressed
@@ -62,6 +79,10 @@ class NamesList extends Component<NamesListProps, NamesListState> {
         }
     };
 
+    /**
+     * Removes a given name from the chosen names list
+     * @param index index of name to remove
+     */
     handleRemove = async (index: number) => {
         const newNames = [...this.props.nameArray];
         newNames.splice(index, 1);

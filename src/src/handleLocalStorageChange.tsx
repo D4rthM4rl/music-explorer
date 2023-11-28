@@ -1,3 +1,7 @@
+/**
+ * Changes the theme in the whole website and stores the theme in localStorage
+ * @param theme theme to change website to
+ */
 export function handleThemeChange (theme: string) {
     // Update the theme based on the selected option value
     const elements = document.querySelectorAll('.themed');
@@ -9,6 +13,11 @@ export function handleThemeChange (theme: string) {
     storeTheme(theme);
 }
 
+/**
+ * Stores theme in localStorage
+ * @param theme theme to store in localStorage
+ * @throws Error if there was an error storing theme
+ */
 function storeTheme (theme: string) {
     try {
         localStorage.setItem('theme', theme);
@@ -17,6 +26,11 @@ function storeTheme (theme: string) {
     }
 }
 
+/**
+ * Stores token in localStorage
+ * @param token token to store
+ * @throws Error if there was an error storing token
+ */
 export async function storeToken (token: Promise<string | undefined>) {
     let stringToken = await token + "";
     try {
@@ -26,7 +40,8 @@ export async function storeToken (token: Promise<string | undefined>) {
     }
 }
 
-/** Stores new name with corresponding id in localstorage if it is unique name
+/**
+ * Stores new name with corresponding id in localStorage if it is unique name
  * @Returns true if it added the given name and id, and false otherwise.
  */
 export function handleNewName (name: string, id: string): boolean {
@@ -52,7 +67,8 @@ export function handleNewName (name: string, id: string): boolean {
     return storePair(name, id, "names");
 }
 
-/** Removes given name from localstorage
+/**
+ * Removes given name from localStorage
  * @Returns true if it removes the given name and corresponding id successfully, and false if name wasn't found.
  */
 export function handleNameRemove(name: string): boolean {
@@ -74,7 +90,8 @@ export function handleNameRemove(name: string): boolean {
     }
 }
 
-/** Stores new name with corresponding id in localstorage if it is unique name
+/**
+ * Stores new name with corresponding id in localStorage if it is unique name
  * @Returns true if it added the given name and id, and false otherwise.
  */
 export function handleNewPlaylist (title: string, id: string): boolean {
@@ -99,8 +116,9 @@ export function handleNewPlaylist (title: string, id: string): boolean {
     return storePair(title, id, "playlists");
 }
 
-/** Removes given playlist from localstorage
- * @Returns true if it removes the given playlist and corresponding id successfully,
+/**
+ * Removes given playlist from localStorage
+ * @returns true if it removes the given playlist and corresponding id successfully,
  * and false if playlist wasn't found.
  */
 export function handlePlaylistRemove(title: string): boolean {
@@ -122,12 +140,12 @@ export function handlePlaylistRemove(title: string): boolean {
 }
 
 /**
- * Helper method that actually stores name and id in local storage
+ * Helper method that actually stores name and id in localStorage
  * @param newThing given nonempty string name of person or playlist
  * @param id given spotify id of name's profile
  * @param localStorageKey category of thing in localStorage
- * @throws Error if it has an error storing name in localstorage
- * @returns false if there was an error storing thing in localstorage
+ * @throws Error if it has an error storing name in localStorage
+ * @returns false if there was an error storing thing in localStorage
  */
 function storePair (newThing: string, id: string, localStorageKey: string): boolean {
     try {
@@ -145,8 +163,9 @@ function storePair (newThing: string, id: string, localStorageKey: string): bool
 }
 
 /**
- * @param localStorageKey of thing to return from localstorage
- * @Returns array of all the inputted type in local storage.
+ * Gets all of a certain thing from localStorage
+ * @param localStorageKey of thing to return from localStorage
+ * @returns array of all the inputted type in localStorage.
  */
 export function getAllFromStorage(localStorageKey: string): string[] {
     try {return JSON.parse(localStorage.getItem(localStorageKey.toLowerCase()) || '[]');
@@ -156,13 +175,18 @@ export function getAllFromStorage(localStorageKey: string): string[] {
     }
 }
 
+/**
+ * Gets theme from localStorage and if there isn't one it returns default
+ * @throws Error if there was an error getting the theme
+ * @returns theme the theme from localStorage or default if there is none or errored
+ */
 export function getTheme(): string {
     try {
-        const theme = localStorage.getItem('theme') || 'default';
+        const theme: string = localStorage.getItem('theme') || 'default';
         return theme;
     } catch (err) {
         console.error('Error getting theme:', err);
-        return 'default-theme';
+        return 'default';
     }
 }
 

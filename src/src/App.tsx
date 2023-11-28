@@ -27,7 +27,6 @@ import assert from "assert";
 interface AppState {
   tracks: Track[];
   trackLocations: Map<string, trackLocation>;
-  requestResult: string;
   names: string[];
   playlists: string[];
   audioFeatures: Map<string, AudioFeatures>;
@@ -48,9 +47,10 @@ interface AppState {
   newPlaylistIdValue: string;
   settingsIcon: typeof settingsIconWhite;
   directionsActive: boolean;
-  userPremium: boolean;
-  userID: string;
 }
+
+let userID: string = "";
+let userPremium: boolean = false;
 
 interface Track {
   track: {
@@ -86,8 +86,6 @@ interface AudioFeatures {
   }
 }
 
-interface PlaylistResponse {items: Track[];}
-
 export type trackLocation = {
   person: string | undefined;
   playlist: string;
@@ -99,7 +97,6 @@ class App extends Component<{}, AppState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      requestResult: "NO REQUEST RESULT",
       tracks: [],
       trackLocations: new Map<string, trackLocation>(),
       audioFeatures: new Map<string, AudioFeatures>(),
@@ -122,13 +119,22 @@ class App extends Component<{}, AppState> {
       newPlaylistIdValue: "",
       settingsIcon: settingsIconWhitesmoke,
       directionsActive: false,
-      userPremium: false,
-      userID: "",
     };
   }
 
+  /**
+   * Clears the names in the sidebar name list
+   */
   clearNames = () => {this.setState({ names: [] });}
 
+  /**
+   * Clears the playlists in the sidebar playlist list
+   */
+  clearPlaylists = () => {this.setState({playlists: [] });}
+
+  /**
+   * Toggles the settings sidebar
+   */
   toggleSettings = () => {
     const aspectRatio = window.innerWidth/window.innerHeight;
     const rSidebar = document.getElementById("settings-sidebar") as HTMLElement;
@@ -142,6 +148,9 @@ class App extends Component<{}, AppState> {
     this.setState({settingsActive: !this.state.settingsActive})
   }
 
+  /**
+   * Toggles the left sidebar
+   */
   toggleMainSidebar = () => {
     const aspectRatio = window.innerWidth/window.innerHeight;
     const sidebar = document.getElementById("sidebar") as HTMLElement;
@@ -155,8 +164,10 @@ class App extends Component<{}, AppState> {
     this.setState({settingsActive: !this.state.settingsActive})
   }
 
-  clearPlaylists = () => {this.setState({playlists: [] });}
-
+  /**
+   * Changes the icons to match the theme
+   * @param theme for icons to match
+   */
   changeIcons = (theme: string) => {
     switch (theme) {
       case "default": this.setState({settingsIcon: settingsIconWhitesmoke});
@@ -193,6 +204,9 @@ class App extends Component<{}, AppState> {
     return Math.floor(((max + 1) * r) / 1000.0); // (Max + 1) * some decimal from 0 - .999 floored
   }
 
+  /**
+   * Gets whether user has premium account
+   */
   getUserDetails = async () => {
     let options = {
       url: `https://api.spotify.com/v1/me`,
@@ -202,16 +216,18 @@ class App extends Component<{}, AppState> {
       }
     }
     const playerResponse = await axios(options);
-    this.setState({userID: playerResponse.data.id});
-    this.setState({userPremium: playerResponse.data.product === "premium"});
+    userID = playerResponse.data.id;
+    userPremium = playerResponse.data.product === "premium";
   }
 
+  /**
+   * Starts the music explorer where it finds music from different playlists
+   * and accounts using the lists of names and playlists.
+   * Puts the tracks into links if user doesn't have premium and into a web player if they do
+   */
   handleStart = async () => {
-    // Memphis apple playlist: https://music.apple.com/us/playlist/anime-rap/pl.u-aZb0kKDTzP1pyE
-    // Kevin apple playlist: https://music.apple.com/us/playlist/evolving-ride-playlist/pl.u-RRbVY6xtyPeVer
-
     const token = localStorage.getItem("access_token");
-    const christmasWords = ["Christmas", "Snow", "Navidad", "Candy Cane", "Winter", "More Christ", "Santa", "Xmas"];
+    const christmasWords = ["Christmas", "Snow", "Navidad", "Candy Cane", "Winter", "More Christ", "Santa", "Xmas", "Mistletoe"];
 
     try {
       let totalTracks: string[] = [];
@@ -219,7 +235,7 @@ class App extends Component<{}, AppState> {
       let trackLocations: Map<string, trackLocation> = new Map<string, trackLocation>();
       let uris: string[] = [];
       const ids: string[] = [];
-      if (this.state.userPremium && this.state.usePlayer) {
+      if (userPremium && this.state.usePlayer) {
         console.log(`device id is: ${deviceID}`)
         let options = {
           url: `https://api.spotify.com/v1/me/player`,
@@ -494,7 +510,7 @@ class App extends Component<{}, AppState> {
         }
       }
 
-      if (this.state.userPremium && this.state.usePlayer) {
+      if (userPremium && this.state.usePlayer) {
         // Gets audio details of tracks
         const audioOptions = {
           url: `https://api.spotify.com/v1/audio-features?ids=${ids.toString()}`,
@@ -530,7 +546,7 @@ class App extends Component<{}, AppState> {
         await axios(playerOptions);
       } else if (this.state.useEmbed) {
         let playlistCreateOptions = {
-          url: "https://api.spotify.com/v1/users/" + this.state.userID + "/playlists?limit=50&offset=0",
+          url: "https://api.spotify.com/v1/users/" + userID + "/playlists?limit=50&offset=0",
           method: 'post',
           headers: {
             'Authorization': 'Bearer ' + token
@@ -560,13 +576,16 @@ class App extends Component<{}, AppState> {
     } catch (error) {console.log("Uh oh there was an error with handle start" + error);}
   }
 
+  /**
+   * Initializes the necessary info when the welcome screen is clicked
+   */
   handleWelcomeClick = async() => {
     this.setState({welcomeVisible: false});
     const newTheme = getTheme();
     this.setState({theme: newTheme});
     this.changeIcons(newTheme);
     getToken();
-    this.getUserDetails();
+    await this.getUserDetails();
   };
 
   /**
@@ -590,9 +609,12 @@ class App extends Component<{}, AppState> {
 
   }
 
+  /**
+   * Renders the app
+   */
   render() {
     const { isNamesTab, theme, newNameValue, newProfileIdValue, newPlaylistValue, newPlaylistIdValue,
-      directionsActive, userPremium } = this.state;
+      directionsActive} = this.state;
     const aspectRatio = window.innerWidth/window.innerHeight;
     // If I get embed to work, remove this
     const EMBED_WORKS = false;
@@ -710,16 +732,16 @@ class App extends Component<{}, AppState> {
                           </ol>
                           <li>Go to the main screen and click the start button</li>
                           <ol style={{fontSize: "80%"}}>
-                            {this.state.userPremium ? (
+                            {userPremium ? (
                             <div>
                               <li className="directions-item">Use the player to skip forward and backwards between songs</li>
                               <li className="directions-item">Disable the "Web Player" toggle in Settings if you want it to just output links</li>
-                              <li className="directions-item">With "Web Player" disabled, click the links to go to each song or enable the "Use Embed" toggle in settings</li>
-                              <li className="directions-item">Enabling "Use Embed" will create a playlist in your library of the generated songs and put them on the screen with previews</li>
+                              <li className="directions-item">With "Web Player" disabled, click the links to go to each song</li>
+                              <li className="directions-item">If it doesn't work, try refreshing the page</li>
                             </div>): (
                                 <div>
-                                  <li className="directions-item">Click the links to go to each song or enable the "Use Embed" toggle in settings</li>
-                                  <li className="directions-item">Enabling "Use Embed" will create a playlist in your library of the generated songs and put them on the screen with previews</li>
+                                  <li className="directions-item">Click the links to go to each song </li>
+                                  <li className="directions-item">If it doesn't work, try refreshing the page</li>
                                 </div>
                             ) }
                           </ol>

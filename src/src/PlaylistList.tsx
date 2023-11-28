@@ -17,8 +17,7 @@ interface PlaylistListState {
 }
 
 /**
- * A text field that allows the user to enter the list of edges.
- * Also contains the buttons that the user will use to interact with the app.
+ * An area of the sidebar where user enters playlists for app to choose from
  */
 class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
     constructor(props: PlaylistListProps) {
@@ -30,6 +29,10 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
         console.log("INITIALIZING playlistARRAY");
     }
 
+    /**
+     * Puts all the playlists into the playlist selector
+     * @param playlists list of names to put into the selector
+     */
     populateDatalist = (playlists: string[]) => {
         const datalist = document.getElementById('playlist-list');
         const stockPlaylists = ["Top Hits 2000-2023", "Top Spotify", "Top USA",
@@ -53,6 +56,9 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
         }
     }
 
+    /**
+     * Adds playlist to the list of playlists chosen
+     */
     handleAdd = async () => {
         const newPlaylist = this.state.value.trim();
         if (newPlaylist && newPlaylist !== "") {
@@ -62,11 +68,18 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
         }
     }
 
+    /**
+     * Clears the list of chosen playlists
+     */
     handleClear = async () => {
         this.props.onChange(this.props.playlistArray);
         this.props.onClear(); // call the onClear prop
     }
 
+    /**
+     * Adds playlist if key pressed was ENTER
+     * @param event key pressed event to check
+     */
     handleInputKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         if (event.keyCode === 13) {
             // Enter key was pressed
@@ -74,6 +87,10 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
         }
     };
 
+    /**
+     * Removes a given playlist from the chosen playlist list
+     * @param index index of playlist to remove
+     */
     handleRemove = async (index: number) => {
         const newPlaylist = [...this.props.playlistArray];
         newPlaylist.splice(index, 1);

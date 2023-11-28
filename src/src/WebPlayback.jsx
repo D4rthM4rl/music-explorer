@@ -11,7 +11,6 @@ import whiteVisibleIcon from "./assets/white-visible-icon.png"
 import quesionMarkIcon from "./assets/question-mark-icon.png"
 import {trackLocation} from "./App";
 import axios from "axios";
-import assert from "assert";
 
 const track = {
     name: "",
@@ -87,6 +86,14 @@ function getKey(k, m){
     return key + " " + mode;
 }
 
+/**
+ * Generates the web player for Spotify playback on the site
+ * @param props trackLocation to get playlist track is from
+ * @param props token to access Spotify content
+ * @param props audioMap tracks mapped to audio analysis to display
+ * @returns {JSX.Element}
+ */
+
 function WebPlayback(props) {
     let theme = getTheme();
     const locations = props.trackLocations;
@@ -101,7 +108,6 @@ function WebPlayback(props) {
     const [moreDetailsVisible, moreDetailsSetVisible] = useState(false);
 
     useEffect(() => {
-        console.log(locations.size);
         const script = document.createElement("script");
         script.src = "https://sdk.scdn.co/spotify-player.js";
         script.async = true;

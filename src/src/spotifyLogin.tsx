@@ -1,26 +1,31 @@
 // Replace redirect URIs with whatever the url is if it changes
-import {deviceID} from "./WebPlayback";
-import axios from "axios";
 
 const redirectUri = "https://d4rthm4rl.github.io/music-explorer/";
 // const redirectUri = "http://localhost:3000";
 
-export async function getToken() {
+/**
+ * Gets access token or sends user to login page if they haven't logged in yet.
+ */
+export async function getToken(): Promise<string | void> {
     const clientId = "4cd6054588e84b1884b9e14998f34844";
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
     let accessToken;
     if (!code) {
-        console.log("no code")
+        // console.log("no code")
         await redirectToAuthCodeFlow(clientId);
     } else {
-        console.log("there is code: " + code)
+        // console.log("there is code: " + code)
         accessToken = await getAccessToken(clientId, code);
-        console.log("access token: " + accessToken)
+        // console.log("access token: " + accessToken)
     }
     return accessToken;
 }
 
+/**
+ * Redirects the user to login page
+ * @param clientId client to sign in
+ */
 async function redirectToAuthCodeFlow(clientId: string) {
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
@@ -36,10 +41,13 @@ async function redirectToAuthCodeFlow(clientId: string) {
         "playlist-read-collaborative playlist-read-private");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
-    // @ts-ignore   Not really any problem here, it's just picky
-    document.location = `https://accounts.spotify.com/authorize?${params.toString()}`;
+    document.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;
 }
 
+/**
+ * Generates a code verifier for the code challenge
+ * @param length length of code verifier to generate
+ */
 function generateCodeVerifier(length: number) {
     let text = '';
     let possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
@@ -50,6 +58,10 @@ function generateCodeVerifier(length: number) {
     return text;
 }
 
+/**
+ * Generates a code challenge to log user in
+ * @param codeVerifier verifier to encode
+ */
 async function generateCodeChallenge(codeVerifier: string) {
     const data = new TextEncoder().encode(codeVerifier);
     const digest = await window.crypto.subtle.digest('SHA-256', data);
@@ -60,6 +72,11 @@ async function generateCodeChallenge(codeVerifier: string) {
         .replace(/=+$/, '');
 }
 
+/**
+ * Gets an access token to access Spotify API
+ * @param clientId id of client to generate token for
+ * @param code code for the access token
+ */
 export async function getAccessToken(clientId: string, code: string) {
     const verifier = localStorage.getItem("verifier");
     let body = new URLSearchParams({
@@ -100,6 +117,10 @@ export async function getAccessToken(clientId: string, code: string) {
     }
 }
 
+/**
+ * Generates refresh token using access token
+ * @param clientId id of client to generate token for
+ */
 export async function getRefreshToken(clientId: string) {
     const refreshToken = localStorage.getItem("refresh_token")
 
