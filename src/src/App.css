@@ -34,6 +34,7 @@ body {
   text-align: center;
   display:flex;
   box-shadow: var(--game-border);
+  overflow-y: scroll;
   /*animation: slideFromLeft ease 3s;*/
 }
 #player-placeholder {
@@ -155,7 +156,6 @@ body {
   font-weight: bold;
   font-size: 25px;
 }
-
 .close-button {
   position: absolute;
   top: 10px;
@@ -163,7 +163,6 @@ body {
   font-size: 20px;
   cursor: pointer;
 }
-
 #embed {
   border-radius:12px
 }
@@ -187,8 +186,6 @@ body {
   stroke: black;
 }
 #links{
-  /*position:absolute;*/
-  /*margin-bottom: 25%;*/
   list-style: none;
 }
 #links-output{color:var(--link-color); mix-blend-mode: var(--link-blend); font-family: var(--overall-font-family)}

@@ -16,6 +16,7 @@
     width:25%;
     /*flex: 50%;*/
     overflow: hidden;
+    overflow-y: scroll;
     right: -25%;
     position:fixed;
 }
@@ -95,7 +96,7 @@ input:checked + .slider:before {
     box-shadow: var(--settings-textbox-glow);
 }
 #playlist-add-header {
-    margin-top: 5%;
+    /*margin-top: 1%;*/
 }
 #new-playlist-box {
     font-family: Comic Sans MS;
@@ -118,6 +119,20 @@ input:checked + .slider:before {
     color: var(--settings-textbox-color);
     background: var(--settings-textbox-bg);
     box-shadow: var(--settings-textbox-glow);
+}
+#about-label {
+
+}
+#logout-label {
+
+}
+#removeAccount-label {
+
+}
+.other-options {
+    font-size: 30px;
+    cursor: pointer;
+    color: var(--settings-text-color);
 }
 .adding-error {
     font-size: 70%;
@@ -209,7 +224,7 @@ input:checked + .slider:before {
 }
 #settings-sidebar.gay {
     background-size: 100% 300%;
-    overflow: hidden;
+    overflow-y: scroll;
     -webkit-animation: rainbow 10s ease infinite;
     -o-animation: rainbow 10s linear infinite;
     animation: rainbow 10s ease infinite;

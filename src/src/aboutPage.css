@@ -1,0 +1,316 @@
+#topbar2 {
+  background-color: var(--topbar-bg);
+  animation: fallDownAnimation ease 1.5s;
+  display: grid;
+  width: 100vw;
+  grid-template-columns: 100%;
+  height: var(--topbar-height);
+  text-align: left;
+  box-shadow:inset 1px -2px 11px 0 black;
+  position: fixed;
+  --topbar-height: 100px;
+}
+#title2 {
+  align-self: center;
+  margin-left: 15px;
+  color: var(--title-color);
+  text-shadow: var(--title-glow);
+  font-size: var(--title-size);
+  font-family: var(--overall-font-family);
+  font-weight: bold;
+}
+
+#main-area {
+  display:flex;
+  height: 100vh;
+}
+
+/* Style for the Sidebar */
+#sidebar {
+  --topbar-height: 100px;
+  z-index: 2;
+  flex:25%;
+  background: var(--sidebar-bg);
+  animation: slideFromLeft ease 1.5s;
+  text-align: center;
+  box-shadow: var(--sidebar-shadow);
+  color: var(--sidebar-color);
+  text-shadow: var(--sidebar-glow);
+  font-family: var(--overall-font-family);
+  height: calc(100vh - var(--topbar-height));
+  margin-top: var(--topbar-height);
+  position: relative;
+  transition: left .5s ease;
+}
+.sidebar-headings {
+  font-size: 2.6vw;
+  margin-top: 5%;
+  color: var(--sidebar-color); /* Idk if this does anything */
+}
+#activate-sidebar-button {
+  font-family: var(--overall-font-family);
+  /*overflow-y: scroll;*/
+  visibility: visible;
+  font-size: calc(30px + var(--activate-sidebar-fontsize-adjustment));
+  z-index: 1;
+  transform: rotate(270deg);
+  background: var(--activate-sidebar-bg);
+  color: var(--activate-sidebar-color);
+  border: white;
+  border-bottom-left-radius: 15%;
+  border-bottom-right-radius: 15%;
+  top: 15%;
+  position: absolute;
+  cursor: pointer;
+  writing-mode: vertical-lr;
+  padding: 12px 10px 8px;
+  right: -88.5px;
+}
+
+#activate-sidebar-button.gay {
+  background-size: 1000% 300%;
+  -webkit-animation: rainbow 10s ease infinite;
+  -o-animation: rainbow 10s linear infinite;
+  animation: rainbow 10s ease infinite;
+} /* Necessary for animation stuff */
+
+#info-area {
+  padding: 1.5%;
+  margin-top: 5%;
+  font-family: var(--info-font-family);
+  flex: 80%;
+  background: var(--info-bg);
+  color: red;
+  box-shadow: var(--game-border);
+  overflow-y: scroll;
+  /*animation: slideFromLeft ease 3s;*/
+}
+#goal {
+  font-size: 20px;
+  font-weight: bold;
+}
+#info-list {
+  margin-top: 15%;
+  font-size: calc(2vw + var(--info-fontsize-adjustment));
+  color: var(--overall-font-color);
+  padding-left: 10%;
+  padding-right: 3%;
+  text-align: left;
+  font-family: var(--info-font-family);
+}
+
+.glow-on-hover {
+  border: none;
+  outline: none;
+  position: relative;
+  z-index: 0;
+  border-radius: 15px;
+  opacity: 1;
+}
+.glow-on-hover:before {
+  content: '';
+  background: var(--start-button-glow);
+  position: absolute;
+  top: -3px;
+  left:-3px;
+  background-size: 400%;
+  z-index: -1;
+  filter: blur(50%);
+  width: calc(100% + 6px);
+  height: calc(100% + 6px);
+  animation: glowing 15s linear infinite;
+  opacity: 0;
+  transition: opacity .3s ease-in-out;
+  border-radius: 10px;
+}
+.glow-on-hover:active {color: var(--start-button-bg)}
+.glow-on-hover:active:after {background: transparent;}
+.glow-on-hover:hover:before {opacity: 1;}
+.glow-on-hover:after {
+  z-index: -1;
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: var(--start-button-bg);
+  left: 0;
+  top: 0;
+  border-radius: 10px;
+}
+
+/* Themes */
+.default {
+  --overall-font-family: Arial;
+  --info-font-family: var(--overall-font-family);
+  --overall-fontsize-adjustment: 0%;
+  --info-fontsize-adjustment: 0%;
+  --info-bg: #ccced0;
+  --sidebar-bg: #282b31;
+  --sidebar-glow: none;
+  --sidebar-color: whitesmoke;
+  --sidebar-textbox-color: #919191;
+  --sidebar-textbox-bg: lightcyan;
+  --sidebar-shadow: 0 0 10px #000000;
+  --activate-sidebar-fontsize-adjustment: 0%;
+  --activate-sidebar-right-adjustment: 0px;
+  --activate-sidebar-color: var(--sidebar-color);
+  --activate-sidebar-bg: var(--sidebar-bg);
+  --start-button-color: #fff;
+  --start-button-bg: #000000;
+  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+}
+.dark {
+  --overall-font-family: Arial;
+  --info-font-family: var(--overall-font-family);
+  --overall-fontsize-adjustment: 0%;
+  --info-fontsize-adjustment: 0%;
+  --sidebar-bg: #282b31;
+  --sidebar-color: #dedede;
+  --sidebar-glow: none;
+  --sidebar-textbox-color: #aaaac5;
+  --sidebar-textbox-bg: #464f5b;
+  --sidebar-shadow: 0 0 10px #000000;
+  --activate-sidebar-fontsize-adjustment: 0%;
+  --activate-sidebar-right-adjustment: 0px;
+  --activate-sidebar-color: var(--sidebar-color);
+  --activate-sidebar-bg: var(--sidebar-bg);
+  --info-bg: black;
+}
+.neon {
+  --overall-font-family: "Arial";
+  --info-font-family: var(--overall-font-family);
+  --overall-fontsize-adjustment: 0%;
+  --info-fontsize-adjustment: 0%;
+  --sidebar-bg: #000000;
+  --sidebar-color: var(--sidebar-bg);
+  --sidebar-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #ffffff, 0 0 15px #00ff77;
+  --sidebar-textbox-color: #aaaac5;
+  --sidebar-textbox-bg: #000000;
+  --sidebar-shadow: 0 40px 20px red;
+  --sidebar-textbox-glow: 0 0 7px #fff, 0 0 10px #ffffff, 0 0 15px #ffed66;
+  --activate-sidebar-fontsize-adjustment: 0%;
+  --activate-sidebar-right-adjustment: 0px;
+  --activate-sidebar-color: white;
+  --activate-sidebar-bg: var(--sidebar-bg);
+  --info-bg: #181818;
+}
+.pastel {
+  --overall-font-family: Arial;
+  --info-font-family: var(--overall-font-family);
+  --overall-fontsize-adjustment: 0%;
+  --info-fontsize-adjustment: 0%;
+  --sidebar-bg: #7effab;
+  --sidebar-color: #7e92ff;
+  --sidebar-textbox-color: #7e92ff;
+  --sidebar-textbox-bg: lightcyan;
+  --sidebar-shadow: 0 0 10px #000000;
+  --activate-sidebar-fontsize-adjustment: 0%;
+  --activate-sidebar-right-adjustment: 0px;
+  --activate-sidebar-color: var(--sidebar-color);
+  --activate-sidebar-bg: var(--sidebar-bg);
+  --info-bg: #e2c1ff;
+}
+.gay {
+  --overall-font-family: Arial;
+  --info-font-family: var(--overall-font-family);
+  --overall-fontsize-adjustment: 0%;
+  --info-fontsize-adjustment: 0%;
+  --sidebar-bg: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
+  --sidebar-color: white;
+  --sidebar-textbox-color: #df5cff;
+  --sidebar-textbox-bg: lightcyan;
+  --sidebar-shadow: 0 0 10px #000000;
+  --activate-sidebar-fontsize-adjustment: 0%;
+  --activate-sidebar-right-adjustment: 0px;
+  --activate-sidebar-color: black;
+  --activate-sidebar-bg: whitesmoke;
+  --info-bg: white;
+}
+#sidebar.gay {
+  background-size: 100% 300%;
+  -webkit-animation: rainbow 10s ease infinite;
+  -o-animation: rainbow 10s linear infinite;
+  animation: rainbow 10s ease infinite, slideFromLeft ease 1.5s;
+} /* Necessary for animation stuff */
+.kevin {
+  --overall-font-family: Genshin Drip;
+  --info-font-family: Genshin;
+  --overall-fontsize-adjustment: -40%;
+  --info-fontsize-adjustment: -20%;
+  --sidebar-bg: linear-gradient(180deg, #D60270, #0038A8);
+  --sidebar-color: white;
+  --sidebar-textbox-color: #a73df1;
+  --sidebar-textbox-bg: #bed5ff;
+  --sidebar-shadow: 0 0 10px #000000;
+  --activate-sidebar-fontsize-adjustment: -40%;
+  --activate-sidebar-right-adjustment: -3%;
+  --activate-sidebar-color: white;
+  --activate-sidebar-bg: black;
+  --info-bg: white;
+}
+.drac {
+  --overall-font-family: Arial;
+  --info-font-family: var(--overall-font-family);
+  --overall-fontsize-adjustment: 0%;
+  --info-fontsize-adjustment: 0%;
+  --sidebar-bg: #282b31;
+  --sidebar-color: red;
+  --sidebar-textbox-color: black;
+  --sidebar-textbox-bg: #ffa0a0;
+  --sidebar-shadow: 0 0 10px #000000;
+  --activate-sidebar-fontsize-adjustment: 0%;
+  --activate-sidebar-right-adjustment: 0px;
+  --activate-sidebar-color: var(--sidebar-color);
+  --activate-sidebar-bg: var(--sidebar-bg);
+  --info-bg: white;
+}
+.barbie {
+  --overall-font-family: Barbie;
+  --info-font-family: Arial;
+  --overall-fontsize-adjustment: 30%;
+  /*--info-fontsize-adjustment: 20%;*/
+  --sidebar-bg: #ff3ec7;
+  --sidebar-color: #ffc9ee;
+  --sidebar-textbox-color: #fff;
+  --sidebar-textbox-bg: #25e7ff;
+  --sidebar-shadow: 0 0 10px #000000;
+  --activate-sidebar-fontsize-adjustment: 35%;
+  --activate-sidebar-right-adjustment: 1.9%;
+  --activate-sidebar-color: var(--sidebar-color);
+  --activate-sidebar-bg: var(--sidebar-bg);
+  --info-bg: white;
+}
+.marley {
+  --overall-font-family: Arial;
+  --info-font-family: var(--overall-font-family);
+  --overall-fontsize-adjustment: 0%;
+  --info-fontsize-adjustment: 0%;
+  --sidebar-bg: #282b31;
+  --sidebar-color: whitesmoke;
+  --sidebar-textbox-color: #919191;
+  --sidebar-textbox-bg: linear-gradient(135deg, #0004b9, #020001);
+  --sidebar-shadow: 0 0 10px #000000;
+  --activate-sidebar-fontsize-adjustment: 0%;
+  --activate-sidebar-right-adjustment: 0px;
+  --activate-sidebar-color: var(--sidebar-color);
+  --activate-sidebar-bg: var(--sidebar-bg);
+  --info-bg: white;
+}
+@media (max-aspect-ratio: 1/1) {
+  #sidebar {
+    --topbar-height: 12vh;
+    flex: none;
+    width: 80vw;
+    left: -80vw;
+    position: fixed;
+  }
+  #activate-sidebar-button {
+    font-size: calc(65px + var(--activate-sidebar-fontsize-adjustment));
+    right: calc(-170px + var(--activate-sidebar-right-adjustment));
+  }
+  .sidebar-headings {
+    font-size: 7vw;
+    margin-top: 5%;
+    margin-bottom: 3%;
+  }
+}

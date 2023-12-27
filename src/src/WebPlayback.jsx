@@ -134,8 +134,9 @@ function WebPlayback(props) {
                 if (!state) {
                     return;
                 }
-
-                setTrack(state.track_window.current_track);
+                if (state.track_window.current_track !== null)  {
+                    setTrack(state.track_window.current_track);
+                }
                 setPaused(state.paused);
 
                 player.getCurrentState().then( state => {
