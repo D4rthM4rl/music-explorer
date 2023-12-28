@@ -169,11 +169,14 @@ body {
 
 #start-button{
   font-size: 25px;
+  height: auto;
+  width: auto;
+  padding: 15px 20px;
   font-family: var(--overall-font-family);
   background: var(--start-button-bg);
   color: var(--start-button-color);
 }
-#songDupeError {
+#songError {
   font-size: 130%;
   font-family: var(--directions-font-family) ;
   font-weight: bold;
@@ -266,7 +269,7 @@ body {
   --directions-fontsize-adjustment: 0%;
   --overall-bg: #282b31;
   --overall-font-color: #ffffff;
-  --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);;
+  --game-bg: linear-gradient(124deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
   --player-color: white;
   --player-bg: black;
   --start-button-color: #fff;

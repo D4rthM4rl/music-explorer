@@ -13,7 +13,6 @@ export async function getToken(): Promise<string | void> {
     const code = params.get("code");
     let accessToken;
     if (!code) {
-        console.log("no code")
         await redirectToAuthCodeFlow(clientId);
     } else {
         // console.log("there is code: " + code)
@@ -28,7 +27,6 @@ export async function getToken(): Promise<string | void> {
  * @param clientId client to sign in
  */
 async function redirectToAuthCodeFlow(clientId: string) {
-    console.log("clientid: " + clientId)
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
 
@@ -39,8 +37,7 @@ async function redirectToAuthCodeFlow(clientId: string) {
     params.append("response_type", "code");
     params.append("redirect_uri", redirectUri);
     params.append("scope", "user-read-private user-read-email streaming " +
-        "user-modify-playback-state playlist-modify-public playlist-modify-private " +
-        "playlist-read-collaborative playlist-read-private");
+        "user-modify-playback-state playlist-read-collaborative");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
     document.location.replace(`https://accounts.spotify.com/authorize?${params.toString()}`);

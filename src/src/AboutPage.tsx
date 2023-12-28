@@ -40,10 +40,21 @@ class AboutPage extends Component<AboutProps, AboutState> {
           </div>
           <div id="main-area">
             <div id="sidebar2" className={`themed ${theme}`}>
+              <button id="activate-sidebar2-button" className={`themed ${theme}`}
+                      onClick={() => {
+                        const sidebar = document.getElementById("sidebar2") as HTMLElement;
+                        if (sidebar) {
+                          if (aspectRatio < 1) {
+                            sidebar.style.left = sidebar.style.left === "0px" ? "-80%" : "0px";
+                          } else {
+                            sidebar.style.left = sidebar.style.left === "0px" ? "-30%" : "0px";
+                          }
+                        }}}
+              >Sidebar</button>
               <button id="back-button" className="glow-on-hover"
                       onClick={this.props.onBackClick}>Back</button>
               <div id="theme-header2" className="sidebar2-heading">Theme
-                <select id="theme-select" className="themed"
+                <select id="theme-select2" className="themed"
                         value={this.state.theme}
                         onChange={(event) => {this.setState({theme: event.target.value})
                           // this.changeIcons(event.target.value);
@@ -74,40 +85,16 @@ class AboutPage extends Component<AboutProps, AboutState> {
                 of tracks based on your given parameters.</p>
               <h1 id="team" className={`info-header info-list themed ${theme}`}>Made by</h1>
               <div className="info-list">
-                <a href="https://www.linkedin.com/in/marley-byers">Marley</a>
+                <a href="https://www.linkedin.com/in/marley-byers" className="info-list name">Marley:</a>
                 <p>Frontend and Backend</p>
               </div>
               <br/>
               <div className="info-list">
-                <a>Josh</a>
+                <a className="info-list name">Josh:</a>
                 <p>Frontend Help</p>
               </div>
               <h2 className={`info-header themed ${theme}`}></h2>
               <p className={`info-body themed ${theme}`}></p>
-            </div>
-            <div id="settings-sidebar" className={`themed ${theme}`}>
-              <div id="theme-header">Theme
-                <select id="theme-select" className="themed"
-                        value={this.state.theme}
-                        onChange={(event) => {this.setState({theme: event.target.value})
-                          // this.changeIcons(event.target.value);
-                          handleThemeChange(event.target.value)}}
-                        style={{
-                          marginLeft: '10%',
-                          marginTop: '3%',
-                          fontSize: "90%"
-                        }}>
-                  <option value="default">Default</option>
-                  <option value="dark">Dark Mode</option>
-                  <option value="neon">Neon</option>
-                  <option value="pastel">Pastel</option>
-                  <option value="gay">Gay</option>
-                  <option value="kevin">Kevin</option>
-                  <option value="drac">Drac</option>
-                  <option value="barbie">Barbie</option>
-                  <option value="marley">Marley</option>
-                </select>
-              </div>
             </div>
           </div>
         </div>

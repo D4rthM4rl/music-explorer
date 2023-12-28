@@ -24,7 +24,7 @@
     color: var(--sidebar-textbox-color);
     background: var(--sidebar-textbox-bg);
     box-shadow: var(--sidebar-textbox-glow);
-    font-family: 'Comic Sans MS';
+    font-family: 'Comic Sans MS', sans-serif;
     width: 29%;
     font-size: 115%;
     border-radius: 5px;
@@ -35,7 +35,7 @@
     color: var(--sidebar-textbox-color);
     background: var(--sidebar-textbox-bg);
     box-shadow: var(--sidebar-textbox-glow);
-    font-family: Comic Sans MS;
+    font-family: "Comic Sans MS", sans-serif;
     width: 75%;
     font-size: 115%;
     border-radius: 5px;
@@ -90,7 +90,7 @@
 .tab:hover {background: var(--tab-highlight-color);}
 #activate-sidebar-button {
     font-family: var(--overall-font-family);
-    /*overflow-y: scroll;*/
+    opacity: 40%;
     visibility: visible;
     font-size: calc(30px + var(--activate-sidebar-fontsize-adjustment));
     z-index: 1;
@@ -106,6 +106,9 @@
     writing-mode: vertical-lr;
     padding: 12px 10px 8px;
     right: -88.5px;
+}
+#activate-sidebar-button:hover {
+    opacity: 90%;
 }
 
 #activate-sidebar-button.gay {

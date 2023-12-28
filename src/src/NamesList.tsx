@@ -44,7 +44,7 @@ class NamesList extends Component<NamesListProps, NamesListState> {
                 datalist.appendChild(option);
             }
         } else {
-            console.log("no namelist element")
+            // console.log("no namelist element")
         }
     }
 

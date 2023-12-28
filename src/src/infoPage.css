@@ -59,10 +59,16 @@
   margin-top: 5%;
   color: var(--sidebar-color); /* Idk if this does anything */
 }
+#theme-select2 {
+  background: var(--theme-select-bg);
+  color: var(--theme-select-color);
+  font-family: var(--overall-font-family);
+  width: auto;
+}
 
 #activate-sidebar2-button {
   font-family: var(--overall-font-family);
-  /*overflow-y: scroll;*/
+  opacity: 40%;
   visibility: visible;
   font-size: calc(30px + var(--activate-sidebar-fontsize-adjustment));
   z-index: 1;
@@ -79,7 +85,9 @@
   padding: 12px 10px 8px;
   right: -88.5px;
 }
-
+#activate-sidebar2-button:hover {
+  opacity: 90%;
+}
 #activate-sidebar2-button.gay {
   background-size: 1000% 300%;
   -webkit-animation: rainbow 10s ease infinite;
@@ -96,16 +104,26 @@
   box-shadow: var(--game-border);
   overflow-y: scroll;
   font-size: calc(24px + var(--info-fontsize-adjustment));
-  color: var(--overall-font-color);
+  color: var(--info-font-color);
   text-align: left;
   /*animation: slideFromLeft ease 3s;*/
 }
-#goal {
-  font-size: 20px;
-  font-weight: bold;
+.info-list:visited {
+  color: var(--info-font-color)
 }
-#privacy-preamble {
-  font-size: 24px;
+.info-header {
+  font-size: 32px;
+}
+.info-body {
+  margin-top: -26px;
+}
+.name {
+  font-weight: bolder;
+  font-size: calc(27px + var(--info-fontsize-adjustment));
+}
+#goal {
+  font-size: 26px;
+  font-weight: bold;
 }
 
 #back-button {
@@ -160,6 +178,7 @@
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
+  --info-font-color: black;
   --info-bg: #ccced0;
   --sidebar-bg: #282b31;
   --sidebar-glow: none;
@@ -180,6 +199,7 @@
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
+  --info-font-color: #dedede;
   --info-bg: black;
   --sidebar-bg: #282b31;
   --sidebar-color: #dedede;
@@ -200,6 +220,7 @@
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
+  --info-font-color: #e3ff80;
   --info-bg: #181818;
   --sidebar-bg: #000000;
   --sidebar-color: var(--sidebar-bg);
@@ -221,6 +242,7 @@
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
+  --info-font-color: #000000;
   --info-bg: #e2c1ff;
   --sidebar-bg: #7effab;
   --sidebar-color: #7e92ff;
@@ -240,7 +262,8 @@
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
-  --info-bg: white;
+  --info-font-color: #000000;
+  --info-bg: linear-gradient(124deg, #ff798d, #ff9473, #e8b71d, #e3e81d, #7bff92, #80e1ff, #85b4ff, #b895ff, #ee7fff);
   --sidebar-bg: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
   --sidebar-color: white;
   --sidebar-blend: difference;
@@ -255,17 +278,24 @@
   --back-button-bg: #000000;
   --back-button-glow: linear-gradient(45deg, #ff0000, #ff00b7, #ff0000, #ff3c00, #ff0000);
 }
-#sidebar.gay {
+#sidebar2.gay {
   background-size: 100% 300%;
-  -webkit-animation: rainbow 10s ease infinite;
-  -o-animation: rainbow 10s linear infinite;
-  animation: rainbow 10s ease infinite, slideFromLeft ease 1.5s;
+  -webkit-animation: rainbow 30s ease infinite;
+  -o-animation: rainbow 30s linear infinite;
+  animation: rainbow 30s ease infinite, slideFromLeft ease 1.5s;
+} /* Necessary for animation stuff */
+#info-area.gay {
+  background-size: 1400% 300%;
+  -webkit-animation: rainbow 100s ease infinite;
+  -o-animation: rainbow 100s linear infinite;
+  animation: rainbow 100s ease infinite;
 } /* Necessary for animation stuff */
 .kevin {
   --overall-font-family: Genshin Drip;
   --info-font-family: Genshin;
   --overall-fontsize-adjustment: -40%;
   --info-fontsize-adjustment: -20%;
+  --info-font-color: #000000;
   --info-bg: white;
   --sidebar-bg: linear-gradient(180deg, #D60270, #0038A8);
   --sidebar-color: white;
@@ -285,7 +315,8 @@
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
-  --info-bg: white;
+  --info-font-color: #000000;
+  --info-bg: linear-gradient(180deg, #ff2400,  dimgray);
   --sidebar-bg: #282b31;
   --sidebar-color: red;
   --sidebar-textbox-color: black;
@@ -304,7 +335,8 @@
   --info-font-family: Arial;
   --overall-fontsize-adjustment: 30%;
   --info-fontsize-adjustment: 0%;
-  --info-bg: white;
+  --info-font-color: #000000;
+  --info-bg: linear-gradient(180deg, #2eedff, #ffffff);
   --sidebar-bg: #ff3ec7;
   --sidebar-color: #ffc9ee;
   --sidebar-textbox-color: #fff;
@@ -323,7 +355,8 @@
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
-  --info-bg: white;
+  --info-font-color: aliceblue;
+  --info-bg: linear-gradient(135deg, #401c67, #000000, #56148d);
   --sidebar-bg: #282b31;
   --sidebar-color: whitesmoke;
   --sidebar-textbox-color: #919191;
@@ -338,20 +371,40 @@
   --back-button-glow: linear-gradient(45deg, #ff0000, #002bff, #ff0000, #ff0000, #7a00ff, #ff0000, #ff0000, #ff00c8, #ff0000);
 }
 @media (max-aspect-ratio: 1/1) {
-  #sidebar {
+  #sidebar2 {
     --topbar-height: 12vh;
     flex: none;
     width: 80vw;
     left: -80vw;
     position: fixed;
   }
-  #activate-sidebar-button {
+  #activate-sidebar2-button {
     font-size: calc(65px + var(--activate-sidebar-fontsize-adjustment));
+    opacity: 30%;
     right: calc(-170px + var(--activate-sidebar-right-adjustment));
   }
-  .sidebar-headings {
-    font-size: 7vw;
+  #back-button {
+    font-size: 40px;
+    width: auto;
+    height: auto;
+    padding: 15px 25px;
+  }
+  #theme-header2 {
+    font-size: calc(6.5vw + var(--overall-fontsize-adjustment));
     margin-top: 5%;
     margin-bottom: 3%;
+  }
+  .sidebar2-nav {
+    font-size: calc(7.5vw + var(--overall-fontsize-adjustment));
+  }
+  #info-area {
+    /*padding-top: 20%;*/
+    margin-top: 15%;
+  }
+  #topbar2 {
+    height: 12vh;
+  }
+  #title2 {
+    font-size: calc(6.5vw + var(--overall-fontsize-adjustment));
   }
 }

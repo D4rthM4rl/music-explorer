@@ -26,7 +26,6 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
             value: "",
             num: 0,
         }
-        console.log("INITIALIZING playlistARRAY");
     }
 
     /**
@@ -52,7 +51,7 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
                 datalist.appendChild(option);
             }
         } else {
-            console.log("no playlist-list element")
+            // console.log("no playlist-list element")
         }
     }
 

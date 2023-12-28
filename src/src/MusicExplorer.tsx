@@ -216,7 +216,7 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
    * Gets whether user has premium account
    */
   getUserDetails = async() => {
-    console.log("getting user details");
+    // console.log("getting user details");
     try {
       let options = {
         url: `https://api.spotify.com/v1/me`,
@@ -230,9 +230,9 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
       userID = playerResponse.data.id;
       userPremium = playerResponse.data.product === "premium";
     } catch (error) {
-      console.log(error);
+      // console.log(error);
       if (error.response.status === 401) {
-        console.log("Error 401");
+        // console.log("Error 401");
         if (!localStorage.getItem("access_token")) {
           await getToken();
         } else {
@@ -272,7 +272,7 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
       let uris: string[] = [];
       const ids: string[] = [];
       if (userPremium && this.state.usePlayer) {
-        console.log(`device id is: ${deviceID}`)
+        // console.log(`device id is: ${deviceID}`)
         let options = {
           url: `https://api.spotify.com/v1/me/player`,
           method: 'put',
@@ -290,7 +290,6 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
       // Gets songs from each playlist inputted
       let playlistID;
       for (let i = 0; i < this.state.playlists.length; i++) {
-        console.log("Getting songs from playlists");
         switch (this.state.playlists[i].toUpperCase()) {
           case 'TOP HITS 2000-2023':
             playlistID = ('7E3uEa1emOcbZJuB8sFXeK');
@@ -370,7 +369,6 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
             'Authorization': 'Bearer ' + token
           }
         };
-        console.log(`https://api.spotify.com/v1/playlists/${playlistID}/tracks?offset=00`);
         
         const playlistResponse = await axios(options);
         if (playlistResponse.status === 200) {
@@ -378,14 +376,13 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
           for (let j = 0; j < this.state.numGenreState; j++) {
             const tracks = playlistResponse.data.items;
             const trackNum = this.getRandom(tracks.length - 1);
-            console.log(`Track number is: ${trackNum}`)
+            // console.log(`Track number is: ${trackNum}`)
             const track = tracks[trackNum].track;
-            const link = `http://open.spotify.com/track/${track.id}`;
-            console.log(`Link: ${link}`)
+            const link = `https://open.spotify.com/track/${track.id}`;
             const trackName = track.name;
             const id = track.id;
             const trackLocation: trackLocation = {person: undefined, playlist: this.state.playlists[i]};
-            console.log(`Track: ${track.name}`)
+            // console.log(`Track: ${track.name}`)
             if (trackNamesChosen.includes(trackName)) {
               j--;
               failedAttempts++;
@@ -393,11 +390,13 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
               console.log('---');
               
               if (failedAttempts > 5) {
+                const message = "Couldn't generate songs because there were likely too few playable songs";
+                this.errorMessage("songError", message, 5);
                 throw new Error("Failed too many times to get a song");
               }
             } else {
-              console.log('Track:', trackName);
-              console.log('---');
+              // console.log('Track:', trackName);
+              // console.log('---');
               
               totalTracks.push(link);
               trackNamesChosen.push(trackName);
@@ -407,7 +406,6 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
               this.setState({links: totalTracks});
               trackLocations.set(trackName, trackLocation);
               this.setState({trackLocations: trackLocations});
-              console.log(`From ${trackLocation.playlist}`);
             }
           }
         }
@@ -431,31 +429,28 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
         const profileResponse = await axios(options);
         if (profileResponse.status === 200) {
           const playlists = profileResponse.data.items;
-          console.log("Person has " + playlists.length + " playlists");
+          // console.log("Person has " + playlists.length + " playlists");
           if (playlists.length > 0) {
             // Iterates over each playlist and selects a song from a random one until reaches numPersonal
-            //TODO: Add it so that it's selectable whether it chooses randomly from one playlist or any or selectable
             for (let j = 0; j < this.state.numPersonalState; j++) {
               let playlistNum = this.getRandom(playlists.length - 1);
               if (this.state.grinchMode) {
-                christmasWords.forEach(function (christmasWord:string) {
-                  console.log("Looking for bad words");
+                for (const christmasWord in christmasWords) {
                   let numGrinchTries = 0;
                   while (playlists[playlistNum].name.includes(christmasWord)) {
                     console.log(playlists[playlistNum].name + " includes " + christmasWord);
                     playlistNum = Math.floor(Math.random() * playlists.length);
                     numGrinchTries++;
                     if (numGrinchTries > 10) {
-                      console.log("player doesn't have any non-Christmas/Winter playlists");
+                      const message = availableNames[j] + " doesn't have any non-Christmas/Winter playlists";
+                      this.errorMessage("songError", message, 5);
                     }
                   }
-                });
+                }
               }
               const playlist = playlists[playlistNum];
-              console.log("PlaylistNum " + playlistNum);
               const playlistID = playlist.id;
               const playlistName = playlist.name;
-              console.log(`Chose ${playlistName}`);
               const person: string = this.state.names[i];
               
               
@@ -479,9 +474,9 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
               if (playlistResponse.status === 200) {
                 const tracks = playlistResponse.data.items;
                 const trackNum = this.getRandom(tracks.length - 1);
-                console.log("Getting track #" + (trackNum + 1) + "out of " + tracks.length);
+                // console.log("Getting track #" + (trackNum + 1) + "out of " + tracks.length);
                 const track = tracks[trackNum].track;
-                const link = `http://open.spotify.com/track/${track.id}`;
+                const link = `https://open.spotify.com/track/${track.id}`;
                 const trackName = track.name;
                 const artists = track.artists;
                 const id = track.id;
@@ -492,12 +487,12 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                   console.log(trackName + "isn't playable or is already selected");
                   console.log('---');
                   if (failedAttempts > 5) {
-                    console.log("Failed too many times to get a song");
-                    this.errorMessage("songDupeError", 5);
+                    const message = "Couldn't generate songs because there were likely too few playable songs";
+                    this.errorMessage("songError", message, 5);
                   }
                 } else if (this.state.grinchMode) {
                   let hasChristmas = false;
-                  for(let cw in christmasWords) {
+                  for(const cw in christmasWords) {
                     if (trackName.includes(cw)) {
                       hasChristmas = true;
                       j--;
@@ -505,14 +500,16 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                       console.log(trackName + " includes " + cw)
                       console.log('---');
                       if (failedAttempts > 5) {
-                        throw new Error("Failed too many times to get a song");
+                        const message = "Couldn't generate songs because there were likely too few playable grinchy songs";
+                        this.errorMessage("songError", message, 5);
+                        throw new Error(message);
                       }
                     }
                   }
                   if (!hasChristmas) {
                     const trackLocation: trackLocation = {person: person, playlist: playlistName};
-                    console.log('Track:', trackName);
-                    console.log('---');
+                    // console.log('Track:', trackName);
+                    // console.log('---');
                     
                     totalTracks.push(link);
                     trackNamesChosen.push(trackName);
@@ -525,8 +522,8 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                   }
                 } else { // if grinch mode is off and track isn't already selected
                   const trackLocation: trackLocation = {person: person, playlist: playlistName};
-                  console.log('Track:', trackName);
-                  console.log('---');
+                  // console.log('Track:', trackName);
+                  // console.log('---');
                   
                   totalTracks.push(link);
                   trackNamesChosen.push(trackName);
@@ -540,8 +537,8 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
               }
             }
           } else {
-            console.log(this.state.names[i] + " doesn't have any public playlists");
-            //TODO: Add something on the page that says this
+            const message = this.state.names[i] + " doesn't have any public playlists"
+            this.errorMessage("songError", message, 5);
           }
         }
       }
@@ -559,10 +556,10 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
         if (audioResponse.status === 200) {
           const audioFeatures = audioResponse.data.audio_features;
           const audioMap: Map<string, AudioFeatures> = new Map<string, AudioFeatures>();
-          console.log(trackNamesChosen.toString());
+          // console.log(trackNamesChosen.toString());
           for (let i = 0; i < trackNamesChosen.length; i++) {
             const n: string = trackNamesChosen[i];
-            console.log(n, " goes with ", audioFeatures[i]);
+            // console.log(n, " goes with ", audioFeatures[i]);
             audioMap.set(n, audioFeatures[i]);
           }
           this.setState({audioFeatures: audioMap});
@@ -570,7 +567,7 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
         
         // Puts the found tracks on the player
         await this.connectToPlayer(uris);
-        console.log("connected to player on start click");
+        // console.log("connected to player on start click");
         this.props.onStartClick();
         
       } else if (this.state.useEmbed) {
@@ -602,7 +599,9 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
         };
         await axios(playlistAddOptions)
       }
-    } catch (error) {console.log("Uh oh there was an error with handle start " + error);}
+    } catch (error) {
+      this.errorMessage("songError", "Uh oh there was some error starting: " + error, 10);
+    }
   }
   
   connectToPlayer = async (uris?: string[]) => {
@@ -639,7 +638,7 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
     this.changeIcons(newTheme);
     if (localStorage.getItem("access_token")) {
       this.getUserDetails();
-      console.log("mounted and player is active: " + this.props.playerActive);
+      // console.log("mounted and player is active: " + this.props.playerActive);
       if (this.props.playerActive) {
         this.connectToPlayer();
       }
@@ -648,23 +647,32 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
   
   /**
    * Displays an error message
-   * @param id class of error message to display
-   * @param secondsDuration how long to display error
+   * @param id element id of error message to display
+   * @param message error message to display
+   * @param secondsDuration how long to display error (seconds)
    */
-  errorMessage = (id :string, secondsDuration: number) => {
-    const spot = document.getElementById(id);
-    assert(spot);
-    function displayMyMessage() {
+  errorMessage = (id :string, message: string, secondsDuration: number) => {
+    const spot: HTMLElement | null = document.getElementById(id);
+    if (spot === null) {
+      console.log("error location doesn't exist for id: " + id);
+    } else {
+      spot.innerHTML = message;
+      
       // @ts-ignore
-      spot.style.visibility = "visible";
-    }
-    function hideMyMessage() {
+      function displayMyMessage() {
+            // @ts-ignore
+            spot.style.visibility = "visible";
+          }
+          
       // @ts-ignore
-      spot.style.visibility = "hidden";
+      function hideMyMessage() {
+        // @ts-ignore
+        spot.style.visibility = "hidden";
+      }
+  
+      displayMyMessage();
+      setTimeout(hideMyMessage, secondsDuration * 1000);
     }
-    displayMyMessage();
-    setTimeout(hideMyMessage, secondsDuration * 1000);
-    
   }
   
   /**
@@ -762,7 +770,7 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                               </iframe>)}
                         </div>
                     )}
-                    <div id="songDupeError">Couldn't generate songs because there were likely too few playable songs</div>
+                    <div id="songError">Insert Song Error</div>
                     <br/>
                     <button id="start-button" className={`glow-on-hover themed ${theme}`} onClick={() => {this.handleStart();}}>Generate</button>
                   </div>) : (
@@ -869,8 +877,8 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                       style={{marginTop: "5%"}}
                       onClick={ () => {
                         if (!handleNewName(newNameValue, newProfileIdValue)) {
-                          this.errorMessage("newNameError", 3);
-                  
+                          const message = "Couldn't add name because it probably already existed";
+                          this.errorMessage("nameError", message, 3);
                         }
                         this.setState({newProfileIdValue: "", newNameValue: ""})}}
               >Add pair</button>
@@ -878,8 +886,8 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                       onClick={() => {handleNameRemove(newNameValue)
                         this.setState({newProfileIdValue: "", newNameValue: ""})}}
               >Remove name</button><br/>
-              <div id="newNameError" className="adding-error display-success">
-                Couldn't add name because it probably already existed
+              <div id="nameError" className="adding-error display-success">
+                Insert Name Error
               </div>
               
               
@@ -901,8 +909,8 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                       style={{marginTop: "5%"}}
                       onClick={ () => {
                         if (!handleNewPlaylist(newPlaylistValue, newPlaylistIdValue)) {
-                          this.errorMessage("newPlaylistError", 3);
-                  
+                          const message = "Couldn't add playlist because it probably already existed";
+                          this.errorMessage("playlistError", message, 3);
                         }
                         this.setState({newPlaylistIdValue: "", newPlaylistValue: ""})}}
               >Add pair</button>
@@ -910,8 +918,8 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                       onClick={() => {handlePlaylistRemove(newPlaylistValue);
                         this.setState({newPlaylistIdValue: "", newPlaylistValue: ""})}}
               >Remove playlist</button><br/>
-              <div id="newPlaylistError" className="adding-error display-success">
-                Couldn't add playlist because it probably already existed
+              <div id="playlistError" className="adding-error display-success">
+                Insert Playlist Error
               </div>
               
               <div>

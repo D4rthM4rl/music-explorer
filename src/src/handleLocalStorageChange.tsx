@@ -52,14 +52,11 @@ export function handleNewName (name: string, id: string): boolean {
     if (id.includes("?")) {
         id = id.replace(id.substr(id.indexOf("?")), "");
     }
-    console.log(`${name} has the id ${id}`)
 
     const names: string[] = getAllFromStorage("names");
-    console.log(names);
 
     for (let i = 0; i < names.length; i++) {
         if (names[i][0] === (name)) {
-            console.log("name already exists");
             return false;
         }
     }
@@ -75,9 +72,9 @@ export function handleNameRemove(name: string): boolean {
     try {
         let existingPairs = JSON.parse(localStorage.getItem('names') || '[]');
         for (let i = 0; i < existingPairs.length; i++) {
-            console.log(existingPairs[i][0]);
+            // console.log(existingPairs[i][0]);
             if (existingPairs[i][0] === name) {
-                console.log("found name")
+                // console.log("found name")
                 existingPairs = existingPairs.slice(0,i).concat(existingPairs.slice(i+1));
                 localStorage.setItem('names', JSON.stringify(existingPairs))
                 return true;
@@ -102,13 +99,13 @@ export function handleNewPlaylist (title: string, id: string): boolean {
     if (id.includes("?")) {
         id = id.replace(id.substr(id.indexOf("?")), "");
     }
-    console.log(`${title} has the id ${id}`)
+    // console.log(`${title} has the id ${id}`)
 
     const playlists: string[] = getAllFromStorage("playlists");
 
     for (let i = 0; i < playlists.length; i++) {
         if (playlists[i][0] === (title)) {
-            console.log("playlist already exists");
+            // console.log("playlist already exists");
             return false;
         }
     }
@@ -125,7 +122,7 @@ export function handlePlaylistRemove(title: string): boolean {
     try {
         let existingPairs = JSON.parse(localStorage.getItem('playlists') || '[]');
         for (let i = 0; i < existingPairs.length; i++) {
-            console.log(existingPairs[i][0]);
+            // console.log(existingPairs[i][0]);
             if (existingPairs[i][0] === title) {
                 existingPairs = existingPairs.slice(0,i).concat(existingPairs.slice(i+1));
                 localStorage.setItem("playlists", JSON.stringify(existingPairs))
@@ -134,7 +131,6 @@ export function handlePlaylistRemove(title: string): boolean {
         }
         return false;
     } catch (err) {
-        console.error('Error removing playlist:', err);
         return false;
     }
 }

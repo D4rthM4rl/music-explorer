@@ -40,10 +40,21 @@ class PrivacyPage extends Component<PrivacyProps, PrivacyState> {
           </div>
           <div id="main-area">
             <div id="sidebar2" className={`themed ${theme}`}>
+              <button id="activate-sidebar2-button" className={`themed ${theme}`}
+                      onClick={() => {
+                        const sidebar = document.getElementById("sidebar2") as HTMLElement;
+                        if (sidebar) {
+                          if (aspectRatio < 1) {
+                            sidebar.style.left = sidebar.style.left === "0px" ? "-80%" : "0px";
+                          } else {
+                            sidebar.style.left = sidebar.style.left === "0px" ? "-30%" : "0px";
+                          }
+                        }}}
+              >Sidebar</button>
               <button id="back-button" className="glow-on-hover"
                       onClick={this.props.onBackClick}>Back</button>
               <div id="theme-header2" className="sidebar2-heading">Theme
-                <select id="theme-select" className="themed"
+                <select id="theme-select2" className="themed"
                         value={this.state.theme}
                         onChange={(event) => {this.setState({theme: event.target.value})
                           // this.changeIcons(event.target.value);
@@ -76,7 +87,7 @@ class PrivacyPage extends Component<PrivacyProps, PrivacyState> {
                 important to us, and we want to ensure that you have a clear
                 understanding of how your data is handled while using our service.</p>
               <h1 className="info-header">Information Collection and Use</h1>
-              <p>To provide you with an enhanced experience,
+              <p className="info-body">To provide you with an enhanced experience,
                 we store certain data in local storage. This information includes
                 your chosen theme, added profiles/playlists, and essential data
                 for login and API usage, such as tokens and verifiers. This
@@ -94,30 +105,6 @@ class PrivacyPage extends Component<PrivacyProps, PrivacyState> {
               <h1 className={`info-header themed ${theme}`}>Contact Information</h1>
               <p className={`info-body themed ${theme}`}>If you have questions or
                 concerns about our privacy practices, please contact us at casualmarley@gmail.com.</p>
-            </div>
-            <div id="settings-sidebar" className={`themed ${theme}`}>
-              <div id="theme-header">Theme
-                <select id="theme-select" className="themed"
-                        value={this.state.theme}
-                        onChange={(event) => {this.setState({theme: event.target.value})
-                          // this.changeIcons(event.target.value);
-                          handleThemeChange(event.target.value)}}
-                        style={{
-                          marginLeft: '10%',
-                          marginTop: '3%',
-                          fontSize: "90%"
-                        }}>
-                  <option value="default">Default</option>
-                  <option value="dark">Dark Mode</option>
-                  <option value="neon">Neon</option>
-                  <option value="pastel">Pastel</option>
-                  <option value="gay">Gay</option>
-                  <option value="kevin">Kevin</option>
-                  <option value="drac">Drac</option>
-                  <option value="barbie">Barbie</option>
-                  <option value="marley">Marley</option>
-                </select>
-              </div>
             </div>
           </div>
         </div>
