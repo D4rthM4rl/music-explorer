@@ -15,6 +15,7 @@
 }
 .topbar-option {
     cursor: pointer;
+    text-decoration: underline;
     font-family: var(--overall-font-family);
     font-weight: bold;
     font-size: var(--topbar-font-size);
@@ -29,6 +30,7 @@
     margin-right: 2%;
 }
 #title {
+    text-decoration: none;
     color: var(--title-color);
     text-shadow: var(--title-glow);
     font-size: var(--title-size);

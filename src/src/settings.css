@@ -124,15 +124,19 @@ input:checked + .slider:before {
 
 }
 #logout-label {
-
+    /*text-decoration: none;*/
 }
 #removeAccount-label {
-
+    /*text-decoration: none;*/
+    padding-bottom: 10px;
 }
 .other-options {
+    text-decoration: underline;
     font-size: 30px;
+    margin-bottom: 10px;
     cursor: pointer;
     color: var(--settings-text-color);
+    display: block;
 }
 .adding-error {
     font-size: 70%;

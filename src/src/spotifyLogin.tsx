@@ -8,11 +8,12 @@ const redirectUri = "https://d4rthm4rl.github.io/music-explorer/";
  */
 export async function getToken(): Promise<string | void> {
     const clientId = "4cd6054588e84b1884b9e14998f34844";
+    
     const params = new URLSearchParams(window.location.search);
     const code = params.get("code");
     let accessToken;
     if (!code) {
-        // console.log("no code")
+        console.log("no code")
         await redirectToAuthCodeFlow(clientId);
     } else {
         // console.log("there is code: " + code)
@@ -27,6 +28,7 @@ export async function getToken(): Promise<string | void> {
  * @param clientId client to sign in
  */
 async function redirectToAuthCodeFlow(clientId: string) {
+    console.log("clientid: " + clientId)
     const verifier = generateCodeVerifier(128);
     const challenge = await generateCodeChallenge(verifier);
 
@@ -41,7 +43,7 @@ async function redirectToAuthCodeFlow(clientId: string) {
         "playlist-read-collaborative playlist-read-private");
     params.append("code_challenge_method", "S256");
     params.append("code_challenge", challenge);
-    document.location.href = `https://accounts.spotify.com/authorize?${params.toString()}`;
+    document.location.replace(`https://accounts.spotify.com/authorize?${params.toString()}`);
 }
 
 /**
@@ -113,7 +115,7 @@ export async function getAccessToken(clientId: string, code: string) {
     const accessToken = localStorage.getItem('access_token');
 
     if (!accessToken) {
-        await getRefreshToken(clientId);
+        await getToken();
     }
 }
 

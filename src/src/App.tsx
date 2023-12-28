@@ -5,15 +5,14 @@ import MusicExplorer from "./MusicExplorer";
 import {getTheme} from "./handleLocalStorageChange";
 import {getToken} from "./spotifyLogin";
 import AboutPage from "./AboutPage";
+import PrivacyPage from "./PrivacyPage";
 
 interface AppState {
   page: string,
   theme: string,
-  token: string,
 }
 
-let userID: string = "";
-let userPremium: boolean = false;
+let playerActive: boolean = false;
 
 class App extends Component<{}, AppState> {
   constructor(props: any) {
@@ -21,7 +20,6 @@ class App extends Component<{}, AppState> {
     this.state = {
       page: "welcome",
       theme: "default",
-      token: "",
     };
   }
   
@@ -37,12 +35,32 @@ class App extends Component<{}, AppState> {
     // await this.getUserDetails();
   };
   
+  /**
+   * Sets page to "main" and renders main page
+   */
+  getMain = () => {
+    this.setState({page: "main"})
+  }
+  
+  /**
+   * Sets page to "about" and renders "about" page
+   */
   getAbout = () => {
     this.setState({page: "about"})
   }
   
-  getMain = () => {
-    this.setState({page: "main"})
+  /**
+   * Sets page to "privacy" and renders "privacy" page
+   */
+  getPrivacy = () => {
+    this.setState({page: "privacy"})
+  }
+  
+  /**
+   * Activates the player and stores that it is active to rerender if necessary
+   */
+  activatePlayer = () => {
+    playerActive = true;
   }
   
   /**
@@ -57,13 +75,12 @@ class App extends Component<{}, AppState> {
           </div>
       )
     } else if (page === "main") {
-      return (
-          <MusicExplorer onAboutClick={this.getAbout}></MusicExplorer>
-      )
-    } else { // if page is "about"
-      return (
-          <AboutPage onBackClick={this.getMain}></AboutPage>
-      )
+      return <MusicExplorer onAboutClick={this.getAbout} onPrivacyClick={this.getPrivacy}
+                onStartClick={this.activatePlayer} playerActive={playerActive}></MusicExplorer>;
+    } else if (page === "about") {
+      return <AboutPage onBackClick={this.getMain} onPrivacyClick={this.getPrivacy}></AboutPage>;
+    } else { // if page is "privacy"
+      return <PrivacyPage onBackClick={this.getMain} onAboutClick={this.getAbout}></PrivacyPage>;
     }
   }
 }

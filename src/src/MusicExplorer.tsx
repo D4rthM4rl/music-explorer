@@ -17,15 +17,20 @@ import {
   getAllFromStorage,
   getTheme,
   handleNewPlaylist,
-  handlePlaylistRemove
+  handlePlaylistRemove,
+  logoutUser,
+  removeAccount
 } from "./handleLocalStorageChange";
-import {getToken} from "./spotifyLogin";
+import {getRefreshToken, getToken} from "./spotifyLogin";
 import {deviceID} from "./WebPlayback";
 import WebPlayback from "./WebPlayback";
 import assert from "assert";
 
 interface ExplorerProps {
-  onAboutClick: () => void
+  onAboutClick: () => void;
+  onPrivacyClick: () => void;
+  onStartClick: () => void;
+  playerActive: boolean;
 }
 
 interface AppState {
@@ -211,41 +216,44 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
    * Gets whether user has premium account
    */
   getUserDetails = async() => {
-    let options = {
-      url: `https://api.spotify.com/v1/me`,
-      method: 'get',
-      headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+    console.log("getting user details");
+    try {
+      let options = {
+        url: `https://api.spotify.com/v1/me`,
+        method: 'get',
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('access_token')
+        }
+      }
+      const playerResponse = await axios(options);
+      
+      userID = playerResponse.data.id;
+      userPremium = playerResponse.data.product === "premium";
+    } catch (error) {
+      console.log(error);
+      if (error.response.status === 401) {
+        console.log("Error 401");
+        if (!localStorage.getItem("access_token")) {
+          await getToken();
+        } else {
+          await getRefreshToken("4cd6054588e84b1884b9e14998f34844");
+        }
       }
     }
-    const playerResponse = await axios(options);
-    userID = playerResponse.data.id;
-    userPremium = playerResponse.data.product === "premium";
   }
   
   /**
-   * Logs user out of Spotify and website
-   */
-  logoutUser = async() => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    localStorage.removeItem("verifier");
-    const url = 'https://www.spotify.com/logout/';
-  }
-  
-  /**
-   * Logs user out of Spotify and website and removes all user's data from website
-   */
-  removeAccount = async() => {
-    localStorage.clear();
-    await this.logoutUser;
-  }
-  
-  /**
-   * Sends user to About page
+   * Sends user to "About" page
    */
   renderAbout = (): void => {
     this.props.onAboutClick();
+  }
+  
+  /**
+   * Sends user to "Privacy" page
+   */
+  renderPrivacy = (): void => {
+    this.props.onPrivacyClick();
   }
   
   /**
@@ -471,7 +479,7 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
               if (playlistResponse.status === 200) {
                 const tracks = playlistResponse.data.items;
                 const trackNum = this.getRandom(tracks.length - 1);
-                console.log("Getting track #" + trackNum + "out of " + tracks.length);
+                console.log("Getting track #" + (trackNum + 1) + "out of " + tracks.length);
                 const track = tracks[trackNum].track;
                 const link = `http://open.spotify.com/track/${track.id}`;
                 const trackName = track.name;
@@ -561,15 +569,10 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
         }
         
         // Puts the found tracks on the player
-        const playerOptions = {
-          url: `https://api.spotify.com/v1/me/player/play`,
-          method: 'put',
-          headers: {
-            'Authorization': 'Bearer ' + token
-          },
-          data: {'uris': uris}
-        };
-        await axios(playerOptions);
+        await this.connectToPlayer(uris);
+        console.log("connected to player on start click");
+        this.props.onStartClick();
+        
       } else if (this.state.useEmbed) {
         let playlistCreateOptions = {
           url: "https://api.spotify.com/v1/users/" + userID + "/playlists?limit=50&offset=0",
@@ -599,7 +602,32 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
         };
         await axios(playlistAddOptions)
       }
-    } catch (error) {console.log("Uh oh there was an error with handle start" + error);}
+    } catch (error) {console.log("Uh oh there was an error with handle start " + error);}
+  }
+  
+  connectToPlayer = async (uris?: string[]) => {
+    const token = localStorage.getItem("access_token");
+    if (token === null) {
+      console.log("token was null");
+    } else {
+      try {
+        const playerOptions = {
+          url: `https://api.spotify.com/v1/me/player/play`,
+          method: 'put',
+          headers: {
+            'Authorization': 'Bearer ' + token
+          },
+          data: uris !== undefined ? {'uris': uris} : {}
+        };
+        const playerResponse = await axios(playerOptions);
+        if (playerResponse.status !== 200) {
+          console.log("Player response: " + playerResponse.status + " " + playerResponse.statusText);
+        }
+      } catch (error) {
+        console.log("Uh oh there was an error connecting to player " + error);
+      }
+      
+    }
   }
   
   /**
@@ -609,8 +637,13 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
     const newTheme = getTheme();
     this.setState({theme: newTheme});
     this.changeIcons(newTheme);
-    // getToken();
-    this.getUserDetails();
+    if (localStorage.getItem("access_token")) {
+      this.getUserDetails();
+      console.log("mounted and player is active: " + this.props.playerActive);
+      if (this.props.playerActive) {
+        this.connectToPlayer();
+      }
+    }
   };
   
   /**
@@ -710,8 +743,7 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                         <WebPlayback
                             token={localStorage.getItem("access_token")}
                             trackLocations={this.state.trackLocations}
-                            audioMap={this.state.audioFeatures}
-                        ></WebPlayback>
+                            audioMap={this.state.audioFeatures}></WebPlayback>
                     ) : (
                         <div>
                           {!this.state.useEmbed ? (
@@ -753,8 +785,9 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                       {userPremium ? (
                           <div>
                             <li className="directions-item">Use the player to skip forward and backwards between songs</li>
+                            <li className="directions-item">If the player goes away when you click on something else, click generate again without any tracks to generate and it will bring the player back</li>
                             <li className="directions-item">Disable the "Web Player" toggle in Settings if you want it to just output links</li>
-                            <li className="directions-item">With "Web Player" disabled, click the links to go to each song</li>
+                            <li className="directions-item">If the "Web Player" toggle isn't appearing, With the toggle disabled, click the links to go to each song</li>
                             <li className="directions-item">If it doesn't work, try refreshing the page</li>
                           </div>): (
                           <div>
@@ -881,12 +914,12 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                 Couldn't add playlist because it probably already existed
               </div>
               
-              
-              <a id="about-label" className="other-options" onClick={this.renderAbout}>About</a>
-              <br/>
-              <a id="logout-label" className="other-options" href="https://www.spotify.com/logout/" onClick={this.logoutUser}>Logout</a>
-              <br/>
-              <a id="removeAccount-label" className="other-options" href="https://accounts.spotify.com/en/logout" onClick={this.removeAccount}>Remove Account</a>
+              <div>
+                <a id="about-label" className="other-options" onClick={this.renderAbout}>About</a>
+                <a id="privacy-label" className="other-options" onClick={this.renderPrivacy}>Privacy</a>
+                <a id="logout-label" className="other-options" href="https://www.spotify.com/logout/" onClick={logoutUser}>Logout</a>
+                <a id="removeAccount-label" className="other-options" href="https://accounts.spotify.com/en/logout" onClick={removeAccount}>Remove Account</a>
+              </div>
             </div>
           </div>
         </div>

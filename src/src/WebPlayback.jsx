@@ -205,7 +205,7 @@ function WebPlayback(props) {
                     <div className="modal-overlay" onClick={toggleMoreDetailsVisibility}>
                         <div className="modal">
                             <span className="close-button" onClick={toggleMoreDetailsVisibility}>&times;</span>
-                            <text>
+                            <p>
                             {props.trackLocations.has(current_track.name) ? (
                                 props.trackLocations.get(current_track.name).person ? (
                                     `This track is from ${locations.get(current_track.name).person}'s playlist "${
@@ -217,7 +217,7 @@ function WebPlayback(props) {
                                 `Loading track ${current_track.name}...` // or any other placeholder while waiting for trackLocations to be populated
                             )}
                             <br/>
-                            </text>
+                            </p>
                             {props.audioMap.has(current_track.name) ? (
                                 `This track's key is ${getKey(props.audioMap.get(current_track.name).key,
                                     props.audioMap.get(current_track.name).mode)} and the tempo is 

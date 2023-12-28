@@ -182,11 +182,35 @@ export function getAllFromStorage(localStorageKey: string): string[] {
  */
 export function getTheme(): string {
     try {
-        const theme: string = localStorage.getItem('theme') || 'default';
+        const themes = ['default', "dark", "neon", "pastel", "gay", "kevin",
+            "drac", "barbie", "marley"]
+        const theme: string= localStorage.getItem('theme') || "default";
+        if (!themes.includes(theme)) {
+            return "default";
+        }
         return theme;
     } catch (err) {
         console.error('Error getting theme:', err);
         return 'default';
     }
+}
+
+/**
+ * Logs user out of Spotify and website
+ */
+export function logoutUser () {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    localStorage.removeItem("verifier");
+    const url = 'https://www.spotify.com/logout/';
+    window.location.replace(url);
+}
+
+/**
+ * Logs user out of Spotify and website and removes all user's data from website
+ */
+export async function removeAccount () {
+    localStorage.clear();
+    logoutUser();
 }
 

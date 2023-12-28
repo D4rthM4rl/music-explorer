@@ -1,6 +1,6 @@
 #topbar2 {
   background-color: var(--topbar-bg);
-  animation: fallDownAnimation ease 1.5s;
+  /*animation: fallDownAnimation ease 1.5s;*/
   display: grid;
   width: 100vw;
   grid-template-columns: 100%;
@@ -9,13 +9,14 @@
   box-shadow:inset 1px -2px 11px 0 black;
   position: fixed;
   --topbar-height: 100px;
+  --title-size2: 50px;
 }
 #title2 {
   align-self: center;
   margin-left: 15px;
   color: var(--title-color);
   text-shadow: var(--title-glow);
-  font-size: var(--title-size);
+  font-size: var(--title-size2);
   font-family: var(--overall-font-family);
   font-weight: bold;
 }
@@ -26,7 +27,7 @@
 }
 
 /* Style for the Sidebar */
-#sidebar {
+#sidebar2 {
   --topbar-height: 100px;
   z-index: 2;
   flex:25%;
@@ -42,12 +43,24 @@
   position: relative;
   transition: left .5s ease;
 }
-.sidebar-headings {
+#theme-header2 {
+  font-size: calc(28px + var(--overall-fontsize-adjustment));
+}
+.sidebar2-nav {
+  font-size: calc(30px + var(--overall-fontsize-adjustment));
+  cursor: pointer;
+  /*text-align: left;*/
+  /*margin-left: 15px;*/
+  text-decoration: underline;
+}
+.sidebar2-heading {
   font-size: 2.6vw;
+  font-weight: bold;
   margin-top: 5%;
   color: var(--sidebar-color); /* Idk if this does anything */
 }
-#activate-sidebar-button {
+
+#activate-sidebar2-button {
   font-family: var(--overall-font-family);
   /*overflow-y: scroll;*/
   visibility: visible;
@@ -67,7 +80,7 @@
   right: -88.5px;
 }
 
-#activate-sidebar-button.gay {
+#activate-sidebar2-button.gay {
   background-size: 1000% 300%;
   -webkit-animation: rainbow 10s ease infinite;
   -o-animation: rainbow 10s linear infinite;
@@ -75,30 +88,33 @@
 } /* Necessary for animation stuff */
 
 #info-area {
-  padding: 1.5%;
   margin-top: 5%;
+  padding: 1.5% 3%;
   font-family: var(--info-font-family);
   flex: 80%;
   background: var(--info-bg);
-  color: red;
   box-shadow: var(--game-border);
   overflow-y: scroll;
+  font-size: calc(24px + var(--info-fontsize-adjustment));
+  color: var(--overall-font-color);
+  text-align: left;
   /*animation: slideFromLeft ease 3s;*/
 }
 #goal {
   font-size: 20px;
   font-weight: bold;
 }
-#info-list {
-  margin-top: 15%;
-  font-size: calc(2vw + var(--info-fontsize-adjustment));
-  color: var(--overall-font-color);
-  padding-left: 10%;
-  padding-right: 3%;
-  text-align: left;
-  font-family: var(--info-font-family);
+#privacy-preamble {
+  font-size: 24px;
 }
 
+#back-button {
+  margin-top: 10px;
+  font-size: 30px;
+  font-family: var(--overall-font-family);
+  background: var(--back-button-bg);
+  color: var(--back-button-color);
+}
 .glow-on-hover {
   border: none;
   outline: none;
@@ -109,7 +125,7 @@
 }
 .glow-on-hover:before {
   content: '';
-  background: var(--start-button-glow);
+  background: var(--back-button-glow);
   position: absolute;
   top: -3px;
   left:-3px;
@@ -123,7 +139,7 @@
   transition: opacity .3s ease-in-out;
   border-radius: 10px;
 }
-.glow-on-hover:active {color: var(--start-button-bg)}
+.glow-on-hover:active {color: var(--back-button-bg)}
 .glow-on-hover:active:after {background: transparent;}
 .glow-on-hover:hover:before {opacity: 1;}
 .glow-on-hover:after {
@@ -132,7 +148,7 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  background: var(--start-button-bg);
+  background: var(--back-button-bg);
   left: 0;
   top: 0;
   border-radius: 10px;
@@ -155,15 +171,16 @@
   --activate-sidebar-right-adjustment: 0px;
   --activate-sidebar-color: var(--sidebar-color);
   --activate-sidebar-bg: var(--sidebar-bg);
-  --start-button-color: #fff;
-  --start-button-bg: #000000;
-  --start-button-glow: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+  --back-button-color: #fff;
+  --back-button-bg: #000000;
+  --back-button-glow: linear-gradient(45deg, #ff0000, #e00101, #ff0000);
 }
 .dark {
   --overall-font-family: Arial;
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
+  --info-bg: black;
   --sidebar-bg: #282b31;
   --sidebar-color: #dedede;
   --sidebar-glow: none;
@@ -174,13 +191,16 @@
   --activate-sidebar-right-adjustment: 0px;
   --activate-sidebar-color: var(--sidebar-color);
   --activate-sidebar-bg: var(--sidebar-bg);
-  --info-bg: black;
+  --back-button-color: #fff;
+  --back-button-bg: #000000;
+  --back-button-glow: linear-gradient(45deg, #ff0000, #cc0000, #cc0000, #ff0000, #ff0000, #cc0000, #cc0000, #ff0000, #ff0000, #cc0000, #cc0000, #ff0000);
 }
 .neon {
   --overall-font-family: "Arial";
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
+  --info-bg: #181818;
   --sidebar-bg: #000000;
   --sidebar-color: var(--sidebar-bg);
   --sidebar-glow: 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 1px #fff, 0 0 7px #ffffff, 0 0 15px #00ff77;
@@ -192,13 +212,16 @@
   --activate-sidebar-right-adjustment: 0px;
   --activate-sidebar-color: white;
   --activate-sidebar-bg: var(--sidebar-bg);
-  --info-bg: #181818;
+  --back-button-color: #fff;
+  --back-button-bg: #000000;
+  --back-button-glow: linear-gradient(45deg, #ff0000, #000000, #ff0000, #ff0000, #000000, #ff0000);
 }
 .pastel {
   --overall-font-family: Arial;
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
+  --info-bg: #e2c1ff;
   --sidebar-bg: #7effab;
   --sidebar-color: #7e92ff;
   --sidebar-textbox-color: #7e92ff;
@@ -208,15 +231,19 @@
   --activate-sidebar-right-adjustment: 0px;
   --activate-sidebar-color: var(--sidebar-color);
   --activate-sidebar-bg: var(--sidebar-bg);
-  --info-bg: #e2c1ff;
+  --back-button-color: #fff;
+  --back-button-bg: #000000;
+  --back-button-glow: linear-gradient(45deg, #ff4343, #ff9ee1, #ff9ee1, #ff0000, #ff0000, #ff9ee1, #ff9ee1, #ff0000, #ff0000, #ff9ee1, #ff9ee1, #ff4343);
 }
 .gay {
   --overall-font-family: Arial;
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
+  --info-bg: white;
   --sidebar-bg: linear-gradient(180deg, #ff2400, #e81d1d, #e8b71d, #e3e81d, #1de840, #1ddde8, #2b1de8, #dd00f3, #dd00f3);
   --sidebar-color: white;
+  --sidebar-blend: difference;
   --sidebar-textbox-color: #df5cff;
   --sidebar-textbox-bg: lightcyan;
   --sidebar-shadow: 0 0 10px #000000;
@@ -224,7 +251,9 @@
   --activate-sidebar-right-adjustment: 0px;
   --activate-sidebar-color: black;
   --activate-sidebar-bg: whitesmoke;
-  --info-bg: white;
+  --back-button-color: #ffffff;
+  --back-button-bg: #000000;
+  --back-button-glow: linear-gradient(45deg, #ff0000, #ff00b7, #ff0000, #ff3c00, #ff0000);
 }
 #sidebar.gay {
   background-size: 100% 300%;
@@ -237,6 +266,7 @@
   --info-font-family: Genshin;
   --overall-fontsize-adjustment: -40%;
   --info-fontsize-adjustment: -20%;
+  --info-bg: white;
   --sidebar-bg: linear-gradient(180deg, #D60270, #0038A8);
   --sidebar-color: white;
   --sidebar-textbox-color: #a73df1;
@@ -246,13 +276,16 @@
   --activate-sidebar-right-adjustment: -3%;
   --activate-sidebar-color: white;
   --activate-sidebar-bg: black;
-  --info-bg: white;
+  --back-button-color: #fff;
+  --back-button-bg: #000000;
+  --back-button-glow: linear-gradient(45deg, #ff0000, #ff00ac, #ff9ee1, #ff0000, #ff0000, #ff00ac, #ff9ee1, #ff0000, #ff0000, #ff00ac, #ff9ee1, #ff0000);
 }
 .drac {
   --overall-font-family: Arial;
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
+  --info-bg: white;
   --sidebar-bg: #282b31;
   --sidebar-color: red;
   --sidebar-textbox-color: black;
@@ -262,13 +295,16 @@
   --activate-sidebar-right-adjustment: 0px;
   --activate-sidebar-color: var(--sidebar-color);
   --activate-sidebar-bg: var(--sidebar-bg);
-  --info-bg: white;
+  --back-button-color: #7e7e7e;
+  --back-button-bg: #000000;
+  --back-button-glow: linear-gradient(45deg, #ff0000, #de4100, #ff0000);
 }
 .barbie {
   --overall-font-family: Barbie;
   --info-font-family: Arial;
   --overall-fontsize-adjustment: 30%;
-  /*--info-fontsize-adjustment: 20%;*/
+  --info-fontsize-adjustment: 0%;
+  --info-bg: white;
   --sidebar-bg: #ff3ec7;
   --sidebar-color: #ffc9ee;
   --sidebar-textbox-color: #fff;
@@ -278,13 +314,16 @@
   --activate-sidebar-right-adjustment: 1.9%;
   --activate-sidebar-color: var(--sidebar-color);
   --activate-sidebar-bg: var(--sidebar-bg);
-  --info-bg: white;
+  --back-button-color: #ffffff;
+  --back-button-bg: #000000;
+  --back-button-glow: linear-gradient(45deg, #ff0000, #ff9ee1, #ff9ee1, #ff0000, #ff0000, #ff9ee1, #ff9ee1, #ff0000, #ff0000, #ff9ee1, #ff9ee1, #ff0000);
 }
 .marley {
   --overall-font-family: Arial;
   --info-font-family: var(--overall-font-family);
   --overall-fontsize-adjustment: 0%;
   --info-fontsize-adjustment: 0%;
+  --info-bg: white;
   --sidebar-bg: #282b31;
   --sidebar-color: whitesmoke;
   --sidebar-textbox-color: #919191;
@@ -294,7 +333,9 @@
   --activate-sidebar-right-adjustment: 0px;
   --activate-sidebar-color: var(--sidebar-color);
   --activate-sidebar-bg: var(--sidebar-bg);
-  --info-bg: white;
+  --back-button-color: #663bff;
+  --back-button-bg: #000000;
+  --back-button-glow: linear-gradient(45deg, #ff0000, #002bff, #ff0000, #ff0000, #7a00ff, #ff0000, #ff0000, #ff00c8, #ff0000);
 }
 @media (max-aspect-ratio: 1/1) {
   #sidebar {

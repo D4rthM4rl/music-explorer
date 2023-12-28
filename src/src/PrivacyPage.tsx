@@ -1,19 +1,19 @@
 import React, {Component} from "react";
 import './infoPage.css'
 import settingsIconWhitesmoke from "./assets/whitesmoke-settings-icon.png";
-import {getTheme, handleThemeChange, removeAccount, logoutUser} from "./handleLocalStorageChange";
+import {getTheme, handleThemeChange, logoutUser, removeAccount} from "./handleLocalStorageChange";
 import {getToken} from "./spotifyLogin";
 
-interface AboutProps {
-  onBackClick: () => void
-  onPrivacyClick: () => void
+interface PrivacyProps {
+  onBackClick: () => void;
+  onAboutClick: () => void;
 }
 
-interface AboutState {
+interface PrivacyState {
   theme: string,
 }
 
-class AboutPage extends Component<AboutProps, AboutState> {
+class PrivacyPage extends Component<PrivacyProps, PrivacyState> {
   constructor(props: any) {
     super(props);
     this.state = {
@@ -36,7 +36,7 @@ class AboutPage extends Component<AboutProps, AboutState> {
         <div>
           <div id="topbar2" className={`themed ${theme}`}>
             <div className={`topbar2-option themed ${theme}`} id="title2"
-                 >About Music Explorer v3.5</div>
+            >Privacy Policy</div>
           </div>
           <div id="main-area">
             <div id="sidebar2" className={`themed ${theme}`}>
@@ -64,26 +64,36 @@ class AboutPage extends Component<AboutProps, AboutState> {
                   <option value="marley">Marley</option>
                 </select>
               </div>
-              <h2 id="sidebar2-privacy" className={`sidebar2-nav themed ${theme}`} onClick={this.props.onPrivacyClick}>Privacy</h2>
+              <h2 id="sidebar2-about" className={`sidebar2-nav`} onClick={this.props.onAboutClick}>About</h2>
               <h2 id="sidebar2-logOut" className={`sidebar2-nav`} onClick={logoutUser}>Log Out</h2>
               <h2 id="sidebar2-removeAccount" className={`sidebar2-nav`} onClick={removeAccount}>Remove Account</h2>
             </div>
-            <div id="info-area" className={`themed ${theme}`}>
-              <p id="goal" className="info-list">The goal of Music Explorer is to help you rediscover your music.
-                It uses Spotify's Web API and Web Playback SDK to generate a list
-                of tracks based on your given parameters.</p>
-              <h1 id="team" className={`info-header info-list themed ${theme}`}>Made by</h1>
-              <div className="info-list">
-                <a href="https://www.linkedin.com/in/marley-byers">Marley</a>
-                <p>Frontend and Backend</p>
-              </div>
-              <br/>
-              <div className="info-list">
-                <a>Josh</a>
-                <p>Frontend Help</p>
-              </div>
-              <h2 className={`info-header themed ${theme}`}></h2>
-              <p className={`info-body themed ${theme}`}></p>
+            <div id="info-area" className={`info-list themed ${theme}`}>
+              <h1 className="info-list">Privacy Notice</h1>
+              <p id="privacy-notice" className="info-body">Thank you for choosing
+                Music Explorer, an open-source application collaboratively
+                developed by Marley Byers and Joshua Steele. Your privacy is
+                important to us, and we want to ensure that you have a clear
+                understanding of how your data is handled while using our service.</p>
+              <h1 className="info-header">Information Collection and Use</h1>
+              <p>To provide you with an enhanced experience,
+                we store certain data in local storage. This information includes
+                your chosen theme, added profiles/playlists, and essential data
+                for login and API usage, such as tokens and verifiers. This
+                information is not shared with any person or organization or used
+                for anything outside the experience of the website.</p>
+              <h1 className={`info-header themed ${theme}`}>Consent</h1>
+              <p className={`info-body themed ${theme}`}>By using our service,
+                you consent to the collection and storage of the aforementioned
+                data for the outlined purposes. If you have any concerns about
+                your privacy, please review our full Privacy Policy.</p>
+              <h1 className={`info-header themed ${theme}`}>Changes to Privacy Policy</h1>
+              <p className={`info-body themed ${theme}`}>We reserve the right
+                to update this privacy notice to reflect changes in our practices.
+                It is recommended to check this notice periodically for any updates.</p>
+              <h1 className={`info-header themed ${theme}`}>Contact Information</h1>
+              <p className={`info-body themed ${theme}`}>If you have questions or
+                concerns about our privacy practices, please contact us at casualmarley@gmail.com.</p>
             </div>
             <div id="settings-sidebar" className={`themed ${theme}`}>
               <div id="theme-header">Theme
@@ -115,4 +125,4 @@ class AboutPage extends Component<AboutProps, AboutState> {
   }
 }
 
-export default AboutPage;
+export default PrivacyPage;

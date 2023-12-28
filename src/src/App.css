@@ -55,7 +55,7 @@ body {
   border-radius: 10px;
 }
 #directions-list {
-  margin-top: 15%;
+  margin-top: 23%;
   font-size: calc(2vw + var(--directions-fontsize-adjustment));
   color: var(--overall-font-color);
   padding-left: 10%;
@@ -170,7 +170,6 @@ body {
 #start-button{
   font-size: 25px;
   font-family: var(--overall-font-family);
-  cursor: pointer;
   background: var(--start-button-bg);
   color: var(--start-button-color);
 }
