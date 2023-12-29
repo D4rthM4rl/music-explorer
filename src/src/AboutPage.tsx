@@ -3,6 +3,7 @@ import './infoPage.css'
 import settingsIconWhitesmoke from "./assets/whitesmoke-settings-icon.png";
 import {getTheme, handleThemeChange, removeAccount, logoutUser} from "./handleLocalStorageChange";
 import {getToken} from "./spotifyLogin";
+import greenSpotify from "./assets/green-spotify.png";
 
 interface AboutProps {
   onBackClick: () => void
@@ -78,14 +79,18 @@ class AboutPage extends Component<AboutProps, AboutState> {
               <h2 id="sidebar2-privacy" className={`sidebar2-nav themed ${theme}`} onClick={this.props.onPrivacyClick}>Privacy</h2>
               <h2 id="sidebar2-logOut" className={`sidebar2-nav`} onClick={logoutUser}>Log Out</h2>
               <h2 id="sidebar2-removeAccount" className={`sidebar2-nav`} onClick={removeAccount}>Remove Account</h2>
+              <h3 id="made-using" className={`themed ${theme}`}>
+                Made using<img src={greenSpotify} id="spotify-logo" className="player-button"/>
+              </h3>
             </div>
             <div id="info-area" className={`themed ${theme}`}>
               <p id="goal" className="info-list">The goal of Music Explorer is to help you rediscover your music.
                 It uses Spotify's Web API and Web Playback SDK to generate a list
-                of tracks based on your given parameters.</p>
+                of tracks based on your given parameters. </p>
               <h1 id="team" className={`info-header info-list themed ${theme}`}>Made by</h1>
               <div className="info-list">
-                <a href="https://www.linkedin.com/in/marley-byers" className="info-list name">Marley:</a>
+                <a href="https://www.linkedin.com/in/marley-byers" target="_blank"
+                   className="info-list name" rel="noreferrer">Marley:</a>
                 <p>Frontend and Backend</p>
               </div>
               <br/>
@@ -93,8 +98,6 @@ class AboutPage extends Component<AboutProps, AboutState> {
                 <a className="info-list name">Josh:</a>
                 <p>Frontend Help</p>
               </div>
-              <h2 className={`info-header themed ${theme}`}></h2>
-              <p className={`info-body themed ${theme}`}></p>
             </div>
           </div>
         </div>

@@ -65,6 +65,18 @@
   font-family: var(--overall-font-family);
   width: auto;
 }
+#spotify-logo {
+  width: 100px;
+  margin-left: 10px;
+  position: fixed;
+}
+#made-using {
+  bottom: 0;
+  margin-left: 30px;
+  position: absolute;
+  text-align: center;
+  font-size: calc(24px + var(--overall-fontsize-adjustment));
+}
 
 #activate-sidebar2-button {
   font-family: var(--overall-font-family);

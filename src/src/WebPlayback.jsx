@@ -8,7 +8,7 @@ import playIcon from "./assets/play-icon.png"
 import blackVisibleIcon from "./assets/black-visible-icon.png"
 import grayVisibleIcon from "./assets/gray-visible-icon.png"
 import whiteVisibleIcon from "./assets/white-visible-icon.png"
-import quesionMarkIcon from "./assets/question-mark-icon.png"
+import questionMarkIcon from "./assets/question-mark-icon.png"
 import {trackLocation} from "./App";
 import axios from "axios";
 
@@ -161,8 +161,11 @@ function WebPlayback(props) {
             <div className="player-container glowing-container">
                 <div className="album-info">
                     <div className="album-cover">
-                        <img src={current_track.album.images[0].url} alt="" ref={current_track.album.external_urls}
-                             style={{visibility: coverVisible ? "visible": "hidden"}}/>
+                        <a href={"https://open.spotify.com/album/" + (current_track.album.uri)
+                            .replace("spotify:album:", "")} target="_blank" rel="noreferrer">
+                            <img src={current_track.album.images[0].url} alt=""
+                                 style={{visibility: coverVisible ? "visible": "hidden"}}/>
+                        </a>
                         <img src={grayVisibleIcon} id="cover-visibility" alt="" onClick={toggleCoverVisibility}/>
                     </div>
                 </div>
@@ -171,16 +174,20 @@ function WebPlayback(props) {
                         <div>
                             <img src={grayVisibleIcon} id="title-visibility" alt="" onClick={toggleTitleVisibility}/>
                             <img src={grayVisibleIcon} id="artist-visibility" alt="" onClick={toggleArtistVisibility}/>
-                            <div id="now-playing__title" className={`themed ${theme}`}
-                                 style={{visibility: titleVisible ? "visible": "hidden"}}>
-                                {current_track.name}
-                            </div>
+                            <a id="now-playing__title" className={`themed ${theme}`}
+                                 style={{visibility: titleVisible ? "visible": "hidden"}}
+                                 href={"https://open.spotify.com/track/" + current_track.id}
+                                target="_blank" rel="noreferrer">{current_track.name}
+                            </a>
                         </div>
                         <br/>
-                        <div id="now-playing__artist" className={`themed ${theme}`}
-                             style={{visibility: artistVisible ? "visible": "hidden"}}>
-                            {current_track.artists[0].name}
-                        </div>
+                        <a id="now-playing__artist" className={`themed ${theme}`}
+                             style={{visibility: artistVisible ? "visible": "hidden"}}
+                            id="now-playing__artist" href={"https://open.spotify.com/artist/" +
+                                (current_track.artists[0].uri).replace("spotify:artist:", "")}
+                                target="_blank" rel="noreferrer">
+                                {current_track.artists[0].name}
+                        </a>
                     </div>
                     <img src={rewindIcon} className="player-button" onClick={() => {
                         player.previousTrack();
@@ -198,7 +205,7 @@ function WebPlayback(props) {
                         player.nextTrack()
                     }} alt="fast forward"/>
                 </div>
-                <img src={quesionMarkIcon} id="question-button" className="player-button" onClick={() => {
+                <img src={questionMarkIcon} id="question-button" className="player-button" onClick={() => {
                     toggleMoreDetailsVisibility();
                 }} alt="fast forward"/>
                 {moreDetailsVisible && (

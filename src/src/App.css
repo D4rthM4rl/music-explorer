@@ -92,15 +92,30 @@ body {
   padding-top: 5%;
   width: 30%;
 }
-#cover-visibility {
-  width: 7%;
-  height: 7%;
-  cursor: pointer;
-}
 #now-playing__title {
   font-size: 40px;
+  display: block;
+  text-decoration: none;
+  color: var(--player-color);
   margin: 1%;
 }
+#now-playing__title:hover {
+  text-decoration: underline;
+}
+#now-playing__artist {
+   font-size: 40px;
+   text-decoration: none;
+   color: var(--player-color);
+   margin: 1%;
+ }
+#now-playing__artist:hover {
+  text-decoration: underline;
+}
+#cover-visibility {
+    width: 7%;
+    height: 7%;
+    cursor: pointer;
+  }
 #title-visibility {
   padding-left: 3%;
   width: 30px;
@@ -108,10 +123,6 @@ body {
   cursor: pointer;
   position: relative;
 }
-#now-playing__artist {
-   font-size: 40px;
-   margin: 1%;
- }
 #artist-visibility {
   padding-left: 3%;
   width: 30px;
@@ -134,6 +145,7 @@ body {
   cursor: pointer;
   position: relative;
 }
+
 .modal-overlay {
   position: fixed;
   top: 0;

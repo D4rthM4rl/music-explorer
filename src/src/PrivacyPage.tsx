@@ -3,6 +3,7 @@ import './infoPage.css'
 import settingsIconWhitesmoke from "./assets/whitesmoke-settings-icon.png";
 import {getTheme, handleThemeChange, logoutUser, removeAccount} from "./handleLocalStorageChange";
 import {getToken} from "./spotifyLogin";
+import greenSpotify from "./assets/green-spotify.png";
 
 interface PrivacyProps {
   onBackClick: () => void;
@@ -78,6 +79,9 @@ class PrivacyPage extends Component<PrivacyProps, PrivacyState> {
               <h2 id="sidebar2-about" className={`sidebar2-nav`} onClick={this.props.onAboutClick}>About</h2>
               <h2 id="sidebar2-logOut" className={`sidebar2-nav`} onClick={logoutUser}>Log Out</h2>
               <h2 id="sidebar2-removeAccount" className={`sidebar2-nav`} onClick={removeAccount}>Remove Account</h2>
+              <h3 id="made-using" className={`themed ${theme}`}>
+                Made using<img src={greenSpotify} id="spotify-logo" className="player-button"/>
+              </h3>
             </div>
             <div id="info-area" className={`info-list themed ${theme}`}>
               <h1 className="info-list">Privacy Notice</h1>
