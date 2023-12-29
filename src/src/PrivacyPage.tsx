@@ -1,8 +1,8 @@
 import React, {Component} from "react";
 import './infoPage.css'
-import settingsIconWhitesmoke from "./assets/whitesmoke-settings-icon.png";
 import {getTheme, handleThemeChange, logoutUser, removeAccount} from "./handleLocalStorageChange";
-import {getToken} from "./spotifyLogin";
+import whiteSpotify from "./assets/white-spotify.png"
+import blackSpotify from "./assets/black-spotify.png"
 import greenSpotify from "./assets/green-spotify.png";
 
 interface PrivacyProps {
@@ -12,6 +12,7 @@ interface PrivacyProps {
 
 interface PrivacyState {
   theme: string,
+  spotifyLogo: typeof whiteSpotify,
 }
 
 class PrivacyPage extends Component<PrivacyProps, PrivacyState> {
@@ -19,6 +20,7 @@ class PrivacyPage extends Component<PrivacyProps, PrivacyState> {
     super(props);
     this.state = {
       theme: "default",
+      spotifyLogo: whiteSpotify,
     };
   }
   
@@ -27,8 +29,36 @@ class PrivacyPage extends Component<PrivacyProps, PrivacyState> {
    */
   componentDidMount() {
     const newTheme = getTheme();
+    this.changeIcons(newTheme);
     this.setState({theme: newTheme});
   };
+  
+  /**
+   * Changes the icons to match the theme
+   * @param theme for icons to match
+   */
+  changeIcons = (theme: string) => {
+    switch (theme) {
+      case "default": this.setState({spotifyLogo: greenSpotify});
+        break;
+      case "dark": this.setState({spotifyLogo: greenSpotify});
+        break;
+      case "neon": this.setState({spotifyLogo: greenSpotify});
+        break;
+      case "pastel": this.setState({spotifyLogo: blackSpotify});
+        break;
+      case "gay": this.setState({spotifyLogo: whiteSpotify});
+        break;
+      case "kevin": this.setState({spotifyLogo: whiteSpotify});
+        break;
+      case "drac": this.setState({spotifyLogo: whiteSpotify});
+        break;
+      case "barbie": this.setState({spotifyLogo: whiteSpotify});
+        break;
+      case "marley": this.setState({spotifyLogo: whiteSpotify});
+        break;
+    }
+  }
   
   render() {
     const {theme} = this.state;
@@ -58,7 +88,7 @@ class PrivacyPage extends Component<PrivacyProps, PrivacyState> {
                 <select id="theme-select2" className="themed"
                         value={this.state.theme}
                         onChange={(event) => {this.setState({theme: event.target.value})
-                          // this.changeIcons(event.target.value);
+                          this.changeIcons(event.target.value);
                           handleThemeChange(event.target.value)}}
                         style={{
                           marginLeft: '10%',
@@ -80,7 +110,7 @@ class PrivacyPage extends Component<PrivacyProps, PrivacyState> {
               <h2 id="sidebar2-logOut" className={`sidebar2-nav`} onClick={logoutUser}>Log Out</h2>
               <h2 id="sidebar2-removeAccount" className={`sidebar2-nav`} onClick={removeAccount}>Remove Account</h2>
               <h3 id="made-using" className={`themed ${theme}`}>
-                Made using<img src={greenSpotify} id="spotify-logo" className="player-button"/>
+                Made using<img src={this.state.spotifyLogo} id="spotify-logo" className="player-button"/>
               </h3>
             </div>
             <div id="info-area" className={`info-list themed ${theme}`}>

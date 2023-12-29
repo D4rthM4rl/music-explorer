@@ -35,7 +35,6 @@ interface ExplorerProps {
 
 interface AppState {
   tracks: Track[];
-  trackLocations: Map<string, trackLocation>;
   names: string[];
   playlists: string[];
   audioFeatures: Map<string, AudioFeatures>;
@@ -60,6 +59,7 @@ interface AppState {
 
 let userID: string = "";
 let userPremium: boolean = false;
+let trackLocations: Map<string, trackLocation> = new Map<string, trackLocation>();
 
 interface Track {
   track: {
@@ -106,7 +106,6 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
     super(props);
     this.state = {
       tracks: [],
-      trackLocations: new Map<string, trackLocation>(),
       audioFeatures: new Map<string, AudioFeatures>(),
       names: [],
       links: [],
@@ -204,12 +203,30 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
    * Returns a random integer from 0 - max
    * @param max highest value able to be randomly generated
    * @requires max < 1000
+   * @returns
    */
   getRandom = (max: number): number => {
     const date = new Date();
     const milli = date.getMilliseconds();
     const r = (milli + Math.random() * 1000) % 1000; // Random number from 0 - 999
     return Math.floor(((max + 1) * r) / 1000.0); // (Max + 1) * some decimal from 0 - .999 floored
+  }
+  
+  /**
+   * Checks if a string is christmassy and returns true if so
+   * @param s string to check christmassyness of
+   * @return true if string contains a christmas word, false if not
+   */
+  isChristmassy = (s: string): boolean => {
+    const christmasWords = ["Christmas", "Snow", "Navidad", "Candy Cane", "Winter",
+      "More Christ", "Santa", "Xmas", "Mistletoe", "Jingle", "Carol of", "Rudolph", "Deck the"];
+    for (let cw of christmasWords) {
+      if (s.includes(cw)) {
+        console.log(s + " is christmassy because it includes " + cw);
+        return true;
+      }
+    }
+    return false;
   }
   
   /**
@@ -263,12 +280,10 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
    */
   handleStart = async() => {
     const token = localStorage.getItem("access_token");
-    const christmasWords = ["Christmas", "Snow", "Navidad", "Candy Cane", "Winter", "More Christ", "Santa", "Xmas", "Mistletoe"];
     
     try {
       let totalTracks: string[] = [];
       let trackNamesChosen: string[] = [];
-      let trackLocations: Map<string, trackLocation> = new Map<string, trackLocation>();
       let uris: string[] = [];
       const ids: string[] = [];
       if (userPremium && this.state.usePlayer) {
@@ -394,6 +409,30 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                 this.errorMessage("songError", message, 5);
                 throw new Error("Failed too many times to get a song");
               }
+            } else if (this.state.grinchMode) {
+              let hasChristmas = false;
+              if (this.isChristmassy(trackName)) {
+                hasChristmas = true;
+                j--;
+                failedAttempts++;
+                if (failedAttempts > 5) {
+                  const message = "Couldn't generate songs because there were likely too few playable grinchy songs";
+                  this.errorMessage("songError", message, 5);
+                  throw new Error(message);
+                }
+              }
+              if (!hasChristmas) {
+                // console.log('Track:', trackName);
+                // console.log('---');
+  
+                totalTracks.push(link);
+                trackNamesChosen.push(trackName);
+                uris.push(`spotify:track:${id}`);
+                ids.push(id);
+                // Update the state with the new track
+                this.setState({links: totalTracks});
+                trackLocations.set(trackName, trackLocation);
+              }
             } else {
               // console.log('Track:', trackName);
               // console.log('---');
@@ -405,7 +444,6 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
               // Update the state with the new track
               this.setState({links: totalTracks});
               trackLocations.set(trackName, trackLocation);
-              this.setState({trackLocations: trackLocations});
             }
           }
         }
@@ -435,16 +473,13 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
             for (let j = 0; j < this.state.numPersonalState; j++) {
               let playlistNum = this.getRandom(playlists.length - 1);
               if (this.state.grinchMode) {
-                for (const christmasWord in christmasWords) {
-                  let numGrinchTries = 0;
-                  while (playlists[playlistNum].name.includes(christmasWord)) {
-                    console.log(playlists[playlistNum].name + " includes " + christmasWord);
-                    playlistNum = Math.floor(Math.random() * playlists.length);
-                    numGrinchTries++;
-                    if (numGrinchTries > 10) {
-                      const message = availableNames[j] + " doesn't have any non-Christmas/Winter playlists";
-                      this.errorMessage("songError", message, 5);
-                    }
+                let numGrinchTries = 0;
+                while (this.isChristmassy(playlists[playlistNum].name)) {
+                  playlistNum = Math.floor(Math.random() * playlists.length);
+                  numGrinchTries++;
+                  if (numGrinchTries > 10) {
+                    const message = availableNames[j] + " doesn't have any non-Christmas/Winter playlists";
+                    this.errorMessage("songError", message, 5);
                   }
                 }
               }
@@ -492,18 +527,14 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                   }
                 } else if (this.state.grinchMode) {
                   let hasChristmas = false;
-                  for(const cw in christmasWords) {
-                    if (trackName.includes(cw)) {
-                      hasChristmas = true;
-                      j--;
-                      failedAttempts++;
-                      console.log(trackName + " includes " + cw)
-                      console.log('---');
-                      if (failedAttempts > 5) {
-                        const message = "Couldn't generate songs because there were likely too few playable grinchy songs";
-                        this.errorMessage("songError", message, 5);
-                        throw new Error(message);
-                      }
+                  if (this.isChristmassy(trackName)) {
+                    hasChristmas = true;
+                    j--;
+                    failedAttempts++;
+                    if (failedAttempts > 5) {
+                      const message = "Couldn't generate songs because there were likely too few playable grinchy songs";
+                      this.errorMessage("songError", message, 5);
+                      throw new Error(message);
                     }
                   }
                   if (!hasChristmas) {
@@ -518,7 +549,6 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                     // Update the state with the new track
                     this.setState({links: totalTracks});
                     trackLocations = trackLocations.set(trackName, trackLocation);
-                    this.setState({trackLocations: trackLocations});
                   }
                 } else { // if grinch mode is off and track isn't already selected
                   const trackLocation: trackLocation = {person: person, playlist: playlistName};
@@ -532,7 +562,6 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                   // Update the state with the new track
                   this.setState({links: totalTracks});
                   trackLocations.set(trackName, trackLocation);
-                  this.setState({trackLocations: trackLocations});
                 }
               }
             }
@@ -604,6 +633,10 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
     }
   }
   
+  /**
+   * Activates the spotify web player
+   * @param uris optional uri string array to put in player
+   */
   connectToPlayer = async (uris?: string[]) => {
     const token = localStorage.getItem("access_token");
     if (token === null) {
@@ -750,7 +783,7 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                     {this.state.usePlayer ? ( // If the toggle is on, use the Spotify Web APK Player
                         <WebPlayback
                             token={localStorage.getItem("access_token")}
-                            trackLocations={this.state.trackLocations}
+                            trackLocations={trackLocations}
                             audioMap={this.state.audioFeatures}></WebPlayback>
                     ) : (
                         <div>
