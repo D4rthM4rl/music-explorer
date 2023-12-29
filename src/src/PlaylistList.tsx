@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {getTheme} from "./handleLocalStorageChange";
 import {getAllFromStorage} from "./handleLocalStorageChange";
 
 interface PlaylistListProps {

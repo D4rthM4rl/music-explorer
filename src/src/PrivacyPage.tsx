@@ -82,7 +82,7 @@ class PrivacyPage extends Component<PrivacyProps, PrivacyState> {
                           }
                         }}}
               >Sidebar</button>
-              <button id="back-button" className="glow-on-hover"
+              <button id="back-button" className="glow-on-hover2"
                       onClick={this.props.onBackClick}>Back</button>
               <div id="theme-header2" className="sidebar2-heading">Theme
                 <select id="theme-select2" className="themed"
@@ -110,7 +110,8 @@ class PrivacyPage extends Component<PrivacyProps, PrivacyState> {
               <h2 id="sidebar2-logOut" className={`sidebar2-nav`} onClick={logoutUser}>Log Out</h2>
               <h2 id="sidebar2-removeAccount" className={`sidebar2-nav`} onClick={removeAccount}>Remove Account</h2>
               <h3 id="made-using" className={`themed ${theme}`}>
-                Made using<img src={this.state.spotifyLogo} id="spotify-logo" className="player-button"/>
+                Made using<img src={this.state.spotifyLogo} id="spotify-logo"
+                               alt="Spotify" className="player-button"/>
               </h3>
             </div>
             <div id="info-area" className={`info-list themed ${theme}`}>

@@ -123,6 +123,9 @@ input:checked + .slider:before {
 #about-label {
 
 }
+#privacy-label {
+    margin-top: 0;
+}
 #logout-label {
     /*text-decoration: none;*/
 }
@@ -131,12 +134,15 @@ input:checked + .slider:before {
     padding-bottom: 10px;
 }
 .other-options {
-    text-decoration: underline;
+    text-decoration: none;
     font-size: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     cursor: pointer;
     color: var(--settings-text-color);
     display: block;
+}
+.other-options:hover {
+    text-decoration: underline;
 }
 .adding-error {
     font-size: 70%;

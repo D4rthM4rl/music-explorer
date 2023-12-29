@@ -24,7 +24,7 @@ import {
 import {getRefreshToken, getToken} from "./spotifyLogin";
 import {deviceID} from "./WebPlayback";
 import WebPlayback from "./WebPlayback";
-import assert from "assert";
+
 
 interface ExplorerProps {
   onAboutClick: () => void;
@@ -248,7 +248,7 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
       userPremium = playerResponse.data.product === "premium";
     } catch (error) {
       // console.log(error);
-      if (error.response.status === 401) {
+      if (error.response !== undefined && error.response.status === 401) {
         // console.log("Error 401");
         if (!localStorage.getItem("access_token")) {
           await getToken();
@@ -288,19 +288,23 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
       const ids: string[] = [];
       if (userPremium && this.state.usePlayer) {
         // console.log(`device id is: ${deviceID}`)
-        let options = {
-          url: `https://api.spotify.com/v1/me/player`,
-          method: 'put',
-          headers: {
-            'Authorization': 'Bearer ' + token
-          },
-          data: {
-            "device_ids": [
-              `${deviceID}`
-            ]
+        try {
+          let options = {
+            url: `https://api.spotify.com/v1/me/player`,
+            method: 'put',
+            headers: {
+              'Authorization': 'Bearer ' + token
+            },
+            data: {
+              "device_ids": [
+                `${deviceID}`
+              ]
+            }
           }
+          await axios(options);
+        } catch (error) {
+          this.errorMessage("songError", "Player wasn't ready yet", 5)
         }
-        await axios(options);
       }
       // Gets songs from each playlist inputted
       let playlistID;
@@ -513,7 +517,6 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                 const track = tracks[trackNum].track;
                 const link = `https://open.spotify.com/track/${track.id}`;
                 const trackName = track.name;
-                const artists = track.artists;
                 const id = track.id;
                 
                 if (trackNamesChosen.includes(trackName)) {
@@ -658,7 +661,6 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
       } catch (error) {
         console.log("Uh oh there was an error connecting to player " + error);
       }
-      
     }
   }
   
@@ -716,7 +718,6 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
       directionsActive} = this.state;
     const aspectRatio = window.innerWidth/window.innerHeight;
     // If I get embed to work, remove this
-    const EMBED_WORKS = false;
     
     return (
         <div className="main-page">
@@ -724,7 +725,9 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
             <div className={`topbar-option themed ${theme}`} id="title" onClick={() => {
               this.setState({directionsActive: false})}}>Music Explorer v3.5</div>
             <div className={`topbar-option themed ${theme}`} id="spotify-genres">
-              <a id="spotify-genres-link" className="topbar-option themed" href="https://everynoise.com/everynoise1d.cgi?scope=all" target="_blank">All Genres</a>
+              <a id="spotify-genres-link" className="topbar-option themed" rel="noreferrer"
+                 href="https://everynoise.com/everynoise1d.cgi?scope=all" target="_blank"
+              >All Genres</a>
             </div>
             <div className={`topbar-option themed ${theme}`} id="directions" onClick={() => {
               this.setState({directionsActive: !directionsActive})}}>Directions</div>
@@ -734,7 +737,7 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                    const sidebar = document.getElementById("sidebar") as HTMLElement;
                    if (sidebar && aspectRatio < 1) {sidebar.style.left = "-80%";}
                  }}>
-              <img src={this.state.settingsIcon} alt="missing image" id="settings-icon"/>
+              <img src={this.state.settingsIcon} alt="settings" id="settings-icon"/>
             </div>
           </div>
           <div className="game-options">
@@ -793,7 +796,7 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
                                     <li key={index}><a id="links-output" className="themed links-output" href={link} target="_blank" rel="noreferrer">{link}</a></li>))}
                               </ul>
                           ): ( // Embeds don't work the way they should
-                              <iframe id="embed"
+                              <iframe id="embed" title="spotify-embed"
                                   // style={"border-radius:12px"}
                                   //TODO: Add embed functionality
                                       src={"https://open.spotify.com/embed/playlist/" + this.state.embedPlaylistID + "?utm_source=generator"}
@@ -896,14 +899,12 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
               <input id="new-name-box" className={`themed ${theme}`}
                      placeholder={"Player Name"}
                      onChange={(event) => {this.setState({newNameValue: event.target.value})}}
-                  // onKeyDown={this.handleInputKeyDown}
                      value={newNameValue}
               />
               <input id="profile-id-box" className={`themed ${theme}`}
                      autoComplete="false"
                      placeholder={"Profile Link"}
                      onChange={(event) => {this.setState({newProfileIdValue: event.target.value})}}
-                  // onKeyDown={this.handleInputKeyDown}
                      value={newProfileIdValue}
               /><br/>
               <button className={`add-button themed ${theme}`}
@@ -928,14 +929,12 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
               <input id="new-playlist-box" className={`themed ${theme}`}
                      placeholder={"Playlist Title"}
                      onChange={(event) => {this.setState({newPlaylistValue: event.target.value})}}
-                  // onKeyDown={this.handleInputKeyDown}
                      value={newPlaylistValue}
               />
               <input id="playlist-id-box" className={`themed ${theme}`}
                      autoComplete="false"
                      placeholder={"Playlist Link"}
                      onChange={(event) => {this.setState({newPlaylistIdValue: event.target.value})}}
-                  // onKeyDown={this.handleInputKeyDown}
                      value={newPlaylistIdValue}
               /><br/>
               <button className={`add-button themed ${theme}`}
@@ -956,8 +955,8 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
               </div>
               
               <div>
-                <a id="about-label" className="other-options" onClick={this.renderAbout}>About</a>
-                <a id="privacy-label" className="other-options" onClick={this.renderPrivacy}>Privacy</a>
+                <h2 id="about-label" className="other-options" onClick={this.renderAbout}>About</h2>
+                <h2 id="privacy-label" className="other-options" onClick={this.renderPrivacy}>Privacy</h2>
                 <a id="logout-label" className="other-options" href="https://www.spotify.com/logout/" onClick={logoutUser}>Logout</a>
                 <a id="removeAccount-label" className="other-options" href="https://accounts.spotify.com/en/logout" onClick={removeAccount}>Remove Account</a>
               </div>

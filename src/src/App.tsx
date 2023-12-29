@@ -1,6 +1,5 @@
 import './App.css';
 import React, {Component} from 'react';
-import axios from "axios";
 import MusicExplorer from "./MusicExplorer";
 import {getTheme} from "./handleLocalStorageChange";
 import {getToken} from "./spotifyLogin";

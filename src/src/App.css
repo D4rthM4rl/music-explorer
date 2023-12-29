@@ -158,7 +158,9 @@ body {
   align-items: center;
 }
 .modal {
-  left: 10%;
+  max-width: 60%;
+  z-index: 10;
+  left: 15%;
   background: var(--player-bg);
   color: var(--player-color);
   padding: 40px;
@@ -175,6 +177,7 @@ body {
   font-size: 20px;
   cursor: pointer;
 }
+
 #embed {
   border-radius:12px
 }

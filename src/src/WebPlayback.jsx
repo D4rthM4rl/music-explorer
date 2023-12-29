@@ -5,12 +5,8 @@ import rewindIcon from "./assets/rewind-icon.png"
 import pauseIcon from "./assets/pause-icon.png"
 import fastforwardIcon from "./assets/fastforward-icon.png"
 import playIcon from "./assets/play-icon.png"
-import blackVisibleIcon from "./assets/black-visible-icon.png"
 import grayVisibleIcon from "./assets/gray-visible-icon.png"
-import whiteVisibleIcon from "./assets/white-visible-icon.png"
 import questionMarkIcon from "./assets/question-mark-icon.png"
-import {trackLocation} from "./App";
-import axios from "axios";
 
 const track = {
     name: "",
@@ -146,6 +142,7 @@ function WebPlayback(props) {
             }));
             player.connect();
         };
+        // eslint-disable-next-line
     }, []);
 
     const toggleCoverVisibility = () => {coverSetVisible(!coverVisible)}; // Toggle visibility state};
@@ -182,8 +179,8 @@ function WebPlayback(props) {
                         </div>
                         <br/>
                         <a id="now-playing__artist" className={`themed ${theme}`}
-                             style={{visibility: artistVisible ? "visible": "hidden"}}
-                            id="now-playing__artist" href={"https://open.spotify.com/artist/" +
+                           style={{visibility: artistVisible ? "visible": "hidden"}}
+                           href={"https://open.spotify.com/artist/" +
                                 (current_track.artists[0].uri).replace("spotify:artist:", "")}
                                 target="_blank" rel="noreferrer">
                                 {current_track.artists[0].name}
@@ -224,14 +221,14 @@ function WebPlayback(props) {
                                 `Loading track ${current_track.name}...` // or any other placeholder while waiting for trackLocations to be populated
                             )}
                             <br/>
-                            </p>
                             {props.audioMap.has(current_track.name) ? (
                                 `This track's key is ${getKey(props.audioMap.get(current_track.name).key,
-                                    props.audioMap.get(current_track.name).mode)} and the tempo is 
+                                    props.audioMap.get(current_track.name).mode)} and the tempo is
                                     ${props.audioMap.get(current_track.name).tempo} bpm`
                             ) : (
                                 `Loading audio details of ${current_track.name}` // or any other placeholder while waiting for audio to be populated
                             )}
+                            </p>
                         </div>
                     </div>
                 )}
