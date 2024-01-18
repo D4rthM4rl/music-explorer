@@ -34,8 +34,8 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
     populateDatalist = (playlists: string[]) => {
         const datalist = document.getElementById('playlist-list');
         const stockPlaylists = ["Top Hits 2000-2023", "Top Spotify", "Top USA",
-            "Party Hits 2010s", '"Singable" Songs', "Soft Pop Hits", "Dance Pop Hits", "Throwback Jams",
-            "Hit Rewind", "Pop"]
+            "Party Hits 2010s", '"Singable" Songs', "Girls Night", "Pregame", "Soft Pop Hits",
+            "Dance Pop Hits", "Throwback Jams", "Hit Rewind", "Pop"]
 
         if (datalist) {
             datalist.innerHTML = '';
@@ -120,17 +120,8 @@ class PlaylistList extends Component<PlaylistListProps, PlaylistListState> {
                    value={this.state.value}
                 /> <br/>
                 <datalist id="playlist-list">
-                    <option value="" />
-                    <option value="" />
-                    <option value="" />
-                    <option value="" />
                     <option value="Marley Party" />
                     <option value="Den of 10" />
-                    <option value="" />
-                    <option value="" />
-                    <option value="" />
-                    <option value="" />
-                    <option value="" />
                     <option value="Christmas" />
                     <option value="Disney" />
                     <option value="Rap Hits" />

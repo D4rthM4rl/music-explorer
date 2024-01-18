@@ -331,6 +331,12 @@ class MusicExplorer extends Component<ExplorerProps, AppState> {
           case 'DEN OF 10':
             playlistID = ('3RHkHvFcAut8GQt3n31zuK');
             break;
+          case 'GIRLS NIGHT':
+            playlistID = ('37i9dQZF1DX0Uv9tZ47pWo');
+            break;
+          case 'PREGAME':
+            playlistID = ('37i9dQZF1DX0u6E5bcKUrV');
+            break;
           case 'SOFT POP HITS':
             playlistID = ('37i9dQZF1DWTwnEm1IYyoj');
             break;
